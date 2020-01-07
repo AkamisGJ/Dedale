@@ -7,8 +7,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 1.0f;
     [SerializeField] private float _acceleration = 0.5f;
     private Camera _mainCamera = null;
-    private float _currentTime = 0.0f;
-    [SerializeField] private float _timeToWait = 0.5f;
     [SerializeField] private Rigidbody _rb = null;
     [SerializeField] private Animator _animator = null;
     private Vector3 _moveDirection = Vector3.zero;
@@ -39,7 +37,6 @@ public class PlayerController : MonoBehaviour
     {
         InputManager.Instance.Direction += Move;
         InputManager.Instance.MousePosition += LookAtMouse;
-        _currentTime = _timeToWait;
         _mainCamera.transform.rotation = transform.rotation;
     }
 
@@ -75,10 +72,5 @@ public class PlayerController : MonoBehaviour
     {
         InputManager.Instance.Direction -= Move;
         InputManager.Instance.MousePosition -= LookAtMouse;
-    }
-
-    private void TimerShoot()
-    {
-        _currentTime += Time.deltaTime;
     }
 }
