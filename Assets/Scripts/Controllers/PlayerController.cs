@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         _grabObject = hit.transform.gameObject;
-                        _currentState = MyState.Observe;
+                        _currentState = MyState.Interaction;
                         InputManager.Instance.Direction -= Move;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         _porte = _grabObject.GetComponent<Porte>();
