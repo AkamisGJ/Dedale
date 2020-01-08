@@ -103,8 +103,8 @@ Rigidbody:
   m_GameObject: {fileID: 8199827238686195771}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 3
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -124,11 +124,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 100
   _acceleration: 250
-  _timeToWait: 0.5
   _rb: {fileID: 8199827238686195750}
   _animator: {fileID: 0}
-  _mouseSensitivity: 1
+  _mouseSensitivityInteract: 5
   _maxVelocity: 2
   _angleX: 60
-  _sensitivityMouseX: 1
-  _sensitivityMouseY: 1
+  _sensitivityMouseX: 5
+  _sensitivityMouseY: 5

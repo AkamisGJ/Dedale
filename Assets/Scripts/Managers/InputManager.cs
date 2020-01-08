@@ -5,7 +5,8 @@ using System;
 public class InputManager : Singleton<InputManager>
 {
     #region Fields
-    private Vector4 _direction = Vector3.zero;
+    private Vector3 _direction = Vector3.zero;
+    private Vector3 _lastDirection = Vector3.zero;
     private event Action<float, float> _directionAction = null;
     public event Action<float, float> Direction
     {
@@ -20,9 +21,10 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private Vector3 _mousePosition = Vector3.zero;
-    private event Action<Vector3> _mousePositionAction = null;
-    public event Action<Vector3> MousePosition
+    private float _mousePositionX = 0;
+    private float _mousePositionY = 0;
+    private event Action<float, float> _mousePositionAction = null;
+    public event Action<float, float> MousePosition
     {
         add
         {
@@ -78,8 +80,9 @@ public class InputManager : Singleton<InputManager>
         }
         if(_mousePositionAction != null && PlayerManager.Instance.PlayerIsDead == false)
         {
-            _mousePosition = Input.mousePosition;
-            _mousePositionAction(_mousePosition);
+            _mousePositionX = Input.GetAxis("Mouse X");
+            _mousePositionY = Input.GetAxis("Mouse Y");
+            _mousePositionAction(_mousePositionX , _mousePositionY);
         }
         if(_interact != null && PlayerManager.Instance.PlayerIsDead == false)
         {

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private float _moveSpeed = 1.0f;
+    [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private float _acceleration = 0.5f;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
     [SerializeField] private Animator _animator = null;
     private Vector3 _moveDirection = Vector3.zero;
-    [SerializeField] private float _mouseSensitivity = 1.0f;
+    [SerializeField] private float _mouseSensitivityInteract = 1.0f;
     [SerializeField] private float _maxVelocity = 2.0f;
     [SerializeField] private float _angleX = 60f;
-    [SerializeField] private float _sensitivityMouseX = 10f;
-    [SerializeField] private float _sensitivityMouseY = 10f;
+    [SerializeField] private float _sensitivityMouseX = 1f;
+    [SerializeField] private float _sensitivityMouseY = 1f;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
     public enum MyState
@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
     }
     private MyState _currentState = MyState.Mouvement;
     private Dictionary<MyState, IPlayerState> _states = null;
+
+    private GameObject _grabObject = null;
+    private Vector3 _originPositionGrabObject = Vector3.zero;
+    private Quaternion _originRotationGrabObject = Quaternion.identity;
+    private Porte _porte = null;
     #endregion Fields
 
     #region Properties
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.Direction += Move;
         InputManager.Instance.MousePosition += LookAtMouse;
         _mainCamera.transform.rotation = transform.rotation;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ChangeState(MyState nextState)
@@ -59,10 +65,84 @@ public class PlayerController : MonoBehaviour
         _rb.velocity += yVel;
     }
 
-    private void LookAtMouse(Vector3 mouseDirection)
+    private void Update()
     {
-        _rotationX = mouseDirection.y * _sensitivityMouseX;
-        _rotationY = mouseDirection.x * _sensitivityMouseY;
+        if (_currentState == MyState.Mouvement)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
+            {
+                if (hit.transform.gameObject.layer == 10)
+                {
+                    Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        _grabObject = hit.transform.gameObject;
+                        _originPositionGrabObject = _grabObject.transform.position;
+                        _originRotationGrabObject = _grabObject.transform.rotation;
+                        _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
+                        _grabObject.transform.rotation = Quaternion.identity;
+                        _currentState = MyState.Observe;
+                        InputManager.Instance.Direction -= Move;
+                        InputManager.Instance.MousePosition -= LookAtMouse;
+                        InputManager.Instance.MousePosition += LookObject;
+                        return;
+                    }
+                }
+                if (hit.transform.gameObject.layer == 11)
+                {
+                    Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.magenta);
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        _grabObject = hit.transform.gameObject;
+                        _currentState = MyState.Observe;
+                        InputManager.Instance.Direction -= Move;
+                        InputManager.Instance.MousePosition -= LookAtMouse;
+                        _porte = _grabObject.GetComponent<Porte>();
+                        InputManager.Instance.MousePosition += _porte.InteractPorte;
+                        return;
+                    }
+                }
+            }
+            else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
+        }
+
+        if (_currentState == MyState.Observe)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _grabObject.transform.position = _originPositionGrabObject;
+                _grabObject.transform.rotation = _originRotationGrabObject;
+                _currentState = MyState.Mouvement;
+                InputManager.Instance.Direction += Move;
+                InputManager.Instance.MousePosition += LookAtMouse;
+                InputManager.Instance.MousePosition -= LookObject;
+            }
+        }
+        if (_currentState == MyState.Interaction)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
+            {
+                _currentState = MyState.Mouvement;
+                InputManager.Instance.Direction += Move;
+                InputManager.Instance.MousePosition += LookAtMouse;
+                InputManager.Instance.MousePosition -= _porte.InteractPorte;
+            }
+        }
+    }
+
+    private void LookObject(float mousePositionX, float mousePositionY)
+    {
+        float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
+        float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
+        _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
+        _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
+    }
+
+    private void LookAtMouse(float mousePositionX, float mousePositionY)
+    {
+        _rotationX += mousePositionY * _sensitivityMouseX;
+        _rotationY += mousePositionX * _sensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_angleX, _angleX);
         transform.localEulerAngles = new Vector3(0, _rotationY, 0);
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
@@ -72,5 +152,10 @@ public class PlayerController : MonoBehaviour
     {
         InputManager.Instance.Direction -= Move;
         InputManager.Instance.MousePosition -= LookAtMouse;
+        InputManager.Instance.MousePosition -= LookObject;
+        if(_porte != null)
+        {
+            InputManager.Instance.MousePosition -= _porte.InteractPorte;
+        }
     }
 }
