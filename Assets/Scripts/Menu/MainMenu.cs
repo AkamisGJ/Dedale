@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     #region Fields
-    [SerializeField] GameObject _mainMenu = null;
-    [SerializeField] GameObject _tutorielMenu = null;
-    [SerializeField] GameObject _settings = null;
+    [SerializeField] private GameObject _mainMenu = null;
+    [SerializeField] private GameObject _tutorielMenu = null;
+    [SerializeField] private GameObject _settings = null;
+    [SerializeField] private string _selectedStage;
     #endregion Fields
 
     private void Start()
@@ -15,9 +17,14 @@ public class MainMenu : MonoBehaviour
         _settings.SetActive(false);
     }
 
+    public void SelectStage()
+    {
+        GameManager.Instance.ChangeState(GameManager.MyState.Game, _selectedStage);
+    }
+
     public void OnClickStart()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.Game);
+        GameManager.Instance.ChangeState(GameManager.MyState.Game, "Level1");
         //SoundManager.Instance.GameStartSound();
         //SoundManager.Instance.StartLevel();
     }

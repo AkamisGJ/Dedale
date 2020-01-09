@@ -7,6 +7,11 @@ public class MainMenuState : IGameState
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void GameScene(string scene)
+    {
+
+    }
+
     public void Exit()
     {
         SceneManager.UnloadSceneAsync("MainMenu");

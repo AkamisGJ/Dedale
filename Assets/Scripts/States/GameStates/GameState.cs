@@ -1,14 +1,15 @@
 ﻿using UnityEngine.SceneManagement;
-
+using UnityEngine;
 public class GameState : IGameState
 {
+
     public void Enter()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(GameManager.Instance.NextScene);
     }
 
     public void Exit()
     {
-        SceneManager.UnloadSceneAsync("Level1");
+        SceneManager.UnloadSceneAsync(GameManager.Instance.NextScene);
     }
 }
