@@ -63,20 +63,22 @@ public class InputManager : Singleton<InputManager>
         {
             if (Input.GetKey(KeyCode.Z))
             {
-                _direction.x = 1;
+                _direction.x += 1;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                _direction.x = -1;
+                _direction.x -= 1;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                _direction.z = 1;
+                _direction.z += 1;
             }
             if (Input.GetKey(KeyCode.Q))
             {
-                _direction.z = -1;
+                _direction.z -= 1;
             }
+            _direction.x = Mathf.Clamp(_direction.x, -1, 1);
+            _direction.z = Mathf.Clamp(_direction.z, -1, 1);
         }
         if(_mousePositionAction != null && PlayerManager.Instance.PlayerIsDead == false)
         {

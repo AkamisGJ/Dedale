@@ -4,14 +4,18 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private float _moveSpeed = 10.0f;
-    [SerializeField] private float _acceleration = 0.5f;
+    [SerializeField] private AnimationCurve _accelerationCurve = null;
+    private float _accelerationTime = 0.0f;
+    [SerializeField] private float _timeMultiplier = 1.0f;
+    [SerializeField] private float _moveSpeedHorizontal = 1;
+    [SerializeField] private float _moveSpeedSide = 1;
+    [SerializeField] private float _moveSpeedMultiplier = 1;
+    private float _currentSpeed = 0;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
     [SerializeField] private Animator _animator = null;
     private Vector3 _moveDirection = Vector3.zero;
     [SerializeField] private float _mouseSensitivityInteract = 1.0f;
-    [SerializeField] private float _maxVelocity = 2.0f;
     [SerializeField] private float _angleX = 60f;
     [SerializeField] private float _sensitivityMouseX = 1f;
     [SerializeField] private float _sensitivityMouseY = 1f;
@@ -25,7 +29,6 @@ public class PlayerController : MonoBehaviour
     }
     private MyState _currentState = MyState.Mouvement;
     private Dictionary<MyState, IPlayerState> _states = null;
-
     private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
@@ -40,6 +43,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _states = new Dictionary<MyState, IPlayerState>();
+        _states.Add(MyState.Interaction, new IInteraction());
+        _states.Add(MyState.Mouvement, new IMouvement());
+        _states.Add(MyState.Observe, new IObserve());
+        _currentState = MyState.Mouvement;
         InputManager.Instance.Direction += Move;
         InputManager.Instance.MousePosition += LookAtMouse;
         _mainCamera.transform.rotation = transform.rotation;
@@ -59,10 +67,12 @@ public class PlayerController : MonoBehaviour
 
     private void Move(float horizontalMouvement, float verticalMouvement)
     {
-        _moveDirection = (verticalMouvement * transform.right + horizontalMouvement * transform.forward).normalized;
-        Vector3 yVel = new Vector3(0, _rb.velocity.y, 0);
-        _rb.velocity = _moveDirection * _moveSpeed * Time.deltaTime;
-        _rb.velocity += yVel;
+        Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward * _moveSpeedHorizontal;
+        Vector3 preVerticalMouvement = verticalMouvement * transform.right * _moveSpeedSide;
+        Vector3 direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
+        Debug.Log(direction);
+        _rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * _moveSpeedMultiplier);
+        Debug.Log(transform.position + direction * Time.fixedDeltaTime * _moveSpeedMultiplier);
     }
 
     private void Update()
