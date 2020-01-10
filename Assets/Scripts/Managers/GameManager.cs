@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     #endregion Fields
 
     #region Properties
-    public MyState CurrentState { get { return _currentState; } }
+    public MyState CurrentState { get { return _currentState; } set { _currentState = value; } }
     public IGameState CurrentStateType { get { return _states[_currentState]; } }
 
     public string NextScene { get { return _nextSceneName; } set { _nextSceneName = value; } }
@@ -31,8 +31,11 @@ public class GameManager : Singleton<GameManager>
         _states.Add(MyState.Preload, new PreloadState());
         _states.Add(MyState.Game, new GameState());
         _states.Add(MyState.MainMenu, new MainMenuState());
-        _currentState = MyState.Preload;
-        ChangeState(MyState.MainMenu, "Main Menu");
+        if(_currentState != MyState.Game)
+        {
+            _currentState = MyState.Preload;
+            ChangeState(MyState.MainMenu, "Main Menu");
+        }
     }
 
     public void ChangeState(MyState nextState, string scene)
