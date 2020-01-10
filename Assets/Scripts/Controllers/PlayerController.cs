@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Porte _porte = null;
     private RaycastHit hit;
+    private bool _isCrouch = false;
+    private bool _crouching = false;
+    private bool _unCrouching = false;
+    private float _crouchSpeed = 1;
+    private float _crouchLerp = 0;
     #endregion Fields
 
     #region Properties
@@ -55,6 +60,7 @@ public class PlayerController : MonoBehaviour
         _currentState = MyState.Mouvement;
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
+        //InputManager.Instance.Crouch += Crouch;
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -99,6 +105,7 @@ public class PlayerController : MonoBehaviour
                         InputManager.Instance.Direction -= SetDirection;
                         direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
+                        //InputManager.Instance.Crouch -= Crouch;
                         InputManager.Instance.MousePosition += LookObject;
                         return;
                     }
@@ -114,6 +121,7 @@ public class PlayerController : MonoBehaviour
                         InputManager.Instance.Direction -= SetDirection;
                         direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
+                        //InputManager.Instance.Crouch -= Crouch;
                         _porte = _grabObject.GetComponent<Porte>();
                         InputManager.Instance.MousePosition += _porte.InteractPorte;
                         return;
@@ -121,6 +129,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
+/*
+            if(_crouching == true)
+            {
+                Crouching(1);
+            }
+            if(_unCrouching == true)
+            {
+                Crouching(-1);
+            }
+*/
         }
         if (_currentState == MyState.Observe)
         {
@@ -132,6 +150,7 @@ public class PlayerController : MonoBehaviour
                 _currentState = MyState.Mouvement;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
+                //InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= LookObject;
             }
         }
@@ -143,6 +162,7 @@ public class PlayerController : MonoBehaviour
                 _rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
+                //InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= _porte.InteractPorte;
             }
         }
@@ -175,13 +195,62 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
         _rb.MovePosition(transform.position + direction * Time.deltaTime * _moveSpeedMultiplier);
     }
+    /*
+    private void Crouch(bool crouchBool)
+    {
+        if(crouchBool == true)
+        {
+            if (_isCrouch == false)
+            {
+                _crouchLerp = 0;
+                Debug.Log("crouching");
+                _crouching = true;
+            }
+            if(_isCrouch == true)
+            {
+                _crouching = false;
+            }
+        }
 
+        if(crouchBool == false)
+        {
+            if(_isCrouch == true)
+            {
+                _crouchLerp = 1;
+                Debug.Log("uncrouching");
+                _unCrouching = true;
+            }
+            if(_isCrouch == false)
+            {
+                _unCrouching = false;
+            }
+        }
+    }
+
+    private void Crouching(float inversion)
+    {
+        _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
+        _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
+        transform.localScale = new Vector3(1,Mathf.Lerp(1,0.5f, _crouchLerp),1);
+        if (inversion < 0 && _crouchLerp == 0)
+        {
+            _isCrouch = true;
+            _crouching = false;
+        }
+        if(inversion > 0 && _crouchLerp == 1)
+        {
+            _isCrouch = false;
+            _unCrouching = false;
+        }
+    }
+    */
     private void OnDestroy()
     {
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.MousePosition -= LookObject;
-        if(_porte != null)
+        //InputManager.Instance.Crouch -= Crouch;
+        if (_porte != null)
         {
             InputManager.Instance.MousePosition -= _porte.InteractPorte;
         }

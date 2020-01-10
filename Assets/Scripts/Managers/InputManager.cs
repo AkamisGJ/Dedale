@@ -50,55 +50,111 @@ public class InputManager : Singleton<InputManager>
             _interact -= value;
         }
     }
+
+    private event Action<bool> _sprintAction = null;
+    public event Action<bool> Sprint
+    {
+        add
+        {
+            _sprintAction -= value;
+            _sprintAction += value;
+        }
+        remove
+        {
+            _sprintAction -= value;
+        }
+    }
+
+    private bool toggleCrouch = false;
+    private event Action<bool> _crouchAction = null;
+    public event Action<bool> Crouch
+    {
+        add
+        {
+            _crouchAction -= value;
+            _crouchAction += value;
+        }
+        remove
+        {
+            _crouchAction -= value;
+        }
+    }
+
+    private bool _sprint = false;
+    private bool _crouch = false;
     #endregion Fields
 
     protected override void Start()
     {
         base.Start();
+        _sprint = false;
+        _crouch = false;
     }
 
     protected override void Update()
     {
-        if(_directionAction != null && PlayerManager.Instance.PlayerIsDead == false)
+        if(PlayerManager.Instance.PlayerIsDead == false)
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (_directionAction != null)
             {
-                _direction.x += 1;
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    _direction.x += 1;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    _direction.x -= 1;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    _direction.z += 1;
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    _direction.z -= 1;
+                }
+                _direction.x = Mathf.Clamp(_direction.x, -1, 1);
+                _direction.z = Mathf.Clamp(_direction.z, -1, 1);
+                _directionAction(_direction.x, _direction.z);
+                _direction = Vector3.zero;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (_mousePositionAction != null)
             {
-                _direction.x -= 1;
+                _mousePositionX = Input.GetAxis("Mouse X");
+                _mousePositionY = Input.GetAxis("Mouse Y");
+                _mousePositionAction(_mousePositionX, _mousePositionY);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (_interact != null)
             {
-                _direction.z += 1;
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _interact();
+                }
             }
-            if (Input.GetKey(KeyCode.Q))
+/*
+            if (_sprintAction != null)
             {
-                _direction.z -= 1;
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+                    _sprint = !_sprint;
+                }
+                _sprintAction(_sprint);
             }
-            _direction.x = Mathf.Clamp(_direction.x, -1, 1);
-            _direction.z = Mathf.Clamp(_direction.z, -1, 1);
-        }
-        if(_mousePositionAction != null && PlayerManager.Instance.PlayerIsDead == false)
-        {
-            _mousePositionX = Input.GetAxis("Mouse X");
-            _mousePositionY = Input.GetAxis("Mouse Y");
-            _mousePositionAction(_mousePositionX , _mousePositionY);
-        }
-        if(_interact != null && PlayerManager.Instance.PlayerIsDead == false)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
+            if(_crouchAction != null && toggleCrouch == false)
             {
-                _interact();
+                if (Input.GetKey(KeyCode.LeftAlt))
+                {
+                    _crouch = true;
+                    Debug.Log(_crouch);
+                }
+                else
+                {
+                    _crouch = false;
+                    Debug.Log(_crouch);
+                }
             }
-        }
-
-        if (_directionAction != null && PlayerManager.Instance.PlayerIsDead == false)
-        {
-            Debug.Log(_direction.x +"     " + _direction.z);
-            _directionAction(_direction.x, _direction.z);
-            _direction = Vector3.zero;
+            _crouchAction(_crouch);
+            */
         }
     }
 }
