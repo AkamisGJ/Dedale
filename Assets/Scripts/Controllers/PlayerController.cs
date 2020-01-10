@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Porte _porte = null;
+    private RaycastHit hit;
     #endregion Fields
 
     #region Properties
@@ -81,7 +82,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_currentState == MyState.Mouvement)
         {
-            RaycastHit hit;
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
             {
                 if (hit.transform.gameObject.layer == 10)
@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
                     Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        hit.collider.isTrigger = true;
                         _grabObject = hit.transform.gameObject;
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
@@ -125,6 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                hit.collider.isTrigger = false;
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
