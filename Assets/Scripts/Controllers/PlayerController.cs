@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
                         _grabObject.transform.rotation = Quaternion.identity;
                         _currentState = MyState.Observe;
                         InputManager.Instance.Direction -= SetDirection;
+                        direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         InputManager.Instance.MousePosition += LookObject;
                         return;
@@ -108,7 +109,9 @@ public class PlayerController : MonoBehaviour
                     {
                         _grabObject = hit.transform.gameObject;
                         _currentState = MyState.Interaction;
+                        _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
+                        direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         _porte = _grabObject.GetComponent<Porte>();
                         InputManager.Instance.MousePosition += _porte.InteractPorte;
@@ -135,6 +138,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
             {
                 _currentState = MyState.Mouvement;
+                _rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
                 InputManager.Instance.MousePosition -= _porte.InteractPorte;
