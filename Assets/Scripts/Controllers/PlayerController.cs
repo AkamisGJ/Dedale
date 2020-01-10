@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
+    private Vector3 direction = Vector3.zero;
+    [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private AnimationCurve _accelerationCurve = null;
     private float _accelerationTime = 0.0f;
     [SerializeField] private float _timeMultiplier = 1.0f;
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
     public Camera MainCamera { set { _mainCamera = value; } }
 
     public Animator Animator { get { return _animator; } set { _animator = value; } }
+
+    public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
     #endregion Properties
 
     void Start()
@@ -48,10 +52,11 @@ public class PlayerController : MonoBehaviour
         _states.Add(MyState.Mouvement, new IMouvement());
         _states.Add(MyState.Observe, new IObserve());
         _currentState = MyState.Mouvement;
-        InputManager.Instance.Direction += Move;
+        InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
+        _rb.interpolation = RigidbodyInterpolation.Interpolate;
     }
 
     public void ChangeState(MyState nextState)
@@ -65,14 +70,11 @@ public class PlayerController : MonoBehaviour
     {
     }
 
-    private void Move(float horizontalMouvement, float verticalMouvement)
+    private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
         Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward * _moveSpeedHorizontal;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right * _moveSpeedSide;
-        Vector3 direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
-        Debug.Log(direction);
-        _rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * _moveSpeedMultiplier);
-        Debug.Log(transform.position + direction * Time.fixedDeltaTime * _moveSpeedMultiplier);
+        direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
     }
 
     private void Update()
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
                         _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
                         _grabObject.transform.rotation = Quaternion.identity;
                         _currentState = MyState.Observe;
-                        InputManager.Instance.Direction -= Move;
+                        InputManager.Instance.Direction -= SetDirection;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         InputManager.Instance.MousePosition += LookObject;
                         return;
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
                     {
                         _grabObject = hit.transform.gameObject;
                         _currentState = MyState.Interaction;
-                        InputManager.Instance.Direction -= Move;
+                        InputManager.Instance.Direction -= SetDirection;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         _porte = _grabObject.GetComponent<Porte>();
                         InputManager.Instance.MousePosition += _porte.InteractPorte;
@@ -116,7 +118,6 @@ public class PlayerController : MonoBehaviour
             }
             else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
         }
-
         if (_currentState == MyState.Observe)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
-                InputManager.Instance.Direction += Move;
+                InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
                 InputManager.Instance.MousePosition -= LookObject;
             }
@@ -134,11 +135,16 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
             {
                 _currentState = MyState.Mouvement;
-                InputManager.Instance.Direction += Move;
+                InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
                 InputManager.Instance.MousePosition -= _porte.InteractPorte;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
     }
 
     private void LookObject(float mousePositionX, float mousePositionY)
@@ -158,9 +164,15 @@ public class PlayerController : MonoBehaviour
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
 
+    private void Move()
+    {
+        //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
+        _rb.MovePosition(transform.position + direction * Time.deltaTime * _moveSpeedMultiplier);
+    }
+
     private void OnDestroy()
     {
-        InputManager.Instance.Direction -= Move;
+        InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.MousePosition -= LookObject;
         if(_porte != null)

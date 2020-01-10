@@ -12,9 +12,6 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] private Camera _cameraPlayer = null;
 
     [SerializeField] private Camera _cameraUI = null;
-    private Vector3 _positionCamera = Vector3.zero;
-    [SerializeField] private float _offsetYCamera = 0.5f;
-    [SerializeField] private float _offsetZCamera = -0.3f;
 
     private bool _playerIsDead = false;
     #endregion Fields
@@ -35,12 +32,9 @@ public class PlayerManager : Singleton<PlayerManager>
         CameraManager.Instance.CameraUI = _cameraUIGameObject;
         _playerIsDead = false;
         _playerGameObject = Instantiate(_player, tranformSpawnerPlayer.position, Quaternion.identity);
-        _positionCamera = tranformSpawnerPlayer.position;
-        _positionCamera.y += _offsetYCamera;
-        _positionCamera.z += _offsetZCamera;
-        _cameraPlayerGameobject = Instantiate(_cameraPlayer, _positionCamera, Player.transform.rotation, _playerGameObject.transform);
-        CameraManager.Instance.CameraPlayer = _cameraPlayerGameobject;
         PlayerController playerController = _playerGameObject.GetComponent<PlayerController>();
+        _cameraPlayerGameobject = Instantiate(_cameraPlayer, playerController.CameraHolder.position, Player.transform.rotation, playerController.CameraHolder);
+        CameraManager.Instance.CameraPlayer = _cameraPlayerGameobject;
         playerController.MainCamera =_cameraPlayerGameobject;
     }
 }

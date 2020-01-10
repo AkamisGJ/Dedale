@@ -93,13 +93,11 @@ public class InputManager : Singleton<InputManager>
                 _interact();
             }
         }
-    }
 
-    protected void FixedUpdate()
-    {
-        if(_directionAction != null && PlayerManager.Instance.PlayerIsDead == false)
+        if (_directionAction != null && PlayerManager.Instance.PlayerIsDead == false)
         {
-            _directionAction(_direction.x,_direction.z);
+            Debug.Log(_direction.x +"     " + _direction.z);
+            _directionAction(_direction.x, _direction.z);
             _direction = Vector3.zero;
         }
     }
