@@ -97,6 +97,9 @@ public class InputManager : Singleton<InputManager>
         {
             if (_directionAction != null)
             {
+                _direction.z = Input.GetAxisRaw("Horizontal");
+                _direction.x = Input.GetAxisRaw("Vertical");
+                /*
                 if (Input.GetKey(KeyCode.Z))
                 {
                     _direction.x += 1;
@@ -115,6 +118,7 @@ public class InputManager : Singleton<InputManager>
                 }
                 _direction.x = Mathf.Clamp(_direction.x, -1, 1);
                 _direction.z = Mathf.Clamp(_direction.z, -1, 1);
+                */
                 _directionAction(_direction.x, _direction.z);
                 _direction = Vector3.zero;
             }

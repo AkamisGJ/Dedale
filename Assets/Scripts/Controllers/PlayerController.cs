@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeedHorizontal = 1;
     [SerializeField] private float _moveSpeedSide = 1;
     [SerializeField] private float _moveSpeedMultiplier = 1;
+    [SerializeField] private float _gravity = 1;
     private float _currentSpeed = 0;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
@@ -85,14 +86,13 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward * _moveSpeedHorizontal;
+        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward * _moveSpeedHorizontal;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right * _moveSpeedSide;
         direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
     }
 
     private void Update()
     {
-        Move();
         if (_currentState == MyState.Mouvement)
         {
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
                         {
                             Vector4 infoWehnLooked = _grabObject.GetComponent<InteractObject>().Interact();
                             Vector3 grabObjectRotationWhenLooked = infoWehnLooked;
+                            Debug.Log(infoWehnLooked);
                             _distanceGrabObjectWithCameraWhenLooked = infoWehnLooked.w;
                             _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
                         }
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
                         }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
-                        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+                        _objectHolder.transform.localPosition = _mainCamera.transform.localPosition + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
                         _grabObject.transform.localRotation = _grabObjectRotationWhenLooked;
                         _currentState = MyState.Observe;
                         _rb.isKinematic = true;
@@ -201,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        Move();
     }
 
     private void LookObject(float mousePositionX, float mousePositionY)
