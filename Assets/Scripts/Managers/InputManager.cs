@@ -142,15 +142,13 @@ public class InputManager : Singleton<InputManager>
             }
             if(_crouchAction != null && toggleCrouch == false)
             {
-                if (Input.GetKey(KeyCode.LeftAlt))
+                if (Input.GetKey(KeyCode.LeftControl))
                 {
                     _crouch = true;
-                    Debug.Log(_crouch);
                 }
                 else
                 {
                     _crouch = false;
-                    Debug.Log(_crouch);
                 }
                 _crouchAction(_crouch);
             }

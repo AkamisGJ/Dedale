@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
+        _crouchLerp = 0;
     }
 
     public void ChangeState(MyState nextState)
@@ -211,15 +212,15 @@ public class PlayerController : MonoBehaviour
         {
             if (_isCrouch == false && _crouching == false)
             {
-                _crouchLerp = 0;
                 _crouching = true;
+                _unCrouching = false;
             }
         }
         if (crouchBool == false)
         {
-            if (_isCrouch == true && _unCrouching == false)
+            if (_unCrouching == false)
             {
-                _crouchLerp = 1;
+                _crouching = false;
                 _unCrouching = true;
             }
         }
