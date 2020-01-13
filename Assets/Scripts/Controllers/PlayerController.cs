@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     #region Fields
     private Vector3 direction = Vector3.zero;
     [SerializeField] private Transform _cameraHolder = null;
+    [SerializeField] private Transform _objectHolder = null;
     [SerializeField] private AnimationCurve _accelerationCurve = null;
     private float _accelerationTime = 0.0f;
     [SerializeField] private float _timeMultiplier = 1.0f;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private bool _unCrouching = false;
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
+    private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
     #endregion Fields
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
+        _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
     }
 
     public void ChangeState(MyState nextState)
@@ -101,6 +104,7 @@ public class PlayerController : MonoBehaviour
                     {
                         hit.collider.isTrigger = true;
                         _grabObject = hit.transform.gameObject;
+                        _grabObject.transform.SetParent(_objectHolder);
                         if (_grabObject.GetComponent<Rigidbody>())
                         {
                             Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
@@ -120,8 +124,8 @@ public class PlayerController : MonoBehaviour
                         }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
-                        _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
-                        _grabObject.transform.rotation = _grabObjectRotationWhenLooked;
+                        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+                        _grabObject.transform.localRotation = _grabObjectRotationWhenLooked;
                         _currentState = MyState.Observe;
                         _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
@@ -165,6 +169,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hit.collider.isTrigger = false;
+                _grabObject.transform.SetParent(null);
                 if (_grabObject.GetComponent<Rigidbody>())
                 {
                     Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
@@ -246,7 +251,7 @@ public class PlayerController : MonoBehaviour
     {
         _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
         _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
-        transform.GetComponent<CapsuleCollider>().height = Mathf.Lerp(2, 1f, _crouchLerp);
+        _playerCapsuleCollider.height = Mathf.Lerp(2, 1f, _crouchLerp);
         Debug.Log(inversion + "    " +  _crouchLerp);
         if (inversion < 0 && _crouchLerp == 0)
         {
