@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         _currentState = MyState.Mouvement;
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
-        //InputManager.Instance.Crouch += Crouch;
+        InputManager.Instance.Crouch += Crouch;
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Move();
         if (_currentState == MyState.Mouvement)
         {
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
@@ -97,6 +98,11 @@ public class PlayerController : MonoBehaviour
                     {
                         hit.collider.isTrigger = true;
                         _grabObject = hit.transform.gameObject;
+                        if (_grabObject.GetComponent<Rigidbody>())
+                        {
+                            Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+                            objectRb.isKinematic = true;
+                        }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
                         _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
@@ -105,7 +111,7 @@ public class PlayerController : MonoBehaviour
                         InputManager.Instance.Direction -= SetDirection;
                         direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
-                        //InputManager.Instance.Crouch -= Crouch;
+                        InputManager.Instance.Crouch -= Crouch;
                         InputManager.Instance.MousePosition += LookObject;
                         return;
                     }
@@ -121,7 +127,7 @@ public class PlayerController : MonoBehaviour
                         InputManager.Instance.Direction -= SetDirection;
                         direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
-                        //InputManager.Instance.Crouch -= Crouch;
+                        InputManager.Instance.Crouch -= Crouch;
                         _porte = _grabObject.GetComponent<Porte>();
                         InputManager.Instance.MousePosition += _porte.InteractPorte;
                         return;
@@ -129,7 +135,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
-/*
             if(_crouching == true)
             {
                 Crouching(1);
@@ -138,19 +143,23 @@ public class PlayerController : MonoBehaviour
             {
                 Crouching(-1);
             }
-*/
         }
         if (_currentState == MyState.Observe)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hit.collider.isTrigger = false;
+                if (_grabObject.GetComponent<Rigidbody>())
+                {
+                    Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+                    objectRb.isKinematic = false;
+                }
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
-                //InputManager.Instance.Crouch += Crouch;
+                InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= LookObject;
             }
         }
@@ -162,7 +171,7 @@ public class PlayerController : MonoBehaviour
                 _rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
-                //InputManager.Instance.Crouch += Crouch;
+                InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= _porte.InteractPorte;
             }
         }
@@ -170,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        
     }
 
     private void LookObject(float mousePositionX, float mousePositionY)
@@ -195,34 +204,23 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
         _rb.MovePosition(transform.position + direction * Time.deltaTime * _moveSpeedMultiplier);
     }
-    /*
+    
     private void Crouch(bool crouchBool)
     {
         if(crouchBool == true)
         {
-            if (_isCrouch == false)
+            if (_isCrouch == false && _crouching == false)
             {
                 _crouchLerp = 0;
-                Debug.Log("crouching");
                 _crouching = true;
             }
-            if(_isCrouch == true)
-            {
-                _crouching = false;
-            }
         }
-
-        if(crouchBool == false)
+        if (crouchBool == false)
         {
-            if(_isCrouch == true)
+            if (_isCrouch == true && _unCrouching == false)
             {
                 _crouchLerp = 1;
-                Debug.Log("uncrouching");
                 _unCrouching = true;
-            }
-            if(_isCrouch == false)
-            {
-                _unCrouching = false;
             }
         }
     }
@@ -232,24 +230,25 @@ public class PlayerController : MonoBehaviour
         _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
         _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
         transform.localScale = new Vector3(1,Mathf.Lerp(1,0.5f, _crouchLerp),1);
+        Debug.Log(inversion + "    " +  _crouchLerp);
         if (inversion < 0 && _crouchLerp == 0)
-        {
-            _isCrouch = true;
-            _crouching = false;
-        }
-        if(inversion > 0 && _crouchLerp == 1)
         {
             _isCrouch = false;
             _unCrouching = false;
         }
+        if(inversion > 0 && _crouchLerp == 1)
+        {
+            _isCrouch = true;
+            _crouching = false;
+        }
     }
-    */
+    
     private void OnDestroy()
     {
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.MousePosition -= LookObject;
-        //InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Crouch -= Crouch;
         if (_porte != null)
         {
             InputManager.Instance.MousePosition -= _porte.InteractPorte;

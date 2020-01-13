@@ -131,7 +131,7 @@ public class InputManager : Singleton<InputManager>
                     _interact();
                 }
             }
-/*
+
             if (_sprintAction != null)
             {
                 if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -152,9 +152,8 @@ public class InputManager : Singleton<InputManager>
                     _crouch = false;
                     Debug.Log(_crouch);
                 }
+                _crouchAction(_crouch);
             }
-            _crouchAction(_crouch);
-            */
         }
     }
 }
