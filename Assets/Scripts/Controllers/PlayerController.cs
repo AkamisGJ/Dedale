@@ -230,7 +230,7 @@ public class PlayerController : MonoBehaviour
     {
         _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
         _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
-        transform.localScale = new Vector3(1,Mathf.Lerp(1,0.5f, _crouchLerp),1);
+        transform.GetComponent<CapsuleCollider>().height = Mathf.Lerp(2, 1f, _crouchLerp);
         Debug.Log(inversion + "    " +  _crouchLerp);
         if (inversion < 0 && _crouchLerp == 0)
         {
