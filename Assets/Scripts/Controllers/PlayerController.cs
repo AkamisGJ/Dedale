@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private bool _unCrouching = false;
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
+    private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
+    private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
     #endregion Fields
 
     #region Properties
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
             {
-                if (hit.transform.gameObject.layer == 10)
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
                 {
                     Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                     if (Input.GetKeyDown(KeyCode.E))
@@ -104,11 +106,24 @@ public class PlayerController : MonoBehaviour
                             Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
                             objectRb.isKinematic = true;
                         }
+                        if (_grabObject.GetComponent<InteractObject>())
+                        {
+                            Vector4 infoWehnLooked = _grabObject.GetComponent<InteractObject>().Interact();
+                            Vector3 grabObjectRotationWhenLooked = infoWehnLooked;
+                            _distanceGrabObjectWithCameraWhenLooked = infoWehnLooked.w;
+                            _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
+                        }
+                        else
+                        {
+                            _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+                            _grabObjectRotationWhenLooked = Quaternion.identity;
+                        }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
-                        _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
-                        _grabObject.transform.rotation = Quaternion.identity;
+                        _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+                        _grabObject.transform.rotation = _grabObjectRotationWhenLooked;
                         _currentState = MyState.Observe;
+                        _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
                         direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
@@ -155,6 +170,7 @@ public class PlayerController : MonoBehaviour
                     Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
                     objectRb.isKinematic = false;
                 }
+                _rb.isKinematic = false;
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
