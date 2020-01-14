@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
     private bool _unCrouching = false;
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
+    private float _maxSprint = 100;
+    private float _sprintJauge = 100;
+    [SerializeField] float _speedSprint = 2;
+    [SerializeField] float _spriteJaugeDecrementation = 10;
     private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
@@ -66,10 +70,12 @@ public class PlayerController : MonoBehaviour
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Crouch += Crouch;
+        InputManager.Instance.Sprint += Sprinting;
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
+        _sprintJauge = 100;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
     }
 
@@ -253,7 +259,6 @@ public class PlayerController : MonoBehaviour
         _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
         _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
         _playerCapsuleCollider.height = Mathf.Lerp(2, 1f, _crouchLerp);
-        Debug.Log(inversion + "    " +  _crouchLerp);
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;
@@ -266,12 +271,25 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    private void Sprinting(bool isSprinting)
+    {
+        if(isSprinting == true && _sprintJauge > 0)
+        {
+
+        }
+        if (isSprinting == false && _sprintJauge <= 100)
+        {
+
+        }
+    }
+
     private void OnDestroy()
     {
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.MousePosition -= LookObject;
         InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Sprint -= Sprinting;
         if (_porte != null)
         {
             InputManager.Instance.MousePosition -= _porte.InteractPorte;

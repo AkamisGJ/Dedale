@@ -138,7 +138,7 @@ public class InputManager : Singleton<InputManager>
 
             if (_sprintAction != null)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (Input.GetButton("Sprint"))
                 {
                     _sprint = !_sprint;
                 }
@@ -146,7 +146,7 @@ public class InputManager : Singleton<InputManager>
             }
             if(_crouchAction != null && toggleCrouch == false)
             {
-                if (Input.GetKey(KeyCode.LeftControl))
+                if (Input.GetButton("Crouch"))
                 {
                     _crouch = true;
                 }
