@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AnimationCurve _accelerationCurve = null;
     private float _accelerationTime = 0.0f;
     [SerializeField] private float _timeMultiplier = 1.0f;
-    [SerializeField] private float _moveSpeedHorizontal = 1;
-    [SerializeField] private float _moveSpeedSide = 1;
+    private float _moveSpeedHorizontal = 1;
+    [SerializeField] private float _speedForward = 1;
+    [SerializeField] private float _speedBack = 0.5f;
+    [SerializeField] private float _moveSpeedSide = 0.5f;
     [SerializeField] private float _moveSpeedMultiplier = 1;
     [SerializeField] private float _gravity = 1;
     private float _currentSpeed = 0;
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
     private float _maxSprint = 100;
     private float _sprintJauge = 100;
     [SerializeField] float _speedSprint = 2;
-    [SerializeField] float _spriteJaugeDecrementation = 10;
+    [SerializeField] float _sprintJaugeDecrementation = 10;
     private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
@@ -92,9 +94,28 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward * _moveSpeedHorizontal;
-        Vector3 preVerticalMouvement = verticalMouvement * transform.right * _moveSpeedSide;
+        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
+        Vector3 preVerticalMouvement = verticalMouvement * transform.right;
         direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
+        if (horizontalMouvement < 0)
+        {
+            direction += transform.forward * _speedSprint;
+            if (horizontalMouvement < 0)
+            {
+                direction += transform.forward * _speedForward;
+            }
+            else
+            {
+                direction -= transform.forward * _speedBack;
+            }
+        }
+        if(verticalMouvement > 0)
+        {
+            direction += transform.right * _moveSpeedSide;
+        }else if(verticalMouvement < 0)
+        {
+            direction -= transform.right * _moveSpeedSide;
+        }
     }
 
     private void Update()
@@ -118,10 +139,9 @@ public class PlayerController : MonoBehaviour
                         }
                         if (_grabObject.GetComponent<InteractObject>())
                         {
-                            Vector4 infoWehnLooked = _grabObject.GetComponent<InteractObject>().Interact();
-                            Vector3 grabObjectRotationWhenLooked = infoWehnLooked;
-                            Debug.Log(infoWehnLooked);
-                            _distanceGrabObjectWithCameraWhenLooked = infoWehnLooked.w;
+                            Vector4 infoWhenLooked = _grabObject.GetComponent<InteractObject>().Interact();
+                            Vector3 grabObjectRotationWhenLooked = infoWhenLooked;
+                            _distanceGrabObjectWithCameraWhenLooked = infoWhenLooked.w;
                             _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
                         }
                         else
@@ -131,8 +151,9 @@ public class PlayerController : MonoBehaviour
                         }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
-                        _objectHolder.transform.localPosition = _mainCamera.transform.localPosition + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
-                        _grabObject.transform.localRotation = _grabObjectRotationWhenLooked;
+                        _grabObject.transform.localPosition = Vector3.zero;
+                        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+                        _grabObject.transform.LookAt(_mainCamera.transform);
                         _currentState = MyState.Observe;
                         _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
@@ -273,13 +294,26 @@ public class PlayerController : MonoBehaviour
     
     private void Sprinting(bool isSprinting)
     {
-        if(isSprinting == true && _sprintJauge > 0)
+        if(isSprinting == true)
         {
-
+            if (_sprintJauge > 0)
+            {
+                _sprintJauge -= _sprintJaugeDecrementation;
+                _speedSprint = 2;
+            }
+            else
+            {
+                _speedSprint = 0;
+            }
         }
-        if (isSprinting == false && _sprintJauge <= 100)
-        {
 
+        if (isSprinting == false)
+        {
+            _speedSprint = 0;
+            if (_sprintJauge < 100)
+            {
+                _sprintJauge += _sprintJaugeDecrementation;
+            }
         }
     }
 

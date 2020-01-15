@@ -140,7 +140,11 @@ public class InputManager : Singleton<InputManager>
             {
                 if (Input.GetButton("Sprint"))
                 {
-                    _sprint = !_sprint;
+                    _sprint = true;
+                }
+                else
+                {
+                    _sprint = false;
                 }
                 _sprintAction(_sprint);
             }
