@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float _currentAcceleration = 0;
     private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
+    [SerializeField] private float _maxSprintSpeed = 2;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
     [SerializeField] private Animator _animator = null;
@@ -48,9 +49,10 @@ public class PlayerController : MonoBehaviour
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
     private float _maxSprint = 100;
-    private float _sprintJauge = 100;
-    [SerializeField] float _speedSprint = 2;
-    [SerializeField] float _sprintJaugeDecrementation = 10;
+    [SerializeField] private float _sprintCurrentTime = 0;
+    private float _speedSprint = 0;
+    [SerializeField] float _speedSprintMax = 1;
+    [SerializeField] float _sprintTimeMax = 100;
     private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
-        _sprintJauge = 100;
+        _sprintCurrentTime = 0;
         _currentAcceleration = 0;
         _accelerationLerp = 0;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
@@ -317,10 +319,11 @@ public class PlayerController : MonoBehaviour
     {
         if(isSprinting == true)
         {
-            if (_sprintJauge > 0)
+            if (_sprintCurrentTime > 0)
             {
-                _sprintJauge -= _sprintJaugeDecrementation;
-                _speedSprint = 2;
+                _sprintCurrentTime -= Time.deltaTime;
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _sprintTimeMax);
+                _speedSprint = _speedSprintMax;
             }
             else
             {
@@ -331,9 +334,10 @@ public class PlayerController : MonoBehaviour
         if (isSprinting == false)
         {
             _speedSprint = 0;
-            if (_sprintJauge < 100)
+            if (_sprintCurrentTime < _sprintTimeMax)
             {
-                _sprintJauge += _sprintJaugeDecrementation;
+                _sprintCurrentTime += Time.deltaTime;
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _sprintTimeMax);
             }
         }
     }
