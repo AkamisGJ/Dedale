@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    private Vector3 direction = Vector3.zero;
+    private Vector3 _direction = Vector3.zero;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
     [SerializeField] private AnimationCurve _accelerationCurve = null;
-    private float _accelerationTime = 0.0f;
+    [SerializeField] private float _accelerationTime = 0.0f;
     [SerializeField] private float _timeMultiplier = 1.0f;
     private float _moveSpeedHorizontal = 1;
     [SerializeField] private float _speedForward = 1;
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeedSide = 0.5f;
     [SerializeField] private float _moveSpeedMultiplier = 1;
     [SerializeField] private float _gravity = 1;
+    private float _currentAcceleration = 0;
+    private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+    private Vector3 _lastDirection = Vector3.zero;
     #endregion Fields
 
     #region Properties
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
         _sprintJauge = 100;
+        _currentAcceleration = 0;
+        _accelerationLerp = 0;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
     }
 
@@ -96,25 +101,35 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right;
-        direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
+        _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
         if (horizontalMouvement < 0)
         {
-            direction += transform.forward * _speedSprint;
+            _direction += transform.forward * _speedSprint;
             if (horizontalMouvement < 0)
             {
-                direction += transform.forward * _speedForward;
+                _direction += transform.forward * _speedForward;
             }
             else
             {
-                direction -= transform.forward * _speedBack;
+                _direction -= transform.forward * _speedBack;
             }
         }
         if(verticalMouvement > 0)
         {
-            direction += transform.right * _moveSpeedSide;
+            _direction += transform.right * _moveSpeedSide;
         }else if(verticalMouvement < 0)
         {
-            direction -= transform.right * _moveSpeedSide;
+            _direction -= transform.right * _moveSpeedSide;
+        }
+        if(_direction != Vector3.zero)
+        {
+            Acceleration(1);
+            _lastDirection = _direction;
+        }
+        else
+        {
+            Acceleration(-1);
+            _direction = _lastDirection;
         }
     }
 
@@ -154,10 +169,11 @@ public class PlayerController : MonoBehaviour
                         _grabObject.transform.localPosition = Vector3.zero;
                         _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
                         _grabObject.transform.LookAt(_mainCamera.transform);
+                        _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
                         _currentState = MyState.Observe;
                         _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
-                        direction = Vector3.zero;
+                        _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         InputManager.Instance.Crouch -= Crouch;
                         InputManager.Instance.MousePosition += LookObject;
@@ -173,7 +189,7 @@ public class PlayerController : MonoBehaviour
                         _currentState = MyState.Interaction;
                         _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
-                        direction = Vector3.zero;
+                        _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
                         InputManager.Instance.Crouch -= Crouch;
                         _porte = _grabObject.GetComponent<Porte>();
@@ -240,6 +256,13 @@ public class PlayerController : MonoBehaviour
         _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
     }
 
+    private void Acceleration(float modifier)
+    {
+        _accelerationLerp += Time.deltaTime * modifier * _accelerationTime;
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
+        _currentAcceleration = Mathf.Lerp(0, 1, _accelerationLerp);
+    }
+
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
         _rotationX += mousePositionY * _sensitivityMouseX;
@@ -252,7 +275,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        _rb.MovePosition(transform.position + direction * Time.deltaTime * _moveSpeedMultiplier);
+        _rb.MovePosition(transform.position + _direction * Time.deltaTime * _moveSpeedMultiplier * _currentAcceleration);
     }
     
     private void Crouch(bool crouchBool)
