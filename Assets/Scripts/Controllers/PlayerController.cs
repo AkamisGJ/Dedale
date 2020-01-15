@@ -123,13 +123,11 @@ public class PlayerController : MonoBehaviour
         }
         if(_direction != Vector3.zero)
         {
-            Acceleration(1);
-            _lastDirection = _direction;
+            Acceleration();
         }
         else
         {
-            Acceleration(-1);
-            _direction = _lastDirection;
+            _accelerationLerp = 0;
         }
     }
 
@@ -256,9 +254,9 @@ public class PlayerController : MonoBehaviour
         _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
     }
 
-    private void Acceleration(float modifier)
+    private void Acceleration()
     {
-        _accelerationLerp += Time.deltaTime * modifier * _accelerationTime;
+        _accelerationLerp += Time.deltaTime * _accelerationTime;
         _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
         _currentAcceleration = Mathf.Lerp(0, 1, _accelerationLerp);
     }
