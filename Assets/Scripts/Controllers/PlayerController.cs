@@ -4,32 +4,18 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    private Vector3 _direction = Vector3.zero;
+    [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
-    [SerializeField] private AnimationCurve _accelerationCurve = null;
-    [SerializeField] private AnimationCurve _crouchCurve = null;
+    private Vector3 _direction = Vector3.zero;
     private float _timeCrouchTime = 0.0f;
-    [SerializeField] private float _accelerationTime = 0.0f;
-    [SerializeField] private float _timeMultiplier = 1.0f;
     private float _moveSpeedHorizontal = 1;
-    [SerializeField] private float _speedForward = 1;
-    [SerializeField] private float _speedBack = 0.5f;
-    [SerializeField] private float _moveSpeedSide = 0.5f;
-    [SerializeField] private float _moveSpeedMultiplier = 1;
-    [SerializeField] private float _gravity = 1;
     private float _currentAcceleration = 0;
     private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
-    [SerializeField] private float _maxSprintSpeed = 2;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
-    [SerializeField] private Animator _animator = null;
     private Vector3 _moveDirection = Vector3.zero;
-    [SerializeField] private float _mouseSensitivityInteract = 1.0f;
-    [SerializeField] private float _angleX = 60f;
-    [SerializeField] private float _sensitivityMouseX = 1f;
-    [SerializeField] private float _sensitivityMouseY = 1f;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
     public enum MyState
@@ -51,10 +37,8 @@ public class PlayerController : MonoBehaviour
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
     private float _maxSprint = 100;
-    [SerializeField] private float _sprintCurrentTime = 0;
+    private float _sprintCurrentTime = 0;
     private float _speedSprint = 0;
-    [SerializeField] float _speedSprintMax = 1;
-    [SerializeField] float _sprintTimeMax = 100;
     private CapsuleCollider _playerCapsuleCollider = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
@@ -65,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
     #region Properties
     public Camera MainCamera { set { _mainCamera = value; } }
-
-    public Animator Animator { get { return _animator; } set { _animator = value; } }
 
     public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
     #endregion Properties
@@ -113,19 +95,19 @@ public class PlayerController : MonoBehaviour
             _direction += transform.forward * _speedSprint;
             if (horizontalMouvement < 0)
             {
-                _direction += transform.forward * _speedForward;
+                _direction += transform.forward * _playerData.SpeedForward;
             }
             else
             {
-                _direction -= transform.forward * _speedBack;
+                _direction -= transform.forward * _playerData.SpeedBack;
             }
         }
         if(verticalMouvement > 0)
         {
-            _direction += transform.right * _moveSpeedSide;
+            _direction += transform.right * _playerData.MoveSpeedSide;
         }else if(verticalMouvement < 0)
         {
-            _direction -= transform.right * _moveSpeedSide;
+            _direction -= transform.right * _playerData.MoveSpeedSide;
         }
         if(_direction != Vector3.zero)
         {
@@ -265,24 +247,24 @@ public class PlayerController : MonoBehaviour
 
     private void LookObject(float mousePositionX, float mousePositionY)
     {
-        float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
-        float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
+        float XaxisRotation = mousePositionX * _playerData.MouseSensitivityInteract;
+        float YaxisRotation = mousePositionY * _playerData.MouseSensitivityInteract;
         _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
         _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
     }
 
     private void Acceleration()
     {
-        _accelerationLerp += Time.deltaTime * _accelerationTime;
-        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _accelerationCurve.length);
-        _currentAcceleration = _accelerationCurve.Evaluate(_accelerationLerp);
+        _accelerationLerp += Time.deltaTime * _playerData.AccelerationTime;
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _playerData.AccelerationCurve.length);
+        _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX += mousePositionY * _sensitivityMouseX;
-        _rotationY += mousePositionX * _sensitivityMouseY;
-        _rotationX = Mathf.Clamp(_rotationX, -_angleX, _angleX);
+        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
+        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+        _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
         transform.localEulerAngles = new Vector3(0, _rotationY, 0);
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
@@ -290,7 +272,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        _rb.MovePosition(transform.position + _direction * Time.deltaTime * _moveSpeedMultiplier * _currentAcceleration);
+        _rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
     }
     
     private void Crouch(bool crouchBool)
@@ -316,15 +298,15 @@ public class PlayerController : MonoBehaviour
     private void Crouching(float inversion)
     {
         _timeCrouchTime += Time.deltaTime * inversion;
-        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _crouchCurve.length);
-        _crouchLerp = _crouchCurve.Evaluate(_timeCrouchTime);
+        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
+        _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
         _playerCapsuleCollider.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;
             _unCrouching = false;
         }
-        if(inversion > 0 && _crouchLerp == _crouchCurve.length)
+        if(inversion > 0 && _crouchLerp == _playerData.CrouchCurve.length)
         {
             _isCrouch = true;
             _crouching = false;
@@ -338,8 +320,8 @@ public class PlayerController : MonoBehaviour
             if (_sprintCurrentTime > 0)
             {
                 _sprintCurrentTime -= Time.deltaTime;
-                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _sprintTimeMax);
-                _speedSprint = _speedSprintMax;
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
+                _speedSprint = _playerData.SpeedSprintMax;
             }
             else
             {
@@ -350,10 +332,10 @@ public class PlayerController : MonoBehaviour
         if (isSprinting == false)
         {
             _speedSprint = 0;
-            if (_sprintCurrentTime < _sprintTimeMax)
+            if (_sprintCurrentTime < _playerData.SprintTimeMax)
             {
                 _sprintCurrentTime += Time.deltaTime;
-                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _sprintTimeMax);
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
             }
         }
     }
