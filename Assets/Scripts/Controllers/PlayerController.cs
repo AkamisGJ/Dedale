@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
     private Vector3 _lastDirection = Vector3.zero;
+    private InteractObject _currentObjectInterract = null;
+    [SerializeField] private AudioSource _audioSourcePlayer = null;
     #endregion Fields
 
     #region Properties
@@ -147,6 +149,12 @@ public class PlayerController : MonoBehaviour
                         hit.collider.isTrigger = true;
                         _grabObject = hit.transform.gameObject;
                         _grabObject.transform.SetParent(_objectHolder);
+                        _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
+                        if(_currentObjectInterract.OnTakeObject != null && _audioSourcePlayer != null)
+                        {
+                            _audioSourcePlayer.clip =_currentObjectInterract.OnTakeObject;
+                            _audioSourcePlayer.Play();
+                        }
                         if (_grabObject.GetComponent<Rigidbody>())
                         {
                             Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
@@ -214,6 +222,11 @@ public class PlayerController : MonoBehaviour
             {
                 hit.collider.isTrigger = false;
                 _grabObject.transform.SetParent(null);
+                if (_currentObjectInterract.OnThrowObject != null && _audioSourcePlayer != null)
+                {
+                    _audioSourcePlayer.clip = _currentObjectInterract.OnThrowObject;
+                    _audioSourcePlayer.Play();
+                }
                 if (_grabObject.GetComponent<Rigidbody>())
                 {
                     Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
