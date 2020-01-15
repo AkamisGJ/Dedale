@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
     [SerializeField] private AnimationCurve _accelerationCurve = null;
+    [SerializeField] private AnimationCurve _crouchCurve = null;
+    private float _timeCrouchTime = 0.0f;
     [SerializeField] private float _accelerationTime = 0.0f;
     [SerializeField] private float _timeMultiplier = 1.0f;
     private float _moveSpeedHorizontal = 1;
@@ -272,8 +274,8 @@ public class PlayerController : MonoBehaviour
     private void Acceleration()
     {
         _accelerationLerp += Time.deltaTime * _accelerationTime;
-        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
-        _currentAcceleration = Mathf.Lerp(0, 1, _accelerationLerp);
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _accelerationCurve.length);
+        _currentAcceleration = _accelerationCurve.Evaluate(_accelerationLerp);
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
@@ -313,15 +315,16 @@ public class PlayerController : MonoBehaviour
 
     private void Crouching(float inversion)
     {
-        _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
-        _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
-        _playerCapsuleCollider.height = Mathf.Lerp(2, 1f, _crouchLerp);
+        _timeCrouchTime += Time.deltaTime * inversion;
+        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _crouchCurve.length);
+        _crouchLerp = _crouchCurve.Evaluate(_timeCrouchTime);
+        _playerCapsuleCollider.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;
             _unCrouching = false;
         }
-        if(inversion > 0 && _crouchLerp == 1)
+        if(inversion > 0 && _crouchLerp == _crouchCurve.length)
         {
             _isCrouch = true;
             _crouching = false;
