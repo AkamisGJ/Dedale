@@ -4,23 +4,18 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    private Vector3 direction = Vector3.zero;
+    [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
-    [SerializeField] private AnimationCurve _accelerationCurve = null;
-    private float _accelerationTime = 0.0f;
-    [SerializeField] private float _timeMultiplier = 1.0f;
-    [SerializeField] private float _moveSpeedHorizontal = 1;
-    [SerializeField] private float _moveSpeedSide = 1;
-    [SerializeField] private float _moveSpeedMultiplier = 1;
+    [SerializeField] private Transform _objectHolder = null;
+    private Vector3 _direction = Vector3.zero;
+    private float _timeCrouchTime = 0.0f;
+    private float _moveSpeedHorizontal = 1;
+    private float _currentAcceleration = 0;
+    private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
     private Camera _mainCamera = null;
     [SerializeField] private Rigidbody _rb = null;
-    [SerializeField] private Animator _animator = null;
     private Vector3 _moveDirection = Vector3.zero;
-    [SerializeField] private float _mouseSensitivityInteract = 1.0f;
-    [SerializeField] private float _angleX = 60f;
-    [SerializeField] private float _sensitivityMouseX = 1f;
-    [SerializeField] private float _sensitivityMouseY = 1f;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
     public enum MyState
@@ -41,12 +36,19 @@ public class PlayerController : MonoBehaviour
     private bool _unCrouching = false;
     private float _crouchSpeed = 1;
     private float _crouchLerp = 0;
+    private float _maxSprint = 100;
+    private float _sprintCurrentTime = 0;
+    private float _speedSprint = 0;
+    private CapsuleCollider _playerCapsuleCollider = null;
+    private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
+    private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+    private Vector3 _lastDirection = Vector3.zero;
+    private InteractObject _currentObjectInterract = null;
+    [SerializeField] private AudioSource _audioSourcePlayer = null;
     #endregion Fields
 
     #region Properties
     public Camera MainCamera { set { _mainCamera = value; } }
-
-    public Animator Animator { get { return _animator; } set { _animator = value; } }
 
     public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
     #endregion Properties
@@ -60,10 +62,16 @@ public class PlayerController : MonoBehaviour
         _currentState = MyState.Mouvement;
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
-        //InputManager.Instance.Crouch += Crouch;
+        InputManager.Instance.Crouch += Crouch;
+        InputManager.Instance.Sprint += Sprinting;
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
+        _crouchLerp = 0;
+        _sprintCurrentTime = 0;
+        _currentAcceleration = 0;
+        _accelerationLerp = 0;
+        _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
     }
 
     public void ChangeState(MyState nextState)
@@ -79,9 +87,36 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward * _moveSpeedHorizontal;
-        Vector3 preVerticalMouvement = verticalMouvement * transform.right * _moveSpeedSide;
-        direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
+        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
+        Vector3 preVerticalMouvement = verticalMouvement * transform.right;
+        _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
+        if (horizontalMouvement < 0)
+        {
+            _direction += transform.forward * _speedSprint;
+            if (horizontalMouvement < 0)
+            {
+                _direction += transform.forward * _playerData.SpeedForward;
+            }
+            else
+            {
+                _direction -= transform.forward * _playerData.SpeedBack;
+            }
+        }
+        if(verticalMouvement > 0)
+        {
+            _direction += transform.right * _playerData.MoveSpeedSide;
+        }else if(verticalMouvement < 0)
+        {
+            _direction -= transform.right * _playerData.MoveSpeedSide;
+        }
+        if(_direction != Vector3.zero)
+        {
+            Acceleration();
+        }
+        else
+        {
+            _accelerationLerp = 0;
+        }
     }
 
     private void Update()
@@ -90,22 +125,49 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out hit, 10.0f))
             {
-                if (hit.transform.gameObject.layer == 10)
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
                 {
                     Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         hit.collider.isTrigger = true;
                         _grabObject = hit.transform.gameObject;
+                        _grabObject.transform.SetParent(_objectHolder);
+                        _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
+                        if(_currentObjectInterract.OnTakeObject != null && _audioSourcePlayer != null)
+                        {
+                            _audioSourcePlayer.clip =_currentObjectInterract.OnTakeObject;
+                            _audioSourcePlayer.Play();
+                        }
+                        if (_grabObject.GetComponent<Rigidbody>())
+                        {
+                            Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+                            objectRb.isKinematic = true;
+                        }
+                        if (_grabObject.GetComponent<InteractObject>())
+                        {
+                            Vector4 infoWhenLooked = _grabObject.GetComponent<InteractObject>().Interact();
+                            Vector3 grabObjectRotationWhenLooked = infoWhenLooked;
+                            _distanceGrabObjectWithCameraWhenLooked = infoWhenLooked.w;
+                            _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
+                        }
+                        else
+                        {
+                            _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+                            _grabObjectRotationWhenLooked = Quaternion.identity;
+                        }
                         _originPositionGrabObject = _grabObject.transform.position;
                         _originRotationGrabObject = _grabObject.transform.rotation;
-                        _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
-                        _grabObject.transform.rotation = Quaternion.identity;
+                        _grabObject.transform.localPosition = Vector3.zero;
+                        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+                        _grabObject.transform.LookAt(_mainCamera.transform);
+                        _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
                         _currentState = MyState.Observe;
+                        _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
-                        direction = Vector3.zero;
+                        _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
-                        //InputManager.Instance.Crouch -= Crouch;
+                        InputManager.Instance.Crouch -= Crouch;
                         InputManager.Instance.MousePosition += LookObject;
                         return;
                     }
@@ -119,9 +181,9 @@ public class PlayerController : MonoBehaviour
                         _currentState = MyState.Interaction;
                         _rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
-                        direction = Vector3.zero;
+                        _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
-                        //InputManager.Instance.Crouch -= Crouch;
+                        InputManager.Instance.Crouch -= Crouch;
                         _porte = _grabObject.GetComponent<Porte>();
                         InputManager.Instance.MousePosition += _porte.InteractPorte;
                         return;
@@ -129,7 +191,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
-/*
             if(_crouching == true)
             {
                 Crouching(1);
@@ -138,19 +199,30 @@ public class PlayerController : MonoBehaviour
             {
                 Crouching(-1);
             }
-*/
         }
         if (_currentState == MyState.Observe)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 hit.collider.isTrigger = false;
+                _grabObject.transform.SetParent(null);
+                if (_currentObjectInterract.OnThrowObject != null && _audioSourcePlayer != null)
+                {
+                    _audioSourcePlayer.clip = _currentObjectInterract.OnThrowObject;
+                    _audioSourcePlayer.Play();
+                }
+                if (_grabObject.GetComponent<Rigidbody>())
+                {
+                    Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+                    objectRb.isKinematic = false;
+                }
+                _rb.isKinematic = false;
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
-                //InputManager.Instance.Crouch += Crouch;
+                InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= LookObject;
             }
         }
@@ -162,7 +234,7 @@ public class PlayerController : MonoBehaviour
                 _rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
-                //InputManager.Instance.Crouch += Crouch;
+                InputManager.Instance.Crouch += Crouch;
                 InputManager.Instance.MousePosition -= _porte.InteractPorte;
             }
         }
@@ -175,17 +247,24 @@ public class PlayerController : MonoBehaviour
 
     private void LookObject(float mousePositionX, float mousePositionY)
     {
-        float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
-        float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
+        float XaxisRotation = mousePositionX * _playerData.MouseSensitivityInteract;
+        float YaxisRotation = mousePositionY * _playerData.MouseSensitivityInteract;
         _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
         _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
     }
 
+    private void Acceleration()
+    {
+        _accelerationLerp += Time.deltaTime * _playerData.AccelerationTime;
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _playerData.AccelerationCurve.length);
+        _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
+    }
+
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX += mousePositionY * _sensitivityMouseX;
-        _rotationY += mousePositionX * _sensitivityMouseY;
-        _rotationX = Mathf.Clamp(_rotationX, -_angleX, _angleX);
+        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
+        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+        _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
         transform.localEulerAngles = new Vector3(0, _rotationY, 0);
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
@@ -193,63 +272,81 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        _rb.MovePosition(transform.position + direction * Time.deltaTime * _moveSpeedMultiplier);
+        _rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
     }
-    /*
+    
     private void Crouch(bool crouchBool)
     {
         if(crouchBool == true)
         {
-            if (_isCrouch == false)
+            if (_isCrouch == false && _crouching == false)
             {
-                _crouchLerp = 0;
-                Debug.Log("crouching");
                 _crouching = true;
-            }
-            if(_isCrouch == true)
-            {
-                _crouching = false;
+                _unCrouching = false;
             }
         }
-
-        if(crouchBool == false)
+        if (crouchBool == false)
         {
-            if(_isCrouch == true)
+            if (_unCrouching == false)
             {
-                _crouchLerp = 1;
-                Debug.Log("uncrouching");
+                _crouching = false;
                 _unCrouching = true;
-            }
-            if(_isCrouch == false)
-            {
-                _unCrouching = false;
             }
         }
     }
 
     private void Crouching(float inversion)
     {
-        _crouchLerp += inversion * Time.deltaTime * _crouchSpeed;
-        _crouchLerp = Mathf.Clamp(_crouchLerp, 0, 1);
-        transform.localScale = new Vector3(1,Mathf.Lerp(1,0.5f, _crouchLerp),1);
+        _timeCrouchTime += Time.deltaTime * inversion;
+        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
+        _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
+        _playerCapsuleCollider.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == 0)
-        {
-            _isCrouch = true;
-            _crouching = false;
-        }
-        if(inversion > 0 && _crouchLerp == 1)
         {
             _isCrouch = false;
             _unCrouching = false;
         }
+        if(inversion > 0 && _crouchLerp == _playerData.CrouchCurve.length)
+        {
+            _isCrouch = true;
+            _crouching = false;
+        }
     }
-    */
+    
+    private void Sprinting(bool isSprinting)
+    {
+        if(isSprinting == true)
+        {
+            if (_sprintCurrentTime > 0)
+            {
+                _sprintCurrentTime -= Time.deltaTime;
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
+                _speedSprint = _playerData.SpeedSprintMax;
+            }
+            else
+            {
+                _speedSprint = 0;
+            }
+        }
+
+        if (isSprinting == false)
+        {
+            _speedSprint = 0;
+            if (_sprintCurrentTime < _playerData.SprintTimeMax)
+            {
+                _sprintCurrentTime += Time.deltaTime;
+                _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.MousePosition -= LookObject;
-        //InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Sprint -= Sprinting;
         if (_porte != null)
         {
             InputManager.Instance.MousePosition -= _porte.InteractPorte;
