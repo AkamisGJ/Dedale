@@ -45,12 +45,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 _lastDirection = Vector3.zero;
     private InteractObject _currentObjectInterract = null;
     [SerializeField] private AudioSource _audioSourcePlayer = null;
+    private RaycastHit _raycastHit;
     #endregion Fields
 
     #region Properties
     public Camera MainCamera { set { _mainCamera = value; } }
-
     public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
+    public Transform ObjectHolder { get { return _objectHolder; } }
+    public AudioSource AudioSourcePlayer { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
+    public AudioSource AudioSourcePlayer1 { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
+
+    public RaycastHit RaycastHit { get { return _raycastHit; } set { _raycastHit = value; } }
+
+    public GameObject GrabObject { get { return _grabObject; } set { _grabObject = value; } }
     #endregion Properties
 
     void Start()
@@ -60,10 +67,13 @@ public class PlayerController : MonoBehaviour
         _states.Add(MyState.Mouvement, new IMouvement());
         _states.Add(MyState.Observe, new IObserve());
         _currentState = MyState.Mouvement;
+        //_states[_currentState].Enter(_grabObject);
+        
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
+        
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
         _rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -72,19 +82,27 @@ public class PlayerController : MonoBehaviour
         _currentAcceleration = 0;
         _accelerationLerp = 0;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
+        _states[MyState.Interaction].Init(_playerData, _mainCamera);
+        _states[MyState.Mouvement].Init(_playerData, _mainCamera);
+        _states[MyState.Observe].Init(_playerData, _mainCamera);
     }
 
     public void ChangeState(MyState nextState)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter();
+        _states[nextState].Enter(_grabObject);
         _currentState = nextState;
     }
 
     public void DeadPlayer()
     {
     }
-
+    /*
+    private void Update()
+    {
+        _states[_currentState].Update();
+    }
+    */
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
         Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
@@ -118,7 +136,7 @@ public class PlayerController : MonoBehaviour
             _accelerationLerp = 0;
         }
     }
-
+    
     private void Update()
     {
         if (_currentState == MyState.Mouvement)
@@ -272,7 +290,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        _rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        //_rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
     }
     
     private void Crouch(bool crouchBool)
@@ -352,4 +371,5 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.MousePosition -= _porte.InteractPorte;
         }
     }
+    
 }

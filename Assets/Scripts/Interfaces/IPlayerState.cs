@@ -1,7 +1,9 @@
-﻿public interface IPlayerState 
+﻿using UnityEngine;
+
+public interface IPlayerState 
 {
-    void Init();
-    void Enter();
+    void Init(PlayerData playerData, Camera camera);
+    void Enter(GameObject grabObject);
     void Update();
     void Exit();
 }

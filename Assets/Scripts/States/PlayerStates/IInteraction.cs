@@ -6,13 +6,14 @@ public class IInteraction : IPlayerState
 {
     private PlayerController _playerController = null;
     private GameObject _porte = null;
+    private PlayerData _playerData = null;
 
-    public void Init()
+    public void Init(PlayerData playerData, Camera _camera)
     {
-
+        _playerData = playerData;
     }
 
-    public void Enter()
+    public void Enter(GameObject grabObject)
     {
 
     }
