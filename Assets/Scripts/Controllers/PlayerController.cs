@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
     public Transform ObjectHolder { get { return _objectHolder; } }
     public AudioSource AudioSourcePlayer { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
-    public AudioSource AudioSourcePlayer1 { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
 
     public RaycastHit RaycastHit { get { return _raycastHit; } set { _raycastHit = value; } }
 
@@ -290,8 +289,11 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        //_rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
-        _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+        _rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        /*
+            _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+            _lastDirection = _direction;
+        */
     }
     
     private void Crouch(bool crouchBool)
