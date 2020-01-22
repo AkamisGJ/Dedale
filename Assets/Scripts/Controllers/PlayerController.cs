@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
+    [SerializeField] private float _gravity = 0.0f;
     private Vector3 _direction = Vector3.zero;
     private float _timeCrouchTime = 0.0f;
     private float _moveSpeedHorizontal = 1;
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour
     */
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
+        Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right;
         _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
         if (horizontalMouvement < 0)
@@ -289,13 +290,25 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        _rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        //_rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        _rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration,ForceMode.Impulse);
+        Debug.DrawRay(transform.position, -transform.up,Color.blue);
+        if (Physics.Raycast(transform.position, -transform.up))
+        {
+            Debug.Log("ok");
+            //Gravity();
+        }
         /*
             _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
             _lastDirection = _direction;
         */
     }
     
+    private void Gravity()
+    {
+        _rb.velocity += _gravity * -transform.up;
+    }
+
     private void Crouch(bool crouchBool)
     {
         if(crouchBool == true)
