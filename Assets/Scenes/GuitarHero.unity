@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &720889289
 GameObject:
@@ -173,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &720889291
 MonoBehaviour:
@@ -187,7 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a617fa379aa862e458e7898291401490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guitarHeroManager: {fileID: 1706447175}
   keyCode: 114
+  _color: {r: 0.015686274, g: 1, b: 0.9391161, a: 1}
 --- !u!58 &720889292
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -203,7 +205,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.02
 --- !u!212 &720889293
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -280,14 +282,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &996022071 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6489612419992677497}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1002389956
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +312,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1474940902
 GameObject:
@@ -431,7 +427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1544571748
 MonoBehaviour:
@@ -445,7 +441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a617fa379aa862e458e7898291401490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guitarHeroManager: {fileID: 1706447175}
   keyCode: 122
+  _color: {r: 1, g: 0.015686274, b: 0.7676226, a: 1}
 --- !u!58 &1544571749
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -461,7 +459,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.02
 --- !u!212 &1544571750
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -538,7 +536,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1632833709
 GameObject:
@@ -571,7 +569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1632833711
 MonoBehaviour:
@@ -585,7 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a617fa379aa862e458e7898291401490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guitarHeroManager: {fileID: 1706447175}
   keyCode: 97
+  _color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!58 &1632833712
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -601,7 +601,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.02
 --- !u!212 &1632833713
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -678,7 +678,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 996022071}
   - {fileID: 1632833710}
   - {fileID: 1544571747}
   - {fileID: 1840365409}
@@ -702,8 +701,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f95e521055d4a419650b8ac0be96e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trustMeter: 50
   _noteArray:
   - {fileID: 11400000, guid: 3a4d1f52d3b79054fa32b3d7ad430e0c, type: 2}
+  - {fileID: 11400000, guid: ee93a590233953448b0ca635aaa6e2bd, type: 2}
+  - {fileID: 11400000, guid: 4a840ca423d48334f89a78ecbf696ce9, type: 2}
+  - {fileID: 11400000, guid: 60a18aea4ede76e45bfbe7a1d8a9c7f5, type: 2}
+  - {fileID: 11400000, guid: 67625f8eb69e98048bfe73d5479f8bdb, type: 2}
+  - {fileID: 11400000, guid: 0629b1710b0256a42848399a97764c99, type: 2}
+  - {fileID: 11400000, guid: 875f2933989e80a4dab0c2eca4c26a2b, type: 2}
+  - {fileID: 11400000, guid: 5d287f2ae4b3a5b4da2dab0a42e75ce4, type: 2}
+  - {fileID: 11400000, guid: 19e7e9c141240ee49a79b900cc14da84, type: 2}
+  - {fileID: 11400000, guid: 3ac82b2c493a86949bbb9f380b3e99bc, type: 2}
+  - {fileID: 11400000, guid: 446ef7b36ed726f498f163c447d4aabf, type: 2}
+  - {fileID: 11400000, guid: 0e72f0abfaa7c1547add67f42074fb42, type: 2}
+  - {fileID: 11400000, guid: 164cad34147608b43bd957fcfb20d336, type: 2}
+  - {fileID: 11400000, guid: ca042c5466d89b743aee20e8edcefc0e, type: 2}
+  - {fileID: 11400000, guid: 8a010f901485e384abace7feafa4f5de, type: 2}
+  - {fileID: 11400000, guid: 14cb1459be396df419529d8725aa50e7, type: 2}
+  - {fileID: 11400000, guid: 7ceda93bbf811a84aabe3d69363c849a, type: 2}
+  - {fileID: 11400000, guid: c181ffc517e353b46ad88d9399f33a6c, type: 2}
+  - {fileID: 11400000, guid: 568f8f32561139948b9e55d5bf44e1c5, type: 2}
+  - {fileID: 11400000, guid: eb6f30fdcee76f54b8ad10f53c9d8f7c, type: 2}
+  - {fileID: 11400000, guid: 3a9dad3cff7181540bda5dfdea3480cb, type: 2}
+  - {fileID: 11400000, guid: 0d1da9a8b74ad8246aba64eb72eaac6a, type: 2}
+  - {fileID: 11400000, guid: 5beee86f899d0a946b0b7060701ed8f9, type: 2}
+  - {fileID: 11400000, guid: 0455639e356eeb24993715ceb120e53f, type: 2}
+  - {fileID: 11400000, guid: 86df315ebb3f3014fa19c62b3937bc1c, type: 2}
+  - {fileID: 11400000, guid: 4dc9f4e87803951418dbef4f0e250f95, type: 2}
+  - {fileID: 11400000, guid: 3d4673b643b766641b9d3acf59d64226, type: 2}
+  - {fileID: 11400000, guid: 195b48b4754cc9248860166209b70e53, type: 2}
+  - {fileID: 11400000, guid: 89aab909f6805754b865707160146666, type: 2}
+  - {fileID: 11400000, guid: 1a527bbe4be93544b8d132a8d2f860f6, type: 2}
+  - {fileID: 11400000, guid: 492d2e96d7620324987618923886edd8, type: 2}
+  - {fileID: 11400000, guid: 1c325735713154644b5f5fb0d93c3063, type: 2}
+  - {fileID: 11400000, guid: 16dbe19b7695d334bb9dabe86c202773, type: 2}
+  - {fileID: 11400000, guid: 380d848d9aa5379489fe7c3a2e27fcce, type: 2}
+  - {fileID: 11400000, guid: b339a7e8d0afded40b4278abd11ba625, type: 2}
   _spawnerLineA: {fileID: 903059894}
   _spawnerLineZ: {fileID: 1613310570}
   _spawnerLineE: {fileID: 1002389957}
@@ -741,7 +775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1706447174}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1840365410
 MonoBehaviour:
@@ -755,7 +789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a617fa379aa862e458e7898291401490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guitarHeroManager: {fileID: 1706447175}
   keyCode: 101
+  _color: {r: 0.015686274, g: 0.12292927, b: 1, a: 1}
 --- !u!58 &1840365411
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -771,7 +807,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.02
 --- !u!212 &1840365412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -889,72 +925,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &6489612419992677497
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1706447174}
-    m_Modifications:
-    - target: {fileID: 6489612420619598668, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_Name
-      value: Note
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489612420619598670, guid: c7410ad966f22c8498d65c85c6415df1,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c7410ad966f22c8498d65c85c6415df1, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GuitarHeroManager : MonoBehaviour
 {
-    private float _moodMeter = 50;
+    [SerializeField] private float _trustMeter = 50;
     [SerializeField] private NoteDataBase[] _noteArray;
     private List<NoteDataBase> _noteList;
     private List<NoteDataBase> _nextNoteToAppear;
@@ -12,12 +12,20 @@ public class GuitarHeroManager : MonoBehaviour
     [SerializeField] private Transform _spawnerLineZ = null;
     [SerializeField] private Transform _spawnerLineE = null;
     [SerializeField] private Transform _spawnerLineR = null;
+    private List<Transform> _spawnerList;
     [SerializeField] private GameObject _notePrefabs = null;
     private bool _canSearchNextNote = true;
     private float _currentTime = 0;
 
+    public float TrustMeter { get => _trustMeter; set => _trustMeter += value; }
+
     private void Start()
     {
+        _spawnerList = new List<Transform>();
+        _spawnerList.Add(_spawnerLineA);
+        _spawnerList.Add(_spawnerLineZ);
+        _spawnerList.Add(_spawnerLineE);
+        _spawnerList.Add(_spawnerLineR);
         _noteList = new List<NoteDataBase>();
         _nextNoteToAppear = new List<NoteDataBase>();
         if(_noteArray.Length == 0)
@@ -40,25 +48,45 @@ public class GuitarHeroManager : MonoBehaviour
         {
             SearchNextNode();
         }
-        if(_canSearchNextNote == false && _nextNoteToAppear.Count > 0 && _nextNoteToAppear[0].TimeToAppear > _currentTime)
+        if(_canSearchNextNote == false && _nextNoteToAppear.Count > 0 && _nextNoteToAppear[0].TimeToAppear < _currentTime)
         {
             for (int i = 0; i < _nextNoteToAppear.Count; i++)
             {
                 if (_nextNoteToAppear[i].StartLine == 0)
                 {
-                    Instantiate(_notePrefabs, _spawnerLineA.position, Quaternion.identity);
+                    GameObject noteGameObject = Instantiate(_notePrefabs, _spawnerLineA.position, Quaternion.identity);
+                    Note note = noteGameObject.GetComponent<Note>();
+                    note.DataBase = _nextNoteToAppear[i];
+                    note.LineToSwitch = _spawnerList[_nextNoteToAppear[i].LineToSwitch];
+                    note.StartLine = _spawnerList[_nextNoteToAppear[i].StartLine];
+                    note.TrustMeter = _trustMeter;
                 }
                 if (_nextNoteToAppear[i].StartLine == 1)
                 {
-                    Instantiate(_notePrefabs, _spawnerLineZ.position, Quaternion.identity);
+                    GameObject noteGameObject = Instantiate(_notePrefabs, _spawnerLineZ.position, Quaternion.identity);
+                    Note note = noteGameObject.GetComponent<Note>();
+                    note.DataBase = _nextNoteToAppear[i];
+                    note.LineToSwitch = _spawnerList[_nextNoteToAppear[i].LineToSwitch];
+                    note.StartLine = _spawnerList[_nextNoteToAppear[i].StartLine];
+                    note.TrustMeter = _trustMeter;
                 }
                 if (_nextNoteToAppear[i].StartLine == 2)
                 {
-                    Instantiate(_notePrefabs, _spawnerLineE.position, Quaternion.identity);
+                    GameObject noteGameObject = Instantiate(_notePrefabs, _spawnerLineE.position, Quaternion.identity);
+                    Note note = noteGameObject.GetComponent<Note>();
+                    note.DataBase = _nextNoteToAppear[i];
+                    note.LineToSwitch = _spawnerList[_nextNoteToAppear[i].LineToSwitch];
+                    note.StartLine = _spawnerList[_nextNoteToAppear[i].StartLine];
+                    note.TrustMeter = _trustMeter;
                 }
                 if (_nextNoteToAppear[i].StartLine == 3)
                 {
-                    Instantiate(_notePrefabs, _spawnerLineR.position, Quaternion.identity);
+                    GameObject noteGameObject = Instantiate(_notePrefabs, _spawnerLineR.position, Quaternion.identity);
+                    Note note = noteGameObject.GetComponent<Note>();
+                    note.DataBase = _nextNoteToAppear[i];
+                    note.LineToSwitch = _spawnerList[_nextNoteToAppear[i].LineToSwitch];
+                    note.StartLine = _spawnerList[_nextNoteToAppear[i].StartLine];
+                    note.TrustMeter = _trustMeter;
                 }
             }
             _nextNoteToAppear.Clear();
@@ -91,8 +119,10 @@ public class GuitarHeroManager : MonoBehaviour
             if (_nextNoteToAppear.Count == 0)
             {
                 _nextNoteToAppear.Add(_noteList[0]);
+                _noteList.Remove(_noteList[0]);
             }
         }
+        Debug.Log(_nextNoteToAppear.Count);
         _canSearchNextNote = false;
     }
 }
