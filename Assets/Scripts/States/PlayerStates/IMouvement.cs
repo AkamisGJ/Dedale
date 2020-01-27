@@ -131,6 +131,7 @@ public class IMouvement : IPlayerState
         {
             _accelerationLerp = 0;
         }
+        Debug.Log(_direction);
         Move();
     }
 

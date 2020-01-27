@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private NavMeshAgent _playerNavMeshAgent = null;
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        //_playerNavMeshAgent.updateRotation = false;
         _states = new Dictionary<MyState, IPlayerState>();
         _states.Add(MyState.Interaction, new IInteraction());
         _states.Add(MyState.Mouvement, new IMouvement());
@@ -108,17 +111,14 @@ public class PlayerController : MonoBehaviour
         Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right;
         _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
-        if (horizontalMouvement < 0)
+        if (horizontalMouvement > 0)
         {
             _direction += transform.forward * _speedSprint;
-            if (horizontalMouvement < 0)
-            {
-                _direction += transform.forward * _playerData.SpeedForward;
-            }
-            else
-            {
-                _direction -= transform.forward * _playerData.SpeedBack;
-            }
+            _direction += transform.forward * _playerData.SpeedForward;
+        }
+        else if (horizontalMouvement < 0)
+        {
+            _direction -= transform.forward * _playerData.SpeedBack;
         }
         if(verticalMouvement > 0)
         {
@@ -291,11 +291,12 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
         //_rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
-        _rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration,ForceMode.Impulse);
+        _rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration, ForceMode.Impulse);
+        Debug.Log(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        //_playerNavMeshAgent.destination = transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration;
         Debug.DrawRay(transform.position, -transform.up,Color.blue);
         if (Physics.Raycast(transform.position, -transform.up))
         {
-            Debug.Log("ok");
             //Gravity();
         }
         /*
