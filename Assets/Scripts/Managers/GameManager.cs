@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Prof.Utils;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -24,9 +23,13 @@ public class GameManager : Singleton<GameManager>
     public string NextScene { get { return _nextSceneName; } set { _nextSceneName = value; } }
     #endregion Properties
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+    }
+
+    protected void Start()
+    {
         _states = new Dictionary<MyState, IGameState>();
         _states.Add(MyState.Preload, new PreloadState());
         _states.Add(MyState.Game, new GameState());

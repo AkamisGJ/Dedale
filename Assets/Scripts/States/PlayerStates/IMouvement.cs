@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class IMouvement : IPlayerState
 {
-    private PlayerController _playerController = null;
+    private PlayerAgentController _playerControllerAgent = null;
     private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Camera _mainCamera = null;
     private PlayerData _playerData = null;
-    private GameObject _playerGameObject = null;
     private Vector3 _direction = Vector3.zero;
     private float _speedSprint = 0;
     private Rigidbody _rbPlayer = null;
@@ -25,15 +25,15 @@ public class IMouvement : IPlayerState
     private float _sprintCurrentTime = 0;
     private PlayerController.MyState nextState = PlayerController.MyState.Mouvement;
     private RaycastHit _raycastHit;
+    private NavMeshAgent _playerNavMeshAgent = null;
 
-    public void Init(PlayerData playerData,Camera _camera)
+    public void Init(PlayerData playerData,Camera _camera, NavMeshAgent navMeshAgent)
     {
+        _playerNavMeshAgent = navMeshAgent;
         _playerData = playerData;
-        _playerGameObject = PlayerManager.Instance.Player;
-        _playerController = PlayerManager.Instance.Player.GetComponent<PlayerController>();
-        _rbPlayer = _playerGameObject.GetComponent<Rigidbody>();
+        _playerControllerAgent = PlayerManager.Instance.Player;
         _mainCamera = _camera;
-        _playerCapsuleCollider = _playerGameObject.GetComponent<CapsuleCollider>();
+        _playerCapsuleCollider = _playerControllerAgent.gameObject.GetComponent<CapsuleCollider>();
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
@@ -45,6 +45,9 @@ public class IMouvement : IPlayerState
 
     public void Enter(GameObject grabObject)
     {
+        _playerNavMeshAgent.ResetPath();
+        _playerNavMeshAgent.isStopped = false;
+        _playerNavMeshAgent.updateRotation = false;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
@@ -60,14 +63,12 @@ public class IMouvement : IPlayerState
                 Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    _playerController.RaycastHit = _raycastHit;
-                    _playerController.GrabObject = _raycastHit.transform.gameObject;
                     _grabObject = _raycastHit.transform.gameObject;
                     _originPositionGrabObject = _grabObject.transform.position;
                     _originRotationGrabObject = _grabObject.transform.rotation;
                     _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
                     _grabObject.transform.rotation = Quaternion.identity;
-                    _playerController.ChangeState(PlayerController.MyState.Observe);
+                    _playerControllerAgent.ChangeState(PlayerAgentController.MyState.Observe);
                     return;
                 }
             }
@@ -77,7 +78,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _grabObject = _raycastHit.transform.gameObject;
-                    _playerController.ChangeState(PlayerController.MyState.Interaction);
+                    _playerControllerAgent.ChangeState(PlayerAgentController.MyState.Interaction);
                     return;
                 }
             }
@@ -87,6 +88,7 @@ public class IMouvement : IPlayerState
 
     public void Exit()
     {
+        _playerNavMeshAgent.isStopped = true;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
@@ -95,33 +97,33 @@ public class IMouvement : IPlayerState
 
     private void Move()
     {
-        _rbPlayer.MovePosition(_playerGameObject.transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        _playerNavMeshAgent.destination = _playerNavMeshAgent.gameObject.transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration;
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = -horizontalMouvement * _playerGameObject.transform.forward;
-        Vector3 preVerticalMouvement = verticalMouvement * _playerGameObject.transform.right;
+        Vector3 preHorizontalMouvement = horizontalMouvement * _playerControllerAgent.transform.forward;
+        Vector3 preVerticalMouvement = verticalMouvement * _playerControllerAgent.transform.right;
         _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
-        if (horizontalMouvement < 0)
+        if (horizontalMouvement > 0)
         {
-            _direction += _playerGameObject.transform.forward * _speedSprint;
-            if (horizontalMouvement < 0)
+            _direction += _playerControllerAgent.transform.forward * _speedSprint;
+            if (horizontalMouvement > 0)
             {
-                _direction += _playerGameObject.transform.forward * _playerData.SpeedForward;
+                _direction += _playerControllerAgent.transform.forward * _playerData.SpeedForward;
             }
             else
             {
-                _direction -= _playerGameObject.transform.forward * _playerData.SpeedBack;
+                _direction -= _playerControllerAgent.transform.forward * _playerData.SpeedBack;
             }
         }
         if (verticalMouvement > 0)
         {
-            _direction += _playerGameObject.transform.right * _playerData.MoveSpeedSide;
+            _direction += _playerControllerAgent.transform.right * _playerData.MoveSpeedSide;
         }
         else if (verticalMouvement < 0)
         {
-            _direction -= _playerGameObject.transform.right * _playerData.MoveSpeedSide;
+            _direction -= _playerControllerAgent.transform.right * _playerData.MoveSpeedSide;
         }
         if (_direction != Vector3.zero)
         {
@@ -140,7 +142,7 @@ public class IMouvement : IPlayerState
         _rotationX += mousePositionY * _playerData.SensitivityMouseX;
         _rotationY += mousePositionX * _playerData.SensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+        _playerControllerAgent.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
 

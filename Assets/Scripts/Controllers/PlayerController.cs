@@ -85,9 +85,9 @@ public class PlayerController : MonoBehaviour
         _currentAcceleration = 0;
         _accelerationLerp = 0;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
-        _states[MyState.Interaction].Init(_playerData, _mainCamera);
-        _states[MyState.Mouvement].Init(_playerData, _mainCamera);
-        _states[MyState.Observe].Init(_playerData, _mainCamera);
+        _states[MyState.Interaction].Init(_playerData, _mainCamera, _playerNavMeshAgent);
+        _states[MyState.Mouvement].Init(_playerData, _mainCamera, _playerNavMeshAgent);
+        _states[MyState.Observe].Init(_playerData, _mainCamera, _playerNavMeshAgent);
     }
 
     public void ChangeState(MyState nextState)

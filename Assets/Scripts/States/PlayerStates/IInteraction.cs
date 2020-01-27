@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IInteraction : IPlayerState
 {
@@ -8,7 +9,7 @@ public class IInteraction : IPlayerState
     private GameObject _porte = null;
     private PlayerData _playerData = null;
 
-    public void Init(PlayerData playerData, Camera _camera)
+    public void Init(PlayerData playerData, Camera _camera, NavMeshAgent navMeshAgent)
     {
         _playerData = playerData;
     }
@@ -22,7 +23,7 @@ public class IInteraction : IPlayerState
     {
         if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
         {
-            
+
         }
     }
 

@@ -73,9 +73,9 @@ GameObject:
   - component: {fileID: 8199827238686195769}
   - component: {fileID: 8199827238686195770}
   - component: {fileID: 8199827238686195750}
-  - component: {fileID: 8199827238686195749}
   - component: {fileID: 82666407533094874}
   - component: {fileID: 195244697331449616}
+  - component: {fileID: 114904461962070654}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -174,25 +174,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &8199827238686195749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199827238686195771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4b94c40a84ce54985f88ede1c30788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerNavMeshAgent: {fileID: 195244697331449616}
-  _playerData: {fileID: 11400000, guid: 9c710522a6f515f41852db1e3427d2bb, type: 2}
-  _cameraHolder: {fileID: 5260772405847699678}
-  _objectHolder: {fileID: 4714213161047680876}
-  _gravity: 9.81
-  _rb: {fileID: 8199827238686195750}
-  _audioSourcePlayer: {fileID: 82666407533094874}
 --- !u!82 &82666407533094874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -296,7 +277,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8199827238686195771}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -311,3 +292,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &114904461962070654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199827238686195771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc95d9ee1db57b41a6a9108e3028504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerNavMeshAgent: {fileID: 195244697331449616}
+  _playerData: {fileID: 11400000, guid: 9c710522a6f515f41852db1e3427d2bb, type: 2}
+  _cameraHolder: {fileID: 5260772405847699678}
+  _objectHolder: {fileID: 4714213161047680876}

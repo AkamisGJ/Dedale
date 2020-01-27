@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Prof.Utils;
 using System;
 
 public class InputManager : Singleton<InputManager>
@@ -84,14 +83,20 @@ public class InputManager : Singleton<InputManager>
     private bool _crouch = false;
     #endregion Fields
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+        GameLoopManager.Instance.StartInputManager += OnStart;
+        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
+    }
+
+    protected void OnStart()
+    {
         _sprint = false;
         _crouch = false;
     }
 
-    protected override void Update()
+    protected void OnUpdate()
     {
         if(PlayerManager.Instance.PlayerIsDead == false)
         {
@@ -99,26 +104,6 @@ public class InputManager : Singleton<InputManager>
             {
                 _direction.z = Input.GetAxisRaw("Horizontal");
                 _direction.x = Input.GetAxisRaw("Vertical");
-                /*
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    _direction.x += 1;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    _direction.x -= 1;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    _direction.z += 1;
-                }
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    _direction.z -= 1;
-                }
-                _direction.x = Mathf.Clamp(_direction.x, -1, 1);
-                _direction.z = Mathf.Clamp(_direction.z, -1, 1);
-                */
                 _directionAction(_direction.x, _direction.z);
                 _direction = Vector3.zero;
             }
