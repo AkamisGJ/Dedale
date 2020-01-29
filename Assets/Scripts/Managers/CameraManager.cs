@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Prof.Utils;
 
 public class CameraManager : Singleton<CameraManager>
 {
@@ -16,9 +15,4 @@ public class CameraManager : Singleton<CameraManager>
     public Camera CameraUI { get { return _cameraUI; } set { _cameraUI = value; } }
     public Camera CameraObject { get { return _cameraObject; } set { _cameraObject = value; } }
     #endregion Properties
-
-    protected override void Start()
-    {
-        base.Start();
-    }
 }
