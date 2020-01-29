@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private NavMeshAgent _playerNavMeshAgent = null;
+    [SerializeField] private CharacterController _characterController = null;
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
     private Camera _mainCamera = null;
-    [SerializeField] private Rigidbody _rb = null;
+    //[SerializeField] private Rigidbody _rb = null;
     private Vector3 _moveDirection = Vector3.zero;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
@@ -79,21 +79,21 @@ public class PlayerController : MonoBehaviour
         
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
-        _rb.interpolation = RigidbodyInterpolation.Interpolate;
+        //_rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
         _accelerationLerp = 0;
         _playerCapsuleCollider = transform.GetComponent<CapsuleCollider>();
-        _states[MyState.Interaction].Init(_playerData, _mainCamera, _playerNavMeshAgent);
-        _states[MyState.Mouvement].Init(_playerData, _mainCamera, _playerNavMeshAgent);
-        _states[MyState.Observe].Init(_playerData, _mainCamera, _playerNavMeshAgent);
+        _states[MyState.Interaction].Init(_playerData, _mainCamera);
+        _states[MyState.Mouvement].Init(_playerData, _mainCamera);
+        _states[MyState.Observe].Init(_playerData, _mainCamera);
     }
 
     public void ChangeState(MyState nextState)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter(_grabObject);
+        _states[nextState].Enter();
         _currentState = nextState;
     }
 
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
                         _grabObject.transform.LookAt(_mainCamera.transform);
                         _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
                         _currentState = MyState.Observe;
-                        _rb.isKinematic = true;
+                        //_rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
                         _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
                     {
                         _grabObject = hit.transform.gameObject;
                         _currentState = MyState.Interaction;
-                        _rb.isKinematic = true;
+                        //_rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
                         _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
                     Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
                     objectRb.isKinematic = false;
                 }
-                _rb.isKinematic = false;
+                //_rb.isKinematic = false;
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
             {
                 _currentState = MyState.Mouvement;
-                _rb.isKinematic = false;
+                //_rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
                 InputManager.Instance.Crouch += Crouch;
@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
         //_rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
-        _rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration, ForceMode.Impulse);
+        //_rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration, ForceMode.Impulse);
         Debug.Log(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
         //_playerNavMeshAgent.destination = transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration;
         Debug.DrawRay(transform.position, -transform.up,Color.blue);
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
     
     private void Gravity()
     {
-        _rb.velocity += _gravity * -transform.up;
+        //_rb.velocity += _gravity * -transform.up;
     }
 
     private void Crouch(bool crouchBool)

@@ -6,7 +6,7 @@ public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
     #region SerializedFields
-    [SerializeField] private NavMeshAgent _playerNavMeshAgent = null;
+    [SerializeField] private CharacterController _characterController = null;
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
@@ -51,9 +51,9 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.QTE, new IQTE());
         _currentState = MyState.Mouvement;
         _states[MyState.Interaction].Init(_playerData, _mainCamera);
-        _states[MyState.Mouvement].Init(_playerData, _mainCamera, _playerNavMeshAgent);
+        _states[MyState.Mouvement].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.Observe].Init(_playerData, _mainCamera);
-        _states[_currentState].Enter(this.gameObject);
+        _states[_currentState].Enter();
     }
 
     void OnUpdate()
@@ -64,7 +64,7 @@ public class PlayerAgentController : MonoBehaviour
     public void ChangeState(MyState nextState)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter(gameObject);
+        _states[nextState].Enter();
         _currentState = nextState;
     }
 }

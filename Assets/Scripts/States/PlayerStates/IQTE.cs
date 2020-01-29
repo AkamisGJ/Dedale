@@ -7,7 +7,7 @@ public class IQTE : IPlayerState
 {
     private PlayerData _playerData = null;
 
-    public void Init(PlayerData playerData, Camera _camera, NavMeshAgent navMeshAgent)
+    public void Init(PlayerData playerData, Camera _camera, CharacterController characterController)
     {
         _playerData = playerData;
     }
@@ -27,7 +27,7 @@ public class IQTE : IPlayerState
 
     }
 
-    public void Enter(GameObject grabObject)
+    public void Enter()
     {
 
     }

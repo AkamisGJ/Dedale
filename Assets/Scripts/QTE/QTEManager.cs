@@ -11,6 +11,7 @@ public class QTEManager : MonoBehaviour
     private QTEDataBase _currentQTE = null;
     private float _maxGauge = 100;
     private float _currentGauge = 0;
+    private bool _isWin = false;
 
     public void Start()
     {
@@ -20,27 +21,30 @@ public class QTEManager : MonoBehaviour
         _currentGauge = 0;
         _currentQTE = _qTEDataBases[_currentQTEIndex];
         _maxGauge = _currentQTE.MaxGauge;
+        _isWin = false;
         InputManager.Instance.QTE += VerifTouch;
     }
 
     void Update()
     {
-        _timeQTE += Time.deltaTime;
-        if(_timeQTE > _currentQTE.TimeToAppear)
+        if(_isWin == false)
         {
-            Debug.Log(_currentQTE.KeyCode);
-        }
-        if(_timeQTE > _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
-        {
-            FailQTE();
+            _timeQTE += Time.deltaTime;
+            if(_timeQTE > _currentQTE.TimeToAppear && _timeQTE < _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
+            {
+                Debug.Log(_currentQTE.KeyCode + "   appear");
+            }
+            if( _timeQTE > _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
+            {
+                FailQTE();
+            }
         }
     }
 
     void VerifTouch(KeyCode keyCode)
     {
-        if(_timeQTE > _currentQTE.TimeToAppear)
+        if(_timeQTE > _currentQTE.TimeToAppear && _isWin == false)
         {
-            Debug.Log(_currentQTE.KeyCode);
             if (keyCode == _currentQTE.KeyCode)
             {
                 if(_currentQTE.SpamQTE == true)
@@ -48,19 +52,19 @@ public class QTEManager : MonoBehaviour
                     if(_currentGauge < _maxGauge)
                     {
                         _currentGauge += _currentQTE.GainGaugePerTouch;
-                        Debug.Log(_currentGauge);
+                        Debug.Log(_currentGauge + "    /    " + _maxGauge);
                     }
                     if(_currentGauge >= _maxGauge)
                     {
                         _currentQTEIndex += 1;
                         if (_qTEDataBases.Length > _currentQTEIndex)
                         {
-                            _currentQTE = _qTEDataBases[_currentQTEIndex];
-                            _maxGauge = _currentQTE.MaxGauge;
+                            ValidQTE();
                         }
                         else
                         {
-                            Debug.Log("WIn");
+                            _isWin = true;
+                            Debug.Log("Win");
                         }
                     }
                 }
@@ -70,25 +74,31 @@ public class QTEManager : MonoBehaviour
                     _currentQTEIndex += 1;
                     if(_qTEDataBases.Length > _currentQTEIndex)
                     {
-                        _currentQTE = _qTEDataBases[_currentQTEIndex];
-                        _maxGauge = _currentQTE.MaxGauge;
-                        Debug.Log(_currentQTE.KeyCode);
+                        ValidQTE();
                     }
                     else
                     {
-                        Debug.Log("WIn");
+                        Debug.Log("Win");
                     }
                 }
             }
         }
     }
 
+    void ValidQTE()
+    {
+        _currentQTE = _qTEDataBases[_currentQTEIndex];
+        _maxGauge = _currentQTE.MaxGauge;
+        Debug.Log(_currentQTE.KeyCode + "    Valid");
+    }
+
+
     void FailQTE()
     {
         Debug.Log("FAil");
         _currentQTEIndex = 0;
         _currentQTE = _qTEDataBases[_currentQTEIndex];
-        Debug.Log(_currentQTE.KeyCode);
+        Debug.Log(_currentQTE.KeyCode +"   Fail");
         _timeQTE = 0;
     }
 

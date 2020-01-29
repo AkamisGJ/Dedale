@@ -8,7 +8,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private Camera _cameraUIGameObject = null;
 
 
-    [SerializeField] private PlayerAgentController _playerAgentController = null;
+    [SerializeField] private PlayerAgentController _playerController = null;
     [SerializeField] private Camera _cameraPlayer = null;
 
     [SerializeField] private Camera _cameraUI = null;
@@ -36,7 +36,7 @@ public class PlayerManager : Singleton<PlayerManager>
         _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0,10,0), Quaternion.identity);
         CameraManager.Instance.CameraUI = _cameraUIGameObject;
         _playerIsDead = false;
-        _playerGameObject = Instantiate(_playerAgentController, tranformSpawnerPlayer.position, Quaternion.identity);
+        _playerGameObject = Instantiate(_playerController, tranformSpawnerPlayer.position, Quaternion.identity);
         _cameraPlayerGameobject = Instantiate(_cameraPlayer, _playerGameObject.CameraHolder.position, _playerGameObject.transform.rotation, _playerGameObject.CameraHolder);
         CameraManager.Instance.CameraPlayer = _cameraPlayerGameobject;
         _playerGameObject.MainCamera =_cameraPlayerGameobject;

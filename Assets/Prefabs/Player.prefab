@@ -72,10 +72,9 @@ GameObject:
   - component: {fileID: 8199827238686195768}
   - component: {fileID: 8199827238686195769}
   - component: {fileID: 8199827238686195770}
-  - component: {fileID: 8199827238686195750}
+  - component: {fileID: 143108291754626560}
   - component: {fileID: 82666407533094874}
-  - component: {fileID: 195244697331449616}
-  - component: {fileID: 114904461962070654}
+  - component: {fileID: 114614065228572998}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -158,22 +157,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8199827238686195750
-Rigidbody:
+--- !u!143 &143108291754626560
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8199827238686195771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 7
-  m_AngularDrag: 0.1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 25
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82666407533094874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -270,29 +271,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!195 &195244697331449616
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199827238686195771}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &114904461962070654
+--- !u!114 &114614065228572998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc95d9ee1db57b41a6a9108e3028504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerNavMeshAgent: {fileID: 195244697331449616}
+  _characterController: {fileID: 143108291754626560}
   _playerData: {fileID: 11400000, guid: 9c710522a6f515f41852db1e3427d2bb, type: 2}
   _cameraHolder: {fileID: 5260772405847699678}
   _objectHolder: {fileID: 4714213161047680876}

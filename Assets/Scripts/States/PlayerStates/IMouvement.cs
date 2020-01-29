@@ -3,7 +3,8 @@ using UnityEngine.AI;
 
 public class IMouvement : IPlayerState
 {
-    private PlayerAgentController _playerControllerAgent = null;
+    private CharacterController _characterController = null;
+    private PlayerAgentController _playerController = null;
     private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
@@ -12,7 +13,6 @@ public class IMouvement : IPlayerState
     private PlayerData _playerData = null;
     private Vector3 _direction = Vector3.zero;
     private float _speedSprint = 0;
-    private Rigidbody _rbPlayer = null;
     private float _currentAcceleration = 0;
     private float _accelerationLerp = 0;
     private float _rotationY = 0.0f;
@@ -24,17 +24,21 @@ public class IMouvement : IPlayerState
     private float _crouchLerp = 0;
     private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
-    private PlayerController.MyState nextState = PlayerController.MyState.Mouvement;
+    private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.Mouvement;
     private RaycastHit _raycastHit;
-    private NavMeshAgent _playerNavMeshAgent = null;
+    private float _gravity = 9;
+    private float _currentGravity = 0;
+    private float _maxGravity = 45;
 
-    public void Init(PlayerData playerData,Camera _camera, NavMeshAgent navMeshAgent)
+    public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
-        _playerNavMeshAgent = navMeshAgent;
+        _characterController = characterController;
         _playerData = playerData;
-        _playerControllerAgent = PlayerManager.Instance.Player;
-        _mainCamera = _camera;
-        _playerCapsuleCollider = _playerControllerAgent.gameObject.GetComponent<CapsuleCollider>();
+        _gravity = _playerData.Gravity;
+        _maxGravity = _playerData.MaxGravity;
+        _playerController = PlayerManager.Instance.Player;
+        _mainCamera = camera;
+        _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
@@ -44,11 +48,8 @@ public class IMouvement : IPlayerState
         _unCrouching = false;
     }
 
-    public void Enter(GameObject grabObject)
+    public void Enter()
     {
-        _playerNavMeshAgent.ResetPath();
-        _playerNavMeshAgent.isStopped = false;
-        _playerNavMeshAgent.updateRotation = false;
         _baseYcamera = _mainCamera.transform.localPosition.y;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
@@ -65,12 +66,7 @@ public class IMouvement : IPlayerState
                 Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    _grabObject = _raycastHit.transform.gameObject;
-                    _originPositionGrabObject = _grabObject.transform.position;
-                    _originRotationGrabObject = _grabObject.transform.rotation;
-                    _grabObject.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward;
-                    _grabObject.transform.rotation = Quaternion.identity;
-                    _playerControllerAgent.ChangeState(PlayerAgentController.MyState.Observe);
+                    _playerController.ChangeState(PlayerAgentController.MyState.Observe);
                     return;
                 }
             }
@@ -80,7 +76,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _grabObject = _raycastHit.transform.gameObject;
-                    _playerControllerAgent.ChangeState(PlayerAgentController.MyState.Interaction);
+                    _playerController.ChangeState(PlayerAgentController.MyState.Interaction);
                     return;
                 }
             }
@@ -98,7 +94,6 @@ public class IMouvement : IPlayerState
 
     public void Exit()
     {
-        _playerNavMeshAgent.isStopped = true;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
@@ -107,33 +102,47 @@ public class IMouvement : IPlayerState
 
     private void Move()
     {
-        _playerNavMeshAgent.destination = _playerNavMeshAgent.gameObject.transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+        if (_characterController.isGrounded)
+        {
+            _currentGravity = _gravity;
+        }
+        else
+        {
+            _currentGravity += _gravity/_currentGravity;
+            _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
+        }
+        _direction.y -= _currentGravity;
+        float desiredMoveX = _direction.x * _playerData.MoveSpeedMultiplier * _currentAcceleration * Time.deltaTime;
+        float desiredMoveZ = _direction.z * _playerData.MoveSpeedMultiplier * _currentAcceleration * Time.deltaTime;
+        float desiredMoveY = _direction.y * Time.deltaTime;
+        Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
+        _characterController.Move(desiredMove);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = horizontalMouvement * _playerControllerAgent.transform.forward;
-        Vector3 preVerticalMouvement = verticalMouvement * _playerControllerAgent.transform.right;
+        Vector3 preHorizontalMouvement = horizontalMouvement * _playerController.transform.forward;
+        Vector3 preVerticalMouvement = verticalMouvement * _playerController.transform.right;
         _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
         if (horizontalMouvement > 0)
         {
-            _direction += _playerControllerAgent.transform.forward * _speedSprint;
+            _direction += _playerController.transform.forward * _speedSprint;
             if (horizontalMouvement > 0)
             {
-                _direction += _playerControllerAgent.transform.forward * _playerData.SpeedForward;
+                _direction += _playerController.transform.forward * _playerData.SpeedForward;
             }
             else
             {
-                _direction -= _playerControllerAgent.transform.forward * _playerData.SpeedBack;
+                _direction -= _playerController.transform.forward * _playerData.SpeedBack;
             }
         }
         if (verticalMouvement > 0)
         {
-            _direction += _playerControllerAgent.transform.right * _playerData.MoveSpeedSide;
+            _direction += _playerController.transform.right * _playerData.MoveSpeedSide;
         }
         else if (verticalMouvement < 0)
         {
-            _direction -= _playerControllerAgent.transform.right * _playerData.MoveSpeedSide;
+            _direction -= _playerController.transform.right * _playerData.MoveSpeedSide;
         }
         if (_direction != Vector3.zero)
         {
@@ -151,7 +160,7 @@ public class IMouvement : IPlayerState
         _rotationX += mousePositionY * _playerData.SensitivityMouseX;
         _rotationY += mousePositionX * _playerData.SensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerControllerAgent.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
         _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
 
@@ -188,9 +197,8 @@ public class IMouvement : IPlayerState
         _timeCrouchTime += Time.deltaTime * inversion;
         _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
         _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
-        _playerNavMeshAgent.height = _crouchLerp;
-        Vector3 playerPosition = _playerControllerAgent.gameObject.transform.position;
-        _mainCamera.transform.position = new Vector3(_mainCamera.transform.position.x, _playerControllerAgent.gameObject.transform.position.y - 1.5f + _crouchLerp, _mainCamera.transform.position.z);
+        _playerCapsuleCollider.height = _crouchLerp;
+        _characterController.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;

@@ -5,16 +5,16 @@ using UnityEngine.AI;
 
 public class IInteraction : IPlayerState
 {
-    private PlayerController _playerController = null;
+    private PlayerAgentController _playerController = null;
     private GameObject _porte = null;
     private PlayerData _playerData = null;
 
-    public void Init(PlayerData playerData, Camera _camera, NavMeshAgent navMeshAgent)
+    public void Init(PlayerData playerData, Camera _camera, CharacterController characterController)
     {
         _playerData = playerData;
     }
 
-    public void Enter(GameObject grabObject)
+    public void Enter()
     {
 
     }

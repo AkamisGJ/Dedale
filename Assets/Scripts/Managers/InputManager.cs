@@ -163,9 +163,21 @@ public class InputManager : Singleton<InputManager>
 
             if(_qTEAction != null)
             {
-                if(Input.anyKeyDown == true && Input.GetKeyDown(KeyCode.Escape) == false)
+                if(Input.GetKeyDown(KeyCode.D))
                 {
-                    _qTEAction(KeyCode.A);
+                    _qTEAction(KeyCode.D);
+                }
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    _qTEAction(KeyCode.Z);
+                }
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    _qTEAction(KeyCode.Q);
+                }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    _qTEAction(KeyCode.S);
                 }
             }
         }

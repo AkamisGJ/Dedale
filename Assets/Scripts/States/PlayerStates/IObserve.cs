@@ -18,7 +18,7 @@ public class IObserve : IPlayerState
     private RaycastHit _raycastHit;
     private AudioSource _audioSourcePlayer;
 
-    public void Init(PlayerData playerData,Camera _camera, NavMeshAgent navMeshAgent)
+    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
         _audioSourcePlayer = PlayerManager.Instance.Player.GetComponent<AudioSource>();
         _playerData = playerData;
@@ -27,7 +27,7 @@ public class IObserve : IPlayerState
         _playerAgentController = PlayerManager.Instance.Player.GetComponent<PlayerAgentController>();
     }
 
-    public void Enter(GameObject grabObject)
+    public void Enter()
     {
         Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f);
         _grabObjectCollider = _raycastHit.collider;
