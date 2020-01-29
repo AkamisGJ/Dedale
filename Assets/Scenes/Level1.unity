@@ -383,37 +383,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &151953502
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 151953503}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &151953503
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151953502}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 1.777, z: -2.26}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 175147460}
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175147455 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 29a5ab08db62bc845ab5fb4dfa22e671,
@@ -450,12 +419,22 @@ MonoBehaviour:
   _distanceWithCameraWehnLooked: 3
   _OnTakeObject: {fileID: 0}
   _OnThrowObject: {fileID: 0}
---- !u!4 &175147460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671,
-    type: 3}
-  m_PrefabInstance: {fileID: 1815159859}
+--- !u!54 &175147461
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175147455}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &214820259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,7 +1694,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 151953503}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 100000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_Name
@@ -1727,27 +1706,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.777
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.26
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1755,7 +1734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29a5ab08db62bc845ab5fb4dfa22e671, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1819,7 +1798,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 311
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1

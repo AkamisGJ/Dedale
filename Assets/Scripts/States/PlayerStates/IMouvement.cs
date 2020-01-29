@@ -8,6 +8,7 @@ public class IMouvement : IPlayerState
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Camera _mainCamera = null;
+    private float _baseYcamera = 0;
     private PlayerData _playerData = null;
     private Vector3 _direction = Vector3.zero;
     private float _speedSprint = 0;
@@ -41,13 +42,14 @@ public class IMouvement : IPlayerState
         _isCrouch = false;
         _crouching = false;
         _unCrouching = false;
-}
+    }
 
     public void Enter(GameObject grabObject)
     {
         _playerNavMeshAgent.ResetPath();
         _playerNavMeshAgent.isStopped = false;
         _playerNavMeshAgent.updateRotation = false;
+        _baseYcamera = _mainCamera.transform.localPosition.y;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
@@ -84,6 +86,14 @@ public class IMouvement : IPlayerState
             }
         }
         else Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.red);
+        if (_crouching == true)
+        {
+            Crouching(1);
+        }
+        if (_unCrouching == true)
+        {
+            Crouching(-1);
+        }
     }
 
     public void Exit()
@@ -133,7 +143,6 @@ public class IMouvement : IPlayerState
         {
             _accelerationLerp = 0;
         }
-        Debug.Log(_direction);
         Move();
     }
 
@@ -159,11 +168,12 @@ public class IMouvement : IPlayerState
         {
             if (_isCrouch == false && _crouching == false)
             {
+                _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
             }
         }
-        if (crouchBool == false)
+        if (crouchBool == false && _crouching == true || _isCrouch == true)
         {
             if (_unCrouching == false)
             {
@@ -178,7 +188,9 @@ public class IMouvement : IPlayerState
         _timeCrouchTime += Time.deltaTime * inversion;
         _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
         _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
-        _playerCapsuleCollider.height = _crouchLerp;
+        _playerNavMeshAgent.height = _crouchLerp;
+        Vector3 playerPosition = _playerControllerAgent.gameObject.transform.position;
+        _mainCamera.transform.position = new Vector3(_mainCamera.transform.position.x, _playerControllerAgent.gameObject.transform.position.y - 1.5f + _crouchLerp, _mainCamera.transform.position.z);
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;

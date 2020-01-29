@@ -22,6 +22,7 @@ public class IObserve : IPlayerState
     {
         _audioSourcePlayer = PlayerManager.Instance.Player.GetComponent<AudioSource>();
         _playerData = playerData;
+        _mouseSensitivityInteract = _playerData.MouseSensitivityInteract;
         _mainCamera = _camera;
         _playerAgentController = PlayerManager.Instance.Player.GetComponent<PlayerAgentController>();
     }
@@ -31,6 +32,8 @@ public class IObserve : IPlayerState
         Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f);
         _grabObjectCollider = _raycastHit.collider;
         _grabObject = _raycastHit.transform.gameObject;
+        _originPositionGrabObject = _grabObject.transform.position;
+        _originRotationGrabObject = _grabObject.transform.rotation;
         _objectHolder = _playerAgentController.ObjectHolder;
         _grabObjectCollider.isTrigger = true;
         _grabObject.transform.SetParent(_objectHolder);
@@ -57,8 +60,6 @@ public class IObserve : IPlayerState
             _distanceGrabObjectWithCameraWhenLooked = 1.0f;
             _grabObjectRotationWhenLooked = Quaternion.identity;
         }
-        _originPositionGrabObject = _grabObject.transform.position;
-        _originRotationGrabObject = _grabObject.transform.rotation;
         _grabObject.transform.localPosition = Vector3.zero;
         _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
         _grabObject.transform.LookAt(_mainCamera.transform);
@@ -90,6 +91,8 @@ public class IObserve : IPlayerState
         }
         _grabObject.transform.position = _originPositionGrabObject;
         _grabObject.transform.rotation = _originRotationGrabObject;
+        _grabObject = null;
+        InputManager.Instance.MousePosition -= LookObject;
     }
 
     private void LookObject(float mousePositionX, float mousePositionY)

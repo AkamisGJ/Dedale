@@ -50,6 +50,21 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
+    private event Action<KeyCode> _qTEAction = null;
+    public event Action<KeyCode> QTE
+    {
+        add
+        {
+            _qTEAction -= value;
+            _qTEAction += value;
+        }
+        remove
+        {
+            _qTEAction -= value;
+        }
+    }
+
+
     private event Action<bool> _sprintAction = null;
     public event Action<bool> Sprint
     {
@@ -144,6 +159,14 @@ public class InputManager : Singleton<InputManager>
                     _crouch = false;
                 }
                 _crouchAction(_crouch);
+            }
+
+            if(_qTEAction != null)
+            {
+                if(Input.anyKeyDown == true && Input.GetKeyDown(KeyCode.Escape) == false)
+                {
+                    _qTEAction(KeyCode.A);
+                }
             }
         }
     }
