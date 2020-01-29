@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     #region Fields
+    [SerializeField] private CharacterController _characterController = null;
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
     [SerializeField] private Transform _objectHolder = null;
+    [SerializeField] private float _gravity = 0.0f;
     private Vector3 _direction = Vector3.zero;
     private float _timeCrouchTime = 0.0f;
     private float _moveSpeedHorizontal = 1;
@@ -14,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float _accelerationLerp = 0;
     private float _currentSpeed = 0;
     private Camera _mainCamera = null;
-    [SerializeField] private Rigidbody _rb = null;
+    //[SerializeField] private Rigidbody _rb = null;
     private Vector3 _moveDirection = Vector3.zero;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
@@ -53,7 +56,6 @@ public class PlayerController : MonoBehaviour
     public Transform CameraHolder { get { return _cameraHolder; } set { _cameraHolder = value; } }
     public Transform ObjectHolder { get { return _objectHolder; } }
     public AudioSource AudioSourcePlayer { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
-    public AudioSource AudioSourcePlayer1 { get { return _audioSourcePlayer; } set { _audioSourcePlayer = value; } }
 
     public RaycastHit RaycastHit { get { return _raycastHit; } set { _raycastHit = value; } }
 
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        //_playerNavMeshAgent.updateRotation = false;
         _states = new Dictionary<MyState, IPlayerState>();
         _states.Add(MyState.Interaction, new IInteraction());
         _states.Add(MyState.Mouvement, new IMouvement());
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
         
         _mainCamera.transform.rotation = transform.rotation;
         Cursor.lockState = CursorLockMode.Locked;
-        _rb.interpolation = RigidbodyInterpolation.Interpolate;
+        //_rb.interpolation = RigidbodyInterpolation.Interpolate;
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeState(MyState nextState)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter(_grabObject);
+        _states[nextState].Enter();
         _currentState = nextState;
     }
 
@@ -105,20 +108,17 @@ public class PlayerController : MonoBehaviour
     */
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        Vector3 preHorizontalMouvement = -horizontalMouvement * transform.forward;
+        Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward;
         Vector3 preVerticalMouvement = verticalMouvement * transform.right;
         _direction = (preVerticalMouvement + preHorizontalMouvement).normalized;
-        if (horizontalMouvement < 0)
+        if (horizontalMouvement > 0)
         {
             _direction += transform.forward * _speedSprint;
-            if (horizontalMouvement < 0)
-            {
-                _direction += transform.forward * _playerData.SpeedForward;
-            }
-            else
-            {
-                _direction -= transform.forward * _playerData.SpeedBack;
-            }
+            _direction += transform.forward * _playerData.SpeedForward;
+        }
+        else if (horizontalMouvement < 0)
+        {
+            _direction -= transform.forward * _playerData.SpeedBack;
         }
         if(verticalMouvement > 0)
         {
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
                         _grabObject.transform.LookAt(_mainCamera.transform);
                         _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
                         _currentState = MyState.Observe;
-                        _rb.isKinematic = true;
+                        //_rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
                         _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
                     {
                         _grabObject = hit.transform.gameObject;
                         _currentState = MyState.Interaction;
-                        _rb.isKinematic = true;
+                        //_rb.isKinematic = true;
                         InputManager.Instance.Direction -= SetDirection;
                         _direction = Vector3.zero;
                         InputManager.Instance.MousePosition -= LookAtMouse;
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
                     Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
                     objectRb.isKinematic = false;
                 }
-                _rb.isKinematic = false;
+                //_rb.isKinematic = false;
                 _grabObject.transform.position = _originPositionGrabObject;
                 _grabObject.transform.rotation = _originRotationGrabObject;
                 _currentState = MyState.Mouvement;
@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
             {
                 _currentState = MyState.Mouvement;
-                _rb.isKinematic = false;
+                //_rb.isKinematic = false;
                 InputManager.Instance.Direction += SetDirection;
                 InputManager.Instance.MousePosition += LookAtMouse;
                 InputManager.Instance.Crouch += Crouch;
@@ -290,10 +290,26 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         //Debug.Log(direction.x * Time.deltaTime * _moveSpeedMultiplier + "  ,   " + direction.y * Time.deltaTime * _moveSpeedMultiplier + "  ,  " + direction.z * Time.deltaTime * _moveSpeedMultiplier);
-        //_rb.MovePosition(transform.position + _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration);
-        _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+        //_rb.MovePosition(transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        //_rb.AddForce(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration, ForceMode.Impulse);
+        Debug.Log(_direction * _playerData.MoveSpeedMultiplier * _currentAcceleration);
+        //_playerNavMeshAgent.destination = transform.position + _direction * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+        Debug.DrawRay(transform.position, -transform.up,Color.blue);
+        if (Physics.Raycast(transform.position, -transform.up))
+        {
+            //Gravity();
+        }
+        /*
+            _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
+            _lastDirection = _direction;
+        */
     }
     
+    private void Gravity()
+    {
+        //_rb.velocity += _gravity * -transform.up;
+    }
+
     private void Crouch(bool crouchBool)
     {
         if(crouchBool == true)

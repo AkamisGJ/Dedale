@@ -19,6 +19,8 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float _sensitivityMouseY = 1f;
     [SerializeField] float _speedSprintMax = 1;
     [SerializeField] float _sprintTimeMax = 100;
+    [SerializeField] float _gravity = 9;
+    [SerializeField] float _maxGravity = 45;
     #endregion Fields
 
     #region Properties
@@ -37,5 +39,7 @@ public class PlayerData : ScriptableObject
     public float SensitivityMouseY { get { return _sensitivityMouseY; } }
     public float SpeedSprintMax { get { return _speedSprintMax; } }
     public float SprintTimeMax { get { return _sprintTimeMax; } }
+    public float Gravity { get => _gravity; }
+    public float MaxGravity { get => _maxGravity; }
     #endregion Properties
 }

@@ -2,52 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Prof.Utils;
 
 public class GameLoopManager : Singleton<GameLoopManager>
 {
     #region Event
 
-    private Action _startLoop_1 = null;
-    public event Action StartLoop_1{
+    private Action _startPlayer = null;
+    public event Action StartPlayer
+    {
         add{
-            _startLoop_1 -= value;
-            _startLoop_1 += value;
+            _startPlayer -= value;
+            _startPlayer += value;
         }
         remove{
-            _startLoop_1 -= value;
+            _startPlayer -= value;
         }
     }
 
-    private Action _startLoop_2 = null;
-    public event Action StartLoop_2{
+    private Action _startInputManager = null;
+    public event Action StartInputManager
+    {
         add{
-            _startLoop_2 -= value;
-            _startLoop_2 += value;
+            _startInputManager -= value;
+            _startInputManager += value;
         }
         remove{
-            _startLoop_2 -= value;
-        }
-    }
-    private Action _gameLoop = null;
-    public event Action GameLoop{
-        add{
-            _gameLoop -= value;
-            _gameLoop += value;
-        }
-        remove{
-            _gameLoop -= value;
+            _startInputManager -= value;
         }
     }
 
-    private Action _secondGameLoop = null;
-    public event Action SecondGameLoop{
+    private Action _gameLoopPlayer = null;
+    public event Action GameLoopPlayer
+    {
         add{
-            _secondGameLoop -= value;
-            _secondGameLoop += value;
+            _gameLoopPlayer -= value;
+            _gameLoopPlayer += value;
         }
         remove{
-            _secondGameLoop -= value;
+            _gameLoopPlayer -= value;
+        }
+    }
+
+    private Action _gameLoopInputManager = null;
+    public event Action GameLoopInputManager
+    {
+        add{
+            _gameLoopInputManager -= value;
+            _gameLoopInputManager += value;
+        }
+        remove{
+            _gameLoopInputManager -= value;
         }
     }
 
@@ -92,22 +96,25 @@ public class GameLoopManager : Singleton<GameLoopManager>
     
     void Start()
     {
-        if(_startLoop_1 != null){
-            _startLoop_1();
+        if(_startPlayer != null){
+            _startPlayer();
         }
-        if(_startLoop_2 != null){
-            _startLoop_2();
+        if(_startInputManager != null){
+            _startInputManager();
         }
     }
 
     void Update()
     {
-        if(_gameLoop != null){
-            _gameLoop();
+        if (_gameLoopInputManager != null)
+        {
+            _gameLoopInputManager();
         }
-        if(_secondGameLoop != null){
-            _secondGameLoop();
+
+        if (_gameLoopPlayer != null){
+            _gameLoopPlayer();
         }
+
         if(_managerLoop != null){
             _managerLoop();
         }

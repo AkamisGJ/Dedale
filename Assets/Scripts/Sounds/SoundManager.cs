@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Prof.Utils;
 using UnityEngine.Audio;
 
 public class SoundManager : Singleton<SoundManager>
@@ -13,10 +12,9 @@ public class SoundManager : Singleton<SoundManager>
     public AudioMixer AudioMixer { get { return _audioMixer; } }
     #endregion Fields
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
-        //MainMenuStart();
+        base.Awake();
     }
 
     public float InitAudioMixer(string audioGroup)
