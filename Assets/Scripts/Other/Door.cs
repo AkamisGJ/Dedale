@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class Porte : MonoBehaviour
+public class Door : MonoBehaviour, IInteract
 {
     private Rigidbody _rb = null;
     private HingeJoint _hj = null;
     private float _initalPositionMouseX = 0;
+    [Tooltip("Speed of rotation of door")]
     [SerializeField] private float speed = 1;
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
@@ -17,7 +18,7 @@ public class Porte : MonoBehaviour
         _hj.limits = _limits;
     }
 
-    public void InteractPorte(float mousePositionX, float mousePositionY)
+    public void Interact(float mousePositionX, float mousePositionY)
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {

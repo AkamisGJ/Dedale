@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class IMouvement : IPlayerState
 {
@@ -35,7 +34,7 @@ public class IMouvement : IPlayerState
         _characterController = characterController;
         _playerData = playerData;
         _gravity = _playerData.Gravity;
-        _maxGravity = _playerData.MaxGravity;
+        _maxGravity = _playerData.MaxFallGravity;
         _playerController = PlayerManager.Instance.Player;
         _mainCamera = camera;
         _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
@@ -46,6 +45,8 @@ public class IMouvement : IPlayerState
         _isCrouch = false;
         _crouching = false;
         _unCrouching = false;
+        _characterController.slopeLimit = _playerData.SlopeLimit;
+        _characterController.stepOffset = _playerData.StepOffset;
     }
 
     public void Enter()
@@ -70,12 +71,11 @@ public class IMouvement : IPlayerState
                     return;
                 }
             }
-            if (_raycastHit.transform.gameObject.layer == 11)
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
             {
                 Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.magenta);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    _grabObject = _raycastHit.transform.gameObject;
                     _playerController.ChangeState(PlayerAgentController.MyState.Interaction);
                     return;
                 }
@@ -112,8 +112,8 @@ public class IMouvement : IPlayerState
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
         _direction.y -= _currentGravity;
-        float desiredMoveX = _direction.x * _playerData.MoveSpeedMultiplier * _currentAcceleration * Time.deltaTime;
-        float desiredMoveZ = _direction.z * _playerData.MoveSpeedMultiplier * _currentAcceleration * Time.deltaTime;
+        float desiredMoveX = _direction.x * _playerData.MoveSpeed * _currentAcceleration * Time.deltaTime;
+        float desiredMoveZ = _direction.z * _playerData.MoveSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
         _characterController.Move(desiredMove);
@@ -129,20 +129,20 @@ public class IMouvement : IPlayerState
             _direction += _playerController.transform.forward * _speedSprint;
             if (horizontalMouvement > 0)
             {
-                _direction += _playerController.transform.forward * _playerData.SpeedForward;
+                _direction += _playerController.transform.forward * _playerData.CoefSpeedForward;
             }
             else
             {
-                _direction -= _playerController.transform.forward * _playerData.SpeedBack;
+                _direction -= _playerController.transform.forward * _playerData.CoefSpeedBack;
             }
         }
         if (verticalMouvement > 0)
         {
-            _direction += _playerController.transform.right * _playerData.MoveSpeedSide;
+            _direction += _playerController.transform.right * _playerData.CoefSpeedSide;
         }
         else if (verticalMouvement < 0)
         {
-            _direction -= _playerController.transform.right * _playerData.MoveSpeedSide;
+            _direction -= _playerController.transform.right * _playerData.CoefSpeedSide;
         }
         if (_direction != Vector3.zero)
         {
@@ -166,7 +166,7 @@ public class IMouvement : IPlayerState
 
     private void Acceleration()
     {
-        _accelerationLerp += Time.deltaTime * _playerData.AccelerationTime;
+        _accelerationLerp += Time.deltaTime;
         _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _playerData.AccelerationCurve.length);
         _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
     }
@@ -195,7 +195,7 @@ public class IMouvement : IPlayerState
     private void Crouching(float inversion)
     {
         _timeCrouchTime += Time.deltaTime * inversion;
-        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
+        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time);
         _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
         _playerCapsuleCollider.height = _crouchLerp;
         _characterController.height = _crouchLerp;
@@ -204,7 +204,7 @@ public class IMouvement : IPlayerState
             _isCrouch = false;
             _unCrouching = false;
         }
-        if (inversion > 0 && _crouchLerp == _playerData.CrouchCurve.length)
+        if (inversion > 0 && _crouchLerp == _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time)
         {
             _isCrouch = true;
             _crouching = false;
@@ -219,7 +219,7 @@ public class IMouvement : IPlayerState
             {
                 _sprintCurrentTime -= Time.deltaTime;
                 _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
-                _speedSprint = _playerData.SpeedSprintMax;
+                _speedSprint = _playerData.MaxSprintSpeed;
             }
             else
             {
