@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class IObserve : IPlayerState
 {
-    private PlayerController _playerController = null;
+    private PlayerAgentController _playerAgentController = null;
     private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
@@ -16,61 +15,83 @@ public class IObserve : IPlayerState
     private InteractObject _currentObjectInterract = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+    private RaycastHit _raycastHit;
+    private AudioSource _audioSourcePlayer;
 
-    public void Init(PlayerData playerData,Camera _camera)
+    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
+        _audioSourcePlayer = PlayerManager.Instance.Player.GetComponent<AudioSource>();
         _playerData = playerData;
+        _mouseSensitivityInteract = _playerData.MouseSensitivityInteract;
+        _mainCamera = _camera;
+        _playerAgentController = PlayerManager.Instance.Player.GetComponent<PlayerAgentController>();
     }
 
-    public void Enter(GameObject grabObject)
+    public void Enter()
     {
-        _grabObjectCollider = _playerController.RaycastHit.collider;
-        _grabObject = grabObject;
-        _objectHolder = _playerController.ObjectHolder;
+        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f);
+        _grabObjectCollider = _raycastHit.collider;
+        _grabObject = _raycastHit.transform.gameObject;
+        _originPositionGrabObject = _grabObject.transform.position;
+        _originRotationGrabObject = _grabObject.transform.rotation;
+        _objectHolder = _playerAgentController.ObjectHolder;
+        _grabObjectCollider.isTrigger = true;
+        _grabObject.transform.SetParent(_objectHolder);
+        _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
+        if (_currentObjectInterract.OnTakeObject != null && _playerAgentController.AudioSourcePlayer != null)
+        {
+            _playerAgentController.AudioSourcePlayer.clip = _currentObjectInterract.OnTakeObject;
+            _playerAgentController.AudioSourcePlayer.Play();
+        }
+        if (_grabObject.GetComponent<Rigidbody>())
+        {
+            Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+            objectRb.isKinematic = true;
+        }
+        if (_grabObject.GetComponent<InteractObject>())
+        {
+            Vector4 infoWhenLooked = _grabObject.GetComponent<InteractObject>().Interact();
+            Vector3 grabObjectRotationWhenLooked = infoWhenLooked;
+            _distanceGrabObjectWithCameraWhenLooked = infoWhenLooked.w;
+            _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
+        }
+        else
+        {
+            _distanceGrabObjectWithCameraWhenLooked = 1.0f;
+            _grabObjectRotationWhenLooked = Quaternion.identity;
+        }
+        _grabObject.transform.localPosition = Vector3.zero;
+        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+        _grabObject.transform.LookAt(_mainCamera.transform);
+        _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
+        InputManager.Instance.MousePosition += LookObject;
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _grabObjectCollider.isTrigger = true;
-            _grabObject.transform.SetParent(_objectHolder);
-            _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
-            if (_currentObjectInterract.OnTakeObject != null && _playerController.AudioSourcePlayer != null)
-            {
-                _playerController.AudioSourcePlayer.clip = _currentObjectInterract.OnTakeObject;
-                _playerController.AudioSourcePlayer.Play();
-            }
-            if (_grabObject.GetComponent<Rigidbody>())
-            {
-                Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
-                objectRb.isKinematic = true;
-            }
-            if (_grabObject.GetComponent<InteractObject>())
-            {
-                Vector4 infoWhenLooked = _grabObject.GetComponent<InteractObject>().Interact();
-                Vector3 grabObjectRotationWhenLooked = infoWhenLooked;
-                _distanceGrabObjectWithCameraWhenLooked = infoWhenLooked.w;
-                _grabObjectRotationWhenLooked = Quaternion.Euler(grabObjectRotationWhenLooked);
-            }
-            else
-            {
-                _distanceGrabObjectWithCameraWhenLooked = 1.0f;
-                _grabObjectRotationWhenLooked = Quaternion.identity;
-            }
-            _originPositionGrabObject = _grabObject.transform.position;
-            _originRotationGrabObject = _grabObject.transform.rotation;
-            _grabObject.transform.localPosition = Vector3.zero;
-            _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
-            _grabObject.transform.LookAt(_mainCamera.transform);
-            _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
-            _grabObject.transform.position = _originPositionGrabObject;
-            _grabObject.transform.rotation = _originRotationGrabObject;
+            _playerAgentController.ChangeState(PlayerAgentController.MyState.Mouvement);
         }
     }
 
     public void Exit()
     {
+        _raycastHit.collider.isTrigger = false;
+        _grabObject.transform.SetParent(null);
+        if (_currentObjectInterract.OnThrowObject != null && _audioSourcePlayer != null)
+        {
+            _audioSourcePlayer.clip = _currentObjectInterract.OnThrowObject;
+            _audioSourcePlayer.Play();
+        }
+        if (_grabObject.GetComponent<Rigidbody>())
+        {
+            Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
+            objectRb.isKinematic = false;
+        }
+        _grabObject.transform.position = _originPositionGrabObject;
+        _grabObject.transform.rotation = _originRotationGrabObject;
+        _grabObject = null;
         InputManager.Instance.MousePosition -= LookObject;
     }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Prof.Utils;
 using System;
 
 public class InputManager : Singleton<InputManager>
@@ -51,6 +50,21 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
+    private event Action<KeyCode> _qTEAction = null;
+    public event Action<KeyCode> QTE
+    {
+        add
+        {
+            _qTEAction -= value;
+            _qTEAction += value;
+        }
+        remove
+        {
+            _qTEAction -= value;
+        }
+    }
+
+
     private event Action<bool> _sprintAction = null;
     public event Action<bool> Sprint
     {
@@ -84,14 +98,20 @@ public class InputManager : Singleton<InputManager>
     private bool _crouch = false;
     #endregion Fields
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+        GameLoopManager.Instance.StartInputManager += OnStart;
+        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
+    }
+
+    protected void OnStart()
+    {
         _sprint = false;
         _crouch = false;
     }
 
-    protected override void Update()
+    protected void OnUpdate()
     {
         if(PlayerManager.Instance.PlayerIsDead == false)
         {
@@ -99,26 +119,6 @@ public class InputManager : Singleton<InputManager>
             {
                 _direction.z = Input.GetAxisRaw("Horizontal");
                 _direction.x = Input.GetAxisRaw("Vertical");
-                /*
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    _direction.x += 1;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    _direction.x -= 1;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    _direction.z += 1;
-                }
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    _direction.z -= 1;
-                }
-                _direction.x = Mathf.Clamp(_direction.x, -1, 1);
-                _direction.z = Mathf.Clamp(_direction.z, -1, 1);
-                */
                 _directionAction(_direction.x, _direction.z);
                 _direction = Vector3.zero;
             }
@@ -159,6 +159,26 @@ public class InputManager : Singleton<InputManager>
                     _crouch = false;
                 }
                 _crouchAction(_crouch);
+            }
+
+            if(_qTEAction != null)
+            {
+                if(Input.GetKeyDown(KeyCode.D))
+                {
+                    _qTEAction(KeyCode.D);
+                }
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    _qTEAction(KeyCode.Z);
+                }
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    _qTEAction(KeyCode.Q);
+                }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    _qTEAction(KeyCode.S);
+                }
             }
         }
     }
