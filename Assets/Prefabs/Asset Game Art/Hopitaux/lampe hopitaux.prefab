@@ -42,16 +42,16 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 0.98874545, b: 0.9198113, a: 1}
-  m_Intensity: 5
-  m_Range: 8.72301
-  m_SpotAngle: 70.401634
+  m_Color: {r: 1, g: 0.9370283, b: 0.5801887, a: 1}
+  m_Intensity: 2
+  m_Range: 18.019642
+  m_SpotAngle: 39.18488
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.927
     m_Bias: 0
     m_NormalBias: 0
     m_NearPlane: 0.2
@@ -82,9 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01d29d88278f45458d99e6b5199e920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0.4
-  useScattering: 2
-  overrideScattering: 0
+  strength: 2
+  useScattering: 0
+  overrideScattering: 1
   overridingScattering: 1
   scatteringBias: 0
   useColorTemperatureTint: 0
@@ -98,12 +98,12 @@ MonoBehaviour:
   outOfPhaseColorStrength: 0.1
   outOfPhaseColor: {r: 0, g: 1, b: 1, a: 1}
   shadowDataRenderTexture: {fileID: 0}
-  customDistanceFalloffThreshold: 1
+  customDistanceFalloffThreshold: 0.595
   customDistanceFalloffPower: 2
   customCookieDistanceFalloffStartThreshold: 0.1
   customCookieDistanceFalloffEndThreshold: 0.25
   customCookieDistanceFalloffPower: 2
-  customAngularFalloffThreshold: 1
+  customAngularFalloffThreshold: 0.231
   customAngularFalloffPower: 2
 --- !u!1 &1015596400961034976
 GameObject:
@@ -338,8 +338,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015596400961034982}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 80.000015, z: 0}
+  m_LocalScale: {x: 1, y: 1.8491, z: 1}
   m_Children:
   - {fileID: 1015596400961193664}
   m_Father: {fileID: 1015596400961193668}
