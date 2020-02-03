@@ -5,14 +5,17 @@ using Sirenix.OdinInspector;
 public class PlayerData : ScriptableObject
 {
     #region Fields
-    [BoxGroup("Layer Mask", centerLabel: true)]
-    [Tooltip("Layer Interaction player - object")]
+    [BoxGroup("Raycast Interaction Object", centerLabel: true)]
+    [Tooltip("Layer Interaction object")]
     [SerializeField] private LayerMask _layerMask;
-    [BoxGroup("Curves", centerLabel: true)]
+    [BoxGroup("Raycast Interaction Object")]
+    [Tooltip("Distance Interaction Object")]
+    [SerializeField] private float _maxDistanceInteractionObject = 5;
+    [BoxGroup("Sprint")]
     [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _accelerationCurve = null;
-    [BoxGroup("Curves")]
-    [Tooltip("2 or max height of player to 1 or crouched height of player and 0 to infinity time")]
+    [BoxGroup("Crouch")]
+    [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _crouchCurve = null;
 
     [BoxGroup("Character Controller", centerLabel: true)]
@@ -22,18 +25,18 @@ public class PlayerData : ScriptableObject
     [Tooltip("override the Step Offset in character controller")]
     [SerializeField] private float _stepOffset = 0.3f;
 
-    [BoxGroup("Coefficient (0 to 1)",centerLabel: true)]
+    [BoxGroup("1 + value = speed in that direction",centerLabel: true)]
     [Tooltip("Apply a coefficient to the speed of forward direction")]
     [SerializeField] private float _coefSpeedForward = 1;
-    [BoxGroup("Coefficient (0 to 1)")]
+    [BoxGroup("1 + value = speed in that direction")]
     [Tooltip("Apply a coefficient to the speed of back direction")]
     [SerializeField] private float _coefSpeedBack = 0.5f;
-    [BoxGroup("Coefficient (0 to 1)")]
+    [BoxGroup("1 + value = speed in that direction")]
     [Tooltip("Apply a coefficient to the speed of left and right direction")]
     [SerializeField] private float _coefSpeedSide = 0.5f;
 
     [BoxGroup("Move Speed", centerLabel: true)]
-    [Tooltip("Multiply normalized vector direction of player by this value")]
+    [Tooltip("global direction multiplier speed of player (0 to infini)")]
     [SerializeField] private float _moveSpeed = 1;
 
     [BoxGroup("Sprint", centerLabel: true)]
@@ -56,7 +59,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float _sensitivityMouseY = 1f;
 
     [BoxGroup("Sprint")]
-    [Tooltip("Sprint max time in seconds")]
+    [Tooltip("Sprint max time in seconds (0 = infinty)")]
     [SerializeField] float _sprintTimeMax = 100;
 
     [BoxGroup("Gravity", centerLabel: true)]
@@ -70,8 +73,19 @@ public class PlayerData : ScriptableObject
     [Tooltip("Define the normal field of view")]
     [SerializeField] private float _FieldOfView = 60;
     [BoxGroup("Camra Zoom")]
-    [Tooltip("0 to zoom field of view value and 0 to infinity time")]
+    [Tooltip("Define the normal field of view")]
+    [SerializeField] private float _zoomFieldOfView = 60;
+    [BoxGroup("Camra Zoom")]
+    [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _zoomTransition = null;
+
+    [BoxGroup("Crouch", centerLabel: true)]
+    [Tooltip("The normal height of player")]
+    [SerializeField] private float _maxHeight = 2;
+    [BoxGroup("Crouch")]
+    [Tooltip("The crouch height of player")]
+    [SerializeField] private float _differenceHeightCrouch = 1;
+
 
     #endregion Fields
 
@@ -95,5 +109,9 @@ public class PlayerData : ScriptableObject
     public float SlopeLimit { get => _slopeLimit; }
     public LayerMask LayerMask { get => _layerMask; }
     public float FieldOfView { get => _FieldOfView; }
+    public float DifferenceHeightCrouch { get => _differenceHeightCrouch; }
+    public float MaxHeight { get => _maxHeight; }
+    public float ZoomFieldOfView { get => _zoomFieldOfView; }
+    public float MaxDistanceInteractionObject { get => _maxDistanceInteractionObject; }
     #endregion Properties
 }

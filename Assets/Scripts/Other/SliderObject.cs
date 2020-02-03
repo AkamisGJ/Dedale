@@ -47,19 +47,22 @@ public class SliderObject : MonoBehaviour, IInteract
         _currentDistance = _startPositionAxe;
     }
 
+    public void Enter()
+    {
+
+    }
+
     public void Interact(float mousePositionX, float mousePositionY)
     {
         switch (_axeMouse)
         {
             case AxeMouse.X:
-                _correctionDeplacement.x = transform.localPosition.x * _nextDeplacement.x;
-                _correctionDeplacement.y = transform.localPosition.y * _nextDeplacement.y;
-                _correctionDeplacement.z = transform.localPosition.z * _nextDeplacement.z;
-                _nextPosition = transform.localPosition + Deplacement(mousePositionX) * _nextDeplacement - _correctionDeplacement;
+                _correctionDeplacement = transform.localPosition;
+                _nextPosition = transform.localPosition + Deplacement(mousePositionX) * _nextDeplacement - _correctionDeplacement + _startPositionAxe * _nextDeplacement;
                 transform.localPosition = _nextPosition;
                 break;
             case AxeMouse.Y:
-                _nextPosition = transform.localPosition + Deplacement(mousePositionX) * _nextDeplacement - _correctionDeplacement;
+                _nextPosition = transform.localPosition + Deplacement(mousePositionY) * _nextDeplacement - _correctionDeplacement;
                 transform.localPosition = _nextPosition;
                 break;
             default:
@@ -108,7 +111,6 @@ public class SliderObject : MonoBehaviour, IInteract
                     return _currentDistance;
                 }
             }
-            Debug.Log(_currentDistance + "    min " + _startPositionAxe + "     max " + _maxDistance);
         }
         return _currentDistance;
     }

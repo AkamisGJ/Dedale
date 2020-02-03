@@ -15,70 +15,41 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 3072
+  _maxDistanceInteractionObject: 5
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 4.0760927
+      outSlope: 4.0760927
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21260008
+      value: 0.8665776
+      inSlope: 0.5336027
+      outSlope: 0.5336027
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.09390752
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.16944678
+      outSlope: 0.16944678
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _crouchCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 2
-      inSlope: -0.05643518
-      outSlope: -0.05643518
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.22579037
-    - serializedVersion: 3
-      time: 0.25
-      value: 1
-      inSlope: -0.11490892
-      outSlope: -0.11490892
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.16094184
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _slopeLimit: 45
-  _stepOffset: 0.3
-  _coefSpeedForward: 1
-  _coefSpeedBack: 0.5
-  _coefSpeedSide: 0.5
-  _moveSpeed: 1
-  _maxSprintSpeed: 2
-  _mouseSensitivityObserve: 1
-  _angleX: 60
-  _sensitivityMouseX: 3
-  _sensitivityMouseY: 3
-  _sprintTimeMax: 100
-  _gravity: 2
-  _maxFallGravity: 45
-  _FieldOfView: 60
-  _zoomTransition:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -92,7 +63,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.5
-      value: -20
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -102,3 +73,45 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _slopeLimit: 45
+  _stepOffset: 0.3
+  _coefSpeedForward: 3
+  _coefSpeedBack: 0.1
+  _coefSpeedSide: 0.1
+  _moveSpeed: 1
+  _maxSprintSpeed: 2
+  _mouseSensitivityObserve: 1
+  _angleX: 60
+  _sensitivityMouseX: 3
+  _sensitivityMouseY: 3
+  _sprintTimeMax: 0
+  _gravity: 2
+  _maxFallGravity: 45
+  _FieldOfView: 60
+  _zoomFieldOfView: 40
+  _zoomTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _maxHeight: 2
+  _differenceHeightCrouch: 1

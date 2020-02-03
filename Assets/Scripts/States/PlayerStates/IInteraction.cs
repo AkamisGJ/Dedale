@@ -20,7 +20,7 @@ public class IInteraction : IPlayerState
 
     public void Enter()
     {
-        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out _raycastHit, 10.0f, _layerMask);
+        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
         _interactGameObject = _raycastHit.collider.gameObject;
         _interactObject = _interactGameObject.GetComponent<IInteract>();
         InputManager.Instance.MousePosition += _interactObject.Interact;
@@ -36,7 +36,13 @@ public class IInteraction : IPlayerState
 
     public void Exit()
     {
+        OnExit();
         InputManager.Instance.MousePosition -= _interactObject.Interact;
+    }
+
+    private void OnExit()
+    {
+        _interactGameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
     void OnDestroy()

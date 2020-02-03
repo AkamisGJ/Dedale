@@ -31,7 +31,7 @@ public class IObserve : IPlayerState
 
     public void Enter()
     {
-        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f, _layerMask);
+        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
         _grabObjectCollider = _raycastHit.collider;
         _grabObject = _raycastHit.transform.gameObject;
         _originPositionGrabObject = _grabObject.transform.position;

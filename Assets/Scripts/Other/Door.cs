@@ -18,10 +18,16 @@ public class Door : MonoBehaviour, IInteract
         _hj.limits = _limits;
     }
 
+    public void Enter()
+    {
+        UnClick();
+    }
+
     public void Interact(float mousePositionX, float mousePositionY)
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            OnClick();
             JointMotor motor = _hj.motor;
             _hj.useMotor = true;
             motor.freeSpin = false;
@@ -46,11 +52,22 @@ public class Door : MonoBehaviour, IInteract
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            UnClick();
             JointMotor motor = _hj.motor;
             motor.freeSpin = true;
             _hj.useMotor = false;
             _limits.bounciness = _bounciness;
             _hj.limits = _limits;
         }
+    }
+
+    void OnClick()
+    {
+        transform.GetComponent<MeshRenderer>().material.color = Color.cyan;
+    }
+
+    void UnClick()
+    {
+        transform.GetComponent<MeshRenderer>().material.color = Color.magenta;
     }
 }
