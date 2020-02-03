@@ -8,17 +8,19 @@ public class IInteraction : IPlayerState
     private PlayerData _playerData = null;
     private RaycastHit _raycastHit;
     private Camera _camera = null;
+    private LayerMask _layerMask;
 
     public void Init(PlayerData playerData, Camera camera, CharacterController characterController)
     {
+        _layerMask = playerData.LayerMask;
         _playerData = playerData;
         _camera = camera;
-        _playerController = PlayerManager.Instance.Player;
+        _playerController = PlayerManager.Instance.PlayerController;
     }
 
     public void Enter()
     {
-        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out _raycastHit, 10.0f);
+        Physics.Raycast(_camera.transform.position, _camera.transform.forward, out _raycastHit, 10.0f, _layerMask);
         _interactGameObject = _raycastHit.collider.gameObject;
         _interactObject = _interactGameObject.GetComponent<IInteract>();
         InputManager.Instance.MousePosition += _interactObject.Interact;

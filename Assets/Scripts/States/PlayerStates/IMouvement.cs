@@ -4,6 +4,7 @@ public class IMouvement : IPlayerState
 {
     private CharacterController _characterController = null;
     private PlayerAgentController _playerController = null;
+    private LayerMask _layerMask;
     private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
@@ -19,8 +20,13 @@ public class IMouvement : IPlayerState
     private bool _isCrouch = false;
     private bool _crouching = false;
     private bool _unCrouching = false;
-    private float _timeCrouchTime = 0.0f;
+    private bool _isZoom = false;
+    private bool _zooming = false;
+    private bool _unZooming = false;
+    private float _timeCrouch = 0.0f;
+    private float _timeZoom = 0.0f;
     private float _crouchLerp = 0;
+    private float _zoomLerp = 0;
     private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
     private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.Mouvement;
@@ -31,11 +37,12 @@ public class IMouvement : IPlayerState
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
+        _layerMask = playerData.LayerMask;
         _characterController = characterController;
         _playerData = playerData;
         _gravity = _playerData.Gravity;
         _maxGravity = _playerData.MaxFallGravity;
-        _playerController = PlayerManager.Instance.Player;
+        _playerController = PlayerManager.Instance.PlayerController;
         _mainCamera = camera;
         _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _crouchLerp = 0;
@@ -56,15 +63,15 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Direction += SetDirection;
+        InputManager.Instance.Zoom += Zoom;
     }
 
     public void Update()
     {
-        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f))
+        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f, _layerMask))
         {
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
             {
-                Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.green);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _playerController.ChangeState(PlayerAgentController.MyState.Observe);
@@ -73,7 +80,6 @@ public class IMouvement : IPlayerState
             }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
             {
-                Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.forward, Color.magenta);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     _playerController.ChangeState(PlayerAgentController.MyState.Interaction);
@@ -90,6 +96,14 @@ public class IMouvement : IPlayerState
         {
             Crouching(-1);
         }
+        if (_zooming == true)
+        {
+            Zooming(1);
+        }
+        if (_unZooming == true)
+        {
+            Zooming(-1);
+        }
     }
 
     public void Exit()
@@ -98,6 +112,7 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
+        InputManager.Instance.Zoom -= Zoom;
     }
 
     private void Move()
@@ -194,9 +209,9 @@ public class IMouvement : IPlayerState
 
     private void Crouching(float inversion)
     {
-        _timeCrouchTime += Time.deltaTime * inversion;
-        _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time);
-        _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
+        _timeCrouch += Time.deltaTime * inversion;
+        _timeCrouch = Mathf.Clamp(_timeCrouch, 0, _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time);
+        _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouch);
         _playerCapsuleCollider.height = _crouchLerp;
         _characterController.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == 0)
@@ -208,6 +223,44 @@ public class IMouvement : IPlayerState
         {
             _isCrouch = true;
             _crouching = false;
+        }
+    }
+
+    private void Zoom(bool zoomBool)
+    {
+        if (zoomBool == true)
+        {
+            if (_isZoom == false && _zooming == false)
+            {
+                _zooming = true;
+                _unZooming = false;
+            }
+        }
+        if (zoomBool == false && _zooming == true || _isZoom == true)
+        {
+            if (_unZooming == false)
+            {
+                _zooming = false;
+                _unZooming = true;
+            }
+        }
+    }
+
+    private void Zooming(float inversion)
+    {
+        _timeZoom += Time.deltaTime * inversion;
+        _timeZoom = Mathf.Clamp(_timeZoom, 0, _playerData.ZoomTransition.keys[_playerData.ZoomTransition.length - 1].time);
+        _zoomLerp = _playerData.ZoomTransition.Evaluate(_timeZoom);
+        _mainCamera.fieldOfView = _zoomLerp + _playerData.FieldOfView;
+        if (inversion < 0 && _zoomLerp == 0)
+        {
+            _isZoom = false;
+            _unZooming = false;
+        }
+        if (inversion > 0 && _zoomLerp == _playerData.ZoomTransition.keys[_playerData.ZoomTransition.length - 1].time)
+        {
+            _isZoom = true;
+            _zooming = false;
         }
     }
 

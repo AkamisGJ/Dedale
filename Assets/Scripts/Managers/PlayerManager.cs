@@ -19,6 +19,8 @@ public class PlayerManager : Singleton<PlayerManager>
     #region Properties
     public PlayerAgentController Player { get { return _playerController; } set { _playerController = value; } }
 
+    public PlayerAgentController PlayerController { get { return _playerGameObject; } set { _playerGameObject = value; } }
+
     public Camera CameraUIInstantiate { get { return _cameraUI; } set { _cameraUI = value; } }
 
     public Camera CameraPlayerInstantiate { get { return _cameraPlayer; } set { _cameraPlayer = value; } }

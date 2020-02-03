@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b31c309fbdf80b4ab5cd67692de9752, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 3072
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -60,12 +63,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _zoomTransition:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _slopeLimit: 45
   _stepOffset: 0.3
   _coefSpeedForward: 1
@@ -80,4 +77,28 @@ MonoBehaviour:
   _sprintTimeMax: 100
   _gravity: 2
   _maxFallGravity: 45
-  _zoomFieldOfView: 40
+  _FieldOfView: 60
+  _zoomTransition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: -20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

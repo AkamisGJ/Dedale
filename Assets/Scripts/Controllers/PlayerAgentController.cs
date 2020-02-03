@@ -42,11 +42,10 @@ public class PlayerAgentController : MonoBehaviour
 
     private void Awake()
     {
-        GameLoopManager.Instance.StartPlayer += OnStart;
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
     }
 
-    void OnStart()
+    void Start()
     {
         _states = new Dictionary<MyState, IPlayerState>();
         _states.Add(MyState.Interaction, new IInteraction());

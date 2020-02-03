@@ -5,15 +5,15 @@ using Sirenix.OdinInspector;
 public class PlayerData : ScriptableObject
 {
     #region Fields
+    [BoxGroup("Layer Mask", centerLabel: true)]
+    [Tooltip("Layer Interaction player - object")]
+    [SerializeField] private LayerMask _layerMask;
     [BoxGroup("Curves", centerLabel: true)]
     [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _accelerationCurve = null;
     [BoxGroup("Curves")]
     [Tooltip("2 or max height of player to 1 or crouched height of player and 0 to infinity time")]
     [SerializeField] private AnimationCurve _crouchCurve = null;
-    [BoxGroup("Curves")]
-    [Tooltip("0 to 1 value and 0 to infinity time")]
-    [SerializeField] private AnimationCurve _zoomTransition = null;
 
     [BoxGroup("Character Controller", centerLabel: true)]
     [Tooltip("override the slope limit in character controller")]
@@ -67,8 +67,11 @@ public class PlayerData : ScriptableObject
     [SerializeField] float _maxFallGravity = 45;
 
     [BoxGroup("Camra Zoom", centerLabel: true)]
-    [Tooltip("Define the min field of view in zoom mod")]
-    [SerializeField] private float _zoomFieldOfView = 40;
+    [Tooltip("Define the normal field of view")]
+    [SerializeField] private float _FieldOfView = 60;
+    [BoxGroup("Camra Zoom")]
+    [Tooltip("0 to zoom field of view value and 0 to infinity time")]
+    [SerializeField] private AnimationCurve _zoomTransition = null;
 
     #endregion Fields
 
@@ -88,8 +91,9 @@ public class PlayerData : ScriptableObject
     public float Gravity { get => _gravity; }
     public float MaxFallGravity { get => _maxFallGravity; }
     public AnimationCurve ZoomTransition { get => _zoomTransition; }
-    public float ZoomFieldOfView { get => _zoomFieldOfView; }
     public float StepOffset { get => _stepOffset; }
     public float SlopeLimit { get => _slopeLimit; }
+    public LayerMask LayerMask { get => _layerMask; }
+    public float FieldOfView { get => _FieldOfView; }
     #endregion Properties
 }
