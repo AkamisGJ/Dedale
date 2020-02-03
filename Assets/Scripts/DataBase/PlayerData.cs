@@ -25,19 +25,19 @@ public class PlayerData : ScriptableObject
     [Tooltip("override the Step Offset in character controller")]
     [SerializeField] private float _stepOffset = 0.3f;
 
-    [BoxGroup("1 + value = speed in that direction",centerLabel: true)]
-    [Tooltip("Apply a coefficient to the speed of forward direction")]
-    [SerializeField] private float _coefSpeedForward = 1;
-    [BoxGroup("1 + value = speed in that direction")]
-    [Tooltip("Apply a coefficient to the speed of back direction")]
-    [SerializeField] private float _coefSpeedBack = 0.5f;
-    [BoxGroup("1 + value = speed in that direction")]
-    [Tooltip("Apply a coefficient to the speed of left and right direction")]
-    [SerializeField] private float _coefSpeedSide = 0.5f;
+    [BoxGroup("Move speed",centerLabel: true)]
+    [Tooltip("Move speed of forward direction")]
+    [SerializeField] private float _speedForward = 1;
+    [BoxGroup("Move speed")]
+    [Tooltip("Move speed of back direction")]
+    [SerializeField] private float _speedBack = 0.5f;
+    [BoxGroup("Move speed")]
+    [Tooltip("Move speed of left and right direction")]
+    [SerializeField] private float _speedSide = 0.5f;
 
-    [BoxGroup("Move Speed", centerLabel: true)]
+    [BoxGroup("Move speed")]
     [Tooltip("global direction multiplier speed of player (0 to infini)")]
-    [SerializeField] private float _moveSpeed = 1;
+    [SerializeField] private float _gloabalSpeed = 1;
 
     [BoxGroup("Sprint", centerLabel: true)]
     [Tooltip("Multiply forward speed by this value")]
@@ -83,7 +83,7 @@ public class PlayerData : ScriptableObject
     [Tooltip("The normal height of player")]
     [SerializeField] private float _maxHeight = 2;
     [BoxGroup("Crouch")]
-    [Tooltip("The crouch height of player")]
+    [Tooltip("The difference between crouch height and normal height")]
     [SerializeField] private float _differenceHeightCrouch = 1;
 
 
@@ -92,10 +92,10 @@ public class PlayerData : ScriptableObject
     #region Properties
     public AnimationCurve AccelerationCurve { get { return _accelerationCurve; } }
     public AnimationCurve CrouchCurve { get { return _crouchCurve; } }
-    public float CoefSpeedForward { get { return _coefSpeedForward; } }
-    public float CoefSpeedBack { get { return _coefSpeedBack; } }
-    public float CoefSpeedSide { get { return _coefSpeedSide; } }
-    public float MoveSpeed { get { return _moveSpeed; } }
+    public float SpeedForward { get { return _speedForward; } }
+    public float SpeedBack { get { return _speedBack; } }
+    public float SpeedSide { get { return _speedSide; } }
+    public float GlobalSpeed { get { return _gloabalSpeed; } }
     public float MaxSprintSpeed { get { return _maxSprintSpeed; } }
     public float MouseSensitivityInteract { get { return _mouseSensitivityObserve; } }
     public float AngleX { get { return _angleX; } }

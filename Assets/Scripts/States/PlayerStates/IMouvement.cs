@@ -148,8 +148,8 @@ public class IMouvement : IPlayerState
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
         _direction.y -= _currentGravity;
-        float desiredMoveX = _direction.x * _playerData.MoveSpeed * _currentAcceleration * Time.deltaTime;
-        float desiredMoveZ = _direction.z * _playerData.MoveSpeed * _currentAcceleration * Time.deltaTime;
+        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
+        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
         _characterController.Move(desiredMove);
@@ -162,24 +162,24 @@ public class IMouvement : IPlayerState
         _direction = (_directionHorinzontal + _directionVertical).normalized;
         if (horizontalMouvement > 0)
         {
-            _direction += _playerController.transform.forward * _playerData.CoefSpeedForward;
+            _direction += _playerController.transform.forward * (_playerData.SpeedForward -1);
         }
         if (horizontalMouvement < 0)
         {
-            _direction -= _playerController.transform.forward * _playerData.CoefSpeedBack;
+            _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
         }
 
         if (verticalMouvement > 0)
         {
-            _direction += _playerController.transform.right * _playerData.CoefSpeedSide;
+            _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
         }
         else if (verticalMouvement < 0)
         {
-            _direction -= _playerController.transform.right * _playerData.CoefSpeedSide;
+            _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
         }
         if (_speedSprint > 1 && horizontalMouvement > 0)
         {
-            _direction += _playerController.transform.forward * _speedSprint;
+            _direction += _playerController.transform.forward * (_speedSprint -1 );
         }
         if (_direction != Vector3.zero)
         {

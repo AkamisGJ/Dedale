@@ -52,6 +52,11 @@ public class SliderObject : MonoBehaviour, IInteract
 
     }
 
+    public void Exit()
+    {
+
+    }
+
     public void Interact(float mousePositionX, float mousePositionY)
     {
         switch (_axeMouse)
