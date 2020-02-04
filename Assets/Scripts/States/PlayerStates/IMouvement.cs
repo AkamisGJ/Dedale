@@ -22,7 +22,6 @@ public class IMouvement : IPlayerState
     private bool _unCrouching = false;
     private float _timeCrouchTime = 0.0f;
     private float _crouchLerp = 0;
-    private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
     private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.Mouvement;
     private RaycastHit _raycastHit;
@@ -38,7 +37,6 @@ public class IMouvement : IPlayerState
         _maxGravity = _playerData.MaxGravity;
         _playerController = PlayerManager.Instance.Player;
         _mainCamera = camera;
-        _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
@@ -197,8 +195,7 @@ public class IMouvement : IPlayerState
         _timeCrouchTime += Time.deltaTime * inversion;
         _timeCrouchTime = Mathf.Clamp(_timeCrouchTime, 0, _playerData.CrouchCurve.length);
         _crouchLerp = _playerData.CrouchCurve.Evaluate(_timeCrouchTime);
-        _playerCapsuleCollider.height = _crouchLerp;
-        _characterController.height = _crouchLerp;
+        _characterController.height = _crouchLerp + _characterController.height;
         if (inversion < 0 && _crouchLerp == 0)
         {
             _isCrouch = false;

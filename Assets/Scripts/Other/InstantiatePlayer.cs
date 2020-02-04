@@ -13,7 +13,7 @@ public class InstantiatePlayer : MonoBehaviour
     {
         if (!FindObjectOfType<PlayerManager>())
         {
-            Instantiate(_playerManager);
+            Instantiate(_playerManager, transform.position, transform.rotation);
             Instantiate(_gameManager);
             Instantiate(_inputManager);
             Instantiate(_cameraManager);
@@ -22,5 +22,8 @@ public class InstantiatePlayer : MonoBehaviour
             GameManager.Instance.CurrentState = GameManager.MyState.Game;
         }
         PlayerManager.Instance.InstantiatePlayer(transform);
+    }
+    private void Start() {
+        Destroy(gameObject);
     }
 }
