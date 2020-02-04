@@ -1,6 +1,6 @@
 ﻿public interface IInteract
 {
-    void Init();
+    void Enter();
     void Interact(float directionX, float directionY);
     void Exit();
 }

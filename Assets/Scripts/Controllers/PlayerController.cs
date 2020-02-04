@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    #region Fields
+  /*  #region Fields
     [SerializeField] private CharacterController _characterController = null;
     [SerializeField] private PlayerData _playerData = null;
     [SerializeField] private Transform _cameraHolder = null;
@@ -100,12 +100,12 @@ public class PlayerController : MonoBehaviour
     public void DeadPlayer()
     {
     }
-    /*
+    
     private void Update()
     {
         _states[_currentState].Update();
     }
-    */
+    
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
         Vector3 preHorizontalMouvement = horizontalMouvement * transform.forward;
@@ -299,10 +299,10 @@ public class PlayerController : MonoBehaviour
         {
             //Gravity();
         }
-        /*
+       
             _rb.velocity = _direction * Time.deltaTime * _playerData.MoveSpeedMultiplier * _currentAcceleration;
             _lastDirection = _direction;
-        */
+        
     }
     
     private void Gravity()
@@ -387,5 +387,5 @@ public class PlayerController : MonoBehaviour
             InputManager.Instance.MousePosition -= _porte.InteractPorte;
         }
     }
-    
+    */
 }
