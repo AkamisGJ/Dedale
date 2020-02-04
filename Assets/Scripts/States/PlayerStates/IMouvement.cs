@@ -37,6 +37,7 @@ public class IMouvement : IPlayerState
     private Vector3 _directionHorinzontal = Vector3.zero;
     private Vector3 _directionVertical = Vector3.zero;
     private GameObject enableHightLightObject = null;
+    private Vector3 _moveModifier = Vector3.zero;
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
@@ -60,6 +61,7 @@ public class IMouvement : IPlayerState
         _characterController.stepOffset = _playerData.StepOffset;
         _directionVertical = Vector3.zero;
         _directionHorinzontal = Vector3.zero;
+        _moveModifier = Vector3.zero;
     }
 
     public void Enter()
@@ -152,7 +154,8 @@ public class IMouvement : IPlayerState
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        _characterController.Move(desiredMove);
+        Vector3 realMove = desiredMove + _moveModifier;
+        _characterController.Move(realMove);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -325,5 +328,10 @@ public class IMouvement : IPlayerState
         {
             hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+    }
+
+    public void MoveModifier(Vector3 direction, float force)
+    {
+        _moveModifier = direction * force;
     }
 }
