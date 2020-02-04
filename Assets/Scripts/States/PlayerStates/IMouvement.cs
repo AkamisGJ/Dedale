@@ -47,7 +47,6 @@ public class IMouvement : IPlayerState
         _maxGravity = _playerData.MaxFallGravity;
         _playerController = PlayerManager.Instance.PlayerController;
         _mainCamera = camera;
-        _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
