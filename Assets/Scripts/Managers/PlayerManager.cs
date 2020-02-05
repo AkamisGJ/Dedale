@@ -17,13 +17,18 @@ public class PlayerManager : Singleton<PlayerManager>
     #endregion Fields
 
     #region Properties
-    public PlayerAgentController Player { get { return _playerGameObject; } }
+    public PlayerAgentController Player { get { return _playerController; } set { _playerController = value; } }
 
-    public Camera CameraUIGameObject { get { return _cameraUIGameObject; } }
+    public PlayerAgentController PlayerController { get { return _playerGameObject; } set { _playerGameObject = value; } }
 
-    public Camera CameraPlayer { get { return _cameraPlayer; } }
+    public Camera CameraUIInstantiate { get { return _cameraUI; } set { _cameraUI = value; } }
+
+    public Camera CameraPlayerInstantiate { get { return _cameraPlayer; } set { _cameraPlayer = value; } }
 
     public bool PlayerIsDead { get { return _playerIsDead; } set { _playerIsDead = value; } }
+
+    public Camera CameraPlayer { get => _cameraPlayerGameobject; }
+    public Camera CameraUI { get => _cameraUIGameObject; }
     #endregion Properties
 
     protected override void Awake()
@@ -39,6 +44,6 @@ public class PlayerManager : Singleton<PlayerManager>
         _playerGameObject = Instantiate(_playerController, tranformSpawnerPlayer.position, Quaternion.identity);
         _cameraPlayerGameobject = Instantiate(_cameraPlayer, _playerGameObject.CameraHolder.position, _playerGameObject.transform.rotation, _playerGameObject.CameraHolder);
         CameraManager.Instance.CameraPlayer = _cameraPlayerGameobject;
-        _playerGameObject.MainCamera =_cameraPlayerGameobject;
+        _playerGameObject.MainCamera = _cameraPlayerGameobject;
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -41,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void ChangeState(MyState nextState, string scene)
+    public void ChangeState(MyState nextState, string scene = null)
     {
         if(_currentState == MyState.Game && _nextSceneName != null)
         {

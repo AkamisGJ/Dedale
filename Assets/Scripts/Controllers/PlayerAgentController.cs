@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
     #region SerializedFields
+    [Tooltip("Character controller of player prefab")]
     [SerializeField] private CharacterController _characterController = null;
+    [Tooltip("Player Data ressource")]
     [SerializeField] private PlayerData _playerData = null;
+    [Tooltip("Camera Holder will be the parent of the Camera")]
     [SerializeField] private Transform _cameraHolder = null;
+    [Tooltip("Object Holder will be the parent of the observable object when player observe them")]
     [SerializeField] private Transform _objectHolder = null;
+    [Tooltip("Audio source of the player")]
     [SerializeField] private AudioSource _audioSourcePlayer = null;
     #endregion SerializedFields
     #region PrivateFields
@@ -38,11 +42,10 @@ public class PlayerAgentController : MonoBehaviour
 
     private void Awake()
     {
-        GameLoopManager.Instance.StartPlayer += OnStart;
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
     }
 
-    void OnStart()
+    void Start()
     {
         _states = new Dictionary<MyState, IPlayerState>();
         _states.Add(MyState.Interaction, new IInteraction());

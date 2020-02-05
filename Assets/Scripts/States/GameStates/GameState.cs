@@ -5,6 +5,8 @@ public class GameState : IGameState
 
     public void Enter()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(GameManager.Instance.NextScene);
     }
 

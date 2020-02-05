@@ -79,7 +79,7 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private bool toggleCrouch = false;
+    private bool _toggleCrouch = false;
     private event Action<bool> _crouchAction = null;
     public event Action<bool> Crouch
     {
@@ -94,8 +94,23 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
+    private event Action<bool> _zoomAction = null;
+    public event Action<bool> Zoom
+    {
+        add
+        {
+            _zoomAction -= value;
+            _zoomAction += value;
+        }
+        remove
+        {
+            _zoomAction -= value;
+        }
+    }
+
     private bool _sprint = false;
     private bool _crouch = false;
+    private bool _zoom = false;
     #endregion Fields
 
     protected override void Awake()
@@ -109,6 +124,7 @@ public class InputManager : Singleton<InputManager>
     {
         _sprint = false;
         _crouch = false;
+        _zoom = false;
     }
 
     protected void OnUpdate()
@@ -148,7 +164,7 @@ public class InputManager : Singleton<InputManager>
                 }
                 _sprintAction(_sprint);
             }
-            if(_crouchAction != null && toggleCrouch == false)
+            if(_crouchAction != null && _toggleCrouch == false)
             {
                 if (Input.GetButton("Crouch"))
                 {
@@ -160,6 +176,20 @@ public class InputManager : Singleton<InputManager>
                 }
                 _crouchAction(_crouch);
             }
+            if (_zoomAction != null)
+            {
+                if (Input.GetButton("Zoom"))
+                {
+                    _zoom = true;
+                }
+                else
+                {
+                    _zoom = false;
+                }
+                _zoomAction(_zoom);
+            }
+
+
 
             if(_qTEAction != null)
             {

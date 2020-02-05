@@ -17,19 +17,21 @@ public class IObserve : IPlayerState
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
     private RaycastHit _raycastHit;
     private AudioSource _audioSourcePlayer;
+    private LayerMask _layerMask;
 
     public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
-        _audioSourcePlayer = PlayerManager.Instance.Player.GetComponent<AudioSource>();
+        _layerMask = playerData.LayerMask;
+        _audioSourcePlayer = PlayerManager.Instance.PlayerController.GetComponent<AudioSource>();
         _playerData = playerData;
         _mouseSensitivityInteract = _playerData.MouseSensitivityInteract;
         _mainCamera = _camera;
-        _playerAgentController = PlayerManager.Instance.Player.GetComponent<PlayerAgentController>();
+        _playerAgentController = PlayerManager.Instance.PlayerController;
     }
 
     public void Enter()
     {
-        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, 10.0f);
+        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
         _grabObjectCollider = _raycastHit.collider;
         _grabObject = _raycastHit.transform.gameObject;
         _originPositionGrabObject = _grabObject.transform.position;
