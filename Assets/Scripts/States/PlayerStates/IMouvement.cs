@@ -2,10 +2,10 @@
 
 public class IMouvement : IPlayerState
 {
+    #region Fields
     private CharacterController _characterController = null;
     private PlayerAgentController _playerController = null;
     private LayerMask _layerMask;
-    private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Camera _mainCamera = null;
@@ -38,6 +38,11 @@ public class IMouvement : IPlayerState
     private Vector3 _directionVertical = Vector3.zero;
     private GameObject enableHightLightObject = null;
     private Vector3 _moveModifier = Vector3.zero;
+    #endregion Fields
+
+    #region Properties
+    public Vector3 MoveModifier { get => _moveModifier; set => _moveModifier = value; }
+    #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
@@ -328,10 +333,5 @@ public class IMouvement : IPlayerState
         {
             hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
-    }
-
-    public void MoveModifier(Vector3 direction, float force)
-    {
-        _moveModifier = direction * force;
     }
 }

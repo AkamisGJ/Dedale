@@ -38,6 +38,9 @@ public class PlayerAgentController : MonoBehaviour
     public Transform CameraHolder { get { return _cameraHolder; } }
     public Transform ObjectHolder { get => _objectHolder; }
     public AudioSource AudioSourcePlayer { get => _audioSourcePlayer; set => _audioSourcePlayer = value; }
+    public MyState CurrentState { get => _currentState; }
+    public Dictionary<MyState, IPlayerState> States { get => _states; }
+    public PlayerData PlayerData { get => _playerData; }
     #endregion Properties
 
     private void Awake()
