@@ -58,7 +58,7 @@ public class IMouvement : IPlayerState
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
         _accelerationLerp = 0;
-        _speedSprint = 1;
+        _speedSprint = playerData.MaxSprintSpeed;
         _isCrouch = false;
         _crouching = false;
         _unCrouching = false;
@@ -159,7 +159,7 @@ public class IMouvement : IPlayerState
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        Vector3 realMove = desiredMove + _moveModifier;
+        Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
         _characterController.Move(realMove);
     }
 
