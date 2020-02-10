@@ -18,7 +18,8 @@ public class InstantiatePlayer : MonoBehaviour
         PlayerManager.Instance.InstantiatePlayer(transform);
         Destroy(gameObject);
     }
-    private void Start() {
+    private void Start()
+    {
         Destroy(gameObject);
     }
 }

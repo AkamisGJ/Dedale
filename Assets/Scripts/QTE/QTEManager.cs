@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QTEManager : MonoBehaviour
 {
@@ -12,9 +10,22 @@ public class QTEManager : MonoBehaviour
     private float _maxGauge = 100;
     private float _currentGauge = 0;
     private bool _isWin = false;
+    private PlayerAgentController _playerController = null;
+    private IQTELadder _iQTELadder = null;
 
-    public void Start()
+    private void Start()
     {
+        _playerController = PlayerManager.Instance.PlayerController;
+    }
+
+    private void OnStart()
+    {
+        if(_playerController.CurrentState == PlayerAgentController.MyState.QTELADDER)
+        {
+            _iQTELadder = _playerController.GetComponent<IPlayerState>() as IQTELadder;
+            _iQTELadder.CanMove = false;
+            return;
+        }
         _onWaitingInput = false;
         _timeQTE = 0;
         _currentQTEIndex = 0;
@@ -23,9 +34,10 @@ public class QTEManager : MonoBehaviour
         _maxGauge = _currentQTE.MaxGauge;
         _isWin = false;
         InputManager.Instance.QTE += VerifTouch;
+        GameLoopManager.Instance.LoopQTE += OnUpdate;
     }
 
-    void Update()
+    void OnUpdate()
     {
         if(_isWin == false)
         {
@@ -49,6 +61,7 @@ public class QTEManager : MonoBehaviour
             {
                 if(_currentQTE.SpamQTE == true)
                 {
+                    _currentGauge -= _currentQTE.LosePerSecond * Time.deltaTime;
                     if(_currentGauge < _maxGauge)
                     {
                         _currentGauge += _currentQTE.GainGaugePerTouch;
@@ -83,27 +96,36 @@ public class QTEManager : MonoBehaviour
                 }
             }
         }
+        if(_timeQTE > _currentQTE.TimeToMake && _isWin == false)
+        {
+            FailQTE();
+        }
     }
 
     void ValidQTE()
     {
-        _currentQTE = _qTEDataBases[_currentQTEIndex];
-        _maxGauge = _currentQTE.MaxGauge;
+        _isWin = true;
         Debug.Log(_currentQTE.KeyCode + "    Valid");
     }
-
 
     void FailQTE()
     {
         Debug.Log("FAil");
-        _currentQTEIndex = 0;
-        _currentQTE = _qTEDataBases[_currentQTEIndex];
-        Debug.Log(_currentQTE.KeyCode +"   Fail");
         _timeQTE = 0;
+        _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            OnStart();
+        }
     }
 
     private void OnDestroy()
     {
         InputManager.Instance.QTE -= VerifTouch;
+        GameLoopManager.Instance.LoopQTE -= OnUpdate;
     }
 }

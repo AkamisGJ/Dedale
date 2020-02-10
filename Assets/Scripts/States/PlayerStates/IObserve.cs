@@ -71,9 +71,9 @@ public class IObserve : IPlayerState
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            _playerAgentController.ChangeState(PlayerAgentController.MyState.Mouvement);
+            _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
         }
     }
 

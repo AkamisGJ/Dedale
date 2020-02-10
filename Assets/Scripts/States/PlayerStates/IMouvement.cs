@@ -29,7 +29,7 @@ public class IMouvement : IPlayerState
     private float _zoomLerp = 0;
     private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
-    private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.Mouvement;
+    private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.MOVEMENT;
     private RaycastHit _raycastHit;
     private float _gravity = 9;
     private float _currentGravity = 0;
@@ -38,10 +38,12 @@ public class IMouvement : IPlayerState
     private Vector3 _directionVertical = Vector3.zero;
     private GameObject enableHightLightObject = null;
     private Vector3 _moveModifier = Vector3.zero;
+    private float _useGravity = 1;
     #endregion Fields
 
     #region Properties
     public Vector3 MoveModifier { get => _moveModifier; set => _moveModifier = value; }
+    public float UseGravity { get => _useGravity; set => _useGravity = value; }
     #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
@@ -95,18 +97,27 @@ public class IMouvement : IPlayerState
             }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    _playerController.ChangeState(PlayerAgentController.MyState.Observe);
+                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE);
                     return;
                 }
             }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
-                    _playerController.ChangeState(PlayerAgentController.MyState.Interaction);
+                    _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
+                    _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
                     return;
                 }
             }
@@ -154,7 +165,7 @@ public class IMouvement : IPlayerState
             _currentGravity += _gravity/_currentGravity;
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
-        _direction.y -= _currentGravity;
+        _direction.y -= _currentGravity * _useGravity;
         float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
