@@ -2,10 +2,10 @@
 
 public class IMouvement : IPlayerState
 {
+    #region Fields
     private CharacterController _characterController = null;
     private PlayerAgentController _playerController = null;
     private LayerMask _layerMask;
-    private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Camera _mainCamera = null;
@@ -37,6 +37,12 @@ public class IMouvement : IPlayerState
     private Vector3 _directionHorinzontal = Vector3.zero;
     private Vector3 _directionVertical = Vector3.zero;
     private GameObject enableHightLightObject = null;
+    private Vector3 _moveModifier = Vector3.zero;
+    #endregion Fields
+
+    #region Properties
+    public Vector3 MoveModifier { get => _moveModifier; set => _moveModifier = value; }
+    #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
@@ -52,7 +58,7 @@ public class IMouvement : IPlayerState
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
         _accelerationLerp = 0;
-        _speedSprint = 1;
+        _speedSprint = playerData.MaxSprintSpeed;
         _isCrouch = false;
         _crouching = false;
         _unCrouching = false;
@@ -60,6 +66,7 @@ public class IMouvement : IPlayerState
         _characterController.stepOffset = _playerData.StepOffset;
         _directionVertical = Vector3.zero;
         _directionHorinzontal = Vector3.zero;
+        _moveModifier = Vector3.zero;
     }
 
     public void Enter()
@@ -152,7 +159,8 @@ public class IMouvement : IPlayerState
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        _characterController.Move(desiredMove);
+        Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
+        _characterController.Move(realMove);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
