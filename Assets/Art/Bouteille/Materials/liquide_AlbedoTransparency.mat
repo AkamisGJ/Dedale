@@ -9,14 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: liquide_AlbedoTransparency
   m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _METALLICGLOSSMAP _OCCLUSION_FROM_ALBEDO_ALPHA
-    _SPECGLOSSMAP _TRANSLUCENCY _WETNESS_NONE
+  m_ShaderKeywords: _METALLICGLOSSMAP _OCCLUSION_FROM_ALBEDO_ALPHA _SPECGLOSSMAP _TRANSLUCENCY
+    _WETNESS_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -50,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b54ad365daea7474c8d74be425f2ec54, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex2:
@@ -150,7 +149,7 @@ Material:
     - _DistStepsShadows: 64
     - _DropletsAnimSpeed: 10
     - _DropletsTiling: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EmissionPulsateSpeed: 0
     - _FlowCycleScale: 2
     - _Frost: 0
@@ -172,7 +171,7 @@ Material:
     - _Metallic: 0
     - _Metallic2: 1
     - _MinPulseBrightness: 0
-    - _Mode: 3
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _OcclusionStrength2: 0
     - _POM: 0
@@ -273,7 +272,7 @@ Material:
     - _WetnessNormalInfluence: 0.5
     - _WetnessShown: 1
     - _WetnessUVMult: 1
-    - _ZWrite: 0
+    - _ZWrite: 1
     - maxDist: 10
     - minDist: 1
     m_Colors:
