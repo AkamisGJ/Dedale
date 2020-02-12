@@ -1545,6 +1545,38 @@ Transform:
   m_Father: {fileID: 3762186444699424699}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &793288313
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Aura Spot Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 11
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &812012378
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,38 +3152,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1595561023
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Aura Spot Light : Shadow Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 11
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1605146143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5642493827072077290, guid: a2733b5b2f0312544976ef50983eec50,
@@ -3479,7 +3479,7 @@ MonoBehaviour:
   _pixelateDownscale: 0
   _antialiasStrength: 5
   _antialiasDepthThreshold: 0.001
-  isDirty: 0
+  isDirty: 1
   bMat: {fileID: 0}
 --- !u!4 &1731687761 stripped
 Transform:
@@ -4973,17 +4973,17 @@ PrefabInstance:
     - target: {fileID: 2583482166985407293, guid: f4054744ee59af74c8658599746c3f89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8160478
+      value: 1.773
       objectReference: {fileID: 0}
     - target: {fileID: 2583482166985407293, guid: f4054744ee59af74c8658599746c3f89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.193002
+      value: -2.328
       objectReference: {fileID: 0}
     - target: {fileID: 2583482166985407293, guid: f4054744ee59af74c8658599746c3f89,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.149102
+      value: 5.206
       objectReference: {fileID: 0}
     - target: {fileID: 2583482166985407293, guid: f4054744ee59af74c8658599746c3f89,
         type: 3}
