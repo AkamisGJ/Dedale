@@ -1,0 +1,1 @@
+pour éviter que l'import des textures se répète, importez juste la boîte bleu, puis importez le reste des assets, et assignez leur le même matériaux.
