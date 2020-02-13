@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 8874398796681491526}
   - component: {fileID: 8874398796682818662}
   - component: {fileID: 8874398796683916966}
-  - component: {fileID: 1621926957435596103}
-  m_Layer: 0
+  - component: {fileID: 6241620848690611174}
+  m_Layer: 15
   m_Name: Roche_02_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8874398796681491526
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8874398796681652326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19, y: 1, z: -4}
-  m_LocalScale: {x: 4.007, y: 4.007, z: 4.007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -69,7 +69,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -78,8 +78,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1621926957435596103
-SphereCollider:
+--- !u!64 &6241620848690611174
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,6 +88,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.7657393
-  m_Center: {x: 0.0352982, y: -0.13900349, z: -0.14525418}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: e4a3a514f0fe0b94cbb62d4acb2b8e2d, type: 3}
