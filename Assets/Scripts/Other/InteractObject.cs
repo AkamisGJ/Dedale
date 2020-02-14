@@ -8,9 +8,10 @@ public class InteractObject : MonoBehaviour
     [SerializeField] private  float _distanceWithCameraWehnLooked = 5.0f;
     [SerializeField] private AudioClip _OnTakeObject = null;
     [SerializeField] private AudioClip _OnThrowObject = null;
-
+    [SerializeField] private bool _isKey = false;
     public AudioClip OnThrowObject { get { return _OnThrowObject; } }
     public AudioClip OnTakeObject { get { return _OnTakeObject; } }
+    public bool IsKey { get => _isKey; }
 
     public Vector4 Interact()
     {

@@ -28,9 +28,9 @@ public class IInteraction : IPlayerState
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Input.GetKey(KeyCode.Mouse0) == false)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            _playerController.ChangeState(PlayerAgentController.MyState.Mouvement);
+            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
         }
     }
 

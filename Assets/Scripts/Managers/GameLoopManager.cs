@@ -40,6 +40,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _loopQTE = null;
+    public event Action LoopQTE
+    {
+        add
+        {
+            _loopQTE -= value;
+            _loopQTE += value;
+        }
+        remove
+        {
+            _loopQTE -= value;
+        }
+    }
+
     private Action _gameLoopInputManager = null;
     public event Action GameLoopInputManager
     {
@@ -108,7 +122,13 @@ public class GameLoopManager : Singleton<GameLoopManager>
             _gameLoopInputManager();
         }
 
-        if (_gameLoopPlayer != null){
+        if(_loopQTE != null)
+        {
+            _loopQTE();
+        }
+
+        if (_gameLoopPlayer != null)
+        {
             _gameLoopPlayer();
         }
 

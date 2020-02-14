@@ -80,9 +80,9 @@ public class Wind : MonoBehaviour
         }
         if (_playerIsIn == true && _playerIsInSafeZone == false)
         {
-            if (_playerController.CurrentState == PlayerAgentController.MyState.Mouvement)
+            if (_playerController.CurrentState == PlayerAgentController.MyState.MOVEMENT)
             {
-                _mouvement = _playerController.States[PlayerAgentController.MyState.Mouvement] as IMouvement;
+                _mouvement = _playerController.States[PlayerAgentController.MyState.MOVEMENT] as IMouvement;
                 _mouvement.MoveModifier = _windModifier;
             }
         }
