@@ -3,9 +3,9 @@
 public class StartLadder : MonoBehaviour
 {
     private PlayerAgentController _playerController = null;
-    private IMouvement _mouvement = null;
     private bool _canLeave = false;
     private float _lerpStartPositionPlayer = 0;
+    [SerializeField] private QTEManager[] _qTEManagers = null;
 
     private void Start()
     {
@@ -30,6 +30,11 @@ public class StartLadder : MonoBehaviour
         if(_lerpStartPositionPlayer > 1)
         {
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
+            _lerpStartPositionPlayer = 0;
+            foreach (QTEManager qTEManager in _qTEManagers)
+            {
+                qTEManager.IsActive = true;
+            }
         }
     }
 

@@ -51,7 +51,10 @@ public class IQTELadder : IPlayerState
 
     private void Move()
     {
-        Vector3 wantedDirection = _directionHorizontal * _playerData.GlobalSpeed * Time.deltaTime;
-        _characterController.Move(wantedDirection);
+        if(_canMove == true)
+        {
+            Vector3 wantedDirection = _directionHorizontal * _playerData.GlobalSpeed * Time.deltaTime;
+            _characterController.Move(wantedDirection);
+        }
     }
 }

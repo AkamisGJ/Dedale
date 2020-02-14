@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class QTEManager : MonoBehaviour
 {
     [SerializeField] private QTEDataBase[] _qTEDataBases = null;
-    private bool _onWaitingInput = false;
     private float _timeQTE = 0;
     private int _currentQTEIndex = 0;
     private QTEDataBase _currentQTE = null;
@@ -12,44 +13,80 @@ public class QTEManager : MonoBehaviour
     private bool _isWin = false;
     private PlayerAgentController _playerController = null;
     private IQTELadder _iQTELadder = null;
+    [SerializeField] private TextMeshPro _touchVisual = null;
+    [SerializeField] private Image _spamImage = null;
+    [SerializeField] private Image _uniqueImage = null;
+    private bool _isActive = true;
+
+    public bool IsActive { get => _isActive; set => _isActive = value; }
 
     private void Start()
     {
         _playerController = PlayerManager.Instance.PlayerController;
+        _touchVisual.gameObject.SetActive(false);
+        _spamImage.gameObject.SetActive(false);
+        _uniqueImage.gameObject.SetActive(false);
+        _isActive = true;
     }
 
     private void OnStart()
     {
-        if(_playerController.CurrentState == PlayerAgentController.MyState.QTELADDER)
+        if(_isActive == true)
         {
-            _iQTELadder = _playerController.GetComponent<IPlayerState>() as IQTELadder;
-            _iQTELadder.CanMove = false;
-            return;
+            if (_playerController.CurrentState == PlayerAgentController.MyState.QTELADDER)
+            {
+                _iQTELadder = _playerController.States[PlayerAgentController.MyState.QTELADDER] as IQTELadder;
+                _iQTELadder.CanMove = false;
+            }
+            _timeQTE = 0;
+            _currentQTEIndex = 0;
+            _currentGauge = _maxGauge / 2;
+            _currentQTE = _qTEDataBases[_currentQTEIndex];
+            _touchVisual.text = _qTEDataBases[_currentQTEIndex].KeyCode.ToString();
+            _maxGauge = _currentQTE.MaxGauge;
+            _isWin = false;
+            InputManager.Instance.QTE += VerifTouch;
+            GameLoopManager.Instance.LoopQTE += OnUpdate;
         }
-        _onWaitingInput = false;
-        _timeQTE = 0;
-        _currentQTEIndex = 0;
-        _currentGauge = 0;
-        _currentQTE = _qTEDataBases[_currentQTEIndex];
-        _maxGauge = _currentQTE.MaxGauge;
-        _isWin = false;
-        InputManager.Instance.QTE += VerifTouch;
-        GameLoopManager.Instance.LoopQTE += OnUpdate;
     }
 
     void OnUpdate()
     {
-        if(_isWin == false)
+        if (_isWin == false)
         {
             _timeQTE += Time.deltaTime;
-            if(_timeQTE > _currentQTE.TimeToAppear && _timeQTE < _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
+            if (_timeQTE > _currentQTE.TimeToAppear && _timeQTE < _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
             {
+                _touchVisual.gameObject.SetActive(true);
+                if (_currentQTE.SpamQTE == true)
+                {
+                    _spamImage.gameObject.SetActive(true);
+                    _spamImage.fillAmount = _currentGauge / _maxGauge;
+                    _currentGauge -= _currentQTE.LosePerSecond * Time.deltaTime;
+                    if (_currentGauge <= 0)
+                    {
+                        FailQTE();
+                    }
+                }
+                else
+                {
+                    _uniqueImage.gameObject.SetActive(true);
+                    _uniqueImage.rectTransform.sizeDelta = new Vector2(1, 1) * (_currentQTE.TimeToMake + _currentQTE.TimeToAppear - _timeQTE)/ (_currentQTE.TimeToMake + _currentQTE.TimeToAppear);
+                }
                 Debug.Log(_currentQTE.KeyCode + "   appear");
             }
-            if( _timeQTE > _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
+            if (_timeQTE > _currentQTE.TimeToAppear + _currentQTE.TimeToMake)
             {
+                _spamImage.gameObject.SetActive(false);
+                _touchVisual.gameObject.SetActive(false);
                 FailQTE();
             }
+        }
+        else
+        {
+            InputManager.Instance.QTE -= VerifTouch;
+            GameLoopManager.Instance.LoopQTE -= OnUpdate;
+            _iQTELadder.CanMove = true;
         }
     }
 
@@ -61,7 +98,6 @@ public class QTEManager : MonoBehaviour
             {
                 if(_currentQTE.SpamQTE == true)
                 {
-                    _currentGauge -= _currentQTE.LosePerSecond * Time.deltaTime;
                     if(_currentGauge < _maxGauge)
                     {
                         _currentGauge += _currentQTE.GainGaugePerTouch;
@@ -72,31 +108,42 @@ public class QTEManager : MonoBehaviour
                         _currentQTEIndex += 1;
                         if (_qTEDataBases.Length > _currentQTEIndex)
                         {
+                            _spamImage.gameObject.SetActive(false);
+                            _touchVisual.gameObject.SetActive(false);
                             ValidQTE();
                         }
                         else
                         {
+                            _spamImage.gameObject.SetActive(false);
+                            _touchVisual.gameObject.SetActive(false);
                             _isWin = true;
-                            Debug.Log("Win");
+                            _isActive = false;
+                            Debug.Log("ok");
                         }
                     }
                 }
                 else
                 {
+                    _uniqueImage.gameObject.SetActive(false);
                     Debug.Log("ok");
                     _currentQTEIndex += 1;
                     if(_qTEDataBases.Length > _currentQTEIndex)
                     {
+                        _spamImage.gameObject.SetActive(false);
+                        _touchVisual.gameObject.SetActive(false);
                         ValidQTE();
                     }
                     else
                     {
-                        Debug.Log("Win");
+                        _spamImage.gameObject.SetActive(false);
+                        _touchVisual.gameObject.SetActive(false);
+                        _isWin = true;
+                        _isActive = false;
                     }
                 }
             }
         }
-        if(_timeQTE > _currentQTE.TimeToMake && _isWin == false)
+        if(_timeQTE > _currentQTE.TimeToMake + _currentQTE.TimeToAppear && _isWin == false)
         {
             FailQTE();
         }
@@ -104,7 +151,14 @@ public class QTEManager : MonoBehaviour
 
     void ValidQTE()
     {
-        _isWin = true;
+        _touchVisual.text = _qTEDataBases[_currentQTEIndex].KeyCode.ToString();
+        _currentQTE = _qTEDataBases[_currentQTEIndex];
+        _maxGauge = _currentQTE.MaxGauge;
+        _currentGauge = _maxGauge / 2;
+        _timeQTE = 0;
+        _uniqueImage.gameObject.SetActive(false);
+        _spamImage.gameObject.SetActive(false);
+        _touchVisual.gameObject.SetActive(false);
         Debug.Log(_currentQTE.KeyCode + "    Valid");
     }
 
@@ -112,12 +166,19 @@ public class QTEManager : MonoBehaviour
     {
         Debug.Log("FAil");
         _timeQTE = 0;
+        _currentGauge = _maxGauge / 2;
+        _uniqueImage.gameObject.SetActive(false);
+        _spamImage.gameObject.SetActive(false);
+        _touchVisual.gameObject.SetActive(false);
         _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+        GameLoopManager.Instance.LoopQTE -= OnUpdate;
+        _iQTELadder.CanMove = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             OnStart();
         }
