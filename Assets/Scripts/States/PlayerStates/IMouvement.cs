@@ -107,8 +107,12 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
-                    _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
+                    Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
+                    if((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                    {
+                        _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
+                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
+                    }
                     return;
                 }
             }
@@ -213,11 +217,11 @@ public class IMouvement : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
-        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+        _rotationX = mousePositionY * _playerData.SensitivityMouseX;
+        _rotationY = mousePositionX * _playerData.SensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
-        _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        _playerController.gameObject.transform.localEulerAngles += new Vector3(0, _rotationY, 0);
+        _mainCamera.transform.localEulerAngles += new Vector3(-_rotationX, 0, 0);
     }
 
     private void Acceleration()

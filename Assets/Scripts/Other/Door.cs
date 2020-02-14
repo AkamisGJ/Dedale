@@ -9,6 +9,8 @@ public class Door : MonoBehaviour, IInteract
     [SerializeField] private float speed = 1;
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
+    [SerializeField] private bool _needKey = false;
+    public bool NeedKey { get => _needKey; }
 
     void Start()
     {
@@ -43,17 +45,20 @@ public class Door : MonoBehaviour, IInteract
 
     public void Interact(float mousePositionX, float mousePositionY)
     {
-        JointMotor motor = _hj.motor;
-        if(mousePositionY < 0)
+        if(_needKey == false || ( _needKey == true && PlayerManager.Instance.HaveKey == true))
         {
-            motor.force = -mousePositionY * speed;
+            JointMotor motor = _hj.motor;
+            if (mousePositionY < 0)
+            {
+                motor.force = -mousePositionY * speed;
+            }
+            if (mousePositionY > 0)
+            {
+                motor.force = mousePositionY * speed;
+            }
+            motor.targetVelocity = mousePositionY * speed;
+            _hj.motor = motor;
         }
-        if (mousePositionY > 0)
-        {
-            motor.force = mousePositionY * speed;
-        }
-        motor.targetVelocity = mousePositionY * speed;
-        _hj.motor = motor;
     }
 
     void OnClick()

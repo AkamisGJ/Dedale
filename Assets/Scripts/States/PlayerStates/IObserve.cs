@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class IObserve : IPlayerState
+public class IObserve :MonoBehaviour, IPlayerState
 {
     private PlayerAgentController _playerAgentController = null;
     private GameObject _grabObject = null;
@@ -73,6 +73,11 @@ public class IObserve : IPlayerState
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            if(_currentObjectInterract.IsKey == true)
+            {
+                PlayerManager.Instance.HaveKey = true;
+                Destroy(_currentObjectInterract.gameObject);
+            }
             _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
         }
     }

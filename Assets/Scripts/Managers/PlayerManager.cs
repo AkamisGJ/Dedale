@@ -6,7 +6,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private PlayerAgentController _playerGameObject = null;
     private Camera _cameraPlayerGameobject = null;
     private Camera _cameraUIGameObject = null;
-
+    private bool _haveKey = false;
 
     [SerializeField] private PlayerAgentController _playerController = null;
     [SerializeField] private Camera _cameraPlayer = null;
@@ -29,6 +29,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public Camera CameraPlayer { get => _cameraPlayerGameobject; }
     public Camera CameraUI { get => _cameraUIGameObject; }
+    public bool HaveKey { get => _haveKey; set => _haveKey = value; }
     #endregion Properties
 
     protected override void Awake()
@@ -38,12 +39,13 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void InstantiatePlayer(Transform tranformSpawnerPlayer)
     {
-        _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0,10,0), Quaternion.identity);
+        _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0, 10, 0), Quaternion.identity);
         CameraManager.Instance.CameraUI = _cameraUIGameObject;
         _playerIsDead = false;
-        _playerGameObject = Instantiate(_playerController, tranformSpawnerPlayer.position, tranformSpawnerPlayer.rotation);
+        _playerGameObject = Instantiate(_playerController, tranformSpawnerPlayer.position, Quaternion.identity);
         _cameraPlayerGameobject = Instantiate(_cameraPlayer, _playerGameObject.CameraHolder.position, _playerGameObject.transform.rotation, _playerGameObject.CameraHolder);
         CameraManager.Instance.CameraPlayer = _cameraPlayerGameobject;
         _playerGameObject.MainCamera = _cameraPlayerGameobject;
+        _playerGameObject.transform.Rotate(tranformSpawnerPlayer.rotation.eulerAngles);
     }
 }
