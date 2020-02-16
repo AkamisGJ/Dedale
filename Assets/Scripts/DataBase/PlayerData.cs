@@ -34,6 +34,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Move speed")]
     [Tooltip("Move speed of left and right direction")]
     [SerializeField] private float _speedSide = 0.5f;
+    [BoxGroup("Move speed")]
+    [Tooltip("Move speed on ladder")]
+    [SerializeField] private float _speedLadder = 0.5f;
 
     [BoxGroup("Move speed")]
     [Tooltip("global direction multiplier speed of player (0 to infini)")]
@@ -113,5 +116,6 @@ public class PlayerData : ScriptableObject
     public float MaxHeight { get => _maxHeight; }
     public float ZoomFieldOfView { get => _zoomFieldOfView; }
     public float MaxDistanceInteractionObject { get => _maxDistanceInteractionObject; }
+    public float SpeedLadder { get => _speedLadder; }
     #endregion Properties
 }

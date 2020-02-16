@@ -23,12 +23,12 @@ public class PlayerAgentController : MonoBehaviour
     #region StatesPlayer
     public enum MyState
     {
-        Mouvement,
-        Observe,
-        Interaction,
-        QTE,
+        MOVEMENT,
+        OBSERVE,
+        INTERACTION,
+        QTELADDER,
     }
-    private MyState _currentState = MyState.Mouvement;
+    private MyState _currentState = MyState.MOVEMENT;
     private Dictionary<MyState, IPlayerState> _states = null;
     #endregion StatesPlayer
     #endregion Fields
@@ -38,6 +38,9 @@ public class PlayerAgentController : MonoBehaviour
     public Transform CameraHolder { get { return _cameraHolder; } }
     public Transform ObjectHolder { get => _objectHolder; }
     public AudioSource AudioSourcePlayer { get => _audioSourcePlayer; set => _audioSourcePlayer = value; }
+    public MyState CurrentState { get => _currentState; }
+    public Dictionary<MyState, IPlayerState> States { get => _states; }
+    public PlayerData PlayerData { get => _playerData; }
     #endregion Properties
 
     private void Awake()
@@ -48,14 +51,15 @@ public class PlayerAgentController : MonoBehaviour
     void Start()
     {
         _states = new Dictionary<MyState, IPlayerState>();
-        _states.Add(MyState.Interaction, new IInteraction());
-        _states.Add(MyState.Mouvement, new IMouvement());
-        _states.Add(MyState.Observe, new IObserve());
-        _states.Add(MyState.QTE, new IQTE());
-        _currentState = MyState.Mouvement;
-        _states[MyState.Interaction].Init(_playerData, _mainCamera);
-        _states[MyState.Mouvement].Init(_playerData, _mainCamera, _characterController);
-        _states[MyState.Observe].Init(_playerData, _mainCamera);
+        _states.Add(MyState.INTERACTION, new IInteraction());
+        _states.Add(MyState.MOVEMENT, new IMouvement());
+        _states.Add(MyState.OBSERVE, new IObserve());
+        _states.Add(MyState.QTELADDER, new IQTELadder());
+        _currentState = MyState.MOVEMENT;
+        _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
+        _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.OBSERVE].Init(_playerData, _mainCamera);
+        _states[MyState.QTELADDER].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
     }
 

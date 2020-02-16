@@ -2,10 +2,10 @@
 
 public class IMouvement : IPlayerState
 {
+    #region Fields
     private CharacterController _characterController = null;
     private PlayerAgentController _playerController = null;
     private LayerMask _layerMask;
-    private GameObject _grabObject = null;
     private Vector3 _originPositionGrabObject = Vector3.zero;
     private Quaternion _originRotationGrabObject = Quaternion.identity;
     private Camera _mainCamera = null;
@@ -29,7 +29,7 @@ public class IMouvement : IPlayerState
     private float _zoomLerp = 0;
     private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
-    private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.Mouvement;
+    private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.MOVEMENT;
     private RaycastHit _raycastHit;
     private float _gravity = 9;
     private float _currentGravity = 0;
@@ -37,6 +37,14 @@ public class IMouvement : IPlayerState
     private Vector3 _directionHorinzontal = Vector3.zero;
     private Vector3 _directionVertical = Vector3.zero;
     private GameObject enableHightLightObject = null;
+    private Vector3 _moveModifier = Vector3.zero;
+    private float _useGravity = 1;
+    #endregion Fields
+
+    #region Properties
+    public Vector3 MoveModifier { get => _moveModifier; set => _moveModifier = value; }
+    public float UseGravity { get => _useGravity; set => _useGravity = value; }
+    #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
@@ -52,7 +60,7 @@ public class IMouvement : IPlayerState
         _sprintCurrentTime = 0;
         _currentAcceleration = 0;
         _accelerationLerp = 0;
-        _speedSprint = 1;
+        _speedSprint = playerData.MaxSprintSpeed;
         _isCrouch = false;
         _crouching = false;
         _unCrouching = false;
@@ -60,6 +68,7 @@ public class IMouvement : IPlayerState
         _characterController.stepOffset = _playerData.StepOffset;
         _directionVertical = Vector3.zero;
         _directionHorinzontal = Vector3.zero;
+        _moveModifier = Vector3.zero;
     }
 
     public void Enter()
@@ -88,18 +97,31 @@ public class IMouvement : IPlayerState
             }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    _playerController.ChangeState(PlayerAgentController.MyState.Observe);
+                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE);
                     return;
                 }
             }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
-                    _playerController.ChangeState(PlayerAgentController.MyState.Interaction);
+                    Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
+                    if((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                    {
+                        _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
+                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
+                    }
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
+                    _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
                     return;
                 }
             }
@@ -147,12 +169,13 @@ public class IMouvement : IPlayerState
             _currentGravity += _gravity/_currentGravity;
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
-        _direction.y -= _currentGravity;
+        _direction.y -= _currentGravity * _useGravity;
         float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
         float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        _characterController.Move(desiredMove);
+        Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
+        _characterController.Move(realMove);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -194,11 +217,11 @@ public class IMouvement : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
-        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+        _rotationX = mousePositionY * _playerData.SensitivityMouseX;
+        _rotationY = mousePositionX * _playerData.SensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
-        _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        _playerController.gameObject.transform.localEulerAngles += new Vector3(0, _rotationY, 0);
+        _mainCamera.transform.localEulerAngles += new Vector3(-_rotationX, 0, 0);
     }
 
     private void Acceleration()
