@@ -75,7 +75,7 @@ namespace Aura2API
         /// <summary>
         /// The light's shadow map
         /// </summary>
-        public RenderTexture shadowMapRenderTexture;
+        [NonSerialized] public RenderTexture shadowMapRenderTexture;
         /// <summary>
         /// Allows to use light's cookie attenuation
         /// </summary>
@@ -83,7 +83,7 @@ namespace Aura2API
         /// <summary>
         /// The light's cookie map
         /// </summary>
-        public RenderTexture cookieMapRenderTexture;
+        [NonSerialized] public RenderTexture cookieMapRenderTexture;
         /// <summary>
         /// Allows to ignore the directional light's color and refers to the \"overridingColor\" property instead
         /// </summary>
@@ -100,7 +100,7 @@ namespace Aura2API
         /// <summary>
         /// The directional light's shadow data texture
         /// </summary>
-        public RenderTexture shadowDataRenderTexture;
+        [NonSerialized] public RenderTexture shadowDataRenderTexture;
         /// <summary>
         /// Custom distance falloff start (Spot/Point Lights only)
         /// </summary>

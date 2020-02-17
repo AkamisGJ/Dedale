@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757c7930830877b47944add6103cde80, type: 3}
+  m_Name: Ledger
+  m_EditorClassIdentifier: 
+  OutstandingTasks:
+  - Title: "Placer les object dans le d\xE9barat"
+    CreationDate: 12/02/2020 | 15:01
+    CompletionDate: 
+    HasDetails: 0
+    Details: 
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.12255252, g: 0.5631556, b: 0.9622642, a: 1}
+  - Title: "Int\xE9grer le controlleur de Servan"
+    CreationDate: 12/02/2020 | 15:02
+    CompletionDate: 
+    HasDetails: 1
+    Details: 'Le faire fonctionner avec le Player Spawner
+
+      Faire fonctionner l''animator'
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.12255252, g: 0.5631556, b: 0.9622642, a: 1}
+  - Title: Faire de la mise en scene
+    CreationDate: 12/02/2020 | 15:03
+    CompletionDate: 
+    HasDetails: 1
+    Details: '- Jeu de lumiere sur les lits en ronds
+
+      - Changer la lumiere dans le virage
+
+      - Animation du cardiogrammes
+
+      - Mettre les voix sur les lits des patients'
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.12255252, g: 0.5631556, b: 0.9622642, a: 1}
+  - Title: Faire un effect de fumer pour la cigarette
+    CreationDate: 13/02/2020 | 15:56
+    CompletionDate: 
+    HasDetails: 1
+    Details: VFX Graph + Tuto Brackey
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.06132078, g: 1, b: 0.94255805, a: 1}
+  - Title: "Int\xE9grer un shader de verre pour le verre de wisky"
+    CreationDate: 13/02/2020 | 16:08
+    CompletionDate: 
+    HasDetails: 0
+    Details: 
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.06132078, g: 1, b: 0.94255805, a: 1}
+  - Title: Fair les Vertex paint PBR pour le sol
+    CreationDate: 16/02/2020 | 19:39
+    CompletionDate: 
+    HasDetails: 0
+    Details: 
+    IsCompleted: 0
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.0627451, g: 1, b: 0.9411765, a: 1}
+  CompletedTasks:
+  - Title: Remplacer les lits par es lits avec les draps
+    CreationDate: 13/02/2020 | 16:09
+    CompletionDate: 16/02/2020 | 17:02
+    HasDetails: 0
+    Details: 
+    IsCompleted: 1
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.06132078, g: 1, b: 0.94255805, a: 1}
+  - Title: Essayer le mask sur les spot light
+    CreationDate: 13/02/2020 | 15:16
+    CompletionDate: 16/02/2020 | 17:46
+    HasDetails: 1
+    Details: t
+    IsCompleted: 1
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.06132078, g: 1, b: 0.94255805, a: 1}
+  - Title: Changer les fleurs
+    CreationDate: 16/02/2020 | 18:03
+    CompletionDate: 16/02/2020 | 18:04
+    HasDetails: 0
+    Details: 
+    IsCompleted: 1
+    IsDeferred: 0
+    IsColored: 0
+    DrawColor: {r: 1, g: 1, b: 1, a: 1}
+  - Title: Changer la texture du sol dans l'hopital
+    CreationDate: 13/02/2020 | 16:09
+    CompletionDate: 16/02/2020 | 19:38
+    HasDetails: 0
+    Details: 
+    IsCompleted: 1
+    IsDeferred: 0
+    IsColored: 1
+    DrawColor: {r: 0.06132078, g: 1, b: 0.94255805, a: 1}
+  DeferredTasks:
+  - Title: Baking Worflow
+    CreationDate: 13/02/2020 | 10:42
+    CompletionDate: 
+    HasDetails: 1
+    Details: '- Ratio de lightmaps entre les cristaux, les rochers, le sol (Baking
+      visualition)
+
+      - Stiche Seams sur les rochers
+
+      - Augmenter le scale in lightmaps par object
+
+      - Lightmaps size assez elever > 2048'
+    IsCompleted: 0
+    IsDeferred: 1
+    IsColored: 0
+    DrawColor: {r: 1, g: 1, b: 1, a: 1}

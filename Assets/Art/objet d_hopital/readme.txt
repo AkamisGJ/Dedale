@@ -1,0 +1,1 @@
+importez d'abord la boîte rouge qui a les textures, et ensuite les autres devraient hériter de la même.
