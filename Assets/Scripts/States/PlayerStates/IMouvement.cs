@@ -73,6 +73,8 @@ public class IMouvement : IPlayerState
 
     public void Enter()
     {
+        _rotationX = -_mainCamera.transform.localEulerAngles.x;
+        _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
@@ -217,11 +219,11 @@ public class IMouvement : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX = mousePositionY * _playerData.SensitivityMouseX;
-        _rotationY = mousePositionX * _playerData.SensitivityMouseY;
+        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
+        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
         _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles += new Vector3(0, _rotationY, 0);
-        _mainCamera.transform.localEulerAngles += new Vector3(-_rotationX, 0, 0);
+        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+        _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
     }
 
     private void Acceleration()
@@ -242,7 +244,7 @@ public class IMouvement : IPlayerState
                 _unCrouching = false;
             }
         }
-        if (crouchBool == false && (_crouching == true || _isCrouch == true))
+        if (crouchBool == false && (_crouching == true || _isCrouch == true) && !Physics.Raycast(PlayerManager.Instance.PlayerController.transform.position, PlayerManager.Instance.PlayerController.transform.up, (_playerData.MaxHeight - _playerData.DifferenceHeightCrouch) /2 + _playerData.DifferenceHeightCrouch))
         {
             if (_unCrouching == false)
             {
@@ -257,7 +259,6 @@ public class IMouvement : IPlayerState
         _timeCrouch += Time.deltaTime * inversion;
         _timeCrouch = Mathf.Clamp(_timeCrouch, 0, _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time);
         _crouchLerp = _playerData.MaxHeight - _playerData.CrouchCurve.Evaluate(_timeCrouch) * _playerData.DifferenceHeightCrouch;
-        _playerCapsuleCollider.height = _crouchLerp;
         _characterController.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == _playerData.MaxHeight)
         {

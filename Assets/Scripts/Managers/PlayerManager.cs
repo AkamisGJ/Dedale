@@ -37,6 +37,11 @@ public class PlayerManager : Singleton<PlayerManager>
         base.Awake();
     }
 
+    public void DestroyThis(GameObject gameObject)
+    {
+        Destroy(gameObject);
+    }
+
     public void InstantiatePlayer(Transform tranformSpawnerPlayer)
     {
         _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0, 10, 0), Quaternion.identity);
