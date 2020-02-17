@@ -6,7 +6,7 @@ public class Door : MonoBehaviour, IInteract
     private HingeJoint _hj = null;
     private float _initalPositionMouseX = 0;
     [Tooltip("Speed of rotation of door")]
-    [SerializeField] private float speed = 1;
+    [SerializeField] private float _speed = 1;
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
     [SerializeField] private bool _needKey = false;
@@ -50,13 +50,13 @@ public class Door : MonoBehaviour, IInteract
             JointMotor motor = _hj.motor;
             if (mousePositionY < 0)
             {
-                motor.force = -mousePositionY * speed;
+                motor.force = -mousePositionY * _speed;
             }
             if (mousePositionY > 0)
             {
-                motor.force = mousePositionY * speed;
+                motor.force = mousePositionY * _speed;
             }
-            motor.targetVelocity = mousePositionY * speed;
+            motor.targetVelocity = mousePositionY * _speed;
             _hj.motor = motor;
         }
     }

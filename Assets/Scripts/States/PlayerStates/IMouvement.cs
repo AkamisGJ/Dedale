@@ -39,6 +39,7 @@ public class IMouvement : IPlayerState
     private GameObject enableHightLightObject = null;
     private Vector3 _moveModifier = Vector3.zero;
     private float _useGravity = 1;
+    private bool _canMove = false;
     #endregion Fields
 
     #region Properties
@@ -73,6 +74,7 @@ public class IMouvement : IPlayerState
 
     public void Enter()
     {
+        _canMove = true;
         _rotationX = -_mainCamera.transform.localEulerAngles.x;
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
@@ -122,8 +124,17 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
-                    _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
             }
@@ -214,16 +225,23 @@ public class IMouvement : IPlayerState
         {
             _accelerationLerp = 0;
         }
-        Move();
+        if(_canMove == true)
+        {
+            Move();
+        }
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX += mousePositionY * _playerData.SensitivityMouseX;
-        _rotationY += mousePositionX * _playerData.SensitivityMouseY;
-        _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
-        _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        if(_canMove == true)
+        {
+            _rotationX += mousePositionY * _playerData.SensitivityMouseX;
+            _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
+            _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+            _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        }
+
     }
 
     private void Acceleration()
