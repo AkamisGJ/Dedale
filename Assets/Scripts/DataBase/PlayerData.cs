@@ -89,6 +89,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("The difference between crouch height and normal height")]
     [SerializeField] private float _differenceHeightCrouch = 1;
 
+    [BoxGroup("Color Hightlight")]
+    [Tooltip("Define the color of the interactible object when the player look at it")]
+    [SerializeField] private Color _colorHightlightObject;
+
 
     #endregion Fields
 
@@ -117,5 +121,6 @@ public class PlayerData : ScriptableObject
     public float ZoomFieldOfView { get => _zoomFieldOfView; }
     public float MaxDistanceInteractionObject { get => _maxDistanceInteractionObject; }
     public float SpeedLadder { get => _speedLadder; }
+    public Color ColorHightLightObject { get => _colorHightlightObject; }
     #endregion Properties
 }

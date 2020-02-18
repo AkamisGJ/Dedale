@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using HighlightingSystem;
 
 public class IMouvement : IPlayerState
 {
@@ -349,11 +350,11 @@ public class IMouvement : IPlayerState
     {
         if(isHightlight == true)
         {
-            hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+            hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
         }
         else
         {
-            hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+            hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
         }
     }
 }

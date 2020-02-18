@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using HighlightingSystem;
 
 public class IObserve : IPlayerState
 {
@@ -61,6 +62,10 @@ public class IObserve : IPlayerState
             _distanceGrabObjectWithCameraWhenLooked = 1.0f;
             _grabObjectRotationWhenLooked = Quaternion.identity;
         }
+        if(_grabObject.GetComponent<Highlighter>()){
+            _grabObject.GetComponent<Highlighter>().ConstantOffImmediate();
+        }
+
         _grabObject.transform.localPosition = Vector3.zero;
         _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
         _grabObject.transform.LookAt(_mainCamera.transform);
