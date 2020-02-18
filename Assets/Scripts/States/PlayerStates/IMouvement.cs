@@ -348,13 +348,17 @@ public class IMouvement : IPlayerState
 
     private void HighlightObject(GameObject hightlightObject, bool isHightlight)
     {
-        if(isHightlight == true)
-        {
-            hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
-        }
-        else
-        {
-            hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
+        if(hightlightObject.GetComponent<Highlighter>()){
+            if(isHightlight == true)
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
+            }
+            else
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
+            }
+        }else{
+            Debug.Log("Cette Object " + hightlightObject + " n'a pas le script Highlighter sur lui");
         }
     }
 }
