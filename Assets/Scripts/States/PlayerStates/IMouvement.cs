@@ -180,6 +180,12 @@ public class IMouvement : IPlayerState
         _characterController.Move(realMove);
     }
 
+    private void BlendTreeAnimator(){
+        float blendValue = 0;
+        PlayerManager.Instance.PlayerController.GetComponent<Animator>().SetFloat("BlendMovement", blendValue);
+        
+    }
+
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
         _directionHorinzontal = horizontalMouvement * _playerController.transform.forward;

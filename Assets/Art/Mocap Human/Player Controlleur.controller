@@ -9,7 +9,7 @@ AnimatorController:
   m_Name: Player Controlleur
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Blend
+  - m_Name: BlendMovement
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -37,7 +37,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: df71b6ec2c7896342952a16e5db5e7b7, type: 3}
+    m_Motion: {fileID: 7400000, guid: 442a054a3eca7bc458cd8ef2e4d3faf2, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -45,14 +45,22 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9378e33df6a87e44081c09e31b4c0a58, type: 3}
+    m_Motion: {fileID: 7400000, guid: 98d3004c970c4e5478f648b37987f8c9, type: 2}
+    m_Threshold: 0.5
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Blend
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 1583b8e406941ec4fa5a8f06ff5c3935, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: Blend
+  m_BlendParameter: BlendMovement
   m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 1

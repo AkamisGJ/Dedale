@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5593557113931189515}
   - component: {fileID: 5593557113928289579}
   - component: {fileID: 5593557113929420779}
+  - component: {fileID: 3263628230716979957}
+  - component: {fileID: 3940860082827047435}
   m_Layer: 0
   m_Name: permis de conduire
   m_TagString: Untagged
@@ -25,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5593557113931419947}
-  m_LocalRotation: {x: -0.26870385, y: -0.91334176, z: 0.30270305, w: -0.04445103}
+  m_LocalRotation: {x: -0.26870167, y: -0.9133425, z: 0.30270264, w: -0.044453323}
   m_LocalPosition: {x: 14.816735, y: 1.6494, z: 51.636356}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.010000005, y: 0.01, z: 0.010000006}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,3 +80,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3263628230716979957
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593557113931419947}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.497193, y: 0.111731686, z: 6.033507}
+  m_Center: {x: -0.00000023831453, y: 0.055888716, z: -0.00036621097}
+--- !u!114 &3940860082827047435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593557113931419947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeb87944b642aa40910d2dac9b7ff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationWhenLooked: {x: 0, y: 0, z: 0}
+  _distanceWithCameraWehnLooked: 5
+  _OnTakeObject: {fileID: 0}
+  _OnThrowObject: {fileID: 0}
+  _isKey: 0
