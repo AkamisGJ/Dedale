@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class CameraUIFollow : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         GameLoopManager.Instance.LateGameLoop += OnLateUpdate;
     }
 
-    void OnLateUpdate()
+    private void OnLateUpdate()
     {
         transform.position = PlayerManager.Instance.CameraPlayer.transform.position;
         transform.rotation = PlayerManager.Instance.CameraPlayer.transform.rotation;
+    }
+
+    private void OnDestroy()
+    {
+        GameLoopManager.Instance.LateGameLoop -= OnLateUpdate;
     }
 }

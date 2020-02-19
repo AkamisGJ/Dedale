@@ -27,7 +27,6 @@ public class IMouvement : IPlayerState
     private float _timeZoom = 0.0f;
     private float _crouchLerp = 0;
     private float _zoomLerp = 0;
-    private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
     private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.MOVEMENT;
     private RaycastHit _raycastHit;
@@ -55,7 +54,6 @@ public class IMouvement : IPlayerState
         _gravity = _playerData.Gravity;
         _maxGravity = _playerData.MaxFallGravity;
         _playerController = PlayerManager.Instance.PlayerController;
-        _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _mainCamera = camera;
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
@@ -92,7 +90,7 @@ public class IMouvement : IPlayerState
 
     public void Update()
     {
-        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
+        if (_mainCamera != null && Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
             if(enableHightLightObject != _raycastHit.collider.gameObject)
             {
@@ -193,47 +191,50 @@ public class IMouvement : IPlayerState
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        _directionHorinzontal = horizontalMouvement * _playerController.transform.forward;
-        _directionVertical = verticalMouvement * _playerController.transform.right;
-        _direction = (_directionHorinzontal + _directionVertical).normalized;
-        if (horizontalMouvement > 0)
+        if(_playerController != null)
         {
-            _direction += _playerController.transform.forward * (_playerData.SpeedForward -1);
-        }
-        if (horizontalMouvement < 0)
-        {
-            _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
-        }
+            _directionHorinzontal = horizontalMouvement * _playerController.transform.forward;
+            _directionVertical = verticalMouvement * _playerController.transform.right;
+            _direction = (_directionHorinzontal + _directionVertical).normalized;
+            if (horizontalMouvement > 0)
+            {
+                _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+            }
+            if (horizontalMouvement < 0)
+            {
+                _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+            }
 
-        if (verticalMouvement > 0)
-        {
-            _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
-        }
-        else if (verticalMouvement < 0)
-        {
-            _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
-        }
-        if (_speedSprint > 1 && horizontalMouvement > 0)
-        {
-            _direction += _playerController.transform.forward * (_speedSprint -1 );
-        }
-        if (_direction != Vector3.zero)
-        {
-            Acceleration();
-        }
-        else
-        {
-            _accelerationLerp = 0;
-        }
-        if(_canMove == true)
-        {
-            Move();
+            if (verticalMouvement > 0)
+            {
+                _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+            }
+            else if (verticalMouvement < 0)
+            {
+                _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+            }
+            if (_speedSprint > 1 && horizontalMouvement > 0)
+            {
+                _direction += _playerController.transform.forward * (_speedSprint - 1);
+            }
+            if (_direction != Vector3.zero)
+            {
+                Acceleration();
+            }
+            else
+            {
+                _accelerationLerp = 0;
+            }
+            if (_canMove == true)
+            {
+                Move();
+            }
         }
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        if(_canMove == true)
+        if(_canMove == true && _playerController != null)
         {
             _rotationX += mousePositionY * _playerData.SensitivityMouseX;
             _rotationY += mousePositionX * _playerData.SensitivityMouseY;
@@ -367,5 +368,14 @@ public class IMouvement : IPlayerState
         {
             hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Sprint -= Sprinting;
+        InputManager.Instance.MousePosition -= LookAtMouse;
+        InputManager.Instance.Direction -= SetDirection;
+        InputManager.Instance.Zoom -= Zoom;
     }
 }
