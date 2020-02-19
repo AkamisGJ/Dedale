@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 4520718479634525297}
   - component: {fileID: 4520718479633722449}
   - component: {fileID: 4520718479632756369}
-  - component: {fileID: 8049297733750318677}
-  - component: {fileID: 5648173263098258858}
-  - component: {fileID: 1402152323896654019}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: verre_whisky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4520718479634952273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -36.421463, y: 1.072273, z: -16.025743}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 2.4953227, y: 2.4953244, z: 2.4953227}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,45 +77,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8049297733750318677
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520718479634952273}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.8061676, y: 8.4227295, z: 7.6104584}
-  m_Center: {x: 0.00024414062, y: 4.2113647, z: -0.00012207031}
---- !u!114 &5648173263098258858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520718479634952273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aeb87944b642aa40910d2dac9b7ff5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotationWhenLooked: {x: 0, y: 0, z: 0}
-  _distanceWithCameraWehnLooked: 0.5
-  _OnTakeObject: {fileID: 0}
-  _OnThrowObject: {fileID: 0}
-  _isKey: 0
---- !u!114 &1402152323896654019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520718479634952273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d4de287b46eb34e83a61e4f9115070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

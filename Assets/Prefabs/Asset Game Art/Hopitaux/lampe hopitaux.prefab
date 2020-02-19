@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 1015596400961193666}
   - component: {fileID: 1015596400957802210}
   - component: {fileID: 1015596400958768162}
+  - component: {fileID: 1160948454}
   m_Layer: 0
   m_Name: corps
   m_TagString: Untagged
@@ -156,6 +157,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &1160948454
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015596400961034978}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1015596400961034980
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1015596400961193668}
+  - component: {fileID: 301356898}
   m_Layer: 0
   m_Name: lampe hopitaux
   m_TagString: Untagged
@@ -187,6 +208,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &301356898
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015596400961034980}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: de6805bf452ff3f4d8f4927d3de179e1, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114575252813836848, guid: de6805bf452ff3f4d8f4927d3de179e1, type: 2}
+    value: {fileID: 580660493932853539}
+  - key: {fileID: 114198626815060038, guid: de6805bf452ff3f4d8f4927d3de179e1, type: 2}
+    value: {fileID: 1160948454}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1015596400961034982
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,11 +374,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6110878480144058152, guid: be738f3eb9321dc4ca0e58e263c66adc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be738f3eb9321dc4ca0e58e263c66adc, type: 3}
 --- !u!4 &1601879908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6683579603624264047, guid: be738f3eb9321dc4ca0e58e263c66adc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6683579605022457355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &580660493932853539 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6110878480144058152, guid: be738f3eb9321dc4ca0e58e263c66adc,
     type: 3}
   m_PrefabInstance: {fileID: 6683579605022457355}
   m_PrefabAsset: {fileID: 0}
