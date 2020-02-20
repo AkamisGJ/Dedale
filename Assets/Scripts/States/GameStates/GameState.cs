@@ -2,7 +2,6 @@
 using UnityEngine;
 public class GameState : IGameState
 {
-
     public void Enter()
     {
         Cursor.visible = false;
