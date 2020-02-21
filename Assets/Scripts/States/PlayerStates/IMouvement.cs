@@ -52,7 +52,7 @@ public class IMouvement : IPlayerState
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
     #endregion Properties
 
-    public void Init(PlayerData playerData,Camera camera, PlayerAgentController characterController, Animator animator = null)
+    public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
     {
         _currentAccelerationSprint = 0;
         _animator = animator;
@@ -156,7 +156,7 @@ public class IMouvement : IPlayerState
                     _timeZoom = 0;
                     _timeCrouch = 0;
                     _canMove = false;
-                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
             }
@@ -169,7 +169,7 @@ public class IMouvement : IPlayerState
                     _timeZoom = 0;
                     _timeCrouch = 0;
                     _canMove = false;
-                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
             }

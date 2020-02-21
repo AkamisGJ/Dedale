@@ -2,23 +2,47 @@
 
 public class ILiana : IPlayerState
 {
-    public void Enter()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void Exit()
-    {
-        throw new System.NotImplementedException();
-    }
+    private PlayerData _playerData = null;
+    private Camera _camera = null;
+    private CharacterController _characterController = null;
+    private Vector3 _directionHorizontal = Vector3.zero;
+    private Vector3 _orientation = Vector3.zero;
 
     public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null, Animator animator = null)
     {
-        throw new System.NotImplementedException();
+        _playerData = playerData;
+        _characterController = characterController;
+        _camera = camera;
+    }
+
+    public void Enter()
+    {
+        InputManager.Instance.Direction += SetOrientation;
     }
 
     public void Update()
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    public void Exit()
+    {
+        InputManager.Instance.Direction -= SetOrientation;
+    }
+
+    private void SetOrientation(float horizontalMouvement, float verticalMouvement)
+    {
+        if(horizontalMouvement < 0)
+        {
+            _orientation = _characterController.transform.up;
+            _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
+            Move();
+        }
+    }
+
+    private void Move()
+    {
+        Vector3 wantedDirection = _directionHorizontal * _playerData.GlobalSpeed * Time.deltaTime;
+        _characterController.Move(wantedDirection);
     }
 }
