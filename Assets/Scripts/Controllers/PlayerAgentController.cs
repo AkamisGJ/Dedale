@@ -27,6 +27,7 @@ public class PlayerAgentController : MonoBehaviour
         OBSERVE,
         INTERACTION,
         QTELADDER,
+        NARROWWAY,
     }
     private MyState _currentState = MyState.MOVEMENT;
     private Dictionary<MyState, IPlayerState> _states = null;
@@ -55,11 +56,13 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.MOVEMENT, new IMouvement());
         _states.Add(MyState.OBSERVE, new IObserve());
         _states.Add(MyState.QTELADDER, new IQTELadder());
+        _states.Add(MyState.NARROWWAY, new INarrowWay());
         _currentState = MyState.MOVEMENT;
         _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
         _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.OBSERVE].Init(_playerData, _mainCamera);
         _states[MyState.QTELADDER].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.NARROWWAY].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
     }
 

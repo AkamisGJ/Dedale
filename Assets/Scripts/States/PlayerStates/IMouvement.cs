@@ -27,7 +27,6 @@ public class IMouvement : IPlayerState
     private float _timeZoom = 0.0f;
     private float _crouchLerp = 0;
     private float _zoomLerp = 0;
-    private CapsuleCollider _playerCapsuleCollider = null;
     private float _sprintCurrentTime = 0;
     private PlayerAgentController.MyState nextState = PlayerAgentController.MyState.MOVEMENT;
     private RaycastHit _raycastHit;
@@ -39,6 +38,7 @@ public class IMouvement : IPlayerState
     private GameObject enableHightLightObject = null;
     private Vector3 _moveModifier = Vector3.zero;
     private float _useGravity = 1;
+    private bool _canMove = false;
     #endregion Fields
 
     #region Properties
@@ -54,7 +54,6 @@ public class IMouvement : IPlayerState
         _gravity = _playerData.Gravity;
         _maxGravity = _playerData.MaxFallGravity;
         _playerController = PlayerManager.Instance.PlayerController;
-        _playerCapsuleCollider = _playerController.gameObject.GetComponent<CapsuleCollider>();
         _mainCamera = camera;
         _crouchLerp = 0;
         _sprintCurrentTime = 0;
@@ -73,6 +72,9 @@ public class IMouvement : IPlayerState
 
     public void Enter()
     {
+        _canMove = true;
+        _rotationX = -_mainCamera.transform.localEulerAngles.x;
+        _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
@@ -88,7 +90,7 @@ public class IMouvement : IPlayerState
 
     public void Update()
     {
-        if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
+        if (_mainCamera != null && Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
             if(enableHightLightObject != _raycastHit.collider.gameObject)
             {
@@ -120,8 +122,17 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
-                    _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
             }
@@ -180,48 +191,58 @@ public class IMouvement : IPlayerState
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        _directionHorinzontal = horizontalMouvement * _playerController.transform.forward;
-        _directionVertical = verticalMouvement * _playerController.transform.right;
-        _direction = (_directionHorinzontal + _directionVertical).normalized;
-        if (horizontalMouvement > 0)
+        if(_playerController != null)
         {
-            _direction += _playerController.transform.forward * (_playerData.SpeedForward -1);
-        }
-        if (horizontalMouvement < 0)
-        {
-            _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
-        }
+            _directionHorinzontal = horizontalMouvement * _playerController.transform.forward;
+            _directionVertical = verticalMouvement * _playerController.transform.right;
+            _direction = (_directionHorinzontal + _directionVertical).normalized;
+            if (horizontalMouvement > 0)
+            {
+                _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+            }
+            if (horizontalMouvement < 0)
+            {
+                _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+            }
 
-        if (verticalMouvement > 0)
-        {
-            _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+            if (verticalMouvement > 0)
+            {
+                _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+            }
+            else if (verticalMouvement < 0)
+            {
+                _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+            }
+            if (_speedSprint > 1 && horizontalMouvement > 0)
+            {
+                _direction += _playerController.transform.forward * (_speedSprint - 1);
+            }
+            if (_direction != Vector3.zero)
+            {
+                Acceleration();
+            }
+            else
+            {
+                _accelerationLerp = 0;
+            }
+            if (_canMove == true)
+            {
+                Move();
+            }
         }
-        else if (verticalMouvement < 0)
-        {
-            _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
-        }
-        if (_speedSprint > 1 && horizontalMouvement > 0)
-        {
-            _direction += _playerController.transform.forward * (_speedSprint -1 );
-        }
-        if (_direction != Vector3.zero)
-        {
-            Acceleration();
-        }
-        else
-        {
-            _accelerationLerp = 0;
-        }
-        Move();
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _rotationX = mousePositionY * _playerData.SensitivityMouseX;
-        _rotationY = mousePositionX * _playerData.SensitivityMouseY;
-        _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
-        _playerController.gameObject.transform.localEulerAngles += new Vector3(0, _rotationY, 0);
-        _mainCamera.transform.localEulerAngles += new Vector3(-_rotationX, 0, 0);
+        if(_canMove == true && _playerController != null)
+        {
+            _rotationX += mousePositionY * _playerData.SensitivityMouseX;
+            _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
+            _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
+            _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        }
+
     }
 
     private void Acceleration()
@@ -242,7 +263,7 @@ public class IMouvement : IPlayerState
                 _unCrouching = false;
             }
         }
-        if (crouchBool == false && (_crouching == true || _isCrouch == true))
+        if (crouchBool == false && (_crouching == true || _isCrouch == true) && !Physics.Raycast(PlayerManager.Instance.PlayerController.transform.position, PlayerManager.Instance.PlayerController.transform.up, (_playerData.MaxHeight - _playerData.DifferenceHeightCrouch) /2 + _playerData.DifferenceHeightCrouch))
         {
             if (_unCrouching == false)
             {
@@ -257,7 +278,6 @@ public class IMouvement : IPlayerState
         _timeCrouch += Time.deltaTime * inversion;
         _timeCrouch = Mathf.Clamp(_timeCrouch, 0, _playerData.CrouchCurve.keys[_playerData.CrouchCurve.length - 1].time);
         _crouchLerp = _playerData.MaxHeight - _playerData.CrouchCurve.Evaluate(_timeCrouch) * _playerData.DifferenceHeightCrouch;
-        _playerCapsuleCollider.height = _crouchLerp;
         _characterController.height = _crouchLerp;
         if (inversion < 0 && _crouchLerp == _playerData.MaxHeight)
         {
@@ -348,5 +368,14 @@ public class IMouvement : IPlayerState
         {
             hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
         }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Sprint -= Sprinting;
+        InputManager.Instance.MousePosition -= LookAtMouse;
+        InputManager.Instance.Direction -= SetDirection;
+        InputManager.Instance.Zoom -= Zoom;
     }
 }
