@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
-public class IObserve :MonoBehaviour, IPlayerState
+public class IObserve : IPlayerState
 {
     private PlayerAgentController _playerAgentController = null;
     private GameObject _grabObject = null;
@@ -76,7 +75,7 @@ public class IObserve :MonoBehaviour, IPlayerState
             if(_currentObjectInterract.IsKey == true)
             {
                 PlayerManager.Instance.HaveKey = true;
-                Destroy(_currentObjectInterract.gameObject);
+                PlayerManager.Instance.DestroyThis(_currentObjectInterract.gameObject);
             }
             _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
         }

@@ -89,6 +89,12 @@ public class PlayerData : ScriptableObject
     [Tooltip("The difference between crouch height and normal height")]
     [SerializeField] private float _differenceHeightCrouch = 1;
 
+    [BoxGroup("Narrow Way", centerLabel: true)]
+    [Tooltip("The max angle of camera in narrow way")]
+    [SerializeField] private float _maxAngleNarrowWay = 60;
+    [BoxGroup("Move speed")]
+    [Tooltip("The speed of player in narrow way")]
+    [SerializeField] private float _speedNarrowWay = 2;
 
     #endregion Fields
 
@@ -117,5 +123,7 @@ public class PlayerData : ScriptableObject
     public float ZoomFieldOfView { get => _zoomFieldOfView; }
     public float MaxDistanceInteractionObject { get => _maxDistanceInteractionObject; }
     public float SpeedLadder { get => _speedLadder; }
+    public float SpeedNarrowWay { get => _speedNarrowWay; }
+    public float MaxAngleNarrowWay { get => _maxAngleNarrowWay; }
     #endregion Properties
 }
