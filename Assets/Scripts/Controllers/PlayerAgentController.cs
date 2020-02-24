@@ -51,6 +51,7 @@ public class PlayerAgentController : MonoBehaviour
     private void Awake()
     {
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()

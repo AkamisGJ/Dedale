@@ -54,6 +54,7 @@ public class IMouvement : IPlayerState
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
     {
+        Debug.Log(camera);
         _currentAccelerationSprint = 0;
         _animator = animator;
         _blendValue = 0;

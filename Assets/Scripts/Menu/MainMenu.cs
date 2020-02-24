@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickStart()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.Game, "Level1");
+        GameManager.Instance.ChangeState(GameManager.MyState.Game, "LoadingScreen");
         //SoundManager.Instance.GameStartSound();
         //SoundManager.Instance.StartLevel();
     }

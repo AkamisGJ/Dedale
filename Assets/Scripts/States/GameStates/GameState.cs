@@ -11,6 +11,6 @@ public class GameState : IGameState
 
     public void Exit()
     {
-        SceneManager.UnloadSceneAsync(GameManager.Instance.NextScene);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
     }
 }

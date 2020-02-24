@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    [SerializeField] private string _nextScene;
+    [SerializeField] private string _nextScene = null;
 
     private void OnTriggerEnter(Collider other)
     {
