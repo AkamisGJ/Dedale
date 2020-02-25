@@ -5,11 +5,12 @@ public class GameManager : Singleton<GameManager>
     #region Fields
     public enum MyState
     {
-        Preload,
-        MainMenu,
-        Game,
+        PRELOAD,
+        MAINMENU,
+        GAME,
+        LOADINGSCREEN,
     }
-    private MyState _currentState = MyState.Preload;
+    private MyState _currentState = MyState.PRELOAD;
     private Dictionary<MyState, IGameState> _states = null;
     private string _nextSceneName = "Level1";
     #endregion Fields
@@ -29,24 +30,23 @@ public class GameManager : Singleton<GameManager>
     protected void Start()
     {
         _states = new Dictionary<MyState, IGameState>();
-        _states.Add(MyState.Preload, new PreloadState());
-        _states.Add(MyState.Game, new GameState());
-        _states.Add(MyState.MainMenu, new MainMenuState());
-        if(_currentState != MyState.Game)
+        _states.Add(MyState.PRELOAD, new PreloadState());
+        _states.Add(MyState.GAME, new GameState());
+        _states.Add(MyState.MAINMENU, new MainMenuState());
+        _states.Add(MyState.LOADINGSCREEN, new LoadingScreenState());
+        if(_currentState == MyState.GAME || _currentState == MyState.LOADINGSCREEN)
         {
-            _currentState = MyState.Preload;
-            ChangeState(MyState.MainMenu, "Main Menu");
+            return;
         }
+        _currentState = MyState.PRELOAD;
+        ChangeState(MyState.MAINMENU, "Main Menu");
     }
 
     public void ChangeState(MyState nextState, string scene = null)
     {
-        if(_currentState == MyState.Game && _nextSceneName != null)
-        {
-            _states[_currentState].Exit();
-        }
+        _states[_currentState].Exit();
         _currentState = nextState;
-        if(_currentState == MyState.Game)
+        if(_currentState == MyState.GAME)
         {
             _nextSceneName = scene;
         }

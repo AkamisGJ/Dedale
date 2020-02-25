@@ -6,7 +6,7 @@ public class ExitGame : MonoBehaviour
     public void Exit(GameObject gameObject)
     {
         Destroy(gameObject);
-        GameManager.Instance.ChangeState(GameManager.MyState.MainMenu);
+        GameManager.Instance.ChangeState(GameManager.MyState.MAINMENU);
     }
 
     private void OnTriggerEnter(Collider other)

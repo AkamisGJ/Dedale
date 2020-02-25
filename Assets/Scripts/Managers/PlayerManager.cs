@@ -45,7 +45,6 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void InstantiatePlayer(Transform tranformSpawnerPlayer)
     {
-        Debug.Log("ok");
         _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0, 0, 0), Quaternion.identity);
         CameraManager.Instance.CameraUI = _cameraUIGameObject;
         _playerIsDead = false;

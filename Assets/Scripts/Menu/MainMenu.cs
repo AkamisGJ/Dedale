@@ -19,12 +19,12 @@ public class MainMenu : MonoBehaviour
 
     public void SelectStage()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.Game, _selectedStage);
+        GameManager.Instance.ChangeState(GameManager.MyState.GAME, _selectedStage);
     }
 
     public void OnClickStart()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.Game, "LoadingScreen");
+        GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN);
         //SoundManager.Instance.GameStartSound();
         //SoundManager.Instance.StartLevel();
     }

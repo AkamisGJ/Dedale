@@ -7,6 +7,7 @@ public class RemoveScene : MonoBehaviour
     [SerializeField] private string _previousSceneName = null;
     private AsyncOperation _asyncOperationLoad = null;
 
+    
     private void Start()
     {
         if (_nextSceneName != string.Empty)
@@ -15,6 +16,7 @@ public class RemoveScene : MonoBehaviour
             _asyncOperationLoad.allowSceneActivation = false;
         }
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
