@@ -7,7 +7,7 @@ public class LoadingScreenState : IGameState
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene("LoadingScreen");
+        SceneManager.LoadSceneAsync("LoadingScreen");
     }
 
     public void GameScene(string scene)
@@ -17,6 +17,6 @@ public class LoadingScreenState : IGameState
 
     public void Exit()
     {
-        SceneManager.UnloadScene("LoadingScreen");
+        
     }
 }
