@@ -27,8 +27,10 @@ public class StartLadder : MonoBehaviour
         _playerController.transform.position = Vector3.Lerp(_playerController.transform.position, transform.position, _lerpStartPositionPlayer);
         _playerController.transform.rotation = Quaternion.Lerp(_playerController.transform.rotation, transform.rotation, _lerpStartPositionPlayer);
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_playerController.MainCamera.transform.rotation, transform.rotation, _lerpStartPositionPlayer);
+        _playerController.MainCamera.fieldOfView = Mathf.Lerp(_playerController.PlayerData.ZoomFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
         if(_lerpStartPositionPlayer > 1)
         {
+            _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
             _lerpStartPositionPlayer = 0;
             foreach (QTEManager qTEManager in _qTEManagers)

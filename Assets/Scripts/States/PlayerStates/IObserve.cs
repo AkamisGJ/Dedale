@@ -19,7 +19,7 @@ public class IObserve : IPlayerState
     private AudioSource _audioSourcePlayer;
     private LayerMask _layerMask;
 
-    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
+    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController, Animator animator = null)
     {
         _layerMask = playerData.LayerMask;
         _audioSourcePlayer = PlayerManager.Instance.PlayerController.GetComponent<AudioSource>();

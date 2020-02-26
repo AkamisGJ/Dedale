@@ -15,6 +15,8 @@ public class PlayerAgentController : MonoBehaviour
     [SerializeField] private Transform _objectHolder = null;
     [Tooltip("Audio source of the player")]
     [SerializeField] private AudioSource _audioSourcePlayer = null;
+    [Tooltip("Animator of player")]
+    [SerializeField] private Animator _animatorShadow = null;
     #endregion SerializedFields
     #region PrivateFields
     private Vector3 _direction = Vector3.zero;
@@ -27,6 +29,9 @@ public class PlayerAgentController : MonoBehaviour
         OBSERVE,
         INTERACTION,
         QTELADDER,
+        NARROWWAY,
+        LIANA,
+        FALL,
     }
     private MyState _currentState = MyState.MOVEMENT;
     private Dictionary<MyState, IPlayerState> _states = null;
@@ -46,6 +51,7 @@ public class PlayerAgentController : MonoBehaviour
     private void Awake()
     {
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -55,11 +61,17 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.MOVEMENT, new IMouvement());
         _states.Add(MyState.OBSERVE, new IObserve());
         _states.Add(MyState.QTELADDER, new IQTELadder());
+        _states.Add(MyState.NARROWWAY, new INarrowWay());
+        _states.Add(MyState.LIANA, new ILiana());
+        _states.Add(MyState.FALL, new IFall());
         _currentState = MyState.MOVEMENT;
         _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
-        _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController, _animatorShadow);
         _states[MyState.OBSERVE].Init(_playerData, _mainCamera);
         _states[MyState.QTELADDER].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.NARROWWAY].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.LIANA].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.FALL].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
     }
 

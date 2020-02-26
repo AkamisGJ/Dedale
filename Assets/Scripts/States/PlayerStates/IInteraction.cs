@@ -10,7 +10,7 @@ public class IInteraction : IPlayerState
     private Camera _camera = null;
     private LayerMask _layerMask;
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController, Animator animator = null)
     {
         _layerMask = playerData.LayerMask;
         _playerData = playerData;

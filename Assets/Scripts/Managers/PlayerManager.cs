@@ -12,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [SerializeField] private Camera _cameraPlayer = null;
 
     [SerializeField] private Camera _cameraUI = null;
-
+    private bool _isInNarrowWay = false;
     private bool _playerIsDead = false;
     #endregion Fields
 
@@ -30,6 +30,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public Camera CameraPlayer { get => _cameraPlayerGameobject; }
     public Camera CameraUI { get => _cameraUIGameObject; }
     public bool HaveKey { get => _haveKey; set => _haveKey = value; }
+    public bool IsInNarrowWay { get => _isInNarrowWay; set => _isInNarrowWay = value; }
     #endregion Properties
 
     protected override void Awake()
@@ -44,7 +45,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void InstantiatePlayer(Transform tranformSpawnerPlayer)
     {
-        _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0, 10, 0), Quaternion.identity);
+        _cameraUIGameObject = Instantiate(_cameraUI, new Vector3(0, 0, 0), Quaternion.identity);
         CameraManager.Instance.CameraUI = _cameraUIGameObject;
         _playerIsDead = false;
         _playerGameObject = Instantiate(_playerController, tranformSpawnerPlayer.position, Quaternion.identity);
