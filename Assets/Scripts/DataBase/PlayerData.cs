@@ -101,10 +101,6 @@ public class PlayerData : ScriptableObject
     [Tooltip("The speed of player in narrow way")]
     [SerializeField] private float _speedNarrowWay = 2;
 
-    [BoxGroup("Color Hightlight")]
-    [Tooltip("Define the color of the interactible object when the player look at it")]
-    [SerializeField] private Color _colorHightlightObject;
-
 
     #endregion Fields
 

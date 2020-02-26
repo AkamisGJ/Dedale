@@ -234,12 +234,6 @@ public class IMouvement : IPlayerState
         _animator.SetFloat("BlendMovement", _blendValue);
     }
 
-    private void BlendTreeAnimator(){
-        float blendValue = 0;
-        PlayerManager.Instance.PlayerController.GetComponent<Animator>().SetFloat("BlendMovement", blendValue);
-        
-    }
-
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
         if(_playerController != null)
@@ -308,7 +302,7 @@ public class IMouvement : IPlayerState
     {
         _accelerationLerp += Time.deltaTime;
         _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
-        Debug.Log(_accelerationLerp);
+        //Debug.Log(_accelerationLerp);
         _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
     }
 
