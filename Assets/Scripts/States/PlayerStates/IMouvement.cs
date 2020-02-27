@@ -288,6 +288,7 @@ public class IMouvement : IPlayerState
     {
         if(_canMove == true && _playerController != null)
         {
+            _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += mousePositionY * _playerData.SensitivityMouseX;
             _rotationY += mousePositionX * _playerData.SensitivityMouseY;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);

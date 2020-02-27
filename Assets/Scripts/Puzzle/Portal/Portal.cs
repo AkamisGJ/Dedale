@@ -15,6 +15,7 @@ public class Portal : MonoBehaviour
         _playerCamera = PlayerManager.Instance.CameraPlayer;
         _portalCamera.enabled = false;
         _trackedTravellers = new List<PortalTraveller>();
+        GameLoopManager.Instance.GameLoopPortal += OnLateUpdate;
     }
 
     void Update()
@@ -22,7 +23,7 @@ public class Portal : MonoBehaviour
         
     }
 
-    private void LateUpdate()
+    private void OnLateUpdate()
     {
         for (int i = 0; i < _trackedTravellers.Count; i++)
         {
@@ -35,6 +36,7 @@ public class Portal : MonoBehaviour
             int portalSideOld = System.Math.Sign(Vector3.Dot(traveller.PreviousOffsetFromPortal, transform.forward));
             if(portalSide != portalSideOld)
             {
+                Debug.Log(travellerT.localToWorldMatrix);
                 Matrix4x4 m = _linkedPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * travellerT.localToWorldMatrix;
                 traveller.Teleport(transform, _linkedPortal.transform, m.GetColumn(3), m.rotation);
                 _linkedPortal.OnTravellerEnterPortal(traveller);
@@ -118,5 +120,10 @@ public class Portal : MonoBehaviour
             traveller.ExitPortalThreshold();
             _trackedTravellers.Remove(traveller);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameLoopManager.Instance.GameLoopPortal -= OnLateUpdate;
     }
 }
