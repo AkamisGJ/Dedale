@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7379066877019365389}
   - component: {fileID: 7403472115740674519}
   - component: {fileID: 7353510555234322251}
+  - component: {fileID: 114944398317296242}
   m_Layer: 0
   m_Name: "Player Controlleur Custom By Th\xE9o"
   m_TagString: Player
@@ -169,6 +170,18 @@ MonoBehaviour:
   _objectHolder: {fileID: 2807965667608906081}
   _audioSourcePlayer: {fileID: 7403472115740674519}
   _animatorShadow: {fileID: 8552150312871934191}
+--- !u!114 &114944398317296242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607918575787650614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7606233f19cae4c8d3ebf3e8bcc30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6907574295826454668
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +249,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1607918575787650602}
     m_Modifications:
+    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Name
+      value: Character In Editor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100124, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6883806fd55209346a10664f14dd5beb, type: 2}
     - target: {fileID: 400132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -280,26 +313,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Name
-      value: Character In Editor (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 100124, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6883806fd55209346a10664f14dd5beb, type: 2}
     - target: {fileID: 100116, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -823,6 +836,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1607918575787650602}
     m_Modifications:
+    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Name
+      value: Character Shadows only (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100124, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6883806fd55209346a10664f14dd5beb, type: 2}
     - target: {fileID: 400132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -867,26 +900,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Name
-      value: Character Shadows only (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 100132, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100006, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100124, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6883806fd55209346a10664f14dd5beb, type: 2}
     - target: {fileID: 100116, guid: c27a7ad9ea13eb246aeb46433714d9b2, type: 3}
       propertyPath: m_Layer
       value: 0

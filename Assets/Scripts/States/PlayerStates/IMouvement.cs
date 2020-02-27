@@ -54,7 +54,6 @@ public class IMouvement : IPlayerState
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
     {
-        Debug.Log(camera);
         _currentAccelerationSprint = 0;
         _animator = animator;
         _blendValue = 0;
@@ -302,7 +301,6 @@ public class IMouvement : IPlayerState
     {
         _accelerationLerp += Time.deltaTime;
         _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
-        Debug.Log(_accelerationLerp);
         _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
     }
 
