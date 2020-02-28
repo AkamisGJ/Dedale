@@ -207,13 +207,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4666571197899207308}
-  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+  m_LocalRotation: {x: 0, y: 0.70710677, z: -0.70710677, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.3}
   m_Children: []
   m_Father: {fileID: 4666571198103749571}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: -90}
 --- !u!33 &4666571197899207304
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -322,8 +322,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0.5}
+  m_Size: {x: 10, y: 3, z: 0.5}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!1 &4666571198843655865
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,35 +427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: portalCameraA
       objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280544927, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
         type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 8400000, guid: 5ca83c7ec37bf604382192c0d320eacc, type: 2}
-    - target: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_RenderingPath
-      value: 3
+      propertyPath: m_CullingMask.m_Bits
+      value: 81719
       objectReference: {fileID: 0}
     - target: {fileID: 6121661707280902335, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
         type: 3}
@@ -512,39 +487,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280902335, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280902335, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280902335, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661708609840646, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: frustumSettings.qualitySettings
-      value: 
-      objectReference: {fileID: 11400000, guid: fadc25590728a2743829071299901906,
-        type: 2}
-    - target: {fileID: 4576846775717079070, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: bMat
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4576846775717079070, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: isDirty
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6121661707286440605, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a, type: 3}
 --- !u!4 &1456491323013710561 stripped
 Transform:
