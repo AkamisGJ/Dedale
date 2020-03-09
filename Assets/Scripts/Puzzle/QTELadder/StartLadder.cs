@@ -6,11 +6,17 @@ public class StartLadder : MonoBehaviour
     private bool _canLeave = false;
     private float _lerpStartPositionPlayer = 0;
     [SerializeField] private QTEManager[] _qTEManagers = null;
+    private Vector3 _startPlayerPosition = Vector3.zero;
+    private Quaternion _startPlayerQuaternion = Quaternion.identity;
+    private Quaternion _startCameraQuaternion = Quaternion.identity;
+    private float _startFieldOfView = 0;
+    private bool _isStarted = false;
 
     private void Start()
     {
         _playerController = PlayerManager.Instance.PlayerController;
         _lerpStartPositionPlayer = 0;
+        _isStarted = false;
     }
 
     private void Update()
@@ -23,16 +29,26 @@ public class StartLadder : MonoBehaviour
 
     public void StartPositionPlayer()
     {
+        if (!_isStarted)
+        {
+            _startPlayerPosition = _playerController.transform.position;
+            _startPlayerQuaternion = _playerController.transform.rotation;
+            _startCameraQuaternion = _playerController.MainCamera.transform.rotation;
+            _startFieldOfView = _playerController.MainCamera.fieldOfView;
+            _isStarted = true;
+        }
         _lerpStartPositionPlayer += Time.deltaTime;
-        _playerController.transform.position = Vector3.Lerp(_playerController.transform.position, transform.position, _lerpStartPositionPlayer);
-        _playerController.transform.rotation = Quaternion.Lerp(_playerController.transform.rotation, transform.rotation, _lerpStartPositionPlayer);
-        _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_playerController.MainCamera.transform.rotation, transform.rotation, _lerpStartPositionPlayer);
-        _playerController.MainCamera.fieldOfView = Mathf.Lerp(_playerController.PlayerData.ZoomFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
+        _playerController.transform.position = Vector3.Lerp(_startPlayerPosition, transform.position, _lerpStartPositionPlayer);
+        _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, transform.rotation, _lerpStartPositionPlayer);
+        _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, transform.rotation, _lerpStartPositionPlayer);
+        _playerController.MainCamera.fieldOfView = Mathf.Lerp(_startFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
+        Debug.Log(_playerController.MainCamera.fieldOfView);
         if(_lerpStartPositionPlayer > 1)
         {
             _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
             _lerpStartPositionPlayer = 0;
+            _isStarted = false;
             foreach (QTEManager qTEManager in _qTEManagers)
             {
                 qTEManager.IsActive = true;

@@ -48,7 +48,7 @@ public class IMouvement : IPlayerState
     #endregion Fields
 
     #region Properties
-    public Vector3 MoveModifier { get => _moveModifier; set => _moveModifier = value; }
+    public Vector3 MoveModifier { get => _moveModifier; set { _moveModifier = value; Debug.Log(value); } }
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
     #endregion Properties
 
@@ -85,6 +85,7 @@ public class IMouvement : IPlayerState
         _rotationX = -_mainCamera.transform.localEulerAngles.x;
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
+        _timeZoom = 0;
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
@@ -141,7 +142,6 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _animator.SetFloat("BlendMovement", _blendValue);
-                    _timeZoom = 0;
                     _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
@@ -153,7 +153,6 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _animator.SetFloat("BlendMovement", _blendValue);
-                    _timeZoom = 0;
                     _timeCrouch = 0;
                     _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
@@ -166,7 +165,6 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _animator.SetFloat("BlendMovement", _blendValue);
-                    _timeZoom = 0;
                     _timeCrouch = 0;
                     _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;

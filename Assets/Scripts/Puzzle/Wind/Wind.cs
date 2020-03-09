@@ -42,9 +42,10 @@ public class Wind : MonoBehaviour
         _playerData = _playerController.PlayerData;
         _isPreWarm = false;
         _windModifier = Vector3.zero;
+        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
     }
 
-    void Update()
+    void OnUpdate()
     {
         _timeWind += Time.deltaTime;
         if (_timeWind > _timeWindActive + _timeNoWind)
@@ -82,11 +83,10 @@ public class Wind : MonoBehaviour
         {
             if (_playerController.CurrentState == PlayerAgentController.MyState.MOVEMENT)
             {
-                _mouvement = _playerController.States[PlayerAgentController.MyState.MOVEMENT] as IMouvement;
                 _mouvement.MoveModifier = _windModifier;
             }
         }
-        else if(_mouvement != null)
+        else if(_mouvement != null && _playerIsIn == true)
         {
             _mouvement.MoveModifier = Vector3.zero;
         }
@@ -109,6 +109,7 @@ public class Wind : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            _mouvement = _playerController.States[PlayerAgentController.MyState.MOVEMENT] as IMouvement;
             _playerIsIn = true;
         }
     }
@@ -118,6 +119,12 @@ public class Wind : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _playerIsIn = false;
+            _mouvement.MoveModifier = Vector3.zero;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
     }
 }
