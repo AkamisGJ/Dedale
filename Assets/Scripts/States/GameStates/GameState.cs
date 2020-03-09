@@ -1,17 +1,23 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+
 public class GameState : IGameState
 {
-
     public void Enter()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene(GameManager.Instance.NextScene);
+        GameLoopManager.Instance.LastStart += OnStart;
+    }
+
+    private void OnStart()
+    {
+        SceneManager.UnloadScene("LoadingScreen");
+        GameLoopManager.Instance.LastStart -= OnStart;
     }
 
     public void Exit()
     {
-        SceneManager.UnloadSceneAsync(GameManager.Instance.NextScene);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
     }
 }

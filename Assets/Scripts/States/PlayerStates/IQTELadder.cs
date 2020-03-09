@@ -13,7 +13,7 @@ public class IQTELadder : IPlayerState
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool IsAtTheEnd { get => _isAtTheEnd; set => _isAtTheEnd = value; }
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController, Animator animator = null)
     {
         _playerData = playerData;
         _characterController = characterController;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8782680235240286944}
   - component: {fileID: 8782680235241056960}
   - component: {fileID: 8782680235242055680}
+  - component: {fileID: 1211947532}
   m_Layer: 0
   m_Name: minutes
   m_TagString: Untagged
@@ -77,6 +78,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &1211947532
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8782680235239864002
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +106,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8782680235240286946}
-  m_Layer: 0
+  - component: {fileID: 1052455333}
+  - component: {fileID: 1052455332}
+  - component: {fileID: 1052455331}
+  - component: {fileID: 1334144507933194281}
+  m_Layer: 8
   m_Name: montre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +124,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8782680235239864002}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21, y: 1, z: -4}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
@@ -108,6 +132,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052455333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d4de287b46eb34e83a61e4f9115070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1052455332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeb87944b642aa40910d2dac9b7ff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationWhenLooked: {x: 90, y: 0, z: 0}
+  _distanceWithCameraWehnLooked: 0.1
+  _OnTakeObject: {fileID: 0}
+  _OnThrowObject: {fileID: 0}
+  _isKey: 0
+--- !u!65 &1052455331
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.2, y: 1.69, z: 20.12}
+  m_Center: {x: 0, y: -0.07, z: 0.61}
+--- !u!320 &1334144507933194281
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 14a838ad63cda0b4aa78afd345ba44d0, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114385266287247352, guid: 14a838ad63cda0b4aa78afd345ba44d0, type: 2}
+    value: {fileID: 1211947532}
+  - key: {fileID: 114012672538302928, guid: 14a838ad63cda0b4aa78afd345ba44d0, type: 2}
+    value: {fileID: 978427276}
+  - key: {fileID: 114461074111864470, guid: 14a838ad63cda0b4aa78afd345ba44d0, type: 2}
+    value: {fileID: 755695100}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &8782680235239864004
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +524,7 @@ GameObject:
   - component: {fileID: 8782680235240286956}
   - component: {fileID: 8782680235241056972}
   - component: {fileID: 8782680235242055692}
+  - component: {fileID: 755695100}
   m_Layer: 0
   m_Name: heure
   m_TagString: Untagged
@@ -501,6 +591,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &755695100
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864012}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8782680235239864014
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +698,7 @@ GameObject:
   - component: {fileID: 8782680235240286968}
   - component: {fileID: 8782680235241056966}
   - component: {fileID: 8782680235242055686}
+  - component: {fileID: 978427276}
   m_Layer: 0
   m_Name: seconde
   m_TagString: Untagged
@@ -603,7 +713,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8782680235239864024}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.99390405, z: -0, w: -0.110249005}
   m_LocalPosition: {x: 0.14270413, y: 0.2858951, z: -0.00000011920929}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -655,3 +765,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &978427276
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

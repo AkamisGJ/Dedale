@@ -10,7 +10,7 @@ public class INarrowWay : IPlayerState
     private float _currentAngleCamera = 0;
     private float _speedRotateCamera = 5;
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null, Animator animator = null)
     {
         _playerData = playerData;
         _camera = camera;

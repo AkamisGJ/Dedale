@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using HighlightingSystem;
 
 public class IMouvement : IPlayerState
 {
@@ -14,7 +15,9 @@ public class IMouvement : IPlayerState
     private Vector3 _direction = Vector3.zero;
     private float _speedSprint = 0;
     private float _currentAcceleration = 0;
+    private float _currentAccelerationSprint = 0;
     private float _accelerationLerp = 0;
+    private float _accelerationSprintLerp = 0;
     private float _rotationY = 0.0f;
     private float _rotationX = 0.0f;
     private bool _isCrouch = false;
@@ -39,6 +42,9 @@ public class IMouvement : IPlayerState
     private Vector3 _moveModifier = Vector3.zero;
     private float _useGravity = 1;
     private bool _canMove = false;
+    private float _blendValue = 0;
+    private float _blendLerp = 0;
+    private Animator _animator = null;
     #endregion Fields
 
     #region Properties
@@ -46,8 +52,12 @@ public class IMouvement : IPlayerState
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
     #endregion Properties
 
-    public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
+    public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
     {
+        //Debug.Log(camera);
+        _currentAccelerationSprint = 0;
+        _animator = animator;
+        _blendValue = 0;
         _layerMask = playerData.LayerMask;
         _characterController = characterController;
         _playerData = playerData;
@@ -94,6 +104,10 @@ public class IMouvement : IPlayerState
         {
             if(enableHightLightObject != _raycastHit.collider.gameObject)
             {
+                if(enableHightLightObject != null)
+                {
+                    HighlightObject(enableHightLightObject, false);
+                }
                 enableHightLightObject = _raycastHit.collider.gameObject;
                 HighlightObject(enableHightLightObject, true);
             }
@@ -101,6 +115,8 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
                     _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE);
                     return;
                 }
@@ -109,6 +125,8 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
                     Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
                     if((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
                     {
@@ -122,6 +140,9 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _timeZoom = 0;
                     _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
@@ -131,8 +152,25 @@ public class IMouvement : IPlayerState
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _timeZoom = 0;
+                    _timeCrouch = 0;
                     _canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Liana"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _timeZoom = 0;
+                    _timeCrouch = 0;
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
             }
@@ -187,6 +225,13 @@ public class IMouvement : IPlayerState
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
         Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
         _characterController.Move(realMove);
+        BlendTreeAnimator();
+    }
+
+    private void BlendTreeAnimator()
+    {
+        _blendValue = Mathf.Lerp(0, 1, _accelerationLerp/2 + _accelerationSprintLerp/2);
+        _animator.SetFloat("BlendMovement", _blendValue);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -215,11 +260,19 @@ public class IMouvement : IPlayerState
             }
             if (_speedSprint > 1 && horizontalMouvement > 0)
             {
-                _direction += _playerController.transform.forward * (_speedSprint - 1);
+                _direction += _playerController.transform.forward * (_speedSprint - 1) * _currentAccelerationSprint;
             }
             if (_direction != Vector3.zero)
             {
                 Acceleration();
+                if(_speedSprint != 0 && horizontalMouvement > 0)
+                {
+                    AccelerationSprint();
+                }
+                else
+                {
+                    _accelerationSprintLerp = 0;
+                }
             }
             else
             {
@@ -248,8 +301,16 @@ public class IMouvement : IPlayerState
     private void Acceleration()
     {
         _accelerationLerp += Time.deltaTime;
-        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, _playerData.AccelerationCurve.length);
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
+        //Debug.Log(_accelerationLerp);
         _currentAcceleration = _playerData.AccelerationCurve.Evaluate(_accelerationLerp);
+    }
+
+    private void AccelerationSprint()
+    {
+        _accelerationSprintLerp += Time.deltaTime;
+        _accelerationSprintLerp = Mathf.Clamp(_accelerationSprintLerp, 0, 1);
+        _currentAccelerationSprint = _playerData.AccelerationCurve.Evaluate(_accelerationSprintLerp);
     }
 
     private void Crouch(bool crouchBool)
@@ -295,20 +356,23 @@ public class IMouvement : IPlayerState
 
     private void Zoom(bool zoomBool)
     {
-        if (zoomBool == true)
+        if(_canMove == true)
         {
-            if (_isZoom == false && _zooming == false)
+            if (zoomBool == true)
             {
-                _zooming = true;
-                _unZooming = false;
+                if (_isZoom == false && _zooming == false)
+                {
+                    _zooming = true;
+                    _unZooming = false;
+                }
             }
-        }
-        if (zoomBool == false && (_zooming == true || _isZoom == true))
-        {
-            if (_unZooming == false)
+            if (zoomBool == false && (_zooming == true || _isZoom == true))
             {
-                _zooming = false;
-                _unZooming = true;
+                if (_unZooming == false)
+                {
+                    _zooming = false;
+                    _unZooming = true;
+                }
             }
         }
     }
@@ -360,13 +424,19 @@ public class IMouvement : IPlayerState
 
     private void HighlightObject(GameObject hightlightObject, bool isHightlight)
     {
-        if(isHightlight == true)
+        if(hightlightObject.GetComponent<Highlighter>())
         {
-            hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
-        }
-        else
+            if(isHightlight == true)
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
+            }
+            else
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
+            }
+        }else
         {
-            hightlightObject.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+            Debug.Log("Cette Object " + hightlightObject + " n'a pas le script Highlighter sur lui");
         }
     }
 

@@ -28,6 +28,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _lastStart = null;
+    public event Action LastStart
+    {
+        add
+        {
+            _lastStart -= value;
+            _lastStart += value;
+        }
+        remove
+        {
+            _lastStart -= value;
+        }
+    }
+
     private Action _gameLoopPlayer = null;
     public event Action GameLoopPlayer
     {
@@ -117,6 +131,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
 
     void Update()
     {
+        if (_lastStart != null)
+        {
+            _lastStart();
+        }
         if (_gameLoopInputManager != null)
         {
             _gameLoopInputManager();

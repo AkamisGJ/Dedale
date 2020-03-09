@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HighlightingSystem;
 
+[RequireComponent(typeof(Highlighter))]
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationWhenLooked = Vector3.zero;
-    [SerializeField] private  float _distanceWithCameraWehnLooked = 5.0f;
+    [SerializeField] private  float _distanceWithCameraWehnLooked = 0.5f;
     [SerializeField] private AudioClip _OnTakeObject = null;
     [SerializeField] private AudioClip _OnThrowObject = null;
     [SerializeField] private bool _isKey = false;
