@@ -80,6 +80,18 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _gameLoopPortal = null;
+    public event Action GameLoopPortal
+    {
+        add{
+            _gameLoopPortal -= value;
+            _gameLoopPortal += value;
+        }
+        remove{
+            _gameLoopPortal -= value;
+        }
+    }
+
     private Action _fixedGameLoop = null;
     public event Action FixedGameLoop{
         add{
@@ -153,6 +165,7 @@ public class GameLoopManager : Singleton<GameLoopManager>
         if(_managerLoop != null){
             _managerLoop();
         }
+
     }
 
     private void FixedUpdate() {
@@ -164,6 +177,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
     private void LateUpdate() {
         if(_lateGameLoop != null){
             _lateGameLoop();
+        }
+        if (_gameLoopPortal != null)
+        {
+            _gameLoopPortal();
         }
     }
 
