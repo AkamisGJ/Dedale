@@ -89,6 +89,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("The difference between crouch height and normal height")]
     [SerializeField] private float _differenceHeightCrouch = 1;
 
+    [BoxGroup("Color Hightlight")]
+    [Tooltip("Define the color of the interactible object when the player look at it")]
+    [SerializeField] private Color _colorHightlightObject;
+
 
     [BoxGroup("Narrow Way", centerLabel: true)]
     [Tooltip("The max angle of camera in narrow way")]
@@ -96,10 +100,6 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Move speed")]
     [Tooltip("The speed of player in narrow way")]
     [SerializeField] private float _speedNarrowWay = 2;
-
-    [BoxGroup("Color Hightlight")]
-    [Tooltip("Define the color of the interactible object when the player look at it")]
-    [SerializeField] private Color _colorHightlightObject;
 
 
     #endregion Fields
