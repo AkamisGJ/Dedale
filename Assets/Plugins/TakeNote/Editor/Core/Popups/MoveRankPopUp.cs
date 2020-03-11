@@ -17,7 +17,7 @@ namespace FuguFirecracker.TakeNote
 
 		public override Vector2 GetWindowSize()
 		{
-			return new Vector2(160, 46);
+			return new Vector2(102, 46);
 		}
 
 		public override void OnClose()
@@ -29,7 +29,6 @@ namespace FuguFirecracker.TakeNote
 		public override void OnGUI(Rect rect)
 		{
 			var rank = ArrayUtility.IndexOf(Ledger.Manifest.OutstandingTasks, _task);
-			EditorGUI.DrawRect(new Rect(0, 0, editorWindow.position.width, editorWindow.position.height), Style.PopColor);
 
 			using (new EditorGUI.DisabledScope(rank == 0))
 			{
