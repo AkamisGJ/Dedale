@@ -13,7 +13,7 @@ namespace FuguFirecracker.TakeNote
 
 				foreach (var task in Ledger.Manifest.CompletedTasks)
 				{
-					task.Draw(e);
+					TaskMaster.DrawTask(task, e);
 				}
 			}
 		}
