@@ -14,12 +14,11 @@ namespace FuguFirecracker.TakeNote
 
 		public override Vector2 GetWindowSize()
 		{
-			return new Vector2(160, 104);
+			return new Vector2(110, 104);
 		}
 
 		public override void OnGUI(Rect rect)
 		{
-			EditorGUI.DrawRect(new Rect(0, 0, editorWindow.position.width, editorWindow.position.height), Style.PopColor);
 
 			if (GUILayout.Button("Remove", GUILayout.Height(22)))
 			{

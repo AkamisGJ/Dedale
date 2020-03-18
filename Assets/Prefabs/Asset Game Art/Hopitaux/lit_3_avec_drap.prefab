@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -67,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -99,16 +101,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4855168749049860404}
     m_Modifications:
-    - target: {fileID: 6092605601922941509, guid: f076276ef7664ed4aae343a3a16148d6,
-        type: 3}
-      propertyPath: m_Name
-      value: drap03_low
-      objectReference: {fileID: 0}
-    - target: {fileID: 6092605601922941509, guid: f076276ef7664ed4aae343a3a16148d6,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 6092605601922915941, guid: f076276ef7664ed4aae343a3a16148d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -178,6 +170,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092605601922941509, guid: f076276ef7664ed4aae343a3a16148d6,
+        type: 3}
+      propertyPath: m_Name
+      value: drap03_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092605601922941509, guid: f076276ef7664ed4aae343a3a16148d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f076276ef7664ed4aae343a3a16148d6, type: 3}

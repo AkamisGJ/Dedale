@@ -6,7 +6,7 @@ namespace FuguFirecracker.TakeNote
 {
 	internal class Ledger : ScriptableObject
 	{
-		internal static Ledger Manifest { get; set; }
+	    internal static Ledger Manifest { get; set; }
 
 		public Task[] OutstandingTasks = { };
 		public Task[] CompletedTasks = { };
@@ -23,7 +23,7 @@ namespace FuguFirecracker.TakeNote
 
 		internal void Save()
 		{
-			EditorUtility.SetDirty(Manifest);
+			EditorUtility.SetDirty(this);
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
 		}

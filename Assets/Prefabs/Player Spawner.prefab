@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8125086f7ce288d4786a56b406f13958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myState: 2
+  _myState: 2
   _playerController: {fileID: 7353510555234322251, guid: 63f9dfca50005eb4088e852480cdcd94,
     type: 3}
   _cameraPlayer: {fileID: 6121661707280348861, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
@@ -58,6 +58,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2457479136862389338}
     m_Modifications:
+    - target: {fileID: 1746102406418715568, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
+        type: 3}
+      propertyPath: customRenderingSettings
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746102406418715568, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
+        type: 3}
+      propertyPath: renderingPathCustomFrameSettingsOverrideMask.mask.data1
+      value: 2013265920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121661707280544927, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
+        type: 3}
+      propertyPath: m_Name
+      value: FirstPersonCharacter
+      objectReference: {fileID: 0}
     - target: {fileID: 6121661707280902335, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -112,11 +127,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121661707280544927, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
-        type: 3}
-      propertyPath: m_Name
-      value: FirstPersonCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 6121661708609840646, guid: 42790cfc71d66aa4dbcb2fd2f8d9ef9a,
         type: 3}
