@@ -1,21 +1,42 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 using UnityEditor;
-using Object = UnityEngine.Object;
+using UnityEngine;
 
 namespace FuguFirecracker.TakeNote
 {
-	public static class PathFinder
-	{
-		public static string Find(string dir, string file)
-		{
-			var path = Directory.GetDirectories(Environment.CurrentDirectory, dir, SearchOption.AllDirectories);
-			return path[0].Replace(Environment.CurrentDirectory + Path.DirectorySeparatorChar, "") + Path.DirectorySeparatorChar + file;
-		}
+    public static class PathFinder
+    {
+        public static T LoadAsset<T>(string relativePath) where T : Object
+        {
+            return AssetDatabase.LoadAssetAtPath<T>(GetPathFromSequence(relativePath));
+        }
 
-		public static T LoadAsset<T>(string dir, string file) where T : Object
-		{
-			return AssetDatabase.LoadAssetAtPath<T>(Find(dir, file));
-		}
-	}
+        public static string GetPathFromSequence(string relativePath)
+        {
+            var folderNames = relativePath.Split('/');
+            var fileIndex = folderNames.Length - 1;
+            var fileName = folderNames[fileIndex];
+
+#if NET_4_6
+            var path = Directory.EnumerateDirectories(Application.dataPath, folderNames[0], SearchOption.AllDirectories)
+                .First();
+
+            for (var i = 1; i < fileIndex; i++)
+            {
+                path = Directory.EnumerateDirectories(path, folderNames[i], SearchOption.TopDirectoryOnly).First();
+            }
+#else
+             var path = Directory.GetDirectories(Application.dataPath, folderNames[0], SearchOption.AllDirectories)
+                .First();
+             
+             for (var i = 1; i < fileIndex; i++)
+             {
+                 path = Directory.GetDirectories(path, folderNames[i], SearchOption.TopDirectoryOnly).First();
+             }
+#endif
+            return string.Format("Assets{0}{1}{2}", path.Substring(Application.dataPath.Length),
+                Path.DirectorySeparatorChar, fileName);
+        }
+    }
 }

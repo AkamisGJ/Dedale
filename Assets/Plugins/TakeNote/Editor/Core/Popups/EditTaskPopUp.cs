@@ -12,13 +12,13 @@ namespace FuguFirecracker.TakeNote
 		private float _colorHeight;
 		private float _detailsHeight;
 
-		private readonly Task _editTask;
+		private readonly Task _tempTask;
 		private readonly Task _task;
 
 		public EditTaskPopUp(Task task)
 		{
 			_task = task;
-			_editTask = _task.Clone();
+			_tempTask = TaskMaster.Clone(task);
 		}
 
 		public override Vector2 GetWindowSize()
@@ -28,27 +28,26 @@ namespace FuguFirecracker.TakeNote
 
 		public override void OnGUI(Rect rect)
 		{
-			EditorGUI.DrawRect(new Rect(0, 0, editorWindow.position.width, editorWindow.position.height), Style.PopColor);
 			GUILayout.Space(6);
-			EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+			EditorGUILayout.BeginVertical(Style.PopUp);
 			GUI.backgroundColor = Color.white;
 
 			EditorGUILayout.LabelField("Edit Task", EditorStyles.boldLabel);
 
 			GUI.SetNextControlName("TaskString");
-			_editTask.Title = EditorGUILayout.TextField(string.Empty, _editTask.Title);
+			_tempTask.Title = EditorGUILayout.TextField(string.Empty, _tempTask.Title);
 
 			GUILayout.Space(8);
 
 			EditorGUILayout.BeginHorizontal("Button");
-			_editTask.HasDetails = GUILayout.Toggle(_editTask.HasDetails, "Add Details", Style.AlignCenter, GUILayout.Height(24));
-			_editTask.HasDetails = GUILayout.Toggle(_editTask.HasDetails, string.Empty, Style.OnOffSwitch);
+			_tempTask.HasDetails = GUILayout.Toggle(_tempTask.HasDetails, "Add Details", Style.AlignCenter, GUILayout.Height(24));
+			_tempTask.HasDetails = GUILayout.Toggle(_tempTask.HasDetails, string.Empty, Style.OnOffSwitch);
 			EditorGUILayout.EndHorizontal();
 
-			if (_editTask.HasDetails)
+			if (_tempTask.HasDetails)
 			{
 				_detailsHeight = DETAILS_HEIGHT;
-				_editTask.Details = EditorGUILayout.TextArea(_editTask.Details, Style.WordWrap, GUILayout.Height(58));
+				_tempTask.Details = EditorGUILayout.TextArea(_tempTask.Details, Style.WordWrap, GUILayout.Height(58));
 			}
 			else
 			{
@@ -56,14 +55,14 @@ namespace FuguFirecracker.TakeNote
 			}
 
 			EditorGUILayout.BeginHorizontal("Button");
-			_editTask.IsColored = GUILayout.Toggle(_editTask.IsColored, "Colorize", Style.AlignCenter, GUILayout.Height(24));
-			_editTask.IsColored = GUILayout.Toggle(_editTask.IsColored, string.Empty, Style.OnOffSwitch);
+			_tempTask.IsColored = GUILayout.Toggle(_tempTask.IsColored, "Colorize", Style.AlignCenter, GUILayout.Height(24));
+			_tempTask.IsColored = GUILayout.Toggle(_tempTask.IsColored, string.Empty, Style.OnOffSwitch);
 			EditorGUILayout.EndHorizontal();
 
-			if (_editTask.IsColored)
+			if (_tempTask.IsColored)
 			{
 				_colorHeight = COLOR_HEIGHT;
-				_editTask.DrawColor = EditorGUILayout.ColorField(_editTask.DrawColor);
+				_tempTask.DrawColor = EditorGUILayout.ColorField(_tempTask.DrawColor);
 			}
 			else
 			{
@@ -76,7 +75,7 @@ namespace FuguFirecracker.TakeNote
 
 			if (GUILayout.Button("Apply", GUILayout.Height(22)))
 			{
-				_editTask.Assimilate(_task);
+				TaskMaster.Assimilate(_tempTask, _task);
 				Ledger.Manifest.Save();
  				editorWindow.Close();
 			}

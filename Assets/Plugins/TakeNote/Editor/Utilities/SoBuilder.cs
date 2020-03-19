@@ -3,49 +3,23 @@ using UnityEngine;
 
 namespace FuguFirecracker.TakeNote
 {
-    public static class SoBuilder<T> where T : ScriptableObject
+    public static class SoBuilder
     {
-        public static ScriptableObject GetScriptableObject(string directory = null)
+        public static T FindOrCreateInRelativePath<T>(string relativePath) where T : ScriptableObject
         {
-            if (directory == null) { directory = Application.dataPath; }
-
-            if (CheckPath(directory))
-            {
-                var settings = AssetDatabase.LoadAssetAtPath<ScriptableObject>(GetPath(directory));
-                return settings;
-            }
-
-            Save(directory);
-            return GetScriptableObject(directory);
+            var path = PathFinder.GetPathFromSequence(relativePath);
+            var so = AssetDatabase.LoadAssetAtPath<T>(path);
+            return so ? so : Create<T>(path);
         }
 
-
-        internal static void Save(string directory)
+        private static T Create<T>(string path) where T : ScriptableObject
         {
             var asset = ScriptableObject.CreateInstance<T>();
-            var path = GetPath(directory);
-            Create(asset, path);
-
-            //TODO Asset Overwrite  logic
-        }
-
-        private static bool CheckPath(string directory)
-        {
-            var path = GetPath(directory);
-            return AssetDatabase.LoadAssetAtPath<T>(path);
-        }
-
-        private static string GetPath(string directory)
-        {
-            var path = PathFinder.Find(directory, typeof(T).Name + ".asset");
-            return path;
-        }
-
-        private static void Create(T asset, string path)
-        {
             AssetDatabase.CreateAsset(asset, path);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            return asset;
         }
     }
 }
