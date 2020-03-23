@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PixelCrushers.Wrappers;
+using PixelCrushers;
 
 public class Trigger_Event_Once : TriggerEvent
 {
