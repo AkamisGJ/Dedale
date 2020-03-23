@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using HighlightingSystem;
 
-[RequireComponent(typeof(Highlighter))]
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationWhenLooked = Vector3.zero;
