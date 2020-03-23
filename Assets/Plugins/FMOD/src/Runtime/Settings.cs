@@ -189,7 +189,7 @@ namespace FMODUnity
         public ImportType ImportType;
 
         [SerializeField]
-        public string TargetAssetPath;
+        public string TargetAssetPath = "FMODBanks";
 
         [SerializeField]
         public FMOD.DEBUG_FLAGS LoggingLevel = FMOD.DEBUG_FLAGS.WARNING;
@@ -411,8 +411,6 @@ namespace FMODUnity
             ImportType = ImportType.StreamingAssets;
             AutomaticEventLoading = true;
             AutomaticSampleLoading = false;
-            TargetAssetPath = "";
-
         }
 
         #if UNITY_EDITOR
