@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6683579603624264047}
   - component: {fileID: 6683579603624264045}
-  - component: {fileID: 6683579603624264046}
   - component: {fileID: 6110878480144058152}
   - component: {fileID: 3924250806382632858}
   m_Layer: 0
@@ -46,7 +45,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.8773585, g: 0.87410456, b: 0.7407885, a: 1}
-  m_Intensity: 3183.0989
+  m_Intensity: 3563.8455
   m_Range: 30
   m_SpotAngle: 60
   m_InnerSpotAngle: 6
@@ -95,38 +94,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 2
   m_ShadowAngle: 0
---- !u!114 &6683579603624264046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6683579603624264040}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f01d29d88278f45458d99e6b5199e920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  strength: 1.5
-  useScattering: 0
-  overrideScattering: 1
-  overridingScattering: 1
-  scatteringBias: 0
-  useColorTemperatureTint: 0
-  overrideColor: 0
-  overridingColor: {r: 1, g: 1, b: 1, a: 1}
-  useShadow: 1
-  useCookie: 1
-  enableOutOfPhaseColor: 0
-  outOfPhaseColorStrength: 0.1
-  outOfPhaseColor: {r: 0, g: 1, b: 1, a: 1}
-  customDistanceFalloffThreshold: 0.595
-  customDistanceFalloffPower: 2
-  customCookieDistanceFalloffStartThreshold: 0.1
-  customCookieDistanceFalloffEndThreshold: 0.25
-  customCookieDistanceFalloffPower: 2
-  customAngularFalloffThreshold: 0.231
-  customAngularFalloffPower: 2
 --- !u!95 &6110878480144058152
 Animator:
   serializedVersion: 3
@@ -158,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 6
+  m_Version: 9
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -215,7 +182,7 @@ MonoBehaviour:
   m_ShadowNearPlane: 0.1
   m_BlockerSampleCount: 24
   m_FilterSampleCount: 16
-  m_MinFilterSize: 0.1
+  m_MinFilterSize: 1
   m_KernelSize: 5
   m_LightAngle: 1
   m_MaxDepthBias: 0.001
