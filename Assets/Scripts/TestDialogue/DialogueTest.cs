@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PixelCrushers.DialogueSystem;
+// using PixelCrushers.DialogueSystem;
 
 public class DialogueTest : MonoBehaviour
 {
@@ -10,11 +10,11 @@ public class DialogueTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && _onConversation == false)
-        {
-            DialogueSystemTrigger dialogueSystemTrigger = _obj.GetComponent<DialogueSystemTrigger>();
-            dialogueSystemTrigger.OnUse();
-            _onConversation = true;
-        }
+        // if (Input.GetKeyDown(KeyCode.A) && _onConversation == false)
+        // {
+        //     DialogueSystemTrigger dialogueSystemTrigger = _obj.GetComponent<DialogueSystemTrigger>();
+        //     dialogueSystemTrigger.OnUse();
+        //     _onConversation = true;
+        // }
     }
 }
