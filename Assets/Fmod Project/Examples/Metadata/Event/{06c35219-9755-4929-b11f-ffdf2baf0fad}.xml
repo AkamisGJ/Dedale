@@ -5,7 +5,7 @@
 			<value>Lumière irréguliere</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{b591d6e5-4c7c-4998-a79b-4013f783743f}</destination>
@@ -113,6 +113,7 @@
 	<object class="MixerBusEffectChain" id="{137d0681-15e6-470c-9174-8aa9d5608c07}">
 		<relationship name="effects">
 			<destination>{97d9f4c5-4481-4964-bc42-612cb01ec5c1}</destination>
+			<destination>{bf2eee95-6e46-4568-bb7a-8c391a5863fc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{010381ff-90a3-48fb-bd0e-ebc701c4a801}" />
@@ -124,5 +125,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{1fb682e7-ef60-4851-868a-e8c893539792}" />
 	<object class="MixerBusFader" id="{97d9f4c5-4481-4964-bc42-612cb01ec5c1}" />
+	<object class="SpatialiserEffect" id="{bf2eee95-6e46-4568-bb7a-8c391a5863fc}" />
 	<object class="MixerBusFader" id="{4eb199c4-730c-4ab8-b5ea-1eaeff42aa39}" />
 </objects>

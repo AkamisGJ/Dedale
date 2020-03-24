@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 979385333871501345}
   - component: {fileID: 979385333870698497}
   - component: {fileID: 979385333869601473}
+  - component: {fileID: 4233203857875161058}
   m_Layer: 0
   m_Name: cristal01
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 979385333871606785}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: -0.151, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.013403812, y: 0.013403816, z: 0.013403812}
   m_Children:
   - {fileID: 309104096093809294}
   m_Father: {fileID: 0}
@@ -81,6 +82,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4233203857875161058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979385333871606785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Sound Design/Roche lumineuse
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &129827473153461393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92,6 +116,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Shadows.m_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 177672516737292579, guid: bc6ccd6f4d439df4988e67dae7bb8e17,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 9.63e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 177672516737292579, guid: bc6ccd6f4d439df4988e67dae7bb8e17,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 2.1e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 177672516737292579, guid: bc6ccd6f4d439df4988e67dae7bb8e17,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 7.8e-44
       objectReference: {fileID: 0}
     - target: {fileID: 398311210521208351, guid: bc6ccd6f4d439df4988e67dae7bb8e17,
         type: 3}
