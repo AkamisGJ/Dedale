@@ -121,7 +121,7 @@ namespace FMODUnity
                 ClearCache();
                 if (wasValid)
                 {
-                    UnityEngine.Debug.LogError(string.Format("FMOD Studio: Directory {0} doesn't contain any banks. Build from the tool or check the path in the settings", defaultBankFolder));
+                    UnityEngine.Debug.LogError(string.Format("FMOD Studio: Directory {0} doesn't contain any banks. Build the banks in Studio or check the path in the settings.", defaultBankFolder));
                 }
                 return;
             }
@@ -522,26 +522,18 @@ namespace FMODUnity
                 return;
             }
 
-            string otherBankTargetFolder, otherBankTargetExension;
-            string[] otherBankFiles = new string[] { };
+            bool madeChanges = false;
 
             if (removeBanks)
             {
-                otherBankTargetFolder =
+                string oldBankTargetFolder =
                 Settings.Instance.ImportType == ImportType.AssetBundle
                 ? Application.dataPath + "/StreamingAssets"
                 : Application.dataPath + "/" + Settings.Instance.TargetAssetPath;
-                Directory.CreateDirectory(bankTargetFolder);
 
-                otherBankTargetExension =
-                    Settings.Instance.ImportType == ImportType.AssetBundle
-                    ? "bank"
-                    : "bytes";
-
-                otherBankFiles = Directory.GetFiles(otherBankTargetFolder, "*." + otherBankTargetExension);
+                RemoveBanks(oldBankTargetFolder);
+                madeChanges = true;
             }
-
-            bool madeChanges = false;
 
             try
             {
@@ -571,32 +563,6 @@ namespace FMODUnity
                             madeChanges = true;
                         }
                     }
-                }
-
-                if (removeBanks)
-                {
-                    foreach (var otherBankFileName in otherBankFiles)
-                    {
-                        string assetString = otherBankFileName.Replace(Application.dataPath, "Assets");
-                        AssetDatabase.ImportAsset(assetString);
-                        UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
-                        string[] labels = AssetDatabase.GetLabels(obj);
-                        foreach (string label in labels)
-                        {
-                            if (label.Equals("FMOD"))
-                            {
-                                File.Delete(otherBankFileName);
-                                madeChanges = true;
-                                break;
-                            }
-                        }
-                    }
-                    AssetDatabase.Refresh();
-                    if (Directory.GetFiles(Path.GetDirectoryName(otherBankFiles[0])).Length == 0)
-                    {
-                        Directory.Delete(Path.GetDirectoryName(otherBankFiles[0]));
-                    }
-                    removeBanks = false;
                 }
 
                 // Copy over any files that don't match timestamp or size or don't exist
@@ -844,6 +810,35 @@ namespace FMODUnity
                     return false;
             }
             return true;
+        }
+
+        public static void RemoveBanks(string path)
+        {
+            string[] oldBankFiles = Directory.GetFiles(path);
+
+            foreach (var oldBankFileName in oldBankFiles)
+            {
+                if (oldBankFileName.EndsWith(".meta"))
+                    continue;
+                string assetString = oldBankFileName.Replace(Application.dataPath, "Assets");
+                AssetDatabase.ImportAsset(assetString);
+                UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetString);
+                string[] labels = AssetDatabase.GetLabels(obj);
+                foreach (string label in labels)
+                {
+                    if (label.Equals("FMOD"))
+                    {
+                        AssetDatabase.MoveAssetToTrash(assetString);
+                        //File.Delete(oldBankFileName);
+                        break;
+                    }
+                }
+            }
+            if (Directory.GetFiles(Path.GetDirectoryName(oldBankFiles[0])).Length == 0)
+            {
+                Directory.Delete(Path.GetDirectoryName(oldBankFiles[0]));
+            }
+            removeBanks = false;
         }
     }
 }
