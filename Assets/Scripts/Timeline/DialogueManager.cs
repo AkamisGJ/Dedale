@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float _timeExposeDialogue = 1;
     private GameObject _previousDialogue = null;
     private List<GameObject> _dialogues = null;
+    private string _nextText = null;
 
     public PlayableDirector CurrentPlayableDirector { get => _currentPlayableDirector; }
     public List<GameObject> Dialogues { get => _dialogues; set => _dialogues = value; }
@@ -43,9 +44,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void OnChangeText(string text)
+    private void SpawnText()
     {
-        if(_dialogues.Count > 0)
+        if (_dialogues.Count > 0)
         {
             foreach (var dialogue in _dialogues)
             {
@@ -55,7 +56,7 @@ public class DialogueManager : MonoBehaviour
         GameObject currentDialogue = Instantiate(_prefabsDialogue, _canvasDialogue.transform.position, Quaternion.identity, _canvasDialogue.transform);
         currentDialogue.transform.localPosition = new Vector3(0, _positionYDialogue, 0);
         TextMeshProUGUI textMeshProUGUI = currentDialogue.GetComponentInChildren<TextMeshProUGUI>();
-        textMeshProUGUI.text = text;
+        textMeshProUGUI.text = _nextText;
         _dialogues.Add(currentDialogue);
         Destroy(_previousDialogue, _timeExposeDialogue);
         _previousDialogue = currentDialogue;
@@ -66,6 +67,21 @@ public class DialogueManager : MonoBehaviour
             _currentPlayableDirector = null;
             OnStartTimeline(_nextPlayableDirector, _nextDialogueData);
             _nextPlayableDirector = null;
+        }
+        GameLoopManager.Instance.LastStart -= SpawnText;
+    }
+
+    public void OnChangeText(string text)
+    {
+        _nextText = text;
+        GameLoopManager.Instance.LastStart += SpawnText;
+    }
+
+    public void DestroyCurrentDialogue()
+    {
+        if(_previousDialogue != null)
+        {
+            Destroy(_previousDialogue);
         }
     }
 

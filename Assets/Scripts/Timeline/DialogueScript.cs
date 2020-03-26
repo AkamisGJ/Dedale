@@ -29,14 +29,22 @@ public class DialogueScript : MonoBehaviour
 
     public void NextText()
     {
-        if(_playableDirector == _dialogueManager.CurrentPlayableDirector)
+        if(Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance)
         {
-            _dialogueIndex += 1;
-            _dialogueManager.OnChangeText(_dialogueData.Dialogue[_dialogueIndex]);
+            if (_playableDirector == _dialogueManager.CurrentPlayableDirector)
+            {
+                _dialogueIndex += 1;
+                _dialogueManager.OnChangeText(_dialogueData.Dialogue[_dialogueIndex]);
+            }
+            else
+            {
+                _dialogueIndex = 0;
+            }
         }
         else
         {
-            _dialogueIndex = 0;
+            _dialogueIndex += 1;
+            _dialogueManager.DestroyCurrentDialogue();
         }
     }
 
