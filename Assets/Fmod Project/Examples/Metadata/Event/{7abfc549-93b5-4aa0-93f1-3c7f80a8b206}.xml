@@ -5,7 +5,7 @@
 			<value>Ramasser un item</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{b591d6e5-4c7c-4998-a79b-4013f783743f}</destination>
@@ -113,6 +113,7 @@
 	<object class="MixerBusEffectChain" id="{e5f39628-478c-4605-91dc-2c4e69fe0250}">
 		<relationship name="effects">
 			<destination>{6e7244a2-c1de-4377-9e75-cce027615d64}</destination>
+			<destination>{07511103-f3b3-4a53-8bd2-2ffc724c4a4f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b7403fa9-82dd-4f67-9baf-a1fc26a8c915}" />
@@ -124,5 +125,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{d8f499d3-4b4b-4ae0-9dfa-7160c431143d}" />
 	<object class="MixerBusFader" id="{6e7244a2-c1de-4377-9e75-cce027615d64}" />
+	<object class="SpatialiserEffect" id="{07511103-f3b3-4a53-8bd2-2ffc724c4a4f}" />
 	<object class="MixerBusFader" id="{2ad7b637-8ea1-4e0a-8d31-61682ca84b5e}" />
 </objects>

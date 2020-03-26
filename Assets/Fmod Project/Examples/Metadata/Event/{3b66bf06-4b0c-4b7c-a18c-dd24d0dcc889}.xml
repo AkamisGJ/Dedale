@@ -5,7 +5,7 @@
 			<value>Clef qui ouvre la porte</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{b591d6e5-4c7c-4998-a79b-4013f783743f}</destination>
@@ -113,6 +113,7 @@
 	<object class="MixerBusEffectChain" id="{1e4b4e12-d1e4-4f63-b8be-80da8101cc9b}">
 		<relationship name="effects">
 			<destination>{f83e502f-a066-4cbb-8566-2de8f4147fe6}</destination>
+			<destination>{d208c8ca-1bc7-4fbe-a590-4fda285443b7}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{fb4a2493-7e53-4ea6-af21-cf03e44ae5cf}" />
@@ -124,5 +125,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{9a030f35-f92a-4cea-b431-d4d6797690b8}" />
 	<object class="MixerBusFader" id="{f83e502f-a066-4cbb-8566-2de8f4147fe6}" />
+	<object class="SpatialiserEffect" id="{d208c8ca-1bc7-4fbe-a590-4fda285443b7}" />
 	<object class="MixerBusFader" id="{2a649585-f978-41bf-9b3f-2fbe0b12a8d3}" />
 </objects>
