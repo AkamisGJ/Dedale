@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
 using TMPro;
+using FMODUnity;
 
 public class DialogueScript : MonoBehaviour
 {
     [SerializeField] private PlayableDirector _playableDirector = null;
     [SerializeField] private DialogueData _dialogueData = null;
-    [SerializeField] private TextMeshProUGUI _textMeshPro = null;
-    [SerializeField] private GameObject _canvasDialogue = null;
     [SerializeField] private DialogueManager _dialogueManager = null;
+    [SerializeField] private StudioEventEmitter _eventEmitter = null;
     private int _dialogueIndex = 0;
 
     public DialogueData DialogueData { get => _dialogueData; }
@@ -21,6 +21,10 @@ public class DialogueScript : MonoBehaviour
     public void OnStart()
     {
         _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData);
+        if(_eventEmitter.IsPlaying() == false)
+        {
+            _eventEmitter.Play();
+        }
     }
 
     public void NextText()
@@ -39,6 +43,7 @@ public class DialogueScript : MonoBehaviour
     public void OnExit()
     {
         _dialogueManager.OnEndTimeline();
+        _eventEmitter.Stop();
         _dialogueIndex = 0;
     }
 }
