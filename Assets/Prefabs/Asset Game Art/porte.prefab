@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6453236979433465170
 Transform:
@@ -51,7 +51,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6453236979433465172
 Transform:
@@ -126,9 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0dff9ad42cd8b34c953c756ad1e1200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 500
+  _speed: 100
   _bounciness: 0.05
   _needKey: 0
+  minLimit: -90
+  maxLimit: 0
 --- !u!65 &7589948823667463745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -140,8 +142,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 207.22636, y: 246.15034, z: 38.741783}
-  m_Center: {x: -103.61199, y: -0.000015258789, z: 12.194924}
+  m_Size: {x: 185.04803, y: 219.08234, z: 30.56026}
+  m_Center: {x: -100.36098, y: -2.1538377, z: 12.194908}
 --- !u!54 &1743713893
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,8 +155,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 2
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -169,7 +171,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.5}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -8.499882, y: 2.1092467, z: -12.391021}
+  m_ConnectedAnchor: {x: -6.5001183, y: 2.3132467, z: -32.60898}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -180,9 +182,9 @@ HingeJoint:
     targetVelocity: 0
     force: 0
     freeSpin: 0
-  m_UseLimits: 0
+  m_UseLimits: 1
   m_Limits:
-    min: -90
+    min: 0
     max: 90
     bounciness: 0.1
     bounceMinVelocity: 0.2
@@ -210,7 +212,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6453236979433465174
 Transform:
