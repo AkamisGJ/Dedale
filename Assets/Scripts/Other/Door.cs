@@ -10,6 +10,8 @@ public class Door : MonoBehaviour, IInteract
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
     [SerializeField] private bool _needKey = false;
+    [SerializeField] private float minLimit = -90f;
+    [SerializeField] private float maxLimit = 90f;
     public bool NeedKey { get => _needKey; }
 
     void Start()
@@ -28,8 +30,8 @@ public class Door : MonoBehaviour, IInteract
         _hj.useMotor = true;
         motor.freeSpin = false;
         _limits.bounciness = 0f;
-        _limits.min = -90;
-        _limits.max = 90;
+        _limits.min = minLimit;
+        _limits.max = maxLimit;
         _hj.limits = _limits;
     }
 

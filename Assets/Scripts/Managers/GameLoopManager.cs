@@ -54,6 +54,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _lateLoopDialogue = null;
+    public event Action LateLoopDialogue
+    {
+        add
+        {
+            _lateLoopDialogue -= value;
+            _lateLoopDialogue += value;
+        }
+        remove
+        {
+            _lateLoopDialogue -= value;
+        }
+    }
+
     private Action _loopQTE = null;
     public event Action LoopQTE
     {
@@ -168,7 +182,8 @@ public class GameLoopManager : Singleton<GameLoopManager>
 
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         if(_fixedGameLoop != null){
             _fixedGameLoop();
         }
@@ -178,6 +193,12 @@ public class GameLoopManager : Singleton<GameLoopManager>
         if(_lateGameLoop != null){
             _lateGameLoop();
         }
+
+        if (_lateLoopDialogue != null)
+        {
+            _lateLoopDialogue();
+        }
+
         if (_gameLoopPortal != null)
         {
             _gameLoopPortal();

@@ -1,25 +1,59 @@
 fileFormatVersion: 2
 guid: e69c3e0b3a193394ea2fbc7905ecc8ee
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: coussin1_low
-    100004: coussin2_low
-    100006: coussin3_low
-    400000: //RootNode
-    400002: coussin1_low
-    400004: coussin2_low
-    400006: coussin3_low
-    2300000: coussin1_low
-    2300002: coussin2_low
-    2300004: coussin3_low
-    3300000: coussin1_low
-    3300002: coussin2_low
-    3300004: coussin3_low
-    4300000: coussin1_low
-    4300002: coussin2_low
-    4300004: coussin3_low
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: coussin1_low
+  - first:
+      1: 100004
+    second: coussin2_low
+  - first:
+      1: 100006
+    second: coussin3_low
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: coussin1_low
+  - first:
+      4: 400004
+    second: coussin2_low
+  - first:
+      4: 400006
+    second: coussin3_low
+  - first:
+      23: 2300000
+    second: coussin1_low
+  - first:
+      23: 2300002
+    second: coussin2_low
+  - first:
+      23: 2300004
+    second: coussin3_low
+  - first:
+      33: 3300000
+    second: coussin1_low
+  - first:
+      33: 3300002
+    second: coussin2_low
+  - first:
+      33: 3300004
+    second: coussin3_low
+  - first:
+      43: 4300000
+    second: coussin1_low
+  - first:
+      43: 4300002
+    second: coussin2_low
+  - first:
+      43: 4300004
+    second: coussin3_low
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -27,7 +61,7 @@ ModelImporter:
       name: coussin
     second: {fileID: 2100000, guid: cccc80b434cc3604ba0c51e1769ba9a0, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 1
     materialSearch: 1
     materialLocation: 0
@@ -60,25 +94,27 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -87,10 +123,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -100,13 +136,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
