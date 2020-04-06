@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using HighlightingSystem;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class IMouvement : IPlayerState
 {
@@ -50,6 +52,8 @@ public class IMouvement : IPlayerState
     #region Properties
     public Vector3 MoveModifier { get => _moveModifier; set { _moveModifier = value; Debug.Log(value); } }
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
+    public bool IsCrouch { get => _isCrouch; }
+    public float SpeedSprint { get => _speedSprint; }
     #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
