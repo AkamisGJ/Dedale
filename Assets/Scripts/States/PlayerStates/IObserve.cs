@@ -15,8 +15,8 @@ public class IObserve : IPlayerState
     private InteractObject _currentObjectInterract = null;
     private Quaternion _grabObjectRotationWhenLooked = Quaternion.identity;
     private float _distanceGrabObjectWithCameraWhenLooked = 1.0f;
-    private RaycastHit _raycastHit;
     private AudioSource _audioSourcePlayer;
+    private Collider _objectCollider = null;
     private LayerMask _layerMask;
     private Vector3 OffsetSpherCast = Vector3.zero;
 
@@ -30,13 +30,11 @@ public class IObserve : IPlayerState
         _playerAgentController = PlayerManager.Instance.PlayerController;
     }
 
-    public void Enter()
+    public void Enter(Collider interactObjectCollider)
     {
-        //Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
-        OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
-        Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
-        _grabObjectCollider = _raycastHit.collider;
-        _grabObject = _raycastHit.transform.gameObject;
+        _objectCollider = interactObjectCollider;
+        _grabObjectCollider = _objectCollider;
+        _grabObject = _objectCollider.transform.gameObject;
         _originPositionGrabObject = _grabObject.transform.position;
         _originRotationGrabObject = _grabObject.transform.rotation;
         _objectHolder = _playerAgentController.ObjectHolder;
@@ -91,7 +89,7 @@ public class IObserve : IPlayerState
 
     public void Exit()
     {
-        _raycastHit.collider.isTrigger = false;
+        _objectCollider.isTrigger = false;
         _grabObject.transform.SetParent(null);
         if (_currentObjectInterract.OnThrowObject != null && _audioSourcePlayer != null)
         {

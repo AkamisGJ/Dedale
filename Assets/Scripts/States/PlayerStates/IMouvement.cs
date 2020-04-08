@@ -84,7 +84,7 @@ public class IMouvement : IPlayerState
         _moveModifier = Vector3.zero;
     }
 
-    public void Enter()
+    public void Enter(Collider collider)
     {
         _canMove = true;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
@@ -237,7 +237,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _animator.SetFloat("BlendMovement", _blendValue);
-                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE);
+                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE, _raycastHit.collider);
                     return;
                 }
             }
@@ -251,7 +251,7 @@ public class IMouvement : IPlayerState
                     if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
                     {
                         _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
-                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
+                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION, _raycastHit.collider);
                     }
                     return;
                 }

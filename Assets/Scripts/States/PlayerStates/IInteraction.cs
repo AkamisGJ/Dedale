@@ -6,7 +6,6 @@ public class IInteraction : IPlayerState
     private GameObject _interactGameObject = null;
     private IInteract _interactObject = null;
     private PlayerData _playerData = null;
-    private RaycastHit _raycastHit;
     private Camera _camera = null;
     private LayerMask _layerMask;
     private Vector3 OffsetSpherCast = Vector3.zero;
@@ -19,12 +18,12 @@ public class IInteraction : IPlayerState
         _playerController = PlayerManager.Instance.PlayerController;
     }
 
-    public void Enter()
+    public void Enter(Collider colliderInteraction)
     {
         //Physics.Raycast(_camera.transform.position, _camera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
-        OffsetSpherCast = _camera.transform.position - _camera.transform.forward * _playerData.RayonInteraction;
-        Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _camera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
-        _interactGameObject = _raycastHit.collider.gameObject;
+        //OffsetSpherCast = _camera.transform.position - _camera.transform.forward * _playerData.RayonInteraction;
+        //Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _camera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
+        _interactGameObject = colliderInteraction.gameObject;
         _interactObject = _interactGameObject.GetComponent<IInteract>();
         InputManager.Instance.MousePosition += _interactObject.Interact;
     }

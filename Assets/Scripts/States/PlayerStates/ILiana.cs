@@ -15,7 +15,7 @@ public class ILiana : IPlayerState
         _camera = camera;
     }
 
-    public void Enter()
+    public void Enter(Collider collider)
     {
         InputManager.Instance.Direction += SetOrientation;
     }

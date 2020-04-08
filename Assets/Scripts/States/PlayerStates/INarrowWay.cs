@@ -17,7 +17,7 @@ public class INarrowWay : IPlayerState
         _characterController = characterController;
     }
 
-    public void Enter()
+    public void Enter(Collider collider)
     {
         _lerpCamera = 0.5f;
         InputManager.Instance.Direction += SetOrientation;
