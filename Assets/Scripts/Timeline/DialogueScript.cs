@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
-using TMPro;
 using FMODUnity;
 
 public class DialogueScript : MonoBehaviour
@@ -10,6 +9,7 @@ public class DialogueScript : MonoBehaviour
     [SerializeField] private DialogueManager _dialogueManager = null;
     [SerializeField] private StudioEventEmitter _eventEmitter = null;
     private int _dialogueIndex = 0;
+    private bool _is3D = false;
 
     public DialogueData DialogueData { get => _dialogueData; }
 
@@ -29,7 +29,8 @@ public class DialogueScript : MonoBehaviour
 
     public void NextText()
     {
-        if(Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance)
+        _eventEmitter.EventDescription.is3D(out _is3D);
+        if (Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance || _is3D == false)
         {
             if (_playableDirector == _dialogueManager.CurrentPlayableDirector)
             {

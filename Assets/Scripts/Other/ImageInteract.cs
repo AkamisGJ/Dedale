@@ -19,36 +19,31 @@ public class ImageInteract : MonoBehaviour
         _playerData = PlayerManager.Instance.PlayerController.PlayerData;
         if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
         {
-            _canvas = Instantiate(_playerData.CanvasHelper, null, true);
-            _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+            SpawnCanvas();
             _imageInteraction = Instantiate(_playerData.ObservableObjectHelper, _canvas.transform, true);
             _distance = _playerData.DistanceHelperObservableObject;
         }
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
         {
-            _canvas = Instantiate(_playerData.CanvasHelper, null, true);
-            _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+            SpawnCanvas();
             _imageInteraction = Instantiate(_playerData.InteractionHelper, _canvas.transform, true);
             _distance = _playerData.DistanceHelperInteraction;
         }
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("Ladder"))
         {
-            _canvas = Instantiate(_playerData.CanvasHelper, null, true);
-            _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+            SpawnCanvas();
             _imageInteraction = Instantiate(_playerData.LadderHelper, _canvas.transform, true);
             _distance = _playerData.DistanceHelperInteraction;
         }
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
         {
-            _canvas = Instantiate(_playerData.CanvasHelper, null, true);
-            _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+            SpawnCanvas();
             _imageInteraction = Instantiate(_playerData.NarrowWayHelper, _canvas.transform, true);
             _distance = _playerData.DistanceHelperInteraction;
         }
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("Liana"))
         {
-            _canvas = Instantiate(_playerData.CanvasHelper, null, true);
-            _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+            SpawnCanvas();
             _imageInteraction = Instantiate(_playerData.LianaHelper, _canvas.transform, true);
             _distance = _playerData.DistanceHelperInteraction;
         }
@@ -66,6 +61,12 @@ public class ImageInteract : MonoBehaviour
         color.a = 0;
         _currentImage.color = color;
         _isFocus = false;
+    }
+
+    void SpawnCanvas()
+    {
+        _canvas = Instantiate(_playerData.CanvasHelper, null, true);
+        _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
     }
 
     void Update()
