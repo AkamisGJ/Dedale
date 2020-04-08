@@ -18,6 +18,7 @@ public class IObserve : IPlayerState
     private RaycastHit _raycastHit;
     private AudioSource _audioSourcePlayer;
     private LayerMask _layerMask;
+    private Vector3 OffsetSpherCast = Vector3.zero;
 
     public void Init(PlayerData playerData,Camera _camera, CharacterController characterController, Animator animator = null)
     {
@@ -31,7 +32,9 @@ public class IObserve : IPlayerState
 
     public void Enter()
     {
-        Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
+        //Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
+        OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
+        Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask);
         _grabObjectCollider = _raycastHit.collider;
         _grabObject = _raycastHit.transform.gameObject;
         _originPositionGrabObject = _grabObject.transform.position;

@@ -5,12 +5,22 @@ using Sirenix.OdinInspector;
 public class PlayerData : ScriptableObject
 {
     #region Fields
-    [BoxGroup("Raycast Interaction Object", centerLabel: true)]
+    [BoxGroup("SphereCast Interaction Object", centerLabel: true)]
     [Tooltip("Layer Interaction object")]
     [SerializeField] private LayerMask _layerMask;
-    [BoxGroup("Raycast Interaction Object")]
-    [Tooltip("Distance Interaction Object")]
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the ray of the sphereCast for interact with object")]
+    [SerializeField] private float _rayonInteraction;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the distance of the sphereCast for interact with object")]
     [SerializeField] private float _maxDistanceInteractionObject = 5;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the angle when the player has the information of what object is interactive")]
+    [SerializeField] private float _angleInteractionImage;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the distance when the player has the information of what object is interactive")]
+    [SerializeField] private float _distanceInteractionImage;
+
     [BoxGroup("Sprint")]
     [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _accelerationCurve = null;
@@ -132,5 +142,8 @@ public class PlayerData : ScriptableObject
     public float SpeedNarrowWay { get => _speedNarrowWay; }
     public float MaxAngleNarrowWay { get => _maxAngleNarrowWay; }
     public Color ColorHightLightObject { get => _colorHightlightObject; }
+    public float DistanceInteractionImage { get => _distanceInteractionImage; }
+    public float AngleInteractionImage { get => _angleInteractionImage; }
+    public float RayonInteraction { get => _rayonInteraction; }
     #endregion Properties
 }
