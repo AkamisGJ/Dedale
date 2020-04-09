@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 3803694425610359260}
   - component: {fileID: 5301415514263563242}
   - component: {fileID: 1922720627335583507}
-  m_Layer: 0
+  - component: {fileID: 5614258942727538350}
+  - component: {fileID: 5614258942727538345}
+  - component: {fileID: 8296172668584461066}
+  m_Layer: 8
   m_Name: flacon_morphine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185270138339419087}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.056, y: -1.7265147e-16, z: 7.781}
+  m_LocalRotation: {x: 0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_LocalPosition: {x: -2.414, y: 0.8747, z: 1.12}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_Children: []
+  m_Children:
+  - {fileID: 5614258943086750888}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 0}
 --- !u!33 &5301415514263563242
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -39,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185270138339419087}
-  m_Mesh: {fileID: -4491273106650073304, guid: 0f788be870e1c7b49ae259799bc6f196, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &1922720627335583507
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -72,7 +76,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -80,3 +84,76 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5614258942727538350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185270138339419087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPosition: {fileID: 5614258943086750891}
+--- !u!114 &5614258942727538345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185270138339419087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeb87944b642aa40910d2dac9b7ff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationWhenLooked: {x: 0, y: 0, z: 0}
+  _distanceWithCameraWehnLooked: 0.1
+  _OnTakeObject: {fileID: 0}
+  _OnThrowObject: {fileID: 0}
+  _isKey: 0
+--- !u!65 &8296172668584461066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185270138339419087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.5234175, y: 9.25502, z: 4.523415}
+  m_Center: {x: 0, y: -0.00000333786, z: 0.0000026226044}
+--- !u!1 &5614258943086750891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5614258943086750888}
+  m_Layer: 8
+  m_Name: UI Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5614258943086750888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614258943086750891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.17, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3803694425610359260}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

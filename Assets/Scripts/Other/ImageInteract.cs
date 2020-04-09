@@ -14,8 +14,17 @@ public class ImageInteract : MonoBehaviour
 
     public bool IsFocus { get => _isFocus; set => _isFocus = value; }
 
-    private void Start()
+    private void Awake()
     {
+        if (GetComponent<Collider>() == null)
+        {
+            Debug.LogWarning("There is no Collider on " + gameObject.name);
+        }
+    }
+
+
+    private void Start()
+    { 
         _playerData = PlayerManager.Instance.PlayerController.PlayerData;
         if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
         {
