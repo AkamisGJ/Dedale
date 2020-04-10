@@ -30,7 +30,7 @@ public class IQTELadder : IPlayerState
         InputManager.Instance.Direction -= SetOrientation;
     }
 
-    public void Enter()
+    public void Enter(Collider collider)
     {
         InputManager.Instance.Direction += SetOrientation;
     }

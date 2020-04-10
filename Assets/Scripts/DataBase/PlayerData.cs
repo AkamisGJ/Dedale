@@ -1,16 +1,56 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "DataBase/PlayerData")]
 public class PlayerData : ScriptableObject
 {
     #region Fields
-    [BoxGroup("Raycast Interaction Object", centerLabel: true)]
+    [BoxGroup("SphereCast Interaction Object", centerLabel: true)]
     [Tooltip("Layer Interaction object")]
     [SerializeField] private LayerMask _layerMask;
-    [BoxGroup("Raycast Interaction Object")]
-    [Tooltip("Distance Interaction Object")]
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the ray of the sphereCast for interact with object")]
+    [SerializeField] private float _rayonInteraction;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the distance of the sphereCast for interact with object")]
     [SerializeField] private float _maxDistanceInteractionObject = 5;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the angle when the player has the information of what object is interactive")]
+    [SerializeField] private float _angleHelper;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the distance when the player has the information of what interaction object is interactive")]
+    [SerializeField] private float _distanceHelperInteraction;
+    [BoxGroup("SphereCast Interaction Object")]
+    [Tooltip("Define the distance when the player has the information of what observable object is interactive")]
+    [SerializeField] private float _distanceHelperObservableObject;
+
+    [BoxGroup("Interaction Object Helper", centerLabel: true)]
+    [Tooltip("The canvas for interaction helper")]
+    [SerializeField] private Canvas _canvasHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for input helper")]
+    [SerializeField] private RawImage _inputHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for interaction helper")]
+    [SerializeField] private RawImage _interactionHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for obsvervable object helper")]
+    [SerializeField] private RawImage _observableObjectHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for liana helper")]
+    [SerializeField] private RawImage _lianaHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for narrow way helper")]
+    [SerializeField] private RawImage _narrowWayHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for ladder helper")]
+    [SerializeField] private RawImage _ladderHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for locked door")]
+    [SerializeField] private RawImage _lock;
+
+
     [BoxGroup("Sprint")]
     [Tooltip("0 to 1 value and 0 to infinity time")]
     [SerializeField] private AnimationCurve _accelerationCurve = null;
@@ -132,5 +172,17 @@ public class PlayerData : ScriptableObject
     public float SpeedNarrowWay { get => _speedNarrowWay; }
     public float MaxAngleNarrowWay { get => _maxAngleNarrowWay; }
     public Color ColorHightLightObject { get => _colorHightlightObject; }
+    public float RayonInteraction { get => _rayonInteraction; }
+    public float DistanceHelperInteraction { get => _distanceHelperInteraction; }
+    public float AngleHelper { get => _angleHelper; }
+    public RawImage InputHelper { get => _inputHelper; }
+    public RawImage InteractionHelper { get => _interactionHelper; }
+    public RawImage ObservableObjectHelper { get => _observableObjectHelper; }
+    public RawImage LianaHelper { get => _lianaHelper; }
+    public RawImage NarrowWayHelper { get => _narrowWayHelper; }
+    public RawImage LadderHelper { get => _ladderHelper; }
+    public Canvas CanvasHelper { get => _canvasHelper; }
+    public float DistanceHelperObservableObject { get => _distanceHelperObservableObject; }
+    public RawImage Lock { get => _lock; }
     #endregion Properties
 }

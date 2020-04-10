@@ -1,18 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using HighlightingSystem;
+﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
+[HierarchyIcon("interact", false)]
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationWhenLooked = Vector3.zero;
     [SerializeField] private  float _distanceWithCameraWehnLooked = 0.5f;
-    [SerializeField] private AudioClip _OnTakeObject = null;
-    [SerializeField] private AudioClip _OnThrowObject = null;
+    [SerializeField] private UnityEvent _OnTakeObject = null;
+    [SerializeField] private UnityEvent _OnThrowObject = null;
     [SerializeField] private bool _isKey = false;
-    public AudioClip OnThrowObject { get { return _OnThrowObject; } }
-    public AudioClip OnTakeObject { get { return _OnTakeObject; } }
+    public UnityEvent OnThrowObject { get { return _OnThrowObject; } }
+    public UnityEvent OnTakeObject { get { return _OnTakeObject; } }
     public bool IsKey { get => _isKey; }
+
+    private void Awake()
+    {
+        if(GetComponent<ImageInteract>() == null)
+        {
+            Debug.Log("Image Interact script is missing on " + transform.name);
+        }
+
+        if (GetComponent<Collider>() == null)
+        {
+            Debug.LogWarning("There is no Collider on " + gameObject.name);
+        }
+    }
 
     public Vector4 Interact()
     {

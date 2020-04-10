@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[HierarchyIcon("camera")]
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
@@ -80,10 +81,10 @@ public class PlayerAgentController : MonoBehaviour
         _states[_currentState].Update();
     }
 
-    public void ChangeState(MyState nextState)
+    public void ChangeState(MyState nextState, Collider collider = null)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter();
+        _states[nextState].Enter(collider);
         _currentState = nextState;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[HierarchyIcon("flag")]
 public class InstantiatePlayer : MonoBehaviour
 {
     [SerializeField] private GameManager.MyState _myState = GameManager.MyState.GAME;
