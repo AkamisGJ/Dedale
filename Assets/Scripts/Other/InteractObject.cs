@@ -13,7 +13,6 @@ public class InteractObject : MonoBehaviour
     public UnityEvent OnTakeObject { get { return _OnTakeObject; } }
     public bool IsKey { get => _isKey; }
 
-
     private void Awake()
     {
         if(GetComponent<ImageInteract>() == null)
