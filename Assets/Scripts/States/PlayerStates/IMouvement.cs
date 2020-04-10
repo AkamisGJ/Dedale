@@ -43,10 +43,8 @@ public class IMouvement : IPlayerState
     private GameObject enableHightLightObject = null;
     private Vector3 _moveModifier = Vector3.zero;
     private float _useGravity = 1;
-    private bool _canMove = false;
     private float _blendValue = 0;
     private float _blendLerp = 0;
-    private Animator _animator = null;
     private Vector3 OffsetSpherCast = Vector3.zero;
     #endregion Fields
 
@@ -57,10 +55,9 @@ public class IMouvement : IPlayerState
     public float SpeedSprint { get => _speedSprint; }
     #endregion Properties
 
-    public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
+    public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
     {
         _currentAccelerationSprint = 0;
-        _animator = animator;
         _blendValue = 0;
         _layerMask = playerData.LayerMask;
         _characterController = characterController;
@@ -86,7 +83,7 @@ public class IMouvement : IPlayerState
 
     public void Enter(Collider collider)
     {
-        _canMove = true;
+        _playerController.CanMove = true;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
@@ -102,7 +99,7 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Direction += SetDirection;
-        InputManager.Instance.Zoom += Zoom;
+        //InputManager.Instance.Zoom += Zoom;
     }
 
     public void Update()
@@ -117,14 +114,14 @@ public class IMouvement : IPlayerState
         {
             Crouching(-1);
         }
-        if (_zooming == true)
+        /*if (_zooming == true)
         {
-            Zooming(1);
+            _playerController.Zooming(1);
         }
         if (_unZooming == true)
         {
-            Zooming(-1);
-        }
+            _playerController.Zooming(-1);
+        }*/
     }
 
     public void Exit()
@@ -133,7 +130,7 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
-        InputManager.Instance.Zoom -= Zoom;
+        //InputManager.Instance.Zoom -= Zoom;
     }
 
     private void RaycastInteractionObject()
@@ -154,7 +151,6 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE);
                     return;
                 }
@@ -164,7 +160,6 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
                     if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
                     {
@@ -179,8 +174,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -190,9 +184,8 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _timeCrouch = 0;
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -202,9 +195,8 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _timeCrouch = 0;
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -236,7 +228,6 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE, _raycastHit.collider);
                     return;
                 }
@@ -246,7 +237,6 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
                     if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
                     {
@@ -261,8 +251,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -272,9 +261,8 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _timeCrouch = 0;
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -284,9 +272,8 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _animator.SetFloat("BlendMovement", _blendValue);
                     _timeCrouch = 0;
-                    _canMove = false;
+                    _playerController.CanMove = false; //_canMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -320,13 +307,6 @@ public class IMouvement : IPlayerState
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
         Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
         _characterController.Move(realMove);
-        BlendTreeAnimator();
-    }
-
-    private void BlendTreeAnimator()
-    {
-        _blendValue = Mathf.Lerp(0, 1, _accelerationLerp/2 + _accelerationSprintLerp/2);
-        _animator.SetFloat("BlendMovement", _blendValue);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -373,7 +353,7 @@ public class IMouvement : IPlayerState
             {
                 _accelerationLerp = 0;
             }
-            if (_canMove == true)
+            if (_playerController.CanMove == true) //_canMove == true)
             {
                 Move();
             }
@@ -382,7 +362,7 @@ public class IMouvement : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        if(_canMove == true && _playerController != null)
+        if(_playerController.CanMove == true && _playerController != null)
         {
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += mousePositionY * _playerData.SensitivityMouseX;
@@ -448,7 +428,7 @@ public class IMouvement : IPlayerState
             _unCrouching = false;
         }
     }
-
+    /*
     private void Zoom(bool zoomBool)
     {
         if(_canMove == true)
@@ -489,7 +469,7 @@ public class IMouvement : IPlayerState
             _zooming = false;
         }
     }
-
+    */
     private void Sprinting(bool isSprinting)
     {
         if (isSprinting == true)
@@ -541,6 +521,6 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
-        InputManager.Instance.Zoom -= Zoom;
+        //InputManager.Instance.Zoom -= Zoom;
     }
 }
