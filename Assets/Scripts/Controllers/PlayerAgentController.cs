@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[HierarchyIcon("camera")]
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
