@@ -43,8 +43,7 @@ public class IObserve : IPlayerState
         _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
         if (_currentObjectInterract.OnTakeObject != null && _playerAgentController.AudioSourcePlayer != null)
         {
-            _playerAgentController.AudioSourcePlayer.clip = _currentObjectInterract.OnTakeObject;
-            _playerAgentController.AudioSourcePlayer.Play();
+            _currentObjectInterract.OnTakeObject.Invoke();
         }
         if (_grabObject.GetComponent<Rigidbody>())
         {
@@ -93,8 +92,7 @@ public class IObserve : IPlayerState
         _grabObject.transform.SetParent(null);
         if (_currentObjectInterract.OnThrowObject != null && _audioSourcePlayer != null)
         {
-            _audioSourcePlayer.clip = _currentObjectInterract.OnThrowObject;
-            _audioSourcePlayer.Play();
+            _currentObjectInterract.OnThrowObject.Invoke();
         }
         if (_grabObject.GetComponent<Rigidbody>())
         {
