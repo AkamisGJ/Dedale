@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationWhenLooked = Vector3.zero;
     [SerializeField] private  float _distanceWithCameraWehnLooked = 0.5f;
-    [SerializeField] private AudioClip _OnTakeObject = null;
-    [SerializeField] private AudioClip _OnThrowObject = null;
+    [SerializeField] private UnityEvent _OnTakeObject = null;
+    [SerializeField] private UnityEvent _OnThrowObject = null;
     [SerializeField] private bool _isKey = false;
-    public AudioClip OnThrowObject { get { return _OnThrowObject; } }
-    public AudioClip OnTakeObject { get { return _OnTakeObject; } }
+    public UnityEvent OnThrowObject { get { return _OnThrowObject; } }
+    public UnityEvent OnTakeObject { get { return _OnTakeObject; } }
     public bool IsKey { get => _isKey; }
 
 
