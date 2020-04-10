@@ -19,10 +19,11 @@ public class ImageInteract : MonoBehaviour
 
     private void Awake()
     {
-        if (GetComponent<Collider>() == null)
+        if(_uiPosition == null)
         {
-            Debug.LogWarning("There is no Collider on " + gameObject.name);
+            _uiPosition = gameObject;
         }
+
     }
 
     private void Start()

@@ -261,9 +261,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationWhenLooked: {x: 0, y: 0, z: 0}
-  _distanceWithCameraWehnLooked: 0.5
-  _OnTakeObject: {fileID: 0}
-  _OnThrowObject: {fileID: 0}
+  _distanceWithCameraWehnLooked: 0.2
+  _OnTakeObject:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543897291}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _OnThrowObject:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543897291}
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _isKey: 0
 --- !u!64 &5159247485580937181
 MeshCollider:

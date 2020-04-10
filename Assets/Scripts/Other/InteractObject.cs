@@ -18,7 +18,12 @@ public class InteractObject : MonoBehaviour
     {
         if(GetComponent<ImageInteract>() == null)
         {
-            Debug.Log("Image Interact script is missing on " + gameObject.name);
+            Debug.Log("Image Interact script is missing on " + transform.name);
+        }
+
+        if (GetComponent<Collider>() == null)
+        {
+            Debug.LogWarning("There is no Collider on " + gameObject.name);
         }
     }
 
