@@ -46,6 +46,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Interaction Object Helper")]
     [Tooltip("The image for ladder helper")]
     [SerializeField] private RawImage _ladderHelper;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for locked door")]
+    [SerializeField] private RawImage _lock;
 
 
     [BoxGroup("Sprint")]
@@ -180,5 +183,6 @@ public class PlayerData : ScriptableObject
     public RawImage LadderHelper { get => _ladderHelper; }
     public Canvas CanvasHelper { get => _canvasHelper; }
     public float DistanceHelperObservableObject { get => _distanceHelperObservableObject; }
+    public RawImage Lock { get => _lock; }
     #endregion Properties
 }
