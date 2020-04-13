@@ -16,15 +16,17 @@ public class HierarchyIconAttribute : Attribute
 
     #region Constructors
 
+    #if UNITY_EDITOR
+
     public HierarchyIconAttribute(string iconName)
     {
         IconName = iconName;
         BubbleUp = true;
 
         if (EditorGUIUtility.isProSkin)
-        {
+        
             IconColor = new Color(1, 1, 1, 1);
-        }
+        
         else
         {
             IconColor = new Color(0.2f, 0.2f, 0.2f, 1);
@@ -82,6 +84,7 @@ public class HierarchyIconAttribute : Attribute
         }
     }
 
+    #endif
     #endregion
 
 }

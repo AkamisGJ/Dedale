@@ -10,27 +10,27 @@ public class hublot : MonoBehaviour
     [ShowIfGroup("_activate")]
 
     [BoxGroup("_activate/Force")]
-    [HideIf("_random")]
+    [HideIf("_randomAmount")]
     [SerializeField] private float forceAmount = 1f;
 
     [BoxGroup("_activate/Force")]
     [SerializeField] private ForceMode _forceMode = ForceMode.Acceleration;
 
     [BoxGroup("_activate/Force")]
-    [SerializeField] private bool _random;
+    [SerializeField] private bool _randomAmount;
 
     [BoxGroup("_activate/Force")]
-    [ShowIf("_random")]
+    [ShowIf("_randomAmount")]
     [SerializeField] private float _minForce = 0.5f;
 
     [BoxGroup("_activate/Force")]
-    [ShowIf("_random")]
+    [ShowIf("_randomAmount")]
     [SerializeField] private float _maxForce = 2f;
 
 
     private void Start()
     {
-        if (_random)
+        if (_randomAmount)
         {
             forceAmount = Random.Range(_minForce, _maxForce);
         }
