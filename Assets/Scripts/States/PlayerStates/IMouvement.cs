@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using HighlightingSystem;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class IMouvement : IPlayerState
 {
@@ -45,11 +47,14 @@ public class IMouvement : IPlayerState
     private float _blendValue = 0;
     private float _blendLerp = 0;
     private Animator _animator = null;
+    private Vector3 OffsetSpherCast = Vector3.zero;
     #endregion Fields
 
     #region Properties
     public Vector3 MoveModifier { get => _moveModifier; set { _moveModifier = value; Debug.Log(value); } }
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
+    public bool IsCrouch { get => _isCrouch; }
+    public float SpeedSprint { get => _speedSprint; }
     #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController, Animator animator = null)
@@ -79,10 +84,17 @@ public class IMouvement : IPlayerState
         _moveModifier = Vector3.zero;
     }
 
-    public void Enter()
+    public void Enter(Collider collider)
     {
         _canMove = true;
-        _rotationX = -_mainCamera.transform.localEulerAngles.x;
+        if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
+        {
+            _rotationX = -_mainCamera.transform.localEulerAngles.x;
+        }
+        else
+        {
+            _rotationX = -_mainCamera.transform.localEulerAngles.x + 360;
+        }
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
         _timeZoom = 0;
@@ -91,20 +103,46 @@ public class IMouvement : IPlayerState
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Direction += SetDirection;
         InputManager.Instance.Zoom += Zoom;
-        if (enableHightLightObject != null)
-        {
-            HighlightObject(enableHightLightObject, false);
-            enableHightLightObject = null;
-        }
     }
 
     public void Update()
     {
+        //RaycastInteractionObject();
+        SphereCastInteractionObject();
+        if (_crouching == true)
+        {
+            Crouching(1);
+        }
+        if (_unCrouching == true)
+        {
+            Crouching(-1);
+        }
+        if (_zooming == true)
+        {
+            Zooming(1);
+        }
+        if (_unZooming == true)
+        {
+            Zooming(-1);
+        }
+    }
+
+    public void Exit()
+    {
+        InputManager.Instance.MousePosition -= LookAtMouse;
+        InputManager.Instance.Direction -= SetDirection;
+        InputManager.Instance.Crouch -= Crouch;
+        InputManager.Instance.Sprint -= Sprinting;
+        InputManager.Instance.Zoom -= Zoom;
+    }
+
+    private void RaycastInteractionObject()
+    {
         if (_mainCamera != null && Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
-            if(enableHightLightObject != _raycastHit.collider.gameObject)
+            if (enableHightLightObject != _raycastHit.collider.gameObject)
             {
-                if(enableHightLightObject != null)
+                if (enableHightLightObject != null)
                 {
                     HighlightObject(enableHightLightObject, false);
                 }
@@ -128,7 +166,7 @@ public class IMouvement : IPlayerState
                     _blendValue = 0;
                     _animator.SetFloat("BlendMovement", _blendValue);
                     Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
-                    if((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                    if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
                     {
                         _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
                         _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION);
@@ -177,31 +215,91 @@ public class IMouvement : IPlayerState
             HighlightObject(enableHightLightObject, false);
             enableHightLightObject = null;
         }
-        if (_crouching == true)
-        {
-            Crouching(1);
-        }
-        if (_unCrouching == true)
-        {
-            Crouching(-1);
-        }
-        if (_zooming == true)
-        {
-            Zooming(1);
-        }
-        if (_unZooming == true)
-        {
-            Zooming(-1);
-        }
     }
 
-    public void Exit()
+    private void SphereCastInteractionObject()
     {
-        InputManager.Instance.MousePosition -= LookAtMouse;
-        InputManager.Instance.Direction -= SetDirection;
-        InputManager.Instance.Crouch -= Crouch;
-        InputManager.Instance.Sprint -= Sprinting;
-        InputManager.Instance.Zoom -= Zoom;
+        OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
+        if(_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction,_mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
+        {
+            if (enableHightLightObject != _raycastHit.collider.gameObject)
+            {
+                if (enableHightLightObject != null)
+                {
+                    enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = false;
+                }
+                enableHightLightObject = _raycastHit.collider.gameObject;
+                enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = true;
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE, _raycastHit.collider);
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
+                    if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                    {
+                        _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
+                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION, _raycastHit.collider);
+                    }
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ladder"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _timeCrouch = 0;
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
+                    return;
+                }
+            }
+            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Liana"))
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    _blendValue = 0;
+                    _animator.SetFloat("BlendMovement", _blendValue);
+                    _timeCrouch = 0;
+                    _canMove = false;
+                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            if (enableHightLightObject != null)
+            {
+                enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = false;
+                enableHightLightObject = null;
+            }
+        }
     }
 
     private void Move()

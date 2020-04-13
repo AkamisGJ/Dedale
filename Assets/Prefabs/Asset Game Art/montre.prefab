@@ -108,10 +108,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8782680235240286946}
-  - component: {fileID: 1052455333}
   - component: {fileID: 1052455332}
   - component: {fileID: 1052455331}
   - component: {fileID: 1334144507933194281}
+  - component: {fileID: 7555484568316823274}
   m_Layer: 8
   m_Name: montre
   m_TagString: Untagged
@@ -134,18 +134,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1052455333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782680235239864002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67d4de287b46eb34e83a61e4f9115070, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1052455332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,8 +148,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationWhenLooked: {x: 90, y: 0, z: 0}
   _distanceWithCameraWehnLooked: 0.1
-  _OnTakeObject: {fileID: 0}
-  _OnThrowObject: {fileID: 0}
+  _OnTakeObject:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnThrowObject:
+    m_PersistentCalls:
+      m_Calls: []
   _isKey: 0
 --- !u!65 &1052455331
 BoxCollider:
@@ -201,6 +193,19 @@ PlayableDirector:
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &7555484568316823274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782680235239864002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPosition: {fileID: 0}
 --- !u!1 &8782680235239864004
 GameObject:
   m_ObjectHideFlags: 0
