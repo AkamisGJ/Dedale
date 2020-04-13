@@ -20,7 +20,7 @@ public class IObserve : IPlayerState
     private LayerMask _layerMask;
     private Vector3 OffsetSpherCast = Vector3.zero;
 
-    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController, Animator animator = null)
+    public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
         _layerMask = playerData.LayerMask;
         _audioSourcePlayer = PlayerManager.Instance.PlayerController.GetComponent<AudioSource>();
