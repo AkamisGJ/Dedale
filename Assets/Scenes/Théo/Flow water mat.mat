@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water Mat
-  m_Shader: {fileID: -6465566751694194690, guid: 47ee0f3c45140e745ba5636a1409b758,
+  m_Name: Flow water mat
+  m_Shader: {fileID: -6465566751694194690, guid: 0cbcab536bd0837489bd9c5349ad86f5,
     type: 3}
   m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
@@ -26,8 +26,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_D3EF6885:
-        m_Texture: {fileID: 2800000, guid: 3e00cfc3ea05a924ebe75c8764ed1af1, type: 3}
+    - Texture2D_8F7AED24:
+        m_Texture: {fileID: 2800000, guid: f8d06697cf8bc3441967e81a2ef03736, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AD0BEF7C:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F4A8F7B3:
+        m_Texture: {fileID: 2800000, guid: 7575cf11286ba5b49aa111c8f9817c30, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F654F37F:
+        m_Texture: {fileID: 2800000, guid: c9c32b673a70f1a4dbd7baa1c10b19fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -114,11 +126,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _USGFlowMapSubGraph_DEFC760D_Texture2D4BDC126D_3987256261:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _USGFlowMapSubGraph_DEFC760D_Texture2D8C356A90_1861232426:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_4FBBAF72: 0.01
-    - Vector1_85C93D4B: 0.7
-    - Vector1_E5DE7468: 0.5
-    - Vector1_FE3745CF: 0.03
+    - Vector1_4D4B46C5: 1
+    - Vector1_4EE4FB02: 1
+    - Vector1_5AB614F1: 0.5
+    - Vector1_808FFCE: 0.4
+    - Vector1_A7710A79: 0
+    - Vector1_C944F589: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -239,8 +261,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_22C459AC: {r: 0.15218942, g: 0.5051843, b: 0.7169812, a: 1}
-    - Color_B27E74D2: {r: 0, g: 0.10399613, b: 0.254717, a: 1}
+    - Color_3DD96864: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -257,7 +278,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
---- !u!114 &837399889769686598
+--- !u!114 &7213219221654341909
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
