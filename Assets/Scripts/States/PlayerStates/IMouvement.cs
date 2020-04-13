@@ -46,6 +46,8 @@ public class IMouvement : IPlayerState
     private float _blendValue = 0;
     private float _blendLerp = 0;
     private Vector3 OffsetSpherCast = Vector3.zero;
+    private float _currentMouseX = 0;
+    private float _currentMouseY = 0;
     #endregion Fields
 
     #region Properties
@@ -364,9 +366,47 @@ public class IMouvement : IPlayerState
     {
         if(_playerController.CanMove == true && _playerController != null)
         {
+            if(mousePositionX > 0)
+            {
+                _currentMouseX += Time.deltaTime*2;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+            }else if(mousePositionX < 0)
+            {
+                _currentMouseX -= Time.deltaTime*2;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+            }
+            else if(mousePositionX == 0 && _currentMouseX > 0)
+            {
+                _currentMouseX -= Time.deltaTime*2;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, 0, 0.5f);
+            }else if(mousePositionX == 0 && _currentMouseX < 0)
+            {
+                _currentMouseX += Time.deltaTime*2;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0);
+            }
+            if (mousePositionY > 0)
+            {
+                _currentMouseY += Time.deltaTime*2;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+            }
+            else if (mousePositionY < 0)
+            {
+                _currentMouseY -= Time.deltaTime*2;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+            }
+            else if (mousePositionY == 0 && _currentMouseY > 0)
+            {
+                _currentMouseY -= Time.deltaTime*2;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, 0, 0.5f);
+            }
+            else if (mousePositionY == 0 && _currentMouseY < 0)
+            {
+                _currentMouseY += Time.deltaTime*2;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0);
+            }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
-            _rotationX += mousePositionY * _playerData.SensitivityMouseX;
-            _rotationY += mousePositionX * _playerData.SensitivityMouseY;
+            _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
+            _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);

@@ -88,7 +88,6 @@ public class PlayerAgentController : MonoBehaviour
         _states[_currentState].Update();
         if (_currentState == MyState.MOVEMENT || _currentState == MyState.OBSERVE)
         {
-            Debug.Log("can zoom");
             if (_zooming == true)
             {
                 Zooming(1);

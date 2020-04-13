@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class NarrowWayTrigger : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class NarrowWayTrigger : MonoBehaviour
     private Quaternion _startCameraQuaternion = Quaternion.identity;
     private float _startFieldOfView = 0;
     private bool _isStarted = false;
+    [SerializeField] private UnityEvent _onEnter = null;
+    [SerializeField] private UnityEvent _onExit = null;
 
     void Start()
     {
@@ -44,6 +47,11 @@ public class NarrowWayTrigger : MonoBehaviour
             _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
             _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
             _playerController.MainCamera.fieldOfView = Mathf.Lerp(_startFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
+            if(_onEnter != null)
+            {
+                _onEnter.Invoke();
+                //_onExit.RemoveAllListeners();
+            }
             if (_lerpStartPositionPlayer > 1)
             {
                 PlayerManager.Instance.IsInNarrowWay = true;
@@ -69,6 +77,11 @@ public class NarrowWayTrigger : MonoBehaviour
         _playerController.transform.position = Vector3.Lerp(_startPlayerPosition, _exitTransform.position, _lerpExitNarrowWay);
         _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
+        if(_onExit != null)
+        {
+            _onExit.Invoke();
+            //_onExit.RemoveAllListeners();
+        }
         if (_lerpExitNarrowWay >= 1)
         {
             _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
