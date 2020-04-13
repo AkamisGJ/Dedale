@@ -1,45 +1,123 @@
 fileFormatVersion: 2
 guid: bb0aad53f8841eb418a2c9f99c47a1b3
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: cristal01
-    100002: cristal02
-    100004: cristal03
-    100006: cristal04
-    100008: cristal05
-    100010: cristal06
-    100012: //RootNode
-    400000: cristal01
-    400002: cristal02
-    400004: cristal03
-    400006: cristal04
-    400008: cristal05
-    400010: cristal06
-    400012: //RootNode
-    2100000: cristal_light
-    2100002: cristal_dark
-    2300000: cristal01
-    2300002: cristal02
-    2300004: cristal03
-    2300006: cristal04
-    2300008: cristal05
-    2300010: cristal06
-    3300000: cristal01
-    3300002: cristal02
-    3300004: cristal03
-    3300006: cristal04
-    3300008: cristal05
-    3300010: cristal06
-    4300000: cristal01
-    4300002: cristal02
-    4300004: cristal03
-    4300006: cristal04
-    4300008: cristal05
-    4300010: cristal06
-  externalObjects: {}
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: cristal01
+  - first:
+      1: 100002
+    second: cristal02
+  - first:
+      1: 100004
+    second: cristal03
+  - first:
+      1: 100006
+    second: cristal04
+  - first:
+      1: 100008
+    second: cristal05
+  - first:
+      1: 100010
+    second: cristal06
+  - first:
+      1: 100012
+    second: //RootNode
+  - first:
+      4: 400000
+    second: cristal01
+  - first:
+      4: 400002
+    second: cristal02
+  - first:
+      4: 400004
+    second: cristal03
+  - first:
+      4: 400006
+    second: cristal04
+  - first:
+      4: 400008
+    second: cristal05
+  - first:
+      4: 400010
+    second: cristal06
+  - first:
+      4: 400012
+    second: //RootNode
+  - first:
+      21: 2100000
+    second: cristal_light
+  - first:
+      21: 2100002
+    second: cristal_dark
+  - first:
+      23: 2300000
+    second: cristal01
+  - first:
+      23: 2300002
+    second: cristal02
+  - first:
+      23: 2300004
+    second: cristal03
+  - first:
+      23: 2300006
+    second: cristal04
+  - first:
+      23: 2300008
+    second: cristal05
+  - first:
+      23: 2300010
+    second: cristal06
+  - first:
+      33: 3300000
+    second: cristal01
+  - first:
+      33: 3300002
+    second: cristal02
+  - first:
+      33: 3300004
+    second: cristal03
+  - first:
+      33: 3300006
+    second: cristal04
+  - first:
+      33: 3300008
+    second: cristal05
+  - first:
+      33: 3300010
+    second: cristal06
+  - first:
+      43: 4300000
+    second: cristal01
+  - first:
+      43: 4300002
+    second: cristal02
+  - first:
+      43: 4300004
+    second: cristal03
+  - first:
+      43: 4300006
+    second: cristal04
+  - first:
+      43: 4300008
+    second: cristal05
+  - first:
+      43: 4300010
+    second: cristal06
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cristal_dark
+    second: {fileID: 2100000, guid: 9158d4faa03396b4f914340476d6bbf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cristal_light
+    second: {fileID: 2100000, guid: 9158d4faa03396b4f914340476d6bbf3, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -72,6 +150,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -79,18 +158,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -99,10 +179,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -112,13 +192,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
