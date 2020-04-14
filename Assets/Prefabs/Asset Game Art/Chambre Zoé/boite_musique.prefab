@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1543897290}
   - component: {fileID: 6084348881562622550}
   - component: {fileID: 5059339498548227604}
-  - component: {fileID: 5159247485580937181}
+  - component: {fileID: 5051294237670663564}
   m_Layer: 8
   m_Name: boite_musique
   m_TagString: Untagged
@@ -261,12 +261,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationWhenLooked: {x: 0, y: 0, z: 0}
-  _distanceWithCameraWehnLooked: 0.5
-  _OnTakeObject: {fileID: 0}
-  _OnThrowObject: {fileID: 0}
+  _distanceWithCameraWehnLooked: 0.2
+  _OnTakeObject:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543897291}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _OnThrowObject:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1543897291}
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _isKey: 0
---- !u!64 &5159247485580937181
-MeshCollider:
+--- !u!65 &5051294237670663564
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -275,7 +301,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5000138081164514385, guid: 1aa8d15faaca7614d89c87a3ec1c920c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 10.235857, y: 9.309408, z: 10.235855}
+  m_Center: {x: 0, y: -1.6652933, z: 0}

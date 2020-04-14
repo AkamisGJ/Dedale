@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8246028044502095975}
   - component: {fileID: 1833807050571363760}
   - component: {fileID: 1833807050571363767}
+  - component: {fileID: 7615215996066550042}
   m_Layer: 8
   m_Name: fiche_reanim
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7661485934707666107}
-  m_LocalRotation: {x: 0.47725418, y: 0.0031550445, z: -0.028034922, w: 0.87831235}
+  m_LocalRotation: {x: 0.47725758, y: 0.0031536673, z: -0.028034432, w: 0.87831056}
   m_LocalPosition: {x: 27.19679, y: 0.2828, z: 5.2336984}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
@@ -108,6 +109,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationWhenLooked: {x: 0, y: 0, z: 0}
   _distanceWithCameraWehnLooked: 0.5
-  _OnTakeObject: {fileID: 0}
-  _OnThrowObject: {fileID: 0}
+  _OnTakeObject:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnThrowObject:
+    m_PersistentCalls:
+      m_Calls: []
   _isKey: 0
+--- !u!114 &7615215996066550042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661485934707666107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPosition: {fileID: 0}
