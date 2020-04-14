@@ -1,0 +1,1 @@
+exporter en 1024 avec un leger doute, faudra voir s'il faut passer en 2048 vu que l'asset est grande (en taille réelle)
