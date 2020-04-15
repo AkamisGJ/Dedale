@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 714204619}
   - component: {fileID: 714204618}
   - component: {fileID: 714204620}
+  - component: {fileID: 714204621}
   m_Layer: 0
   m_Name: Timeline Introduction Audio
   m_TagString: Untagged
@@ -212,6 +213,63 @@ MonoBehaviour:
   _dialogueData: {fileID: 11400000, guid: 7e08580a0e56de743985b4c3e8a3b244, type: 2}
   _dialogueManager: {fileID: 1291878891}
   _eventEmitter: {fileID: 2104121388}
+--- !u!114 &714204621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714204616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 59f91bcbfd2fadf49bda09539ec73202, type: 2}
+    - {fileID: 11400000, guid: 39e4c8659b693c141a61ab10891d8e18, type: 2}
+    - {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 714204620}
+          m_MethodName: OnStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 714204620}
+          m_MethodName: OnExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 714204620}
+          m_MethodName: NextText
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &852252520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8163362112954830313, guid: 101000cecbd14ba4b8b216a850878bce,
