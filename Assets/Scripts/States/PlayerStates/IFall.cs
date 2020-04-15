@@ -7,7 +7,7 @@ public class IFall : IPlayerState
     private PlayerAgentController _playerController = null;
     private CharacterController _characterController = null;
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null, Animator animator = null)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null)
     {
         _playerData = playerData;
         _characterController = characterController;

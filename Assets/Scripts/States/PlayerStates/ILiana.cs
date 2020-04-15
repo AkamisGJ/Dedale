@@ -8,7 +8,7 @@ public class ILiana : IPlayerState
     private Vector3 _directionHorizontal = Vector3.zero;
     private Vector3 _orientation = Vector3.zero;
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null, Animator animator = null)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null)
     {
         _playerData = playerData;
         _characterController = characterController;
@@ -18,6 +18,7 @@ public class ILiana : IPlayerState
     public void Enter(Collider collider)
     {
         InputManager.Instance.Direction += SetOrientation;
+        PlayerManager.Instance.PlayerController.TimeZoom = 0;
     }
 
     public void Update()
