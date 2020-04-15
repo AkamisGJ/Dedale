@@ -13,7 +13,7 @@ public class DialogueScript : MonoBehaviour
 
     public DialogueData DialogueData { get => _dialogueData; }
 
-    void Start()
+    void Awake()
     {
         _dialogueIndex = 0;
     }
@@ -27,15 +27,20 @@ public class DialogueScript : MonoBehaviour
         }
     }
 
+    public void ClearText()
+    {
+        _dialogueManager.DestroyCurrentDialogue();
+    }
+
     public void NextText()
     {
         _eventEmitter.EventDescription.is3D(out _is3D);
-        if (Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance || _is3D == false)
+        if (_is3D == false || Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance)
         {
             if (_playableDirector == _dialogueManager.CurrentPlayableDirector)
             {
-                _dialogueIndex += 1;
                 _dialogueManager.OnChangeText(_dialogueData.Dialogue[_dialogueIndex]);
+                _dialogueIndex += 1;
             }
             else
             {
