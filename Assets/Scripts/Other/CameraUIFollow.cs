@@ -15,6 +15,10 @@ public class CameraUIFollow : MonoBehaviour
         transform.position = PlayerManager.Instance.CameraPlayer.transform.position;
         transform.rotation = PlayerManager.Instance.CameraPlayer.transform.rotation;
         _cameraUi.fieldOfView = PlayerManager.Instance.CameraPlayer.fieldOfView;
+        if(GameManager.Instance.CurrentState != GameManager.MyState.GAME)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDestroy()

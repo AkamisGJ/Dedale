@@ -10,7 +10,7 @@ public class INarrowWay : IPlayerState
     private float _currentAngleCamera = 0;
     private float _speedRotateCamera = 5;
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null, Animator animator = null)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null)
     {
         _playerData = playerData;
         _camera = camera;
@@ -21,6 +21,7 @@ public class INarrowWay : IPlayerState
     {
         _lerpCamera = 0.5f;
         InputManager.Instance.Direction += SetOrientation;
+        PlayerManager.Instance.PlayerController.TimeZoom = 0;
     }
 
     public void Update()
