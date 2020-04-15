@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace NullSave
 {
-    [InitializeOnLoad]
+    //[InitializeOnLoad]
     public class HierarchyIcons
     {
 
