@@ -6,7 +6,6 @@ public class NarrowWayTrigger : MonoBehaviour
     private PlayerAgentController _playerController = null;
     private float _lerpStartPositionPlayer = 0;
     private float _lerpExitNarrowWay = 0;
-    private float _speedRotateCamera = 5;
     [SerializeField] private Collider _collider = null;
     [SerializeField] private Collider _pairedColliderNarowWay = null;
     [SerializeField] private Transform _enterTransform = null;
@@ -16,6 +15,7 @@ public class NarrowWayTrigger : MonoBehaviour
     private Quaternion _startCameraQuaternion = Quaternion.identity;
     private float _startFieldOfView = 0;
     private bool _isStarted = false;
+    private PlayerData _playerData = null;
     [SerializeField] private UnityEvent _onEnter = null;
     [SerializeField] private UnityEvent _onExit = null;
 
@@ -23,6 +23,7 @@ public class NarrowWayTrigger : MonoBehaviour
     {
         _playerController = PlayerManager.Instance.PlayerController;
         PlayerManager.Instance.IsInNarrowWay = false;
+        _playerData = PlayerManager.Instance.PlayerController.PlayerData;
     }
 
     public void StartPositionPlayer()
@@ -42,7 +43,7 @@ public class NarrowWayTrigger : MonoBehaviour
         }
         if(PlayerManager.Instance.IsInNarrowWay == false)
         {
-            _lerpStartPositionPlayer += Time.deltaTime * _speedRotateCamera;
+            _lerpStartPositionPlayer += Time.deltaTime * _playerData.SpeedEnterExitNarrowWay;
             _playerController.transform.position = Vector3.Lerp(_startPlayerPosition, _enterTransform.position, _lerpStartPositionPlayer);
             _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
             _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
@@ -50,7 +51,6 @@ public class NarrowWayTrigger : MonoBehaviour
             if(_onEnter != null)
             {
                 _onEnter.Invoke();
-                //_onExit.RemoveAllListeners();
             }
             if (_lerpStartPositionPlayer > 1)
             {
@@ -73,14 +73,13 @@ public class NarrowWayTrigger : MonoBehaviour
             _startFieldOfView = _playerController.MainCamera.fieldOfView;
             _isStarted = true;
         }
-        _lerpExitNarrowWay += Time.deltaTime * _speedRotateCamera;
+        _lerpExitNarrowWay += Time.deltaTime * _playerData.SpeedEnterExitNarrowWay;
         _playerController.transform.position = Vector3.Lerp(_startPlayerPosition, _exitTransform.position, _lerpExitNarrowWay);
         _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
         if(_onExit != null)
         {
             _onExit.Invoke();
-            //_onExit.RemoveAllListeners();
         }
         if (_lerpExitNarrowWay >= 1)
         {
