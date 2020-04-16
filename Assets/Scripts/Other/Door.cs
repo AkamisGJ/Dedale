@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
 
-#if UNITY_EDITOR
-[HierarchyIcon("door", "#ffffff" ,false)]
-#endif
-
 public class Door : MonoBehaviour, IInteract
 {
     private Rigidbody _rb = null;
