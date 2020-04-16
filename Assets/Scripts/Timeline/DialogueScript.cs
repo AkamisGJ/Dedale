@@ -21,7 +21,15 @@ public class DialogueScript : MonoBehaviour
     public void OnStart()
     {
         _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData);
-        if(_eventEmitter.IsPlaying() == false)
+        /*if(_eventEmitter.IsPlaying() == false)
+        {
+            _eventEmitter.Play();
+        }*/
+    }
+
+    public void StartAudio()
+    {
+        if (_eventEmitter.IsPlaying() == false)
         {
             _eventEmitter.Play();
         }
