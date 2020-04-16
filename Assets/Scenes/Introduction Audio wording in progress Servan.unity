@@ -155,7 +155,7 @@ MonoBehaviour:
   _playableDirector: {fileID: 911935892}
   _dialogueData: {fileID: 11400000, guid: 7e08580a0e56de743985b4c3e8a3b244, type: 2}
   _dialogueManager: {fileID: 1291878891}
-  _eventEmitter: {fileID: 2104121388}
+  _eventEmitter: {fileID: 0}
 --- !u!114 &911935891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 39e4c8659b693c141a61ab10891d8e18, type: 2}
     - {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
     - {fileID: 11400000, guid: f2ce2fa5f6caad24cb6141ae1ad37985, type: 2}
-    - {fileID: 11400000, guid: 9f1d0fc42e2c21340947afe0b11eb467, type: 2}
+    - {fileID: 0}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -244,6 +244,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -7999554723381317589, guid: aaac3029b79ea28439b3d8464737a003, type: 2}
     value: {fileID: 911935891}
+  - key: {fileID: -6665028780851463722, guid: aaac3029b79ea28439b3d8464737a003, type: 2}
+    value: {fileID: 911935889}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &911935893
