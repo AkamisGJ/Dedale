@@ -21,7 +21,7 @@ public class DialogueScript : MonoBehaviour
     public void OnStart()
     {
         _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData);
-        if(_eventEmitter.IsPlaying() == false)
+        if(_eventEmitter != null && _eventEmitter.IsPlaying() == false)
         {
             _eventEmitter.Play();
         }
@@ -35,7 +35,7 @@ public class DialogueScript : MonoBehaviour
     public void NextText()
     {
         _eventEmitter.EventDescription.is3D(out _is3D);
-        if (_is3D == false || Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance)
+        if ((_is3D == false || Vector3.Distance(PlayerManager.Instance.PlayerController.transform.position, _eventEmitter.transform.position) < _eventEmitter.OverrideMaxDistance))
         {
             if (_playableDirector == _dialogueManager.CurrentPlayableDirector)
             {
