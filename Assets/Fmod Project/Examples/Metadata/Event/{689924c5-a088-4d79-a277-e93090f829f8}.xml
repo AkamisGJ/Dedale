@@ -5,7 +5,7 @@
 			<value>Chinc Verre</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{90bfdd7b-508d-43e3-9fa3-3645bfa11b3b}</destination>
@@ -59,11 +59,18 @@
 	<object class="EventAutomatableProperties" id="{c8d50727-c9b8-467c-abb4-2ffeda15db30}" />
 	<object class="MarkerTrack" id="{ba580caf-0ccc-4c12-96be-90ebb82244df}" />
 	<object class="GroupTrack" id="{e1afebf0-78ce-474d-86a0-5f95062b263e}">
+		<relationship name="modules">
+			<destination>{5641bdd5-07ae-4f20-9863-e58fe40da40c}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{3d6ff013-2efe-4489-b0c2-09d35993b837}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{9ff0b9d8-7c01-4976-8f2a-b35702e52256}" />
+	<object class="Timeline" id="{9ff0b9d8-7c01-4976-8f2a-b35702e52256}">
+		<relationship name="modules">
+			<destination>{5641bdd5-07ae-4f20-9863-e58fe40da40c}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{e0b6e6c3-fea6-4b7a-866f-6ae523eff287}">
 		<relationship name="effectChain">
 			<destination>{e5e623e6-ad29-4caf-b224-843f0dd31ab4}</destination>
@@ -81,6 +88,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{01663546-e0fe-44a8-9959-9be3cbb90c9a}" />
+	<object class="SingleSound" id="{5641bdd5-07ae-4f20-9863-e58fe40da40c}">
+		<property name="length">
+			<value>0.35417233560090705</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{9e55f273-8832-49a7-b319-9ad96adde2c5}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{3d6ff013-2efe-4489-b0c2-09d35993b837}">
 		<property name="name">
 			<value>Audio 1</value>

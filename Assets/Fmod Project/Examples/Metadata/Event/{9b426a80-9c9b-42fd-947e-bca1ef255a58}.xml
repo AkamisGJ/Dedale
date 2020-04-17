@@ -5,7 +5,7 @@
 			<value>Bruit de la pelluche</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{dfbdc220-1fa7-4913-b535-f14a1bcc5059}</destination>
@@ -59,11 +59,18 @@
 	<object class="EventAutomatableProperties" id="{104d3737-3172-4bb3-a7f4-4651a51d3293}" />
 	<object class="MarkerTrack" id="{5d09847b-d8b2-4b51-b121-67efba5157a6}" />
 	<object class="GroupTrack" id="{55c5c61a-923e-44f3-9fa1-3680627b7e71}">
+		<relationship name="modules">
+			<destination>{be1ea4a5-57fe-4e07-b4c1-3c30ecc1b71c}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{c8f5bafd-962c-4a22-9db2-0f87fa924313}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{038c689c-818a-491d-acc1-2fedee8d85dd}" />
+	<object class="Timeline" id="{038c689c-818a-491d-acc1-2fedee8d85dd}">
+		<relationship name="modules">
+			<destination>{be1ea4a5-57fe-4e07-b4c1-3c30ecc1b71c}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{78b5fa7e-d624-4390-9029-b68151683b07}">
 		<relationship name="effectChain">
 			<destination>{23ce293e-d805-497e-ae59-49a24a6c9aec}</destination>
@@ -81,7 +88,18 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{13efcd43-542c-4fd0-8f8f-a5cc35fc523d}" />
+	<object class="SingleSound" id="{be1ea4a5-57fe-4e07-b4c1-3c30ecc1b71c}">
+		<property name="length">
+			<value>1.344013605442177</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{9ec7d5a9-0e56-44ec-bf6d-9292cfe66927}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{c8f5bafd-962c-4a22-9db2-0f87fa924313}">
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>

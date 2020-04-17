@@ -5,7 +5,7 @@
 			<value>Musique du Squat</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c2692448-301e-417a-8ade-796c6589bfa4}</destination>
@@ -59,11 +59,18 @@
 	<object class="EventAutomatableProperties" id="{748da1b9-b669-49ac-a33f-c72f925d1bae}" />
 	<object class="MarkerTrack" id="{e4bda838-df08-4365-9eeb-efbbff0755a1}" />
 	<object class="GroupTrack" id="{63c6fcad-45ca-4638-bf9b-91c4963f7ca8}">
+		<relationship name="modules">
+			<destination>{86077e18-9157-4f8a-92d9-5aa1b89f059f}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{17ca2455-5151-4eeb-8ad5-f8291d74b0ab}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{07b91504-390b-43f5-a827-e5eef9196fd7}" />
+	<object class="Timeline" id="{07b91504-390b-43f5-a827-e5eef9196fd7}">
+		<relationship name="modules">
+			<destination>{86077e18-9157-4f8a-92d9-5aa1b89f059f}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{3403d6cf-df3e-4f12-a70a-12c30c9f85a4}">
 		<relationship name="effectChain">
 			<destination>{6f55d115-7a64-4655-a7dd-090dfffc96d6}</destination>
@@ -81,6 +88,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{257e87be-1008-441d-939e-9b0a6404693a}" />
+	<object class="SingleSound" id="{86077e18-9157-4f8a-92d9-5aa1b89f059f}">
+		<property name="length">
+			<value>283.05000000000001</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{6d41d195-2170-4024-bcd0-6ae40a6d759d}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{17ca2455-5151-4eeb-8ad5-f8291d74b0ab}">
 		<property name="name">
 			<value>Audio 1</value>
