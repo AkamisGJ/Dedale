@@ -9,6 +9,7 @@ public class SwapEtiquette : MonoBehaviour
     private float lerpValue = 0f;
 
     public void StartLerping(){
+        _etiquette.SetFloat("Vector1_9532F5BD", 0f);
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
     }
 
