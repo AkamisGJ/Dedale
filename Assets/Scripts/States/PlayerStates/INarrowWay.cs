@@ -8,7 +8,6 @@ public class INarrowWay : IPlayerState
     private Vector3 _direction = Vector3.zero;
     private float _lerpCamera = 0;
     private float _currentAngleCamera = 0;
-    private float _speedRotateCamera = 5;
 
     public void Init(PlayerData playerData, Camera camera, CharacterController characterController = null)
     {
@@ -56,7 +55,7 @@ public class INarrowWay : IPlayerState
 
     private void RotationCamera(int inversion)
     {
-        _lerpCamera += Time.deltaTime * inversion * _speedRotateCamera;
+        _lerpCamera += Time.deltaTime * inversion * _playerData.SpeedRotationCamera;
         _lerpCamera = Mathf.Clamp(_lerpCamera, 0, 1);
         _currentAngleCamera = Mathf.Lerp(-_playerData.MaxAngleNarrowWay, _playerData.MaxAngleNarrowWay, _lerpCamera);
         _camera.transform.localEulerAngles = new Vector3(0, _currentAngleCamera, 0);

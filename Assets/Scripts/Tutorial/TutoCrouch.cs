@@ -82,7 +82,13 @@ public class TutoCrouch : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
-        InputManager.Instance.Crouch -= VerifyTouch;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
+        }
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.Crouch -= VerifyTouch;
+        }
     }
 }

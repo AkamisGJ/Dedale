@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-[HierarchyIcon("camera")]
-#endif
-
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
@@ -153,6 +149,9 @@ public class PlayerAgentController : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputManager.Instance.Zoom -= Zoom;
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.Zoom -= Zoom;
+        }
     }
 }

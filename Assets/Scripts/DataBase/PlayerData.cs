@@ -90,9 +90,15 @@ public class PlayerData : ScriptableObject
     [Tooltip("Mousse sensitivity when player observe an object")]
     [SerializeField] private float _mouseSensitivityObserve = 1.0f;
 
-    [BoxGroup("Angle of Player's Camera", centerLabel: true)]
+    [BoxGroup("Player's Camera", centerLabel: true)]
     [Tooltip("Define the max angle on X of the player's camera, auto inverse this value to define the min angle")]
     [SerializeField] private float _angleX = 60f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define distance of camera slow when player stop move it")]
+    [SerializeField] private float _stackMovement = 0.5f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define speed of camera slow when player stop move it")]
+    [SerializeField] private float _speedToStopCamera = 2;
 
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on X axis when player move")]
@@ -137,7 +143,13 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Narrow Way", centerLabel: true)]
     [Tooltip("The max angle of camera in narrow way")]
     [SerializeField] private float _maxAngleNarrowWay = 60;
-    [BoxGroup("Move speed")]
+    [BoxGroup("Narrow Way")]
+    [Tooltip("The speed of player's camera rotation")]
+    [SerializeField] private float _speedRotationCamera = 2;
+    [BoxGroup("Narrow Way")]
+    [Tooltip("The speed of player when enter or exit Narrow Way")]
+    [SerializeField] private float _speedEnterExitNarrowWay = 2;
+    [BoxGroup("Narrow Way")]
     [Tooltip("The speed of player in narrow way")]
     [SerializeField] private float _speedNarrowWay = 2;
 
@@ -184,5 +196,9 @@ public class PlayerData : ScriptableObject
     public Canvas CanvasHelper { get => _canvasHelper; }
     public float DistanceHelperObservableObject { get => _distanceHelperObservableObject; }
     public RawImage Lock { get => _lock; }
+    public float SpeedEnterExitNarrowWay { get => _speedEnterExitNarrowWay; }
+    public float SpeedRotationCamera { get => _speedRotationCamera; }
+    public float SpeedToStopCamera { get => _speedToStopCamera; }
+    public float StackMovement { get => _stackMovement; }
     #endregion Properties
 }

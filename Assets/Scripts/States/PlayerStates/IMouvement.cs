@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using HighlightingSystem;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -139,15 +138,6 @@ public class IMouvement : IPlayerState
     {
         if (_mainCamera != null && Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
-            if (enableHightLightObject != _raycastHit.collider.gameObject)
-            {
-                if (enableHightLightObject != null)
-                {
-                    HighlightObject(enableHightLightObject, false);
-                }
-                enableHightLightObject = _raycastHit.collider.gameObject;
-                HighlightObject(enableHightLightObject, true);
-            }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -203,11 +193,6 @@ public class IMouvement : IPlayerState
                     return;
                 }
             }
-        }
-        else if (enableHightLightObject != null)
-        {
-            HighlightObject(enableHightLightObject, false);
-            enableHightLightObject = null;
         }
     }
 
@@ -368,41 +353,41 @@ public class IMouvement : IPlayerState
         {
             if(mousePositionX > 0)
             {
-                _currentMouseX += Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+                _currentMouseX += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, _playerData.StackMovement);
             }else if(mousePositionX < 0)
             {
-                _currentMouseX -= Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+                _currentMouseX -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if(mousePositionX == 0 && _currentMouseX > 0)
             {
-                _currentMouseX -= Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, 0, 0.5f);
+                _currentMouseX -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, 0, _playerData.StackMovement);
             }else if(mousePositionX == 0 && _currentMouseX < 0)
             {
-                _currentMouseX += Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0);
+                _currentMouseX += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, 0);
             }
             if (mousePositionY > 0)
             {
-                _currentMouseY += Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+                _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if (mousePositionY < 0)
             {
-                _currentMouseY -= Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+                _currentMouseY -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if (mousePositionY == 0 && _currentMouseY > 0)
             {
-                _currentMouseY -= Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, 0, 0.5f);
+                _currentMouseY -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, 0, _playerData.StackMovement);
             }
             else if (mousePositionY == 0 && _currentMouseY < 0)
             {
-                _currentMouseY += Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0);
+                _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
@@ -534,24 +519,6 @@ public class IMouvement : IPlayerState
                 _sprintCurrentTime += Time.deltaTime;
                 _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
             }
-        }
-    }
-
-    private void HighlightObject(GameObject hightlightObject, bool isHightlight)
-    {
-        if(hightlightObject.GetComponent<Highlighter>())
-        {
-            if(isHightlight == true)
-            {
-                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
-            }
-            else
-            {
-                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
-            }
-        }else
-        {
-            Debug.Log("Cette Object " + hightlightObject + " n'a pas le script Highlighter sur lui");
         }
     }
 
