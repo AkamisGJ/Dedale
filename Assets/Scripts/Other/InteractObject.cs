@@ -2,7 +2,6 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[HierarchyIcon("interact", false)]
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationWhenLooked = Vector3.zero;

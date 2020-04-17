@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     public List<GameObject> Dialogues { get => _dialogues; set => _dialogues = value; }
     public float TimeExposeDialogue { get => _timeExposeDialogue; }
 
-    void Start()
+    void Awake()
     {
         _dialogues = new List<GameObject>();
         _dialogueTransition = 0;
@@ -36,12 +36,6 @@ public class DialogueManager : MonoBehaviour
             _dialogueTransition = 0;
             _currentPlayableDirector = playableDirector;
             _currentPlayableDirector.Play();
-            GameObject currentDialogue = Instantiate(_prefabsDialogue, _canvasDialogue.transform.position, Quaternion.identity, _canvasDialogue.transform);
-            currentDialogue.transform.localPosition = new Vector3(0, _positionYDialogue, 0);
-            TextMeshProUGUI textMeshProUGUI = currentDialogue.GetComponentInChildren<TextMeshProUGUI>();
-            textMeshProUGUI.text = dialogueData.Dialogue[0];
-            _dialogues.Add(currentDialogue);
-            _previousDialogue = currentDialogue;
         }
         else if(_currentPlayableDirector != playableDirector)
         {
@@ -110,7 +104,7 @@ public class DialogueManager : MonoBehaviour
     public void OnEndTimeline()
     {
         _currentPlayableDirector = null;
-        Destroy(_previousDialogue, _timeExposeDialogue);
+        DestroyCurrentDialogue();
         if (_nextPlayableDirector != null)
         {
             OnStartTimeline(_nextPlayableDirector, _nextDialogueData);

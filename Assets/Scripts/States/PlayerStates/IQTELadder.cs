@@ -13,7 +13,7 @@ public class IQTELadder : IPlayerState
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool IsAtTheEnd { get => _isAtTheEnd; set => _isAtTheEnd = value; }
 
-    public void Init(PlayerData playerData, Camera camera, CharacterController characterController, Animator animator = null)
+    public void Init(PlayerData playerData, Camera camera, CharacterController characterController)
     {
         _playerData = playerData;
         _characterController = characterController;
@@ -33,6 +33,7 @@ public class IQTELadder : IPlayerState
     public void Enter(Collider collider)
     {
         InputManager.Instance.Direction += SetOrientation;
+        PlayerManager.Instance.PlayerController.TimeZoom = 0;
     }
 
     private void SetOrientation(float horizontalMouvement, float verticalMouvement)

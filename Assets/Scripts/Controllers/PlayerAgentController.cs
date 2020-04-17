@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[HierarchyIcon("camera")]
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
@@ -16,12 +15,16 @@ public class PlayerAgentController : MonoBehaviour
     [SerializeField] private Transform _objectHolder = null;
     [Tooltip("Audio source of the player")]
     [SerializeField] private AudioSource _audioSourcePlayer = null;
-    [Tooltip("Animator of player")]
-    [SerializeField] private Animator _animatorShadow = null;
     #endregion SerializedFields
     #region PrivateFields
     private Vector3 _direction = Vector3.zero;
     private Camera _mainCamera = null;
+    private bool _canMove = true;
+    private bool _isZoom = false;
+    private bool _zooming = false;
+    private bool _unZooming = false;
+    private float _timeZoom = 0;
+    private float _zoomLerp = 0;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -47,6 +50,8 @@ public class PlayerAgentController : MonoBehaviour
     public MyState CurrentState { get => _currentState; }
     public Dictionary<MyState, IPlayerState> States { get => _states; }
     public PlayerData PlayerData { get => _playerData; }
+    public bool CanMove { get => _canMove; set => _canMove = value; }
+    public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
     #endregion Properties
 
     private void Awake()
@@ -67,18 +72,31 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.FALL, new IFall());
         _currentState = MyState.MOVEMENT;
         _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
-        _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController, _animatorShadow);
+        _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.OBSERVE].Init(_playerData, _mainCamera);
         _states[MyState.QTELADDER].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.NARROWWAY].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.LIANA].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.FALL].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
+        _timeZoom = 0;
+        InputManager.Instance.Zoom += Zoom;
     }
 
     void OnUpdate()
     {
         _states[_currentState].Update();
+        if (_currentState == MyState.MOVEMENT || _currentState == MyState.OBSERVE)
+        {
+            if (_zooming == true)
+            {
+                Zooming(1);
+            }
+            if (_unZooming == true)
+            {
+                Zooming(-1);
+            }
+        }
     }
 
     public void ChangeState(MyState nextState, Collider collider = null)
@@ -86,5 +104,51 @@ public class PlayerAgentController : MonoBehaviour
         _states[_currentState].Exit();
         _states[nextState].Enter(collider);
         _currentState = nextState;
+    }
+
+    public void Zoom(bool zoomBool)
+    {
+        if (_canMove == true)
+        {
+            if (zoomBool == true)
+            {
+                if (_isZoom == false && _zooming == false)
+                {
+                    _zooming = true;
+                    _unZooming = false;
+                }
+            }
+            if (zoomBool == false && (_zooming == true || _isZoom == true))
+            {
+                if (_unZooming == false)
+                {
+                    _zooming = false;
+                    _unZooming = true;
+                }
+            }
+        }
+    }
+
+    public void Zooming(float inversion)
+    {
+        _timeZoom += Time.deltaTime * inversion;
+        _timeZoom = Mathf.Clamp(_timeZoom, 0, _playerData.ZoomTransition.keys[_playerData.ZoomTransition.length - 1].time);
+        _zoomLerp = _playerData.FieldOfView - _playerData.ZoomTransition.Evaluate(_timeZoom) * (_playerData.FieldOfView - _playerData.ZoomFieldOfView);
+        _mainCamera.fieldOfView = _zoomLerp;
+        if (inversion < 0 && _zoomLerp == _playerData.FieldOfView)
+        {
+            _isZoom = false;
+            _unZooming = false;
+        }
+        if (inversion > 0 && _zoomLerp == _playerData.ZoomFieldOfView)
+        {
+            _isZoom = true;
+            _zooming = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.Instance.Zoom -= Zoom;
     }
 }

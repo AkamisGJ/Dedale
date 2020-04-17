@@ -14,8 +14,16 @@ namespace BayatGames.Utilities.Editor
     public class SceneManagerWindow : EditorWindow
     {
 
+        public enum ScenesSource
+        {
+            BuildSettings,
+            Project,
+            Manual
+        }
+
         protected Vector2 scrollPosition;
         protected Vector2 scenesTabScrollPosition;
+        protected ScenesSource scenesSource = ScenesSource.BuildSettings;
         protected NewSceneSetup newSceneSetup = NewSceneSetup.DefaultGameObjects;
         protected NewSceneMode newSceneMode = NewSceneMode.Single;
         protected OpenSceneMode openSceneMode = OpenSceneMode.Single;
@@ -30,6 +38,7 @@ namespace BayatGames.Utilities.Editor
             "Settings"
         };
         protected string lastScene;
+        protected string searchFolder = "Assets";
 
         [MenuItem("Tools/Scene Manager")]
         public static void Init()
@@ -64,6 +73,10 @@ namespace BayatGames.Utilities.Editor
         protected virtual void OnEnable()
         {
             EditorApplication.playModeStateChanged += PlayModeStateChanged;
+            this.scenesSource = (ScenesSource)EditorPrefs.GetInt(
+                "SceneManager.scenesSource",
+                (int)ScenesSource.BuildSettings);
+            this.searchFolder = EditorPrefs.GetString("SceneManager.searchFolder", "Assets");
             this.newSceneSetup = (NewSceneSetup)EditorPrefs.GetInt(
                 "SceneManager.newSceneSetup",
                 (int)NewSceneSetup.DefaultGameObjects);
@@ -79,6 +92,8 @@ namespace BayatGames.Utilities.Editor
         protected virtual void OnDisable()
         {
             EditorApplication.playModeStateChanged -= PlayModeStateChanged;
+            EditorPrefs.SetInt("SceneManager.scenesSource", (int)this.scenesSource);
+            EditorPrefs.SetString("SceneManager.searchFolder", this.searchFolder);
             EditorPrefs.SetInt("SceneManager.newSceneSetup", (int)this.newSceneSetup);
             EditorPrefs.SetInt("SceneManager.newSceneMode", (int)this.newSceneMode);
             EditorPrefs.SetInt("SceneManager.openSceneMode", (int)this.openSceneMode);
@@ -110,6 +125,11 @@ namespace BayatGames.Utilities.Editor
 
         protected virtual void SettingsTabGUI()
         {
+            this.scenesSource = (ScenesSource)EditorGUILayout.EnumPopup("Scenes Source", this.scenesSource);
+            if (this.scenesSource == ScenesSource.Manual)
+            {
+                this.searchFolder = EditorGUILayout.TextField("Search Folder", this.searchFolder);
+            }
             this.newSceneSetup = (NewSceneSetup)EditorGUILayout.EnumPopup("New Scene Setup", this.newSceneSetup);
             this.newSceneMode = (NewSceneMode)EditorGUILayout.EnumPopup("New Scene Mode", this.newSceneMode);
             this.openSceneMode = (OpenSceneMode)EditorGUILayout.EnumPopup("Open Scene Mode", this.openSceneMode);
@@ -144,6 +164,21 @@ namespace BayatGames.Utilities.Editor
                 });
                 Scene scene = SceneManager.GetSceneByPath(path);
                 bool isOpen = scene.IsValid() && scene.isLoaded;
+                switch (this.scenesSource)
+                {
+                    case ScenesSource.BuildSettings:
+                        if (buildScene == null)
+                        {
+                            continue;
+                        }
+                        break;
+                    case ScenesSource.Manual:
+                        if (!path.Contains(this.searchFolder))
+                        {
+                            continue;
+                        }
+                        break;
+                }
                 EditorGUILayout.BeginHorizontal();
                 this.selectedScenes[i] = EditorGUILayout.Toggle(this.selectedScenes[i], GUILayout.Width(15));
                 if (isOpen)
