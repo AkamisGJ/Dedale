@@ -10,10 +10,6 @@ public class Anim_Hopital : MonoBehaviour
         {
             _animation.SetBool("down", true);
         }
-        else
-        {
-            _animation.SetBool("down", false);
-        }
     }
 }
 
