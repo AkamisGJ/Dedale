@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using HighlightingSystem;
-using System.Collections.Generic;
-using UnityEngine.UI;
+using FMODUnity;
 
 public class IMouvement : IPlayerState
 {
@@ -48,6 +47,8 @@ public class IMouvement : IPlayerState
     private Vector3 OffsetSpherCast = Vector3.zero;
     private float _currentMouseX = 0;
     private float _currentMouseY = 0;
+    private float _currentTimeFootStepPlayer = 0;
+    private FMOD.Studio.EventInstance _footsteps;
     #endregion Fields
 
     #region Properties
@@ -81,6 +82,7 @@ public class IMouvement : IPlayerState
         _directionVertical = Vector3.zero;
         _directionHorinzontal = Vector3.zero;
         _moveModifier = Vector3.zero;
+        _currentTimeFootStepPlayer = 0;
     }
 
     public void Enter(Collider collider)
@@ -309,6 +311,7 @@ public class IMouvement : IPlayerState
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
         Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
         _characterController.Move(realMove);
+        FootStepSpeed(realMove);
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -355,11 +358,12 @@ public class IMouvement : IPlayerState
             {
                 _accelerationLerp = 0;
             }
-            if (_playerController.CanMove == true) //_canMove == true)
+            if (_playerController.CanMove == true)
             {
                 Move();
             }
         }
+        _direction = Vector3.zero;
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
@@ -555,12 +559,55 @@ public class IMouvement : IPlayerState
         }
     }
 
+    private void FootStepSpeed(Vector3 realMove)
+    {
+        float speedPlayer = (_accelerationLerp + _accelerationSprintLerp) / 2;
+        if(speedPlayer > 0 && _currentTimeFootStepPlayer > (0.25f / speedPlayer))
+        {
+            SelectFootStepAndPlay();
+            _currentTimeFootStepPlayer = 0;
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (0.25f / speedPlayer))
+        {
+            _currentTimeFootStepPlayer += Time.deltaTime;
+        }
+    }
+
+    private void SelectFootStepAndPlay()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 10.0f);
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Example/Character/Player Footsteps");
+        _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+        foreach  (RaycastHit raycastHit in hits)
+        {
+            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Terre"))
+            {
+                _footsteps.setParameterByName("Surface", 1);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Beton"))
+            {
+                _footsteps.setParameterByName("Surface", 2);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else
+            {
+                _footsteps.setParameterByName("Surface", 0);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
-        //InputManager.Instance.Zoom -= Zoom;
     }
 }

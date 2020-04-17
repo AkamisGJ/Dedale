@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 #if UNITY_EDITOR
 [HierarchyIcon("camera")]
@@ -17,8 +18,6 @@ public class PlayerAgentController : MonoBehaviour
     [SerializeField] private Transform _cameraHolder = null;
     [Tooltip("Object Holder will be the parent of the observable object when player observe them")]
     [SerializeField] private Transform _objectHolder = null;
-    [Tooltip("Audio source of the player")]
-    [SerializeField] private AudioSource _audioSourcePlayer = null;
     #endregion SerializedFields
     #region PrivateFields
     private Vector3 _direction = Vector3.zero;
@@ -50,7 +49,6 @@ public class PlayerAgentController : MonoBehaviour
     public Camera MainCamera { get => _mainCamera; set => _mainCamera = value; }
     public Transform CameraHolder { get { return _cameraHolder; } }
     public Transform ObjectHolder { get => _objectHolder; }
-    public AudioSource AudioSourcePlayer { get => _audioSourcePlayer; set => _audioSourcePlayer = value; }
     public MyState CurrentState { get => _currentState; }
     public Dictionary<MyState, IPlayerState> States { get => _states; }
     public PlayerData PlayerData { get => _playerData; }
