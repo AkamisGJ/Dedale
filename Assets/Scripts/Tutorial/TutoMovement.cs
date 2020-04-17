@@ -100,8 +100,14 @@ public class TutoMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
-        InputManager.Instance.Direction -= VerifyTouch;
-        GameLoopManager.Instance.GameLoopInputManager -= Timer;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
+            GameLoopManager.Instance.GameLoopInputManager -= Timer;
+        }
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.Direction -= VerifyTouch;
+        }
     }
 }

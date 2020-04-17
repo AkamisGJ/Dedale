@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 114944398317296242}
   - component: {fileID: 3111930204287323394}
   - component: {fileID: 6944109329626690331}
+  - component: {fileID: 4189894246218230615}
+  - component: {fileID: 8961100045639944228}
   m_Layer: 0
   m_Name: "Player Controlleur Custom By Th\xE9o"
   m_TagString: Player
@@ -212,10 +214,37 @@ MonoBehaviour:
   material: {fileID: 0}
   phase: 0
   thickness: 0
-  sourceCollider: {fileID: 0}
+  sourceCollider: {fileID: 7379066877019365389}
   accurateContacts: 0
   useDistanceFields: 0
   distanceField: {fileID: 0}
+--- !u!114 &4189894246218230615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607918575787650614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
+--- !u!136 &8961100045639944228
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607918575787650614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.21
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6907574295826454668
 GameObject:
   m_ObjectHideFlags: 0

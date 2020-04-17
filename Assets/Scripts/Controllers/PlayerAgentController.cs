@@ -153,6 +153,9 @@ public class PlayerAgentController : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputManager.Instance.Zoom -= Zoom;
+        if(InputManager.Instance != null)
+        {
+            InputManager.Instance.Zoom -= Zoom;
+        }
     }
 }

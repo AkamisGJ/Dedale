@@ -23,6 +23,9 @@ public class CameraUIFollow : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.LateGameLoop -= OnLateUpdate;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.LateGameLoop -= OnLateUpdate;
+        }
     }
 }
