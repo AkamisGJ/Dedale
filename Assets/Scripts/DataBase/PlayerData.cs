@@ -90,9 +90,15 @@ public class PlayerData : ScriptableObject
     [Tooltip("Mousse sensitivity when player observe an object")]
     [SerializeField] private float _mouseSensitivityObserve = 1.0f;
 
-    [BoxGroup("Angle of Player's Camera", centerLabel: true)]
+    [BoxGroup("Player's Camera", centerLabel: true)]
     [Tooltip("Define the max angle on X of the player's camera, auto inverse this value to define the min angle")]
     [SerializeField] private float _angleX = 60f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define distance of camera slow when player stop move it")]
+    [SerializeField] private float _stackMovement = 0.5f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define speed of camera slow when player stop move it")]
+    [SerializeField] private float _speedToStopCamera = 2;
 
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on X axis when player move")]
@@ -192,5 +198,7 @@ public class PlayerData : ScriptableObject
     public RawImage Lock { get => _lock; }
     public float SpeedEnterExitNarrowWay { get => _speedEnterExitNarrowWay; }
     public float SpeedRotationCamera { get => _speedRotationCamera; }
+    public float SpeedToStopCamera { get => _speedToStopCamera; }
+    public float StackMovement { get => _stackMovement; }
     #endregion Properties
 }

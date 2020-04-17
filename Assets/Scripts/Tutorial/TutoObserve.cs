@@ -96,7 +96,10 @@ public class TutoObserve : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
-        GameLoopManager.Instance.GameLoopInputManager -= VerifyTouch;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
+            GameLoopManager.Instance.GameLoopInputManager -= VerifyTouch;
+        }
     }
 }
