@@ -368,41 +368,41 @@ public class IMouvement : IPlayerState
         {
             if(mousePositionX > 0)
             {
-                _currentMouseX += Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+                _currentMouseX += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, _playerData.StackMovement);
             }else if(mousePositionX < 0)
             {
-                _currentMouseX -= Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0.5f);
+                _currentMouseX -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if(mousePositionX == 0 && _currentMouseX > 0)
             {
-                _currentMouseX -= Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, 0, 0.5f);
+                _currentMouseX -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, 0, _playerData.StackMovement);
             }else if(mousePositionX == 0 && _currentMouseX < 0)
             {
-                _currentMouseX += Time.deltaTime*2;
-                _currentMouseX = Mathf.Clamp(_currentMouseX, -0.5f, 0);
+                _currentMouseX += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseX = Mathf.Clamp(_currentMouseX, -_playerData.StackMovement, 0);
             }
             if (mousePositionY > 0)
             {
-                _currentMouseY += Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+                _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if (mousePositionY < 0)
             {
-                _currentMouseY -= Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0.5f);
+                _currentMouseY -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, _playerData.StackMovement);
             }
             else if (mousePositionY == 0 && _currentMouseY > 0)
             {
-                _currentMouseY -= Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, 0, 0.5f);
+                _currentMouseY -= Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, 0, _playerData.StackMovement);
             }
             else if (mousePositionY == 0 && _currentMouseY < 0)
             {
-                _currentMouseY += Time.deltaTime*2;
-                _currentMouseY = Mathf.Clamp(_currentMouseY, -0.5f, 0);
+                _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
+                _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
