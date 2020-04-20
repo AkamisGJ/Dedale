@@ -14,7 +14,7 @@ public class tambour : MonoBehaviour
     [SerializeField] private float _maxSpeed = 2f;
 
 
-    void Start()
+    void Awake()
     {
         if (_random)
         {

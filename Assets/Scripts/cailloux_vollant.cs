@@ -5,49 +5,17 @@ using Sirenix.OdinInspector;
 
 public class cailloux_vollant : MonoBehaviour
 {
-    //Position
-    [InfoBox("Put the curve between time -1 and 1")]
-    [SerializeField] AnimationCurve curve;
-    private Vector3 initial_position;
-    private Vector3 new_position = Vector3.zero;
-    float time;
-    float random_startTime = 0f;
+        //Position
+        [InfoBox("Put the curve between time -1 and 1")]
+        [SerializeField] public AnimationCurve curve;
+        [HideInInspector] public Vector3 initial_position;
+        [HideInInspector] public Vector3 new_position = Vector3.zero;
+        [HideInInspector] public float time;
+        [HideInInspector] public float random_startTime = 0f;
 
-    //Rotation
-    private Quaternion initialRotation;
-    private Quaternion newRotation = Quaternion.identity;
-    private float lerpRotationValue = 0f; 
-    [SerializeField] private float speedRotation = 0.2f;
-
-
-    void Start()
-    {
-        initial_position = transform.position;
-        initialRotation = transform.rotation;
-        random_startTime = Random.Range(-1f, 1f);
-    }
-
-
-    void Update()
-    {
-        MovePosition();
-        ChangeRotation();
-    }
-
-    void ChangeRotation(){
-        if(transform.rotation == newRotation || lerpRotationValue > 1f){
-            newRotation = Random.rotation;
-            initialRotation = transform.rotation;
-            lerpRotationValue = 0f;
-        }
-        lerpRotationValue += Time.deltaTime * speedRotation;
-        transform.rotation = Quaternion.Lerp(initialRotation, newRotation, lerpRotationValue);
-    }
-
-    void MovePosition(){
-        time = Mathf.Sin(Time.time + random_startTime);
-        new_position = initial_position;
-        new_position.y += curve.Evaluate(time);
-        transform.position = new_position;
-    }
+        //Rotation
+        [SerializeField] public float speedRotation = 0.2f;
+        [HideInInspector] public Quaternion initialRotation;
+        [HideInInspector] public Quaternion newRotation = Quaternion.identity;
+        [HideInInspector] public float lerpRotationValue = 0f; 
 }

@@ -141,15 +141,6 @@ public class IMouvement : IPlayerState
     {
         if (_mainCamera != null && Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
-            if (enableHightLightObject != _raycastHit.collider.gameObject)
-            {
-                if (enableHightLightObject != null)
-                {
-                    HighlightObject(enableHightLightObject, false);
-                }
-                enableHightLightObject = _raycastHit.collider.gameObject;
-                HighlightObject(enableHightLightObject, true);
-            }
             if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -205,11 +196,6 @@ public class IMouvement : IPlayerState
                     return;
                 }
             }
-        }
-        else if (enableHightLightObject != null)
-        {
-            HighlightObject(enableHightLightObject, false);
-            enableHightLightObject = null;
         }
     }
 

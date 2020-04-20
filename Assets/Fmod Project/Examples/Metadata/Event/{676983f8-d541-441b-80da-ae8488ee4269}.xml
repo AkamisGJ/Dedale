@@ -5,7 +5,7 @@
 			<value>Feuille froisé</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{90bfdd7b-508d-43e3-9fa3-3645bfa11b3b}</destination>
@@ -59,11 +59,18 @@
 	<object class="EventAutomatableProperties" id="{00b22ffd-bb71-4914-be22-682c5cf9fba1}" />
 	<object class="MarkerTrack" id="{e41bf2da-c845-477e-9865-a0dad62c5bf5}" />
 	<object class="GroupTrack" id="{4f88b43c-2bfe-442a-9f0b-bde0991a03ca}">
+		<relationship name="modules">
+			<destination>{e55ba2e2-ae66-4743-a658-2e451d0ff398}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{7b2a5cc9-7e16-4244-aece-3b22a6bd963b}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{5dfd8a7c-f6ba-4e38-9354-fc5b58cedf51}" />
+	<object class="Timeline" id="{5dfd8a7c-f6ba-4e38-9354-fc5b58cedf51}">
+		<relationship name="modules">
+			<destination>{e55ba2e2-ae66-4743-a658-2e451d0ff398}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{d027938f-c1eb-4619-a5f3-f2ef6783ced9}">
 		<relationship name="effectChain">
 			<destination>{62c5449e-0c32-474a-a136-e63d25db592d}</destination>
@@ -81,6 +88,14 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{eb5432e9-0563-4a32-802b-5630ba7ca6c4}" />
+	<object class="SingleSound" id="{e55ba2e2-ae66-4743-a658-2e451d0ff398}">
+		<property name="length">
+			<value>3.2146485260770974</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{34c17708-bfcc-4324-aa87-833a036a9600}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{7b2a5cc9-7e16-4244-aece-3b22a6bd963b}">
 		<property name="name">
 			<value>Audio 1</value>

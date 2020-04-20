@@ -2,10 +2,6 @@
 using UnityEngine;
 using FMODUnity;
 
-#if UNITY_EDITOR
-[HierarchyIcon("camera")]
-#endif
-
 public class PlayerAgentController : MonoBehaviour
 {
     #region Fields
