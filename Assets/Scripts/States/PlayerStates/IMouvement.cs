@@ -549,7 +549,6 @@ public class IMouvement : IPlayerState
     private void FootStepSpeed(Vector3 realMove)
     {
         float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
-        Debug.Log(speedPlayer);
         if(speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep / speedPlayer))
         {
             SelectFootStepAndPlay();
