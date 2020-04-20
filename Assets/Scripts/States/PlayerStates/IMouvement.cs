@@ -293,12 +293,11 @@ public class IMouvement : IPlayerState
         float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
         float desiredMoveY = _direction.y * Time.fixedDeltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        Vector3 realMove = desiredMove + _moveModifier * Time.fixedDeltaTime;
+        Vector3 realMove = desiredMove + (_moveModifier * Time.fixedDeltaTime);
         _characterController.Move(realMove);
         if (_characterController.isGrounded)
         {
             FootStepSpeed(realMove);
-            Debug.Log(realMove.magnitude);
         }
     }
 
@@ -549,7 +548,8 @@ public class IMouvement : IPlayerState
     */
     private void FootStepSpeed(Vector3 realMove)
     {
-        float speedPlayer = realMove.magnitude / 2;
+        float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
+        Debug.Log(speedPlayer);
         if(speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep / speedPlayer))
         {
             SelectFootStepAndPlay();
