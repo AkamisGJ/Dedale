@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using HighlightingSystem;
 using FMODUnity;
 
 public class IMouvement : IPlayerState
@@ -134,7 +133,6 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
-        //InputManager.Instance.Zoom -= Zoom;
     }
 
     private void RaycastInteractionObject()
@@ -169,7 +167,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -180,7 +178,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -191,7 +189,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -241,7 +239,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -252,7 +250,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -263,7 +261,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -291,13 +289,17 @@ public class IMouvement : IPlayerState
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
         _direction.y -= _currentGravity * _useGravity;
-        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
-        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
-        float desiredMoveY = _direction.y * Time.deltaTime;
+        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
+        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
+        float desiredMoveY = _direction.y * Time.fixedDeltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
+        Vector3 realMove = desiredMove + _moveModifier * Time.fixedDeltaTime;
         _characterController.Move(realMove);
-        FootStepSpeed(realMove);
+        if (_characterController.isGrounded)
+        {
+            FootStepSpeed(realMove);
+            Debug.Log(realMove.magnitude);
+        }
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -527,7 +529,7 @@ public class IMouvement : IPlayerState
         }
     }
 
-    private void HighlightObject(GameObject hightlightObject, bool isHightlight)
+    /*private void HighlightObject(GameObject hightlightObject, bool isHightlight)
     {
         if(hightlightObject.GetComponent<Highlighter>())
         {
@@ -544,15 +546,15 @@ public class IMouvement : IPlayerState
             Debug.Log("Cette Object " + hightlightObject + " n'a pas le script Highlighter sur lui");
         }
     }
-
+    */
     private void FootStepSpeed(Vector3 realMove)
     {
-        float speedPlayer = (_accelerationLerp + _accelerationSprintLerp) / 2;
-        if(speedPlayer > 0 && _currentTimeFootStepPlayer > (0.25f / speedPlayer))
+        float speedPlayer = realMove.magnitude / 2;
+        if(speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep / speedPlayer))
         {
             SelectFootStepAndPlay();
             _currentTimeFootStepPlayer = 0;
-        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (0.25f / speedPlayer))
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (_playerData.TimeStep / speedPlayer))
         {
             _currentTimeFootStepPlayer += Time.deltaTime;
         }
