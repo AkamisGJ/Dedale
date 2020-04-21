@@ -16,7 +16,7 @@ public class IInfintyCorridor : IPlayerState
     public void Enter(Collider collider = null)
     {
         _playerController.CanMove = true;
-        _acceleration = 1;
+        _acceleration = 0;
         if (_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
