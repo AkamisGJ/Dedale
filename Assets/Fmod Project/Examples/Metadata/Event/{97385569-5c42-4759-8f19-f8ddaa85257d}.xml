@@ -70,6 +70,9 @@
 		<relationship name="modules">
 			<destination>{aded7ede-1e22-4d23-a1f1-623d4c185526}</destination>
 		</relationship>
+		<relationship name="markers">
+			<destination>{d8b4e027-20f9-4f05-846d-1a1c001ffb08}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{32ff4f69-aaeb-4e07-a93c-a1375428aac3}">
 		<relationship name="effectChain">
@@ -90,7 +93,10 @@
 	<object class="MixerBusPanner" id="{9814e501-37dc-410f-871a-e10ed6c30348}" />
 	<object class="SingleSound" id="{aded7ede-1e22-4d23-a1f1-623d4c185526}">
 		<property name="length">
-			<value>60.313832199546482</value>
+			<value>30.313832199546482</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>30</value>
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{ee1d5cfb-a6db-4a3b-89b7-5a74f220ab00}</destination>
@@ -111,6 +117,20 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{32ff4f69-aaeb-4e07-a93c-a1375428aac3}</destination>
+		</relationship>
+	</object>
+	<object class="NamedMarker" id="{d8b4e027-20f9-4f05-846d-1a1c001ffb08}">
+		<property name="position">
+			<value>30</value>
+		</property>
+		<property name="name">
+			<value>Marker A</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{a32dd30e-2bd1-4902-ba00-de748caedb54}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{abf69742-26c0-4d0e-9215-0483dff931e5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{69186ab6-c84c-481c-aa47-be9795f3905e}">
