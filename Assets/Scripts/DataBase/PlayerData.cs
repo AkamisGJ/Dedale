@@ -77,10 +77,16 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Move speed")]
     [Tooltip("Move speed on ladder")]
     [SerializeField] private float _speedLadder = 0.5f;
-
     [BoxGroup("Move speed")]
     [Tooltip("global direction multiplier speed of player (0 to infini)")]
     [SerializeField] private float _gloabalSpeed = 1;
+    [BoxGroup("Move speed")]
+    [Tooltip("Move speed when crouching")]
+    [SerializeField] private float _crouchMoveSpeed = 1;
+    [BoxGroup("Move speed")]
+    [Tooltip("Time between to step")]
+    [Range(0, 0.1f)]
+    [SerializeField] private float _timeStep = 0.5f;
 
     [BoxGroup("Sprint", centerLabel: true)]
     [Tooltip("Multiply forward speed by this value")]
@@ -99,6 +105,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Player's Camera")]
     [Tooltip("Define speed of camera slow when player stop move it")]
     [SerializeField] private float _speedToStopCamera = 2;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
+    [SerializeField] private float _angleY = 40f;
 
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on X axis when player move")]
@@ -200,5 +209,8 @@ public class PlayerData : ScriptableObject
     public float SpeedRotationCamera { get => _speedRotationCamera; }
     public float SpeedToStopCamera { get => _speedToStopCamera; }
     public float StackMovement { get => _stackMovement; }
+    public float TimeStep { get => _timeStep; }
+    public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
+    public float AngleY { get => _angleY; }
     #endregion Properties
 }

@@ -40,7 +40,7 @@ public class IObserve : IPlayerState
         _grabObjectCollider.isTrigger = true;
         _grabObject.transform.SetParent(_objectHolder);
         _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
-        if (_currentObjectInterract.OnTakeObject != null && _playerAgentController.AudioSourcePlayer != null)
+        if (_currentObjectInterract.OnTakeObject != null)
         {
             _currentObjectInterract.OnTakeObject.Invoke();
         }

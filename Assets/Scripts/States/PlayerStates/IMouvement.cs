@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI;
+using FMODUnity;
 
 public class IMouvement : IPlayerState
 {
@@ -47,6 +46,8 @@ public class IMouvement : IPlayerState
     private Vector3 OffsetSpherCast = Vector3.zero;
     private float _currentMouseX = 0;
     private float _currentMouseY = 0;
+    private float _currentTimeFootStepPlayer = 0;
+    private FMOD.Studio.EventInstance _footsteps;
     #endregion Fields
 
     #region Properties
@@ -80,6 +81,7 @@ public class IMouvement : IPlayerState
         _directionVertical = Vector3.zero;
         _directionHorinzontal = Vector3.zero;
         _moveModifier = Vector3.zero;
+        _currentTimeFootStepPlayer = 0;
     }
 
     public void Enter(Collider collider)
@@ -131,7 +133,6 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
-        //InputManager.Instance.Zoom -= Zoom;
     }
 
     private void RaycastInteractionObject()
@@ -166,7 +167,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -177,7 +178,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -188,7 +189,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -238,7 +239,7 @@ public class IMouvement : IPlayerState
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     _blendValue = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
                     return;
                 }
@@ -249,7 +250,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -260,7 +261,7 @@ public class IMouvement : IPlayerState
                 {
                     _blendValue = 0;
                     _timeCrouch = 0;
-                    _playerController.CanMove = false; //_canMove = false;
+                    _playerController.CanMove = false;
                     GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
                     return;
                 }
@@ -288,12 +289,16 @@ public class IMouvement : IPlayerState
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
         _direction.y -= _currentGravity * _useGravity;
-        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
-        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
-        float desiredMoveY = _direction.y * Time.deltaTime;
+        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
+        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
+        float desiredMoveY = _direction.y * Time.fixedDeltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        Vector3 realMove = desiredMove + _moveModifier * Time.deltaTime;
+        Vector3 realMove = desiredMove + (_moveModifier * Time.fixedDeltaTime);
         _characterController.Move(realMove);
+        if (_characterController.isGrounded)
+        {
+            FootStepSpeed(realMove);
+        }
     }
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
@@ -305,29 +310,57 @@ public class IMouvement : IPlayerState
             _direction = (_directionHorinzontal + _directionVertical).normalized;
             if (horizontalMouvement > 0)
             {
-                _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+                if (_isCrouch == true)
+                {
+                    _direction += _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+                }
             }
             if (horizontalMouvement < 0)
             {
-                _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+                if (_isCrouch == true)
+                {
+                    _direction -= _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+                }
             }
 
             if (verticalMouvement > 0)
             {
-                _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+                if (_isCrouch == true)
+                {
+                    _direction += _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+                }
             }
             else if (verticalMouvement < 0)
             {
-                _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+                if (_isCrouch == true)
+                {
+                    _direction -= _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+                }
             }
-            if (_speedSprint > 1 && horizontalMouvement > 0)
+            if (_speedSprint > 1 && horizontalMouvement > 0 && _isCrouch == false)
             {
                 _direction += _playerController.transform.forward * (_speedSprint - 1) * _currentAccelerationSprint;
             }
             if (_direction != Vector3.zero)
             {
                 Acceleration();
-                if(_speedSprint != 0 && horizontalMouvement > 0)
+                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false)
                 {
                     AccelerationSprint();
                 }
@@ -340,11 +373,12 @@ public class IMouvement : IPlayerState
             {
                 _accelerationLerp = 0;
             }
-            if (_playerController.CanMove == true) //_canMove == true)
+            if (_playerController.CanMove == true)
             {
                 Move();
             }
         }
+        _direction = Vector3.zero;
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
@@ -396,7 +430,6 @@ public class IMouvement : IPlayerState
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
         }
-
     }
 
     private void Acceleration()
@@ -499,7 +532,7 @@ public class IMouvement : IPlayerState
     {
         if (isSprinting == true)
         {
-            if (_sprintCurrentTime > 0 || _playerData.SprintTimeMax == 0)
+            if (_sprintCurrentTime > 0 || _playerData.SprintTimeMax == 0 && _isCrouch == false)
             {
                 _sprintCurrentTime -= Time.deltaTime;
                 _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
@@ -511,7 +544,7 @@ public class IMouvement : IPlayerState
             }
         }
 
-        if (isSprinting == false)
+        if (isSprinting == false || _isCrouch == true)
         {
             _speedSprint = 0;
             if (_sprintCurrentTime < _playerData.SprintTimeMax)
@@ -522,12 +555,73 @@ public class IMouvement : IPlayerState
         }
     }
 
+    /*private void HighlightObject(GameObject hightlightObject, bool isHightlight)
+    {
+        if(hightlightObject.GetComponent<Highlighter>())
+        {
+            if(isHightlight == true)
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOn(_playerData.ColorHightLightObject);
+            }
+            else
+            {
+                hightlightObject.gameObject.GetComponent<Highlighter>().ConstantOff();
+            }
+        }else
+        {
+            Debug.Log("Cette Object " + hightlightObject + " n'a pas le script Highlighter sur lui");
+        }
+    }
+    */
+    private void FootStepSpeed(Vector3 realMove)
+    {
+        float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
+        if(speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep / speedPlayer))
+        {
+            SelectFootStepAndPlay();
+            _currentTimeFootStepPlayer = 0;
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (_playerData.TimeStep / speedPlayer))
+        {
+            _currentTimeFootStepPlayer += Time.deltaTime;
+        }
+    }
+
+    private void SelectFootStepAndPlay()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 10.0f);
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Example/Character/Player Footsteps");
+        _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+        foreach  (RaycastHit raycastHit in hits)
+        {
+            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Terre"))
+            {
+                _footsteps.setParameterByName("Surface", 1);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Beton"))
+            {
+                _footsteps.setParameterByName("Surface", 2);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else
+            {
+                _footsteps.setParameterByName("Surface", 0);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
-        //InputManager.Instance.Zoom -= Zoom;
     }
 }
