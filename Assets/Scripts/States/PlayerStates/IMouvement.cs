@@ -430,7 +430,6 @@ public class IMouvement : IPlayerState
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
         }
-
     }
 
     private void Acceleration()

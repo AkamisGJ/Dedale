@@ -105,6 +105,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Player's Camera")]
     [Tooltip("Define speed of camera slow when player stop move it")]
     [SerializeField] private float _speedToStopCamera = 2;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
+    [SerializeField] private float _angleY = 40f;
 
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on X axis when player move")]
@@ -208,5 +211,6 @@ public class PlayerData : ScriptableObject
     public float StackMovement { get => _stackMovement; }
     public float TimeStep { get => _timeStep; }
     public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
+    public float AngleY { get => _angleY; }
     #endregion Properties
 }

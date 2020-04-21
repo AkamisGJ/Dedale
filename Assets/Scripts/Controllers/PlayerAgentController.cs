@@ -35,6 +35,7 @@ public class PlayerAgentController : MonoBehaviour
         NARROWWAY,
         LIANA,
         FALL,
+        INFINITYCORRIDOR,
     }
     private MyState _currentState = MyState.MOVEMENT;
     private Dictionary<MyState, IPlayerState> _states = null;
@@ -68,6 +69,7 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.NARROWWAY, new INarrowWay());
         _states.Add(MyState.LIANA, new ILiana());
         _states.Add(MyState.FALL, new IFall());
+        _states.Add(MyState.INFINITYCORRIDOR, new IInfintyCorridor());
         _currentState = MyState.MOVEMENT;
         _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
         _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
@@ -76,6 +78,7 @@ public class PlayerAgentController : MonoBehaviour
         _states[MyState.NARROWWAY].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.LIANA].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.FALL].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.INFINITYCORRIDOR].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
@@ -84,7 +87,7 @@ public class PlayerAgentController : MonoBehaviour
     void OnUpdate()
     {
         _states[_currentState].Update();
-        if (_currentState == MyState.MOVEMENT || _currentState == MyState.OBSERVE)
+        if (_currentState == MyState.MOVEMENT || _currentState == MyState.OBSERVE || _currentState == MyState.INFINITYCORRIDOR)
         {
             if (_zooming == true)
             {
