@@ -81,6 +81,9 @@ public class PlayerData : ScriptableObject
     [Tooltip("global direction multiplier speed of player (0 to infini)")]
     [SerializeField] private float _gloabalSpeed = 1;
     [BoxGroup("Move speed")]
+    [Tooltip("Move speed when crouching")]
+    [SerializeField] private float _crouchMoveSpeed = 1;
+    [BoxGroup("Move speed")]
     [Tooltip("Time between to step")]
     [Range(0, 0.1f)]
     [SerializeField] private float _timeStep = 0.5f;
@@ -204,5 +207,6 @@ public class PlayerData : ScriptableObject
     public float SpeedToStopCamera { get => _speedToStopCamera; }
     public float StackMovement { get => _stackMovement; }
     public float TimeStep { get => _timeStep; }
+    public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
     #endregion Properties
 }

@@ -310,29 +310,57 @@ public class IMouvement : IPlayerState
             _direction = (_directionHorinzontal + _directionVertical).normalized;
             if (horizontalMouvement > 0)
             {
-                _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+                if (_isCrouch == true)
+                {
+                    _direction += _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+                }
             }
             if (horizontalMouvement < 0)
             {
-                _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+                if (_isCrouch == true)
+                {
+                    _direction -= _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+                }
             }
 
             if (verticalMouvement > 0)
             {
-                _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+                if (_isCrouch == true)
+                {
+                    _direction += _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+                }
             }
             else if (verticalMouvement < 0)
             {
-                _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+                if (_isCrouch == true)
+                {
+                    _direction -= _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                }
+                else
+                {
+                    _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+                }
             }
-            if (_speedSprint > 1 && horizontalMouvement > 0)
+            if (_speedSprint > 1 && horizontalMouvement > 0 && _isCrouch == false)
             {
                 _direction += _playerController.transform.forward * (_speedSprint - 1) * _currentAccelerationSprint;
             }
             if (_direction != Vector3.zero)
             {
                 Acceleration();
-                if(_speedSprint != 0 && horizontalMouvement > 0)
+                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false)
                 {
                     AccelerationSprint();
                 }
@@ -505,7 +533,7 @@ public class IMouvement : IPlayerState
     {
         if (isSprinting == true)
         {
-            if (_sprintCurrentTime > 0 || _playerData.SprintTimeMax == 0)
+            if (_sprintCurrentTime > 0 || _playerData.SprintTimeMax == 0 && _isCrouch == false)
             {
                 _sprintCurrentTime -= Time.deltaTime;
                 _sprintCurrentTime = Mathf.Clamp(_sprintCurrentTime, 0, _playerData.SprintTimeMax);
@@ -517,7 +545,7 @@ public class IMouvement : IPlayerState
             }
         }
 
-        if (isSprinting == false)
+        if (isSprinting == false || _isCrouch == true)
         {
             _speedSprint = 0;
             if (_sprintCurrentTime < _playerData.SprintTimeMax)
