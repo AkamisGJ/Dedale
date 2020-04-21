@@ -9,7 +9,12 @@ public class ChangeScene : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            GameManager.Instance.ChangeState(GameManager.MyState.GAME, _nextScene);
+            SwitchScene();
         }
+    }
+
+    public void SwitchScene(){
+        print("test");
+        GameManager.Instance.ChangeState(GameManager.MyState.GAME, _nextScene);
     }
 }
