@@ -18,6 +18,7 @@ public class IObserve : IPlayerState
     private Collider _objectCollider = null;
     private LayerMask _layerMask;
     private Vector3 OffsetSpherCast = Vector3.zero;
+    private Light _lightPlayer = null;
 
     public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
@@ -27,10 +28,13 @@ public class IObserve : IPlayerState
         _mouseSensitivityInteract = _playerData.MouseSensitivityInteract;
         _mainCamera = _camera;
         _playerAgentController = PlayerManager.Instance.PlayerController;
+        _lightPlayer = _mainCamera.GetComponent<Light>();
+        _lightPlayer.enabled = false;
     }
 
     public void Enter(Collider interactObjectCollider)
     {
+        _lightPlayer.enabled = true;
         _objectCollider = interactObjectCollider;
         _grabObjectCollider = _objectCollider;
         _grabObject = _objectCollider.transform.gameObject;
@@ -84,6 +88,7 @@ public class IObserve : IPlayerState
 
     public void Exit()
     {
+        _lightPlayer.enabled = false;
         _objectCollider.isTrigger = false;
         _grabObject.transform.SetParent(null);
         if (_currentObjectInterract.OnThrowObject != null)
