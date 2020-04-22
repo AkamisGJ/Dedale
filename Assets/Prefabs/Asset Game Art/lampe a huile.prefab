@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129972429}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.3, y: 37.2, z: 0}
+  m_LocalPosition: {x: 10.7, y: 37.2, z: 0}
   m_LocalScale: {x: 0.7189739, y: 0.7189741, z: 0.7189741}
   m_Children: []
   m_Father: {fileID: 6846205444775968744}
@@ -215,7 +215,6 @@ GameObject:
   - component: {fileID: 2980686042717405741}
   - component: {fileID: 2980686042718503149}
   - component: {fileID: 6259207644840183158}
-  - component: {fileID: 1354675681}
   m_Layer: 0
   m_Name: lampe a huile
   m_TagString: Untagged
@@ -299,26 +298,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 17.084518, y: 55.035427, z: 17.08452}
   m_Center: {x: 0, y: 27.441843, z: 0}
---- !u!114 &1354675681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6846205444775535560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  Event: event:/Sound Design/Petite flammes (lampe a huile)
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 0
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
