@@ -21,7 +21,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     }
     
     public void FinalLoadScene(){
-        if (_nextSceneName != string.Empty && _asyncOperationLoad.isDone)
+        if (_nextSceneName != string.Empty)
         {
             _asyncOperationLoad.allowSceneActivation = true;
         }else{
