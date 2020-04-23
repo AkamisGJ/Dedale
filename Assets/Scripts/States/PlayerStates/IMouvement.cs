@@ -203,8 +203,8 @@ public class IMouvement : IPlayerState
         if (_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
             RaycastHit raycastHit;
-            Physics.Raycast(_mainCamera.transform.position,_raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, _playerData.CantSeeInteractionHelperBehindThis + _playerData.LayerMask);
-            if(raycastHit.transform?.gameObject.layer != LayerMask.NameToLayer("Wall"))
+            Physics.Raycast(_mainCamera.transform.position, _raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, _raycastHit.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
+            if (raycastHit.collider == null)
             {
                 if (enableHightLightObject != _raycastHit.collider.gameObject)
                 {
