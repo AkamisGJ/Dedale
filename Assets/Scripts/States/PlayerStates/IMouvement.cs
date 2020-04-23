@@ -200,70 +200,75 @@ public class IMouvement : IPlayerState
     private void SphereCastInteractionObject()
     {
         OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
-        if(_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction,_mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
+        if (_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
-            if (enableHightLightObject != _raycastHit.collider.gameObject)
+            RaycastHit raycastHit;
+            Physics.Raycast(_mainCamera.transform.position,_raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, _playerData.CantSeeInteractionHelperBehindThis + _playerData.LayerMask);
+            if(raycastHit.transform?.gameObject.layer != LayerMask.NameToLayer("Wall"))
             {
-                if (enableHightLightObject != null)
+                if (enableHightLightObject != _raycastHit.collider.gameObject)
                 {
-                    enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = false;
-                }
-                enableHightLightObject = _raycastHit.collider.gameObject;
-                enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = true;
-            }
-            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    _blendValue = 0;
-                    _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE, _raycastHit.collider);
-                    return;
-                }
-            }
-            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    _blendValue = 0;
-                    Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
-                    if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                    if (enableHightLightObject != null)
                     {
-                        _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
-                        _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION, _raycastHit.collider);
+                        enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = false;
                     }
-                    return;
+                    enableHightLightObject = _raycastHit.collider.gameObject;
+                    enableHightLightObject.transform.GetComponent<ImageInteract>().IsFocus = true;
                 }
-            }
-            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ladder"))
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("ObserveObject"))
                 {
-                    _blendValue = 0;
-                    _playerController.CanMove = false;
-                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
-                    return;
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        _blendValue = 0;
+                        _playerController.ChangeState(PlayerAgentController.MyState.OBSERVE, _raycastHit.collider);
+                        return;
+                    }
                 }
-            }
-            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
                 {
-                    _blendValue = 0;
-                    _timeCrouch = 0;
-                    _playerController.CanMove = false;
-                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
-                    return;
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        _blendValue = 0;
+                        Door interact = _raycastHit.transform.gameObject.GetComponent<IInteract>() as Door;
+                        if ((interact.NeedKey == true && PlayerManager.Instance.HaveKey == true) || interact.NeedKey == false)
+                        {
+                            _raycastHit.transform.gameObject.GetComponent<IInteract>().Enter();
+                            _playerController.ChangeState(PlayerAgentController.MyState.INTERACTION, _raycastHit.collider);
+                        }
+                        return;
+                    }
                 }
-            }
-            if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Liana"))
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ladder"))
                 {
-                    _blendValue = 0;
-                    _timeCrouch = 0;
-                    _playerController.CanMove = false;
-                    GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
-                    return;
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        _blendValue = 0;
+                        _playerController.CanMove = false;
+                        GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<StartLadder>().StartPositionPlayer;
+                        return;
+                    }
+                }
+                if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("NarrowWay"))
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        _blendValue = 0;
+                        _timeCrouch = 0;
+                        _playerController.CanMove = false;
+                        GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<NarrowWayTrigger>().StartPositionPlayer;
+                        return;
+                    }
+                }
+                if (_raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Liana"))
+                {
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        _blendValue = 0;
+                        _timeCrouch = 0;
+                        _playerController.CanMove = false;
+                        GameLoopManager.Instance.LoopQTE += _raycastHit.transform.GetComponent<LianaTrigger>().StartPositionPlayer;
+                        return;
+                    }
                 }
             }
         }

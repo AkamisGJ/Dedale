@@ -128,6 +128,9 @@ public class TutoNarrowWay : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopInputManager -= OnUpdate;
+        }
     }
 }

@@ -42,23 +42,29 @@ public class StartLadder : MonoBehaviour
         _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, transform.rotation, _lerpStartPositionPlayer);
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, transform.rotation, _lerpStartPositionPlayer);
         _playerController.MainCamera.fieldOfView = Mathf.Lerp(_startFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
-        Debug.Log(_playerController.MainCamera.fieldOfView);
         if(_lerpStartPositionPlayer > 1)
         {
             _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
             _lerpStartPositionPlayer = 0;
             _isStarted = false;
-            foreach (QTEManager qTEManager in _qTEManagers)
+            if(_qTEManagers.Length > 0)
             {
-                qTEManager.IsActive = true;
+                Debug.Log(_qTEManagers.Length);
+                foreach (QTEManager qTEManager in _qTEManagers)
+                {
+                    qTEManager.IsActive = true;
+                }
             }
         }
     }
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
+        }
     }
 
     private void OnTriggerStay(Collider other)

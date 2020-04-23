@@ -35,6 +35,9 @@ MonoBehaviour:
   _ladderHelper: {fileID: 5224312957269270060, guid: 2895f84acf2837f41a0ffe49a0d3283b,
     type: 3}
   _lock: {fileID: 5224312957269270060, guid: 97fac92a0ba442c4891fc4e9d59434a8, type: 3}
+  _cantSeeInteractionHelperBehindThis:
+    serializedVersion: 2
+    m_Bits: 0
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -99,9 +102,14 @@ MonoBehaviour:
   _speedSide: 1
   _speedLadder: 1
   _gloabalSpeed: 3
+  _crouchMoveSpeed: 1
+  _timeStep: 0.1
   _maxSprintSpeed: 2
   _mouseSensitivityObserve: 3
   _angleX: 60
+  _stackMovement: 0.5
+  _speedToStopCamera: 2
+  _angleY: 40
   _sensitivityMouseX: 3
   _sensitivityMouseY: 3
   _sprintTimeMax: 0
@@ -137,4 +145,6 @@ MonoBehaviour:
   _differenceHeightCrouch: 1.5
   _colorHightlightObject: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 1}
   _maxAngleNarrowWay: 60
+  _speedRotationCamera: 2
+  _speedEnterExitNarrowWay: 2
   _speedNarrowWay: 2

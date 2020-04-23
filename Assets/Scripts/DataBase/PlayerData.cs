@@ -49,6 +49,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Interaction Object Helper")]
     [Tooltip("The image for locked door")]
     [SerializeField] private RawImage _lock;
+    [BoxGroup("Interaction Object Helper")]
+    [Tooltip("All Layer that block Interaction and interaction helper")]
+    [SerializeField] private LayerMask _cantSeeInteractionHelperBehindThis;
 
 
     [BoxGroup("Sprint")]
@@ -212,5 +215,6 @@ public class PlayerData : ScriptableObject
     public float TimeStep { get => _timeStep; }
     public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
     public float AngleY { get => _angleY; }
+    public LayerMask CantSeeInteractionHelperBehindThis { get => _cantSeeInteractionHelperBehindThis; }
     #endregion Properties
 }

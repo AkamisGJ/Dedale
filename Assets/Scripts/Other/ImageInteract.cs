@@ -14,7 +14,7 @@ public class ImageInteract : MonoBehaviour
     private PlayerData _playerData = null;
     private float _distance = 0;
     private bool _canShowLock = false;
-
+    private Camera _playerCamera = null;
     public bool IsFocus { get => _isFocus; set => _isFocus = value; }
 
     private void Awake()
@@ -23,7 +23,6 @@ public class ImageInteract : MonoBehaviour
         {
             _uiPosition = gameObject;
         }
-
     }
 
     private void Start()
@@ -87,6 +86,7 @@ public class ImageInteract : MonoBehaviour
         color.a = 0;
         _currentImage.color = color;
         _isFocus = false;
+        _playerCamera = PlayerManager.Instance.CameraPlayer;
     }
 
     void SpawnCanvas()
@@ -103,7 +103,9 @@ public class ImageInteract : MonoBehaviour
         }
         _canvas.transform.position = _uiPosition.transform.position;
         _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
-        if(Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) < (180 + _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance)
+        RaycastHit raycastHit;
+        Physics.Raycast(_playerCamera.transform.position, transform.position - _playerCamera.transform.position, out raycastHit, _playerData.CantSeeInteractionHelperBehindThis + _playerData.LayerMask);
+        if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) < (180 + _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.transform.gameObject.layer != LayerMask.NameToLayer("Wall"))
         {
             Color color = _currentImage.color;
             color.a = 1;
