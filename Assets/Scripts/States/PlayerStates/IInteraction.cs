@@ -45,7 +45,7 @@ public class IInteraction : IPlayerState
     private void OnExit()
     {
         _interactObject.Exit();
-        _interactGameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+        //_interactGameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
     }
 
     void OnDestroy()

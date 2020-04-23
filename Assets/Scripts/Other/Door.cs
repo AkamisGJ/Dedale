@@ -65,11 +65,11 @@ public class Door : MonoBehaviour, IInteract
 
     void OnClick()
     {
-        transform.GetComponent<MeshRenderer>().material.color = Color.cyan;
+        //transform.GetComponent<MeshRenderer>().material.color = Color.cyan;
     }
 
     void UnClick()
     {
-        transform.GetComponent<MeshRenderer>().material.color = Color.magenta;
+        //transform.GetComponent<MeshRenderer>().material.color = Color.magenta;
     }
 }

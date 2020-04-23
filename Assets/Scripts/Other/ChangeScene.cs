@@ -14,7 +14,6 @@ public class ChangeScene : MonoBehaviour
     }
 
     public void SwitchScene(){
-        print("test");
         GameManager.Instance.ChangeState(GameManager.MyState.GAME, _nextScene);
     }
 }
