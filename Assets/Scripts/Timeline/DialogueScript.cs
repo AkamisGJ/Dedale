@@ -60,7 +60,10 @@ public class DialogueScript : MonoBehaviour
     public void OnExit()
     {
         _dialogueManager.OnEndTimeline();
-        _eventEmitter.Stop();
+        if(_eventEmitter != null)
+        {
+            _eventEmitter.Stop();
+        }
         _dialogueIndex = 0;
     }
 }

@@ -12,7 +12,7 @@ public class GameState : IGameState
 
     private void OnStart()
     {
-        SceneManager.UnloadScene("LoadingScreen");
+        //SceneManager.UnloadScene("LoadingScreen");
         GameLoopManager.Instance.LastStart -= OnStart;
     }
 
