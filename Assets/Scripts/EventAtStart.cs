@@ -11,6 +11,5 @@ public class EventAtStart : MonoBehaviour
         {
             _unityEvent.Invoke();
         }
-        Destroy(this);
     }
 }

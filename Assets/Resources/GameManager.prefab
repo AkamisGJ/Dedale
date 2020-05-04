@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7122617993820077800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908687834499952610}
+  - component: {fileID: 5013279253329681551}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &908687834499952610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122617993820077800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5013279253329681551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122617993820077800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd2ae503e78cd14da039ced88d8e0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGameStart: []
+  OnLevelLoaded: []
+  OnMainMenuLoaded: []
+  MainMenuGameLevel: {fileID: 11400000, guid: d99561144ab5c0345b420674ec7d0228, type: 2}
+  MainGameLevels:
+  - {fileID: 11400000, guid: 9f2f4106fb707f94b8ba444221854f92, type: 2}
+  - {fileID: 11400000, guid: 1b66eea4011d7984a8ac332146b3eb6c, type: 2}
+  - {fileID: 11400000, guid: 1707cf36df161814d86f7060dac6d717, type: 2}
+  - {fileID: 11400000, guid: 21cb279a2a3787347a3e0ef438b6b96c, type: 2}
+  - {fileID: 11400000, guid: 23736d8bcf57e864cbe33b7519be622a, type: 2}
+  - {fileID: 11400000, guid: 946fe49bc15dd414d99db0a28d1c1583, type: 2}
+  EnableSaveProgress: 0
+  ProgressSaveName: Progress
