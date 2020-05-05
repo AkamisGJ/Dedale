@@ -1,39 +1,61 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using GameplayIngredients;
+using System;
+using System.Collections;
 
-public class LoadOrAndUnLoadScene : MonoBehaviour
+public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
 {
-    [SerializeField] private string _nextSceneName = null;
-    [SerializeField] private string _previousSceneName = null;
-    [SerializeField] private bool _autoLoadingScene = false;
-    private AsyncOperation _asyncOperationLoad = null;
-    private bool _alreadyUse = false;
+
+    [SerializeField] private string[] gameLevels;
+    private AsyncOperation _asyncOperationLoad;
+    public LoadSceneMode _loadSceneMode = LoadSceneMode.Additive;
 
     
-    public void PreloadScene()
+
+    
+    public void PreloadScene(string new_level)
     {
-        _alreadyUse = false;
-        if (_nextSceneName != string.Empty)
-        {
-            _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextSceneName, LoadSceneMode.Additive);
-            _asyncOperationLoad.allowSceneActivation = _autoLoadingScene;
-        }
+        
+        _asyncOperationLoad = SceneManager.LoadSceneAsync(new_level, _loadSceneMode);
+        _asyncOperationLoad.allowSceneActivation = false;
+        print("PreloadScene");
+        
+    }
+
+    public void PreloadScene(int new_level)
+    {
+        
+        _asyncOperationLoad = SceneManager.LoadSceneAsync(new_level, _loadSceneMode);
+        _asyncOperationLoad.allowSceneActivation = false;
+        print("PreloadScene");
+        
     }
     
     public void FinalLoadScene(){
-        if (_nextSceneName != string.Empty)
+        if (_asyncOperationLoad != null)
         {
             _asyncOperationLoad.allowSceneActivation = true;
         }else{
             Debug.Log("Can't load the next scene");
         }
+        print("FinalLoadScene");
     }
 
-    public void UnLoadScene(){
-        if (_previousSceneName != string.Empty && SceneManager.GetSceneByName(_previousSceneName).isLoaded)
+    public void UnLoadScene(string level){
+        if (SceneManager.GetSceneByName(level).isLoaded)
         {
-            AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
+            SceneManager.UnloadSceneAsync(level);
         }
+        print("UnLoadScene");
+    }
+
+    public void UnLoadScene(int level){
+        if (SceneManager.GetSceneByBuildIndex(level).isLoaded)
+        {
+            SceneManager.UnloadSceneAsync(level);
+        }
+        print("UnLoadScene");
     }
     
 
