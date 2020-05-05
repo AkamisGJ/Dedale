@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class scriptkeydialogue : MonoBehaviour
+public class EventOnKeyDown : MonoBehaviour
 {
 
+public KeyCode m_key;
 [SerializeField] private UnityEvent _unityEvent = null;
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("m_key"))
         {
             _unityEvent.Invoke();
         }
