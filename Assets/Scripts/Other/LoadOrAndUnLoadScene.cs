@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using GameplayIngredients;
 using System;
 using System.Collections;
 
@@ -19,7 +18,7 @@ public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
         
         _asyncOperationLoad = SceneManager.LoadSceneAsync(new_level, _loadSceneMode);
         _asyncOperationLoad.allowSceneActivation = false;
-        print("PreloadScene");
+        Debug.Log("PreloadScene");
         
     }
 
@@ -28,7 +27,7 @@ public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
         
         _asyncOperationLoad = SceneManager.LoadSceneAsync(new_level, _loadSceneMode);
         _asyncOperationLoad.allowSceneActivation = false;
-        print("PreloadScene");
+        Debug.Log("PreloadScene");
         
     }
     
@@ -39,7 +38,7 @@ public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
         }else{
             Debug.Log("Can't load the next scene");
         }
-        print("FinalLoadScene");
+        Debug.Log("FinalLoadScene");
     }
 
     public void UnLoadScene(string level){
@@ -47,7 +46,7 @@ public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
         {
             SceneManager.UnloadSceneAsync(level);
         }
-        print("UnLoadScene");
+        Debug.Log("UnLoadScene");
     }
 
     public void UnLoadScene(int level){
@@ -55,7 +54,7 @@ public class LoadOrAndUnLoadScene : Singleton<LoadOrAndUnLoadScene>
         {
             SceneManager.UnloadSceneAsync(level);
         }
-        print("UnLoadScene");
+        Debug.Log("UnLoadScene");
     }
     
 
