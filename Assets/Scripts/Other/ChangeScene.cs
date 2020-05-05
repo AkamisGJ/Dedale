@@ -17,7 +17,7 @@ public class ChangeScene : MonoBehaviour
         GameManager.Instance.ChangeState(GameManager.MyState.GAME, _nextScene);
     }
 
-
+    /*
     public void PreloadScene(string new_level)
     {
         LoadOrAndUnLoadScene.Instance.PreloadScene(new_level);
@@ -38,5 +38,5 @@ public class ChangeScene : MonoBehaviour
 
     public void UnLoadScene(int level){
         LoadOrAndUnLoadScene.Instance.UnLoadScene(level);
-    }
+    }*/
 }

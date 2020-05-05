@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AsyncLoading : MonoBehaviour
-{
+{/*
     public void PreloadScene(string new_level)
     {
         LoadOrAndUnLoadScene.Instance.PreloadScene(new_level);
@@ -24,5 +24,5 @@ public class AsyncLoading : MonoBehaviour
 
     public void UnLoadScene(int level){
         LoadOrAndUnLoadScene.Instance.UnLoadScene(level);
-    }
+    }*/
 }

@@ -17,6 +17,6 @@ public class MainMenuState : IGameState
 
     public void Exit()
     {
-        SceneManager.UnloadSceneAsync("0_MainMenu");
+
     }
 }
