@@ -111,6 +111,15 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Player's Camera")]
     [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
     [SerializeField] private float _angleY = 40f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define the min angle on Y of the player's camera when on ladder")]
+    [SerializeField] private float _ladderMinAngleY = 40f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define the angle on Y of the player's camera when on ladder")]
+    [SerializeField] private float _ladderAngleY = 80f;
+    [BoxGroup("Player's Camera")]
+    [Tooltip("Define the reduction of camera speed when player control door")]
+    [SerializeField] private float _speedCameraDoor = 0.0000000000000001f;
 
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on X axis when player move")]
@@ -216,5 +225,8 @@ public class PlayerData : ScriptableObject
     public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
     public float AngleY { get => _angleY; }
     public LayerMask CantSeeInteractionHelperBehindThis { get => _cantSeeInteractionHelperBehindThis; }
+    public float LadderMinAngleY { get => _ladderMinAngleY; }
+    public float LadderAngleY { get => _ladderAngleY; }
+    public float SpeedCameraDoor { get => _speedCameraDoor; }
     #endregion Properties
 }

@@ -105,7 +105,6 @@ public class IInfintyCorridor : IPlayerState
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
-            Debug.Log(_rotationY);
         }
     }
 }

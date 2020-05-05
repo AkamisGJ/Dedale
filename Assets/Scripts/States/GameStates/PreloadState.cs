@@ -17,6 +17,5 @@ public class PreloadState : IGameState
 
     public void Exit()
     {
-        SceneManager.UnloadSceneAsync("PreLoad");
     }
 }

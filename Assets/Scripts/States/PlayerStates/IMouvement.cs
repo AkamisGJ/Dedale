@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using FMODUnity;
 
 public class IMouvement : IPlayerState
 {
@@ -51,10 +50,12 @@ public class IMouvement : IPlayerState
     #endregion Fields
 
     #region Properties
-    public Vector3 MoveModifier { get => _moveModifier; set { _moveModifier = value; Debug.Log(value); } }
+    public Vector3 MoveModifier { get => _moveModifier; set { _moveModifier = value; } }
     public float UseGravity { get => _useGravity; set => _useGravity = value; }
     public bool IsCrouch { get => _isCrouch; }
     public float SpeedSprint { get => _speedSprint; }
+    public float RotationX { get => _rotationX; set => _rotationX = value; }
+    public float RotationY { get => _rotationY; set => _rotationY = value; }
     #endregion Properties
 
     public void Init(PlayerData playerData,Camera camera, CharacterController characterController)
@@ -102,7 +103,6 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
         InputManager.Instance.Direction += SetDirection;
-        //InputManager.Instance.Zoom += Zoom;
     }
 
     public void Update()
@@ -203,8 +203,8 @@ public class IMouvement : IPlayerState
         if (_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
             RaycastHit raycastHit;
-            Physics.Raycast(_mainCamera.transform.position,_raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, _playerData.CantSeeInteractionHelperBehindThis + _playerData.LayerMask);
-            if(raycastHit.transform?.gameObject.layer != LayerMask.NameToLayer("Wall"))
+            Physics.Raycast(_mainCamera.transform.position, _raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, _raycastHit.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
+            if (raycastHit.collider == null)
             {
                 if (enableHightLightObject != _raycastHit.collider.gameObject)
                 {

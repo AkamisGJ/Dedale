@@ -25,26 +25,21 @@ public class MainMenu : MonoBehaviour
     public void OnClickStart()
     {
         GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN);
-        //SoundManager.Instance.GameStartSound();
-        //SoundManager.Instance.StartLevel();
     }
 
     public void OnClickQuit()
     {
-        SoundManager.Instance.ClickSound();
         Application.Quit();
     }
 
     public void OnClickTutorial()
     {
-        SoundManager.Instance.ClickSound();
         _mainMenu.SetActive(false);
         _tutorielMenu.SetActive(true);
     }
 
     public void OnClickReturn()
     {
-        SoundManager.Instance.ClickSound();
         _mainMenu.SetActive(true);
         _tutorielMenu.SetActive(false);
         _settings.SetActive(false);
@@ -52,7 +47,6 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickSettings()
     {
-        SoundManager.Instance.ClickSound();
         _mainMenu.SetActive(false);
         _settings.SetActive(true);
     }
