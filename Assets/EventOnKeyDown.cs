@@ -11,7 +11,7 @@ public KeyCode m_key;
 
     void Update()
     {
-        if (Input.GetKeyDown("m_key"))
+        if (Input.GetKeyDown(m_key))
         {
             _unityEvent.Invoke();
         }
