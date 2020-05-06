@@ -202,6 +202,11 @@ public class IMouvement : IPlayerState
         OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
         if (_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
+            RaycastHit raycastHitVerify;
+            if(Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out raycastHitVerify, _playerData.MaxDistanceInteractionObject, _layerMask))
+            {
+                _raycastHit = raycastHitVerify;
+            }
             RaycastHit raycastHit;
             Physics.Raycast(_mainCamera.transform.position, _raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, _raycastHit.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
             if (raycastHit.collider == null)

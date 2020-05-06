@@ -23,6 +23,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextSceneName, _sceneParameters);
             _asyncOperationLoad.allowSceneActivation = _autoLoadingScene;
+            _asyncOperationLoad.completed += OnCompleted;
         }
         yield return null;
     }
@@ -36,6 +37,12 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             Debug.Log("Can't load the next scene");
         }
+    }
+
+    private void OnCompleted(AsyncOperation asyncOperation)
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextSceneName));
+        _asyncOperationLoad.completed -= OnCompleted;
     }
 
     public void UnLoadScene()
