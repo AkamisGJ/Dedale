@@ -150,8 +150,8 @@ public class Door : MonoBehaviour, IInteract
                 _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
-            _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX * _playerData.SpeedCameraDoor;
-            _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY * _playerData.SpeedCameraDoor;
+            _rotationX += (_currentMouseY + mousePositionY * _playerData.SensitivityMouseX) * _playerData.SpeedCameraDoor;
+            _rotationY += (_currentMouseX + mousePositionX * _playerData.SensitivityMouseY) * _playerData.SpeedCameraDoor;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
