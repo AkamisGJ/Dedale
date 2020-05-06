@@ -7,6 +7,7 @@ public class Door : MonoBehaviour, IInteract
     private float _initalPositionMouseX = 0;
     [Tooltip("Speed of rotation of door")]
     [SerializeField] private float _speed = 1;
+    [SerializeField] private bool _inverseRotation = false;
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
     [SerializeField] private bool _needKey = false;
@@ -21,6 +22,7 @@ public class Door : MonoBehaviour, IInteract
     private PlayerAgentController _playerController = null;
     private PlayerData _playerData = null;
     private Camera _mainCamera = null;
+    private float _inversionSense = 1;
     public bool NeedKey { get => _needKey; }
 
     void Start()
@@ -53,7 +55,14 @@ public class Door : MonoBehaviour, IInteract
         Transform playerTransform = PlayerManager.Instance.PlayerController.transform;
         Vector3 vectorDoorPlayer = playerTransform.position - _startTransformDoor.position;
         float anglePortePlayer = Vector3.Dot(transform.right, vectorDoorPlayer);
-        Debug.Log(anglePortePlayer);
+        if (_inverseRotation == true)
+        {
+            _inversionSense = -1;
+        }
+        else
+        {
+            _inversionSense = 1;
+        }
         if (anglePortePlayer < 0)
         {
             _inversion = -1;
@@ -91,7 +100,7 @@ public class Door : MonoBehaviour, IInteract
             {
                 motor.force = mousePositionY * _speed;
             }
-            motor.targetVelocity = mousePositionY * _speed * _inversion;
+            motor.targetVelocity = mousePositionY * _speed * _inversion * _inversionSense;
             _hj.motor = motor;
         }
     }
