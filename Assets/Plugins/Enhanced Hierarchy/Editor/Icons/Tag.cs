@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace EnhancedHierarchy.Icons {
 
         public static void ChangeTagAndAskForChildren(List<GameObject> objs, string newTag) {
             var changeMode = AskChangeModeIfNecessary(objs, Preferences.TagAskMode, "Change Layer",
-                   "Do you want to change the tags of the children objects as well?");
+                "Do you want to change the tags of the children objects as well?");
 
             switch (changeMode) {
                 case ChildrenChangeMode.ObjectOnly:

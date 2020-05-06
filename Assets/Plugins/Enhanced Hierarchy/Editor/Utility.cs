@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using UnityEditor;
@@ -39,8 +39,8 @@ namespace EnhancedHierarchy {
             var evt = EventType.Repaint;
 
             EditorApplication.hierarchyWindowItemOnGUI += (id, rect) => {
-                using (ProfilerSample.Get("Enhanced Hierarchy"))
-                using (ProfilerSample.Get("FPS Counter")) {
+                using(ProfilerSample.Get("Enhanced Hierarchy"))
+                using(ProfilerSample.Get("FPS Counter")) {
                     if (evt == Event.current.type)
                         return;
 
@@ -122,7 +122,7 @@ namespace EnhancedHierarchy {
         }
 
         public static GUIStyle CreateStyleFromTextures(GUIStyle reference, Texture2D on, Texture2D off) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 var style = reference != null ? new GUIStyle(reference) : new GUIStyle();
 
                 style.active.background = off;
@@ -134,8 +134,11 @@ namespace EnhancedHierarchy {
                 style.onHover.background = on;
                 style.onNormal.background = on;
                 style.imagePosition = ImagePosition.ImageOnly;
-                style.fixedHeight = 15f;
-                style.fixedWidth = 15f;
+
+                EditorApplication.update += () => {
+                    style.fixedHeight = Preferences.IconsSize;
+                    style.fixedWidth = Preferences.IconsSize;
+                };
 
                 return style;
             }
@@ -147,49 +150,48 @@ namespace EnhancedHierarchy {
                 style.normal.background;
         }
 
-        public static Texture2D FindOrLoad(string base64, string name) {
-            if (Preferences.DebugEnabled)
-                return LoadTexture(base64, name);
-            else
-                return FindTextureFromName(name) ?? LoadTexture(base64, name);
+        public static Texture2D FindOrLoad(string base64) {
+            var name = string.Format("Enhanced_Hierarchy_{0}", (long)base64.GetHashCode() - int.MinValue);
+
+            return FindTextureFromName(name) ?? LoadTexture(base64, name);
         }
 
         public static Texture2D LoadTexture(string base64, string name) {
-            using (ProfilerSample.Get())
-                try {
-                    var bytes = Convert.FromBase64String(base64);
-                    var texture = new Texture2D(0, 0, TextureFormat.ARGB32, false, false);
+            using(ProfilerSample.Get())
+            try {
+                var bytes = Convert.FromBase64String(base64);
+                var texture = new Texture2D(0, 0, TextureFormat.ARGB32, false, false);
 
-                    texture.name = name;
-                    texture.hideFlags = HideFlags.HideAndDontSave;
-                    texture.LoadImage(bytes);
+                texture.name = name;
+                texture.hideFlags = HideFlags.HideAndDontSave;
+                texture.LoadImage(bytes);
 
-                    return texture;
-                } catch (Exception e) {
-                    Debug.LogErrorFormat("Failed to load texture \"{0}\": {1}", name, e);
-                    return null;
-                }
+                return texture;
+            } catch (Exception e) {
+                Debug.LogErrorFormat("Failed to load texture \"{0}\": {1}", name, e);
+                return null;
+            }
         }
 
         public static Texture2D FindTextureFromName(string name) {
-            using (ProfilerSample.Get())
-                try {
-                    var textures = Resources.FindObjectsOfTypeAll<Texture2D>();
+            using(ProfilerSample.Get())
+            try {
+                var textures = Resources.FindObjectsOfTypeAll<Texture2D>();
 
-                    for (var i = 0; i < textures.Length; i++)
-                        if (textures[i].name == name)
-                            return textures[i];
+                for (var i = 0; i < textures.Length; i++)
+                    if (textures[i].name == name)
+                        return textures[i];
 
-                    return null;
-                } catch (Exception e) {
-                    Debug.LogErrorFormat("Failed to find texture \"{0}\": {1}", name, e);
-                    return null;
-                }
+                return null;
+            } catch (Exception e) {
+                Debug.LogErrorFormat("Failed to find texture \"{0}\": {1}", name, e);
+                return null;
+            }
         }
 
         public static Color GetHierarchyColor(Transform t) {
             if (!t)
-                return Color.black;
+                return Color.clear;
 
             return GetHierarchyColor(t.gameObject);
         }
@@ -202,13 +204,13 @@ namespace EnhancedHierarchy {
         }
 
         public static GUIStyle GetHierarchyLabelStyle(GameObject go) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 if (!go)
                     return EditorStyles.label;
 
                 var active = go.activeInHierarchy;
 
-#if UNITY_2018_3_OR_NEWER
+                #if UNITY_2018_3_OR_NEWER
                 var prefabType = PrefabUtility.GetPrefabInstanceStatus(go);
 
                 switch (prefabType) {
@@ -221,7 +223,7 @@ namespace EnhancedHierarchy {
                     default:
                         return active ? Styles.labelNormal : Styles.labelDisabled;
                 }
-#else
+                #else
                 var prefabType = PrefabUtility.GetPrefabType(PrefabUtility.FindPrefabRoot(go));
 
                 switch (prefabType) {
@@ -235,12 +237,12 @@ namespace EnhancedHierarchy {
                     default:
                         return active ? Styles.labelNormal : Styles.labelDisabled;
                 }
-#endif
+                #endif
             }
         }
 
         public static Color OverlayColors(Color src, Color dst) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 var alpha = dst.a + src.a * (1f - dst.a);
                 var result = (dst * dst.a + src * src.a * (1f - dst.a)) / alpha;
 
@@ -250,98 +252,88 @@ namespace EnhancedHierarchy {
             }
         }
 
-        public static bool LastInHierarchy(Transform t) {
-            using (ProfilerSample.Get()) {
+        public static bool TransformIsLastChild(Transform t) {
+            using(ProfilerSample.Get()) {
                 if (!t)
                     return true;
 
-                return t.parent.GetChild(t.parent.childCount - 1) == t;
+                return t.GetSiblingIndex() == t.parent.childCount - 1;
             }
         }
 
-        public static bool LastInHierarchy(GameObject go) {
-            if (!go)
-                return true;
+        public static void ApplyHideFlagsToPrefab(UnityEngine.Object obj) {
+            var handle = PrefabUtility.GetPrefabInstanceHandle(obj);
 
-            return LastInHierarchy(go.transform);
+            if (handle)
+                handle.hideFlags = obj.hideFlags;
         }
 
         public static void LockObject(GameObject go) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 go.hideFlags |= HideFlags.NotEditable;
+                ApplyHideFlagsToPrefab(go);
 
-                if (!Preferences.AllowSelectingLockedSceneView)
-                    foreach (var comp in go.GetComponents<Component>().Where(comp => comp && !(comp is Transform))) {
-                        comp.hideFlags |= HideFlags.NotEditable;
-                        comp.hideFlags |= HideFlags.HideInHierarchy;
-                    }
+                #if UNITY_2019_3_OR_NEWER
+                if (!Preferences.AllowPickingLockedObjects)
+                    SceneVisibilityManager.instance.DisablePicking(go, false);
+                #endif
 
                 EditorUtility.SetDirty(go);
             }
         }
 
         public static void UnlockObject(GameObject go) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 go.hideFlags &= ~HideFlags.NotEditable;
+                ApplyHideFlagsToPrefab(go);
 
-                foreach (var comp in go.GetComponents<Component>().Where(comp => comp && !(comp is Transform))) {
-                    comp.hideFlags &= ~HideFlags.NotEditable;
-                    comp.hideFlags &= ~HideFlags.HideInHierarchy;
-                }
+                #if UNITY_2019_3_OR_NEWER
+                if (!Preferences.AllowPickingLockedObjects)
+                    SceneVisibilityManager.instance.EnablePicking(go, false);
+                #endif
 
                 EditorUtility.SetDirty(go);
             }
         }
 
-        public static void RelockAllObjects() {
-            using (ProfilerSample.Get())
-                foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
-                    if (obj && (obj.hideFlags & HideFlags.HideInHierarchy) == 0 && !EditorUtility.IsPersistent(obj)) {
-                        var locked = (obj.hideFlags & HideFlags.NotEditable) != 0;
-
-                        UnlockObject(obj);
-
-                        if (locked)
-                            LockObject(obj);
-                    }
-        }
-
-        public static void UnlockAllObjects() {
-            using (ProfilerSample.Get())
-                foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
-                    if (obj && (obj.hideFlags & HideFlags.HideInHierarchy) == 0 && !EditorUtility.IsPersistent(obj))
-                        UnlockObject(obj);
-        }
+        // public static void UnlockAllObjects() {
+        //     using(ProfilerSample.Get())
+        //     foreach (var objRaw in Resources.FindObjectsOfTypeAll<GameObject>()) {
+        //         var obj = ObjectOrPrefabInstanceHandle(objRaw);
+        //         if (obj && (obj.hideFlags & HideFlags.HideInHierarchy) == 0 && !EditorUtility.IsPersistent(obj))
+        //             UnlockObject(obj);
+        //     }
+        // }
 
         public static void ApplyPrefabModifications(GameObject go, bool allowCreatingNew) {
-#if UNITY_2018_3_OR_NEWER
+            #if UNITY_2018_3_OR_NEWER
             var isPrefab = PrefabUtility.IsPartOfAnyPrefab(go);
-#else
+            #else
             var isPrefab = PrefabUtility.GetPrefabType(go) == PrefabType.PrefabInstance;
-#endif
+            #endif
 
             if (isPrefab) {
 
-#if UNITY_2018_3_OR_NEWER
+                #if UNITY_2018_3_OR_NEWER
                 var prefab = PrefabUtility.GetNearestPrefabInstanceRoot(go);
-#elif UNITY_2018_2_OR_NEWER
+                #elif UNITY_2018_2_OR_NEWER
                 var prefab = PrefabUtility.GetCorrespondingObjectFromSource(go);
-#else
+                #else
                 var prefab = PrefabUtility.GetPrefabParent(go);
-#endif
+                #endif
 
                 if (!prefab) {
                     Debug.LogError("Prefab asset not valid!");
                     return;
                 }
 
-#if UNITY_2018_3_OR_NEWER
+                #if UNITY_2018_3_OR_NEWER
                 if (PrefabUtility.GetPrefabInstanceStatus(prefab) == PrefabInstanceStatus.Connected)
                     PrefabUtility.ApplyPrefabInstance(prefab, InteractionMode.UserAction);
                 else if (EditorUtility.DisplayDialog("Apply disconnected prefab", "This is a disconnected game object, do you want to try to reconnect to the last prefab asset?", "Try to Reconnect", "Cancel"))
                     PrefabUtility.RevertPrefabInstance(prefab, InteractionMode.UserAction);
                 EditorUtility.SetDirty(prefab);
-#else
+                #else
                 var selection = Selection.instanceIDs;
                 Selection.activeGameObject = go;
 
@@ -350,45 +342,45 @@ namespace EnhancedHierarchy {
                     Selection.instanceIDs = selection;
                 } else
                     Debug.LogError("Failed to apply prefab modifications");
-#endif
+                #endif
             } else if (allowCreatingNew) {
                 var path = EditorUtility.SaveFilePanelInProject("Save prefab", "New Prefab", "prefab", "Save the selected prefab");
 
                 if (!string.IsNullOrEmpty(path))
-#if UNITY_2018_3_OR_NEWER
+                    #if UNITY_2018_3_OR_NEWER
                     PrefabUtility.SaveAsPrefabAssetAndConnect(go, path, InteractionMode.UserAction);
-#else
+                #else
                 PrefabUtility.CreatePrefab(path, go, ReplacePrefabOptions.ConnectToPrefab);
-#endif
+                #endif
             }
         }
 
         public static string EnumFlagsToString(Enum value) {
-            using (ProfilerSample.Get())
-                try {
-                    if ((int)(object)value == -1)
-                        return "Everything";
+            using(ProfilerSample.Get())
+            try {
+                if ((int)(object)value == -1)
+                    return "Everything";
 
-                    var str = new StringBuilder();
-                    var separator = ", ";
+                var str = new StringBuilder();
+                var separator = ", ";
 
-                    foreach (var enumValue in Enum.GetValues(value.GetType())) {
-                        var i = (int)enumValue;
-                        if (i != 0 && (i & (i - 1)) == 0 && Enum.IsDefined(value.GetType(), i) && (Convert.ToInt32(value) & i) != 0) {
-                            str.Append(ObjectNames.NicifyVariableName(enumValue.ToString()));
-                            str.Append(separator);
-                        }
+                foreach (var enumValue in Enum.GetValues(value.GetType())) {
+                    var i = (int)enumValue;
+                    if (i != 0 && (i & (i - 1)) == 0 && Enum.IsDefined(value.GetType(), i) && (Convert.ToInt32(value) & i) != 0) {
+                        str.Append(ObjectNames.NicifyVariableName(enumValue.ToString()));
+                        str.Append(separator);
                     }
-
-                    if (str.Length > 0)
-                        str.Length -= separator.Length;
-
-                    return str.ToString();
-                } catch (Exception e) {
-                    if (Preferences.DebugEnabled)
-                        Debug.LogException(e);
-                    return string.Empty;
                 }
+
+                if (str.Length > 0)
+                    str.Length -= separator.Length;
+
+                return str.ToString();
+            } catch (Exception e) {
+                if (Preferences.DebugEnabled)
+                    Debug.LogException(e);
+                return string.Empty;
+            }
         }
 
         public static GUIContent GetTempGUIContent(string text, string tooltip = null, Texture2D image = null) {
@@ -410,7 +402,7 @@ namespace EnhancedHierarchy {
 
         public static float SafeGetWidth(this IconBase icon) {
             try {
-                return icon.Width;
+                return icon.Width + (Preferences.IconsSize - 15) / 2;
             } catch (Exception e) {
                 Debug.LogException(e);
                 Preferences.ForceDisableButton(icon);
@@ -429,11 +421,22 @@ namespace EnhancedHierarchy {
 
         public static void SafeDoGUI(this IconBase icon, Rect rect) {
             try {
+                rect.yMin -= (Preferences.IconsSize - 15) / 2;
+                rect.xMin -= (Preferences.IconsSize - 15) / 2;
                 icon.DoGUI(rect);
             } catch (Exception e) {
                 Debug.LogException(e);
                 Preferences.ForceDisableButton(icon);
             }
+        }
+
+        public static Rect FlipRectHorizontally(Rect rect) {
+            return Rect.MinMaxRect(
+                rect.xMax,
+                rect.yMin,
+                rect.xMin,
+                rect.yMax
+            );
         }
 
     }

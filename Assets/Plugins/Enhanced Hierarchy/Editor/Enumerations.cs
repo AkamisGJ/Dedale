@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace EnhancedHierarchy {
 
@@ -26,16 +26,6 @@ namespace EnhancedHierarchy {
         GraphCompileError = 1 << 20,
         ScriptingAssertion = 1 << 21,
         VisualScriptingError = 1 << 22
-    }
-
-    public enum MiniLabelType {
-        None = 0,
-        Tag = 1,
-        Layer = 2,
-        TagOrLayer = 3,
-        LayerOrTag = 4,
-        TagAndLayer = 5,
-        LayerAndTag = 6
     }
 
     public enum ChildrenChangeMode {

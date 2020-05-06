@@ -16,8 +16,8 @@ namespace EnhancedHierarchy {
         public static Action onResetPreferences = new Action(() => { });
         public static readonly List<GUIContent> contents = new List<GUIContent>();
 
-        public static readonly Version pluginVersion = new Version(2, 4, 4);
-        public static readonly DateTime pluginDate = new DateTime(2020, 01, 30);
+        public static readonly Version pluginVersion = new Version(2, 4, 5);
+        public static readonly DateTime pluginDate = new DateTime(2020, 05, 04);
 
         private static readonly GUIContent resetSettingsContent = new GUIContent("Use Defaults", "Reset all settings to default");
         private static readonly GUIContent unlockAllContent = new GUIContent("Unlock All Objects", "Unlock all objects in the current scene, it's highly recommended to do this when disabling or removing the extension to prevent data loss\nThis might take a few seconds on large scenes");
@@ -27,6 +27,8 @@ namespace EnhancedHierarchy {
         private static Vector2 scroll;
 
         private static ReorderableList leftIconsList, rightIconsList, rowColorsList;
+
+        private static readonly string[] minilabelsNames;
 
         private static GenericMenu LeftIconsMenu { get { return GetGenericMenuForIcons(LeftIcons, IconBase.AllLeftIcons); } }
         private static GenericMenu RightIconsMenu { get { return GetGenericMenuForIcons(RightIcons, IconBase.AllRightIcons); } }
@@ -42,8 +44,9 @@ namespace EnhancedHierarchy {
                     if (PerLayerRowColors.Value.Contains(new LayerColor(i)))
                         continue;
 
+                    var mode = PerLayerRowColors.Value.LastOrDefault().mode;
                     var layerName = LayerMask.LayerToName(i);
-                    var layer = new LayerColor(i, randomColor);
+                    var layer = new LayerColor(i, randomColor, mode);
 
                     if (string.IsNullOrEmpty(layerName))
                         layerName = string.Format("Layer: {0}", i);
@@ -141,11 +144,15 @@ namespace EnhancedHierarchy {
                             EditorGUILayout.HelpBox("Custom Indent and Margins are not supported in this Unity version", MessageType.Warning);
                     }
 
+                    IconsSize.DoGUISlider(13, 23);
                     TreeOpacity.DoGUISlider(0f, 1f);
 
-                    using(new GUIIndent())
-                    using(SelectOnTree.GetFadeScope(TreeOpacity.Value > 0.01f))
-                    SelectOnTree.DoGUI();
+                    using(new GUIIndent()) {
+                        using(SelectOnTree.GetFadeScope(TreeOpacity.Value > 0.01f))
+                        SelectOnTree.DoGUI();
+                        using(TreeStemProportion.GetFadeScope(TreeOpacity.Value > 0.01f))
+                        TreeStemProportion.DoGUISlider(0f, 1f);
+                    }
 
                     Tooltips.DoGUI();
 
@@ -171,17 +178,14 @@ namespace EnhancedHierarchy {
 
                     GUI.changed = false;
 
-                    using(AllowSelectingLocked.GetFadeScope(IsButtonEnabled(new Icons.Lock())))
-                    AllowSelectingLocked.DoGUI();
+                    using(AllowSelectingLockedObjects.GetFadeScope(IsButtonEnabled(new Icons.Lock())))
+                    AllowSelectingLockedObjects.DoGUI();
 
-                    using(AllowSelectingLockedSceneView.GetFadeScope(IsButtonEnabled(new Icons.Lock()) && AllowSelectingLocked))
-                    AllowSelectingLockedSceneView.DoGUI();
-
-                    if (GUI.changed && EditorUtility.DisplayDialog("Relock all objects",
-                            "Would you like to relock all objects?\n" +
-                            "This is recommended when changing this setting and might take a few seconds on large scenes" +
-                            "\nIt's also recommended to do this on all scenes", "Yes", "No"))
-                        Utility.RelockAllObjects();
+                    #if !UNITY_2019_3_OR_NEWER
+                    using(new GUIEnabled(false))
+                    #endif
+                    using(AllowPickingLockedObjects.GetFadeScope(IsButtonEnabled(new Icons.Lock())))
+                    AllowPickingLockedObjects.DoGUI();
 
                     HoverTintColor.DoGUI();
                 }
@@ -201,15 +205,24 @@ namespace EnhancedHierarchy {
                     rowColorsList.DoList(rect);
                 }
 
-                MiniLabel.DoGUI();
+                GUI.changed = false;
+                MiniLabels.Value[0] = EditorGUILayout.Popup("Mini Label Top", MiniLabels.Value[0], minilabelsNames);
+                MiniLabels.Value[1] = EditorGUILayout.Popup("Mini Label Bottom", MiniLabels.Value[1], minilabelsNames);
+
+                if (GUI.changed) {
+                    MiniLabels.ForceSave();
+                    RecreateMiniLabelProviders();
+                }
+
+                // MiniLabel.DoGUI();
                 using(new GUIIndent()) {
-                    using(SmallerMiniLabel.GetFadeScope(MiniLabel.Value != MiniLabelType.None))
+                    using(SmallerMiniLabel.GetFadeScope(miniLabelProviders.Length > 0))
                     SmallerMiniLabel.DoGUI();
                     using(HideDefaultTag.GetFadeScope(MiniLabelTagEnabled))
                     HideDefaultTag.DoGUI();
                     using(HideDefaultLayer.GetFadeScope(MiniLabelLayerEnabled))
                     HideDefaultLayer.DoGUI();
-                    using(CentralizeMiniLabelWhenPossible.GetFadeScope((HideDefaultLayer || HideDefaultTag) && (MiniLabel.Value == MiniLabelType.TagAndLayer || MiniLabel.Value == MiniLabelType.LayerAndTag)))
+                    using(CentralizeMiniLabelWhenPossible.GetFadeScope(miniLabelProviders.Length >= 2))
                     CentralizeMiniLabelWhenPossible.DoGUI();
                 }
 
@@ -259,8 +272,8 @@ namespace EnhancedHierarchy {
                     if (GUILayout.Button(resetSettingsContent, GUILayout.Width(120f)))
                         onResetPreferences();
 
-                    if (GUILayout.Button(unlockAllContent, GUILayout.Width(120f)))
-                        Utility.UnlockAllObjects();
+                    // if (GUILayout.Button(unlockAllContent, GUILayout.Width(120f)))
+                    //     Utility.UnlockAllObjects();
 
                     if (GUILayout.Button(mailDeveloperContent, GUILayout.Width(120f)))
                         OpenSupportEmail();
@@ -312,15 +325,19 @@ namespace EnhancedHierarchy {
             var rect1 = rect;
             var rect2 = rect;
             var rect3 = rect;
+            var rect4 = rect;
 
             rect1.xMax = rect1.xMin + 175f;
             rect2.xMin = rect1.xMax;
             rect2.xMax = rect2.xMin + 80f;
             rect3.xMin = rect2.xMax;
+            rect3.xMax = rect3.xMin + 100;
+            rect4.xMin = rect3.xMax;
 
             value.layer = EditorGUI.LayerField(rect1, value.layer);
             value.layer = EditorGUI.DelayedIntField(rect2, value.layer);
             value.color = EditorGUI.ColorField(rect3, value.color);
+            value.mode = (TintMode)EditorGUI.EnumPopup(rect4, value.mode);
 
             if (value.layer > 31 || value.layer < 0)
                 return layerColor;

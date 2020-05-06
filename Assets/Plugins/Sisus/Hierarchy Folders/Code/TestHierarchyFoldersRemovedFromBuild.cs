@@ -1,5 +1,5 @@
 ﻿#define LOG_ZERO_COUNT
-//#define LOG_ROOT_OBJECTS
+#define LOG_ROOT_OBJECTS
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +13,7 @@ namespace Sisus.HierarchyFolders
 	public class TestHierarchyFoldersRemovedFromBuild : MonoBehaviour
 	{
 		[UsedImplicitly]
-		private void Awake()
+		private void Start()
 		{
 			var hierarchyFolders = FindObjectsOfType<HierarchyFolder>();
 			int count = hierarchyFolders.Length;

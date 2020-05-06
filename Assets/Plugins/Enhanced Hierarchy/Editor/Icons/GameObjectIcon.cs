@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,19 +20,16 @@ namespace EnhancedHierarchy.Icons {
                 lastContent = new GUIContent();
 
             lastContent.text = string.Empty;
-            lastContent.image = AssetPreview.GetMiniThumbnail(EnhancedHierarchy.CurrentGameObject);
+
+            lastContent.image = Preferences.HideDefaultIcon ? // Fix #46
+                Reflected.GetObjectIcon(EnhancedHierarchy.CurrentGameObject) :
+                AssetPreview.GetMiniThumbnail(EnhancedHierarchy.CurrentGameObject);
+
             lastContent.tooltip = Preferences.Tooltips && !Preferences.RelevantTooltipsOnly ? "Change Icon" : string.Empty;
-
-            if (Preferences.HideDefaultIcon && lastContent.image) {
-                var imageName = lastContent.image.name;
-
-                if (imageName == "GameObject Icon" || imageName == "PrefabNormal Icon" || imageName == "PrefabModel Icon")
-                    lastContent.image = null;
-            }
         }
 
         public override void DoGUI(Rect rect) {
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 rect.yMin++;
                 rect.xMin++;
 

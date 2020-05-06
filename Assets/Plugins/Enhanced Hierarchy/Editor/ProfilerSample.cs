@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 #if HIERARCHY_PROFILING
 using System.Diagnostics;
 using System.Text;
@@ -13,21 +13,21 @@ namespace EnhancedHierarchy {
     /// </summary>
     public sealed class ProfilerSample : IDisposable {
 
-#if HIERARCHY_PROFILING
+        #if HIERARCHY_PROFILING
         private static readonly StringBuilder name = new StringBuilder(150);
-#endif
+        #endif
 
         private ProfilerSample(string name, Object targetObject) {
-#if HIERARCHY_PROFILING
-            if(!targetObject)
+            #if HIERARCHY_PROFILING
+            if (!targetObject)
                 Profiler.BeginSample(name);
             else
                 Profiler.BeginSample(name, targetObject);
-#endif
+            #endif
         }
 
         public static ProfilerSample Get() {
-#if HIERARCHY_PROFILING
+            #if HIERARCHY_PROFILING
             Profiler.BeginSample("Getting Stack Frame");
 
             var stack = new StackFrame(1, false);
@@ -40,23 +40,23 @@ namespace EnhancedHierarchy {
             Profiler.EndSample();
 
             return Get(name.ToString(), null);
-#else
+            #else
             return null;
-#endif
+            #endif
         }
 
         public static ProfilerSample Get(string name, Object targetObject = null) {
-#if HIERARCHY_PROFILING
+            #if HIERARCHY_PROFILING
             return new ProfilerSample(name, targetObject);
-#else
+            #else
             return null;
-#endif
+            #endif
         }
 
         public void Dispose() {
-#if HIERARCHY_PROFILING
+            #if HIERARCHY_PROFILING
             Profiler.EndSample();
-#endif
+            #endif
         }
 
     }

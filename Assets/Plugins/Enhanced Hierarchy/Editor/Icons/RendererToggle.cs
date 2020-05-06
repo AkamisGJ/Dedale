@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace EnhancedHierarchy.Icons {
         //public override string PreferencesTooltip { get { return "Some tag for the tooltip here"; } }
 
         public override void Init() {
-            renderer = EnhancedHierarchy.Components.FirstOrDefault(c => c is Renderer) as Renderer;
+            renderer = EnhancedHierarchy.Components.FirstOrDefault(c => c is Renderer)as Renderer;
         }
 
         public override float Width { get { return renderer ? base.Width : 0; } }
@@ -24,7 +24,7 @@ namespace EnhancedHierarchy.Icons {
             if (!renderer)
                 return;
 
-            using (new GUIBackgroundColor(renderer.enabled ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
+            using(new GUIBackgroundColor(renderer.enabled ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
                 GUI.changed = false;
                 GUI.Toggle(rect, renderer, Styles.rendererContent, Styles.rendererToggleStyle);
 
