@@ -238,7 +238,7 @@ MonoBehaviour:
   _mainMenu: {fileID: 1361524539}
   _tutorielMenu: {fileID: 262467810}
   _settings: {fileID: 350945537}
-  _selectedStage: Introduction Audio
+  _selectedStage: 1_Introduction Audio
 --- !u!1 &83139609
 GameObject:
   m_ObjectHideFlags: 1
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e560ada7d8b1c4880ea27f45d46ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextScene: Introduction Audio
+  _nextScene: 1_Introduction Audio
 --- !u!4 &1182492963
 Transform:
   m_ObjectHideFlags: 0
@@ -1745,8 +1745,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1182492962}
-        m_MethodName: SwitchScene
+      - m_Target: {fileID: 49468922}
+        m_MethodName: OnClickStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2105,19 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 366663908, guid: ebe26e22332665d4c8332b2a624e5e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rules:
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1182492961}
-    Ordinal: 0
-    Priority: 0
-    IconType: 1090
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
 --- !u!4 &2058217279
 Transform:
   m_ObjectHideFlags: 1

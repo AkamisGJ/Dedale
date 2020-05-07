@@ -1,4 +1,7 @@
 ﻿//#define DEBUG_REMOVE_HIERARCHY_FOLDER
+#define DEBUG_STRIP_SCENE
+//#define DEBUG_STRIP_FOLDER
+#define DEBUG_UNMAKE_HIERARCHY_FOLDER
 
 #define ASSERT_COMPONENT_COUNT
 //#define ASSERT_CHILD_COUNT
@@ -31,14 +34,27 @@ namespace Sisus.HierarchyFolders
 			}
 		}
 
-		public static void ApplyStrippingType(Scene scene, StrippingType strippingType) 
+		public static void ApplyStrippingType(Scene scene, StrippingType strippingType)
 		{
+			#if DEV_MODE && DEBUG_STRIP_SCENE
+			Debug.Assert(RootGameObjects.Count == 0);
+			#endif
+
 			scene.GetRootGameObjects(RootGameObjects);
-			for(int r = 0, rcount = RootGameObjects.Count; r < rcount; r++)
+
+			#if DEV_MODE && DEBUG_STRIP_SCENE
+			Debug.Log("Stripping "+ RootGameObjects.Count + " root objects in scene "+scene.name+"...");
+			#endif
+
+			for(int n = 0, count = RootGameObjects.Count; n < count; n++)
 			{
-				CheckForAndRemoveHierarchyFoldersInChildren(RootGameObjects[r].transform, strippingType);
+				CheckForAndRemoveHierarchyFoldersInChildren(RootGameObjects[n].transform, strippingType);
 			}
 			RootGameObjects.Clear();
+
+			#if DEV_MODE && DEBUG_STRIP_SCENE
+			Debug.Log("Stripping scene "+scene.name+" done.");
+			#endif
 		}
 
 		public static void CheckForAndRemoveHierarchyFoldersInChildren([NotNull]Transform transform, StrippingType strippingType)
@@ -46,30 +62,46 @@ namespace Sisus.HierarchyFolders
 			bool wasStripping = NowStripping;
 			NowStripping = true;
 
+			int childCount = transform.childCount;
+			var children = new Transform[childCount];
+			for(int n = 0; n < childCount; n++)
+			{
+				children[n] = transform.GetChild(n);
+			}
+
 			var hierarchyFolder = transform.GetComponent<HierarchyFolder>();
 			if(hierarchyFolder != null)
 			{
 				var hierarchyFolderParent = transform.parent;
+				int setSiblingIndex = transform.GetSiblingIndex() + 1;
+
+				#if DEV_MODE && DEBUG_STRIP_FOLDER
+				Debug.Log("Stripping "+transform.name+" with "+childCount+" children...");
+				#endif
 
 				switch(strippingType)
 				{
+					case StrippingType.FlattenHierarchyAndRemoveGameObject:
 					case StrippingType.FlattenHierarchy:
 					case StrippingType.FlattenHierarchyAndRemoveComponent:
-					case StrippingType.FlattenHierarchyAndRemoveGameObject:
 					case StrippingType.FlattenHierarchyAndDisableComponent:
-						transform.SetAsLastSibling();
-						for(int n = transform.childCount - 1; n >= 0; n--)
+						for(int n = 0; n < childCount; n++)
 						{
-							var child = transform.GetChild(0);
+							var child = children[n];
 							child.SetParent(hierarchyFolderParent, true);
-							child.SetAsLastSibling();
-							CheckForAndRemoveHierarchyFoldersInChildren(child, strippingType);
+							child.SetSiblingIndex(setSiblingIndex);
+							setSiblingIndex++;
+						}
+						for(int n = 0; n < childCount; n++)
+						{
+							CheckForAndRemoveHierarchyFoldersInChildren(children[n], strippingType);
 						}
 						break;
 					default:
-						for(int n = transform.childCount - 1; n >= 0; n--)
+						for(int n = 0; n < childCount; n++)
 						{
-							CheckForAndRemoveHierarchyFoldersInChildren(transform.GetChild(n), strippingType);
+							var child = children[n];
+							CheckForAndRemoveHierarchyFoldersInChildren(child, strippingType);
 						}
 						break;
 				}
@@ -109,9 +141,9 @@ namespace Sisus.HierarchyFolders
 			}
 			else
 			{
-				for(int n = transform.childCount - 1; n >= 0; n--)
+				for(int n = 0, count = children.Length; n < count; n++)
 				{
-					CheckForAndRemoveHierarchyFoldersInChildren(transform.GetChild(n), strippingType);
+					CheckForAndRemoveHierarchyFoldersInChildren(children[n], strippingType);
 				}
 			}
 
@@ -120,6 +152,10 @@ namespace Sisus.HierarchyFolders
 
 		public static void UnmakeHierarchyFolder([NotNull]GameObject gameObject, [CanBeNull]HierarchyFolder hierarchyFolder)
 		{
+			#if DEV_MODE && DEBUG_UNMAKE_HIERARCHY_FOLDER
+			Debug.Log("UnmakeHierarchyFolder("+gameObject.name+")");
+			#endif
+
 			if(hierarchyFolder != null)
 			{
 				#if UNITY_EDITOR

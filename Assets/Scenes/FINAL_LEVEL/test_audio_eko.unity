@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &911935890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212192859
 GameObject:
@@ -277,13 +277,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212192859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27fd70b46d63512419c1b053a61cee4e, type: 3}
+  m_Script: {fileID: 11500000, guid: da614043f7ebf684aab1b44bbbeb32df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_key: 32
   _unityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 911935890}
+      - m_Target: {fileID: 2091368874}
         m_MethodName: OnStart
         m_Mode: 1
         m_Arguments:
@@ -485,24 +486,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1291878890}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291878893}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee71a7c9fd23c6f4b8756e596f0573d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1291878892 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8163362112954830313, guid: 101000cecbd14ba4b8b216a850878bce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1291878890}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1291878893 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8163362113364797634, guid: 101000cecbd14ba4b8b216a850878bce,
-    type: 3}
-  m_PrefabInstance: {fileID: 1291878890}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396557569
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +587,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1644801239
 MonoBehaviour:
@@ -814,6 +803,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListenerNumber: -1
+--- !u!114 &2091368874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1436985943616920695, guid: 77f9979303913bc4296fe190b27b4ebc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1436985944214592989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2482f5701ed6a41b8d62616e3d09d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2104121387
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,103 +898,6 @@ MonoBehaviour:
   m_Script: {fileID: 366663908, guid: ebe26e22332665d4c8332b2a624e5e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rules:
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 2021631436}
-    Ordinal: 0
-    Priority: 0
-    IconType: 2900
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1291878893}
-    Ordinal: 1
-    Priority: 0
-    IconType: 2910
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1212192859}
-    Ordinal: 2
-    Priority: 0
-    IconType: 1010
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 2104121387}
-    Ordinal: 3
-    Priority: 0
-    IconType: 1380
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1396557569}
-    Ordinal: 4
-    Priority: 0
-    IconType: 1500
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 911935889}
-    Ordinal: 5
-    Priority: 0
-    IconType: 2800
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1291878892}
-    Ordinal: 6
-    Priority: 0
-    IconType: 10
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
-    Name: 
-    GameObject: {fileID: 1644801237}
-    Ordinal: 7
-    Priority: 0
-    IconType: 1010
-    IconTexture: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
 --- !u!4 &2142507447
 Transform:
   m_ObjectHideFlags: 1
@@ -1008,3 +912,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1436985944214592989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920694, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436985943616920695, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: _dialogueManager
+      value: 
+      objectReference: {fileID: 1291878891}
+    - target: {fileID: 1436985943616920698, guid: 77f9979303913bc4296fe190b27b4ebc,
+        type: 3}
+      propertyPath: m_Name
+      value: "Eko_squat_v\xE9lo"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77f9979303913bc4296fe190b27b4ebc, type: 3}

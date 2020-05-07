@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace EnhancedHierarchy.Icons {
         public override void DoGUI(Rect rect) {
             var locked = (EnhancedHierarchy.CurrentGameObject.hideFlags & HideFlags.NotEditable) != 0;
 
-            using (new GUIBackgroundColor(locked ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
+            using(new GUIBackgroundColor(locked ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
                 GUI.changed = false;
                 GUI.Toggle(rect, locked, Styles.lockContent, Styles.lockToggleStyle);
 

@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -11,7 +11,7 @@ namespace EnhancedHierarchy.Icons {
         public override string Name { get { return "Memory Used"; } }
         public override float Width { get { return m_width + 4f; } }
 
-        private GUIStyle Style { get { return Styles.miniLabelStyle; } }
+        private GUIStyle Style { get { return Styles.applyPrefabStyle; } }
 
         public override void Init() {
             m_width = 0f;
@@ -24,11 +24,11 @@ namespace EnhancedHierarchy.Icons {
             else
                 label.tooltip = string.Empty;
 
-#if UNITY_5_6_OR_NEWER
+            #if UNITY_5_6_OR_NEWER
             var memory = Profiler.GetRuntimeMemorySizeLong(EnhancedHierarchy.CurrentGameObject);
-#else
+            #else
             var memory = Profiler.GetRuntimeMemorySize(EnhancedHierarchy.CurrentGameObject);
-#endif
+            #endif
 
             if (memory == 0)
                 return;
@@ -44,8 +44,8 @@ namespace EnhancedHierarchy.Icons {
             rect.xMin += 2f;
             rect.xMax -= 2f;
 
-            using (new GUIColor(Styles.backgroundColorEnabled))
-                EditorGUI.LabelField(rect, label, Style);
+            using(new GUIColor(Styles.backgroundColorEnabled))
+            EditorGUI.LabelField(rect, label, Style);
         }
 
     }

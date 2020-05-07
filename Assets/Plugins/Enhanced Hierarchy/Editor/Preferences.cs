@@ -1,12 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace EnhancedHierarchy {
+
+    public enum TintMode {
+        Flat = 0,
+        GradientRightToLeft = 1,
+        GradientLeftToRight = 2,
+    }
 
     /// <summary>
     /// Per layer color setting.
@@ -14,16 +19,19 @@ namespace EnhancedHierarchy {
     [Serializable]
     public struct LayerColor {
 
-        [SerializeField, FormerlySerializedAs("layer")]
+        [SerializeField]
         public int layer;
-        [SerializeField, FormerlySerializedAs("color")]
+        [SerializeField]
         public Color color;
+        [SerializeField]
+        public TintMode mode;
 
         public LayerColor(int layer) : this(layer, Color.clear) { }
 
-        public LayerColor(int layer, Color color) {
+        public LayerColor(int layer, Color color, TintMode mode = TintMode.GradientRightToLeft) {
             this.layer = layer;
             this.color = color;
+            this.mode = mode;
         }
 
         public static implicit operator LayerColor(int layer) {
@@ -115,6 +123,11 @@ namespace EnhancedHierarchy {
         public static PrefItem<float> TreeOpacity;
 
         [AutoPrefItem]
+        [AutoPrefItemDefaultValue(0.5f)]
+        [AutoPrefItemLabel("Stem Proportion", "Stem length for hierarchy items that have no children")]
+        public static PrefItem<float> TreeStemProportion;
+
+        [AutoPrefItem]
         [AutoPrefItemDefaultValue(true)]
         [AutoPrefItemLabel("Select on Tree", "Select the parent when you click on the tree lines\n\nTHIS MAY AFFECT PERFORMANCE")]
         public static PrefItem<bool> SelectOnTree;
@@ -150,13 +163,13 @@ namespace EnhancedHierarchy {
 
         [AutoPrefItem]
         [AutoPrefItemDefaultValue(true)]
-        [AutoPrefItemLabel("Allow locked selection (Hierarchy)", "Allow selecting objects that are locked")]
-        public static PrefItem<bool> AllowSelectingLocked;
+        [AutoPrefItemLabel("Select locked objects", "Allow selecting objects that are locked")]
+        public static PrefItem<bool> AllowSelectingLockedObjects;
 
         [AutoPrefItem]
         [AutoPrefItemDefaultValue(false)]
-        [AutoPrefItemLabel("Allow locked selection (Scene View)", "Allow selecting objects that are locked on scene view\nObjects locked before you change this option will have the previous behaviour, you need to unlock and lock them again to apply this setting")]
-        public static PrefItem<bool> AllowSelectingLockedSceneView;
+        [AutoPrefItemLabel("Pick locked objects", "Allow picking objects that are locked on scene view\nObjects locked before you change this option will not be affected\nRequires Unity 2019.3 or newer")]
+        public static PrefItem<bool> AllowPickingLockedObjects;
 
         [AutoPrefItem]
         [AutoPrefItemDefaultValue(true)]
@@ -182,6 +195,11 @@ namespace EnhancedHierarchy {
         [AutoPrefItemDefaultValue(true)]
         [AutoPrefItemLabel("Smaller font", "Use a smaller font on the minilabel for narrow hierarchies")]
         public static PrefItem<bool> SmallerMiniLabel;
+
+        [AutoPrefItem]
+        [AutoPrefItemDefaultValue(15)]
+        [AutoPrefItemLabel("Icons Size", "The size of the icons in pixels")]
+        public static PrefItem<int> IconsSize;
 
         [AutoPrefItem]
         [AutoPrefItemDefaultValue(true)]
@@ -225,9 +243,8 @@ namespace EnhancedHierarchy {
         public static PrefItem<IconData> LeftSideButtonPref;
 
         [AutoPrefItem]
-        [AutoPrefItemDefaultValue(MiniLabelType.TagAndLayer)]
         [AutoPrefItemLabel("Mini label", "The little label next to the GameObject name")]
-        public static PrefItem<MiniLabelType> MiniLabel;
+        public static PrefItem<int[]> MiniLabels;
 
         [AutoPrefItem]
         [AutoPrefItemDefaultValue(ChildrenChangeMode.ObjectAndChildren)]
@@ -267,6 +284,8 @@ namespace EnhancedHierarchy {
         public static PrefItem<List<LayerColor>> PerLayerRowColors;
         #endregion
 
+        public static MiniLabelProvider[] miniLabelProviders;
+
         public static IconBase LeftSideButton {
             get { return LeftSideButtonPref.Value.Icon; }
             set {
@@ -296,35 +315,11 @@ namespace EnhancedHierarchy {
         }
 
         public static bool MiniLabelTagEnabled {
-            get {
-                switch (MiniLabel.Value) {
-                    case MiniLabelType.Tag:
-                    case MiniLabelType.TagOrLayer:
-                    case MiniLabelType.LayerOrTag:
-                    case MiniLabelType.LayerAndTag:
-                    case MiniLabelType.TagAndLayer:
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
+            get { return miniLabelProviders.Any(ml => ml is TagMiniLabel); }
         }
 
         public static bool MiniLabelLayerEnabled {
-            get {
-                switch (MiniLabel.Value) {
-                    case MiniLabelType.Layer:
-                    case MiniLabelType.LayerOrTag:
-                    case MiniLabelType.TagOrLayer:
-                    case MiniLabelType.LayerAndTag:
-                    case MiniLabelType.TagAndLayer:
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
+            get { return miniLabelProviders.Any(ml => ml is LayerMiniLabel); }
         }
 
         public static bool EnhancedSelectionSupported {
@@ -354,6 +349,14 @@ namespace EnhancedHierarchy {
             LeftIcons.DefaultValue = defaultLeftIcons;
             RightIcons.DefaultValue = defaultRightIcons;
             PerLayerRowColors.DefaultValue = defaultLayerColors;
+            MiniLabels.DefaultValue = new [] {
+                Array.IndexOf(MiniLabelProvider.MiniLabelsTypes, typeof(LayerMiniLabel)),
+                Array.IndexOf(MiniLabelProvider.MiniLabelsTypes, typeof(TagMiniLabel))
+            };
+
+            minilabelsNames = MiniLabelProvider.MiniLabelsTypes
+                .Select(ml => ml == null? "None": ObjectNames.NicifyVariableName(ml.Name.Replace("MiniLabel", "")))
+                .ToArray();
 
             leftIconsList = GenerateReordableList(LeftIcons);
             rightIconsList = GenerateReordableList(RightIcons);
@@ -373,6 +376,16 @@ namespace EnhancedHierarchy {
                 if (GUI.changed)
                     PerLayerRowColors.ForceSave();
             };
+
+            RecreateMiniLabelProviders();
+        }
+
+        public static void RecreateMiniLabelProviders() {
+            miniLabelProviders = MiniLabels.Value
+                .Select(ml => MiniLabelProvider.MiniLabelsTypes.ElementAtOrDefault(ml))
+                .Where(ml => ml != null)
+                .Select(ml => Activator.CreateInstance(ml)as MiniLabelProvider)
+                .ToArray();
         }
 
         public static bool IsButtonEnabled(IconBase button) {

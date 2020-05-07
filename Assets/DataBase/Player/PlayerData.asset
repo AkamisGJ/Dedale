@@ -17,8 +17,20 @@ MonoBehaviour:
     m_Bits: 918272
   _rayonInteraction: 1
   _maxDistanceInteractionObject: 4
-  _angleInteractionImage: 45
-  _distanceInteractionImage: 10
+  _angleHelper: 0
+  _distanceHelperInteraction: 0
+  _distanceHelperObservableObject: 0
+  _canvasHelper: {fileID: 0}
+  _inputHelper: {fileID: 0}
+  _interactionHelper: {fileID: 0}
+  _observableObjectHelper: {fileID: 0}
+  _lianaHelper: {fileID: 0}
+  _narrowWayHelper: {fileID: 0}
+  _ladderHelper: {fileID: 0}
+  _lock: {fileID: 0}
+  _cantSeeInteractionHelperBehindThis:
+    serializedVersion: 2
+    m_Bits: 0
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -92,9 +104,17 @@ MonoBehaviour:
   _speedSide: 1
   _speedLadder: 0.5
   _gloabalSpeed: 3
+  _crouchMoveSpeed: 1
+  _timeStep: 0.1
   _maxSprintSpeed: 2
   _mouseSensitivityObserve: 3
   _angleX: 60
+  _stackMovement: 0.5
+  _speedToStopCamera: 2
+  _angleY: 40
+  _ladderMinAngleY: 40
+  _ladderAngleY: 80
+  _speedCameraDoor: 1e-16
   _sensitivityMouseX: 3
   _sensitivityMouseY: 3
   _sprintTimeMax: 0
@@ -130,4 +150,6 @@ MonoBehaviour:
   _differenceHeightCrouch: 1
   _colorHightlightObject: {r: 0.8773585, g: 0.8513442, b: 0.1448469, a: 1}
   _maxAngleNarrowWay: 60
+  _speedRotationCamera: 2
+  _speedEnterExitNarrowWay: 2
   _speedNarrowWay: 0.5

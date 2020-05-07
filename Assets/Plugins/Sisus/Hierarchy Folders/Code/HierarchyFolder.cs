@@ -7,7 +7,6 @@ using Sisus.Attributes;
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEditor;
 using JetBrains.Annotations;
 #endif
@@ -24,7 +23,6 @@ namespace Sisus.HierarchyFolders
 	public class HierarchyFolder : MonoBehaviour
 	{
 		#if UNITY_EDITOR
-		public static Scene playModeStrippingHandled;
 		private static readonly List<Component> ReusableComponentsList = new List<Component>(2);
 
 		[UsedImplicitly]
@@ -87,19 +85,7 @@ namespace Sisus.HierarchyFolders
 		[UsedImplicitly]
 		private void Awake()
 		{
-			if(playModeStrippingHandled == gameObject.scene)
-			{
-				return;
-			}
-
-			playModeStrippingHandled = gameObject.scene;
-
-			var preferences = HierarchyFolderPreferences.Get();
-			var playModeStripping = preferences.playModeBehaviour;
-			if(playModeStripping != StrippingType.None)
-			{
-				HierarchyFolderUtility.ApplyStrippingType(gameObject.scene, playModeStripping);
-			}
+			PlayModeStripper.OnSceneObjectAwake(gameObject);
 		}
 
 		private void ResubscribeToHierarchyChanged(HierarchyFolderPreferences preferences)
@@ -246,7 +232,7 @@ namespace Sisus.HierarchyFolders
 
 			// If has RectTransform child convert Transform component into RectTransform 
 			// to avoid child RectTransform values being affected by the parent hierarchy folders.
-			// For performance reasons only first child is checkd.
+			// For performance reasons only first child is checked.
 			if(transform.GetFirstChild(true) is RectTransform && !(transform is RectTransform))
 			{
 				#if DEV_MODE
@@ -274,8 +260,8 @@ namespace Sisus.HierarchyFolders
 			#if DEV_MODE
 			if(transform.childCount > 0)
 			{
-				if(HierarchyFolderUtility.NowStripping) { Debug.LogWarning(name + " child count is "+ transform.childCount+" but won't flatten because HierarchyFolderUtility.NowStripping already true."); }
-				else { Debug.Log(name + " child count " + transform.childCount+". Flattening now..."); }
+				if(HierarchyFolderUtility.NowStripping) { Debug.LogWarning(name + " child count is "+ transform.childCount+" but won't flatten because HierarchyFolderUtility.NowStripping already true.", gameObject); }
+				else { Debug.Log(name + " child count " + transform.childCount+". Flattening now...", gameObject); }
 			}
 			#endif
 
@@ -304,9 +290,21 @@ namespace Sisus.HierarchyFolders
 
 		private void OnHierarchyChangedShared()
 		{
+			#if DEV_MODE && DEBUG_HIERARCHY_CHANGED
+			Debug.Log(name + ".OnHierarchyChangedShared");
+			#endif
+
 			if(HasSupernumeraryComponents())
 			{
 				Debug.LogWarning("Hierarchy Folder \"" + name + "\" contained extraneous components.\nThis is not supported since Hierarchy Folders are stripped from builds. Converting into a normal GameObject now.", gameObject);
+
+				#if DEV_MODE
+				foreach(var component in gameObject.GetComponents<Component>())
+				{
+					Debug.Log(component.GetType().Name);
+				}
+				#endif
+
 				TurnIntoNormalGameObject();
 				return;
 			}
@@ -318,7 +316,9 @@ namespace Sisus.HierarchyFolders
 		{
 			GetComponents(ReusableComponentsList);
 			// A hierarchy folder GameObject should only have Transform (or RectTransform) and HierarchyFolder components.
-			return ReusableComponentsList.Count > 2;
+			bool tooManyComponents = ReusableComponentsList.Count > 2;
+			ReusableComponentsList.Clear();
+			return tooManyComponents;
 		}
 
 		[ContextMenu("Turn Into Normal GameObject")]

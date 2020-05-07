@@ -10,7 +10,18 @@ namespace Sisus.HierarchyFolders
 	/// </summary>
 	public static class HierarchyFolderSettingsProvider
 	{
+		private const int ScriptExecutionOrder = -10000;
+
 		private static Editor defaultEditor;
+
+		private static bool setupDone;
+		private static bool unappliedChanges;
+		private static bool defaultState;
+
+		private static readonly Color applyColor = new Color32(60, 226, 65, 255);
+		private static readonly Color discardColor = new Color32(229, 99, 99, 255);
+
+		private static Vector2 scrollPosition;
 
 		#if UNITY_2019_1_OR_NEWER
 		[SettingsProvider, UsedImplicitly]
@@ -54,6 +65,12 @@ namespace Sisus.HierarchyFolders
 
 			var preferences = HierarchyFolderPreferences.Get();
 
+			if(!setupDone)
+			{
+				setupDone = true;
+				defaultState = preferences.HasDefaultState();
+			}
+
 			Editor.CreateCachedEditor(preferences, null, ref defaultEditor);
 
 			string previousNamePrefix = preferences.namePrefix;
@@ -64,6 +81,8 @@ namespace Sisus.HierarchyFolders
 			// hide the script field
 			GUILayout.Space(-20f);
 
+			scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+
 			defaultEditor.OnInspectorGUI();
 
 			if(EditorGUI.EndChangeCheck())
@@ -72,13 +91,19 @@ namespace Sisus.HierarchyFolders
 				{
 					preferences.previousNamePrefix = previousNamePrefix;
 				}
+
 				if(!string.Equals(previousNameSuffix, preferences.nameSuffix, StringComparison.OrdinalIgnoreCase))
 				{
 					preferences.previousNameSuffix = previousNameSuffix;
 				}
+
+				unappliedChanges = preferences.HasUnappliedChanges();
+				defaultState = preferences.HasDefaultState();
 			}
 
-			GUILayout.Space(15f);
+			GUILayout.EndScrollView();
+
+			GUILayout.Space(10f);
 
 			GUILayout.BeginHorizontal();
 			{
@@ -86,37 +111,53 @@ namespace Sisus.HierarchyFolders
 
 				const float buttonHeight = 25f;
 
-				if(GUILayout.Button("Apply Changes", GUILayout.Height(buttonHeight)))
+				if(unappliedChanges)
 				{
-					preferences.SaveState();
-
-					if(preferences.playModeBehaviour != StrippingType.None)
+					var guiColorWas = GUI.color;
+					GUI.color = applyColor;
+				
+					if(GUILayout.Button("Apply Changes", GUILayout.Height(buttonHeight)))
 					{
-						var hierarchyFolderScript = FileUtility.FindScriptAssetForType(typeof(HierarchyFolder));
-						if(MonoImporter.GetExecutionOrder(hierarchyFolderScript) >= 0)
-						{
-							MonoImporter.SetExecutionOrder(hierarchyFolderScript, -1000);
-						}
+						preferences.SaveState();
+						unappliedChanges = false;
+
+						#if DEV_MODE
+						Debug.Assert(!preferences.HasUnappliedChanges());
+						#endif
 					}
+
+					GUILayout.Space(15f);
+
+					GUI.color = discardColor;
+
+					if(GUILayout.Button("Discard Changes", GUILayout.Height(buttonHeight)))
+					{
+						preferences.DiscardChanges();
+						unappliedChanges = false;
+					}
+
+					GUI.color = guiColorWas;
 				}
 
-				GUILayout.Space(15f);
-
-				if(GUILayout.Button("Discard Changes", GUILayout.Height(buttonHeight)))
+				if(!defaultState)
 				{
-					preferences.DiscardChanges();
-				}
+					if(unappliedChanges)
+					{
+						GUILayout.Space(15f);
+					}
 
-				GUILayout.Space(15f);
-
-				if(GUILayout.Button("Reset To Defaults", GUILayout.Height(buttonHeight)))
-				{
-					preferences.ResetToDefaults();
+					if(GUILayout.Button("Reset To Defaults", GUILayout.Height(buttonHeight)))
+					{
+						preferences.ResetToDefaults();
+						unappliedChanges = false;
+					}
 				}
 
 				GUILayout.Space(15f);
 			}
 			GUILayout.EndHorizontal();
+
+			GUILayout.Space(10f);
 
 			EditorGUIUtility.labelWidth = labelWidthWas;
 			EditorGUI.indentLevel = indentLevelWas;

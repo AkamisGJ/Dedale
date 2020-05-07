@@ -22,6 +22,13 @@ namespace Sisus.HierarchyFolders
 		static HierarchyFolderIconDrawer()
 		{
 			var preferences = HierarchyFolderPreferences.Get();
+
+			var icon = preferences.Icon();
+			folderIconOpen = icon.open;
+			folderIconClosed = icon.closed;
+
+			EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
 			if(!preferences.enableHierarchyIcons && !preferences.doubleClickSelectsChildrens)
 			{
 				return;
@@ -55,12 +62,50 @@ namespace Sisus.HierarchyFolders
 			}
 
 			EditorApplication.hierarchyChanged += OnHierarchyChanged;
-
-			var icon = preferences.Icon();
-			folderIconOpen = icon.open;
-			folderIconClosed = icon.closed;
 			
 			UpdateExpandedIDs();
+		}
+
+		private static void OnPlayModeStateChanged(PlayModeStateChange playModeState)
+		{
+			if(playModeState == PlayModeStateChange.ExitingPlayMode)
+			{
+				ResubscribeToEvents();
+			}
+		}
+
+		public static void ResubscribeToEvents()
+		{
+			var preferences = HierarchyFolderPreferences.Get();
+
+			if(!preferences.enableHierarchyIcons && !preferences.doubleClickSelectsChildrens)
+			{
+				return;
+			}
+
+			if(preferences.enableHierarchyIcons)
+			{
+				if(preferences.doubleClickSelectsChildrens)
+				{
+					EditorApplication.hierarchyWindowItemOnGUI -= HandleDrawIconAndDoubleClickToSelectChildren;
+					EditorApplication.hierarchyWindowItemOnGUI += HandleDrawIconAndDoubleClickToSelectChildren;
+				}
+				else
+				{
+					EditorApplication.hierarchyWindowItemOnGUI -= HandleDrawIcon;
+					EditorApplication.hierarchyWindowItemOnGUI += HandleDrawIcon;
+				}
+				EditorApplication.hierarchyChanged -= OnHierarchyChanged;
+				EditorApplication.hierarchyChanged += OnHierarchyChanged;
+			}
+			else if(preferences.doubleClickSelectsChildrens)
+			{
+				EditorApplication.hierarchyWindowItemOnGUI -= HandleDoubleClickToSelectChildren;
+				EditorApplication.hierarchyWindowItemOnGUI += HandleDoubleClickToSelectChildren;
+
+				EditorApplication.hierarchyChanged -= OnHierarchyChanged;
+				EditorApplication.hierarchyChanged += OnHierarchyChanged;
+			}
 		}
 
 		[MethodImpl(256)] //256 = MethodImplOptions.AggressiveInlining in .NET 4.5. and later

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EnhancedHierarchy.Icons;
@@ -86,7 +86,7 @@ namespace EnhancedHierarchy {
 
             return Selection.gameObjects
                 .Where(obj => !EditorUtility.IsPersistent(obj)) // Makes sure the object is part of the scene and not the project
-                .Union(EnhancedHierarchy.CurrentGameObject ? new[] { EnhancedHierarchy.CurrentGameObject } : new GameObject[0])
+                .Union(EnhancedHierarchy.CurrentGameObject ? new [] { EnhancedHierarchy.CurrentGameObject } : new GameObject[0])
                 .Distinct()
                 .ToList();
         }

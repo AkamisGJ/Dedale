@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace EnhancedHierarchy.Icons {
@@ -11,7 +11,7 @@ namespace EnhancedHierarchy.Icons {
         //public override string PreferencesTooltip { get { return "Some tag for the tooltip here"; } }
 
         public override void DoGUI(Rect rect) {
-            using (new GUIBackgroundColor(EnhancedHierarchy.CurrentGameObject.isStatic ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
+            using(new GUIBackgroundColor(EnhancedHierarchy.CurrentGameObject.isStatic ? Styles.backgroundColorEnabled : Styles.backgroundColorDisabled)) {
                 GUI.changed = false;
                 GUI.Toggle(rect, EnhancedHierarchy.CurrentGameObject.isStatic, Styles.staticContent, Styles.staticToggleStyle);
 
