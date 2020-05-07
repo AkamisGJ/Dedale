@@ -2,8 +2,8 @@
 
 public class Door : MonoBehaviour, IInteract
 {
-    private Rigidbody _rb = null;
-    private HingeJoint _hj = null;
+    [SerializeField] private Rigidbody _rb = null;
+    [SerializeField] private HingeJoint _hj = null;
     private float _initalPositionMouseX = 0;
     [Tooltip("Speed of rotation of door")]
     [SerializeField] private float _speed = 1;
@@ -28,8 +28,16 @@ public class Door : MonoBehaviour, IInteract
     void Start()
     {
         int _inversion = 1;
-        _rb = GetComponent<Rigidbody>();
-        _hj = GetComponent<HingeJoint>();
+        if(_rb == null)
+        {
+            _rb = GetComponent<Rigidbody>();
+            Debug.LogWarning(" Insert rigidbody on door script to optimise  :   " + gameObject);
+        }
+        if(_hj == null)
+        {
+            _hj = GetComponent<HingeJoint>();
+            Debug.LogWarning(" Insert hingeJoint on door script to optimise  :   " + gameObject);
+        }
         _limits.bounciness = _bounciness;
         _hj.limits = _limits;
         _playerController = PlayerManager.Instance.PlayerController;
