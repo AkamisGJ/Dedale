@@ -288,7 +288,7 @@ MonoBehaviour:
       - gameObject: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
           type: 3}
       selectedSlot: 0
-      selected: 1
+      selected: 0
       colorTag: 0
     - name: Book01
       settings:
@@ -433,7 +433,7 @@ MonoBehaviour:
       colorTag: 0
     - name: Brin d'herbe
       settings:
-        brushRadius: 1.06
+        brushRadius: 0.23
         brushSpacing: 0.064
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
@@ -447,12 +447,12 @@ MonoBehaviour:
         alongBrushStroke: 0
         rotation: {x: 0, y: 0, z: 0}
         randomizeOrientationX: 58.7
-        randomizeOrientationY: 87.1
+        randomizeOrientationY: 59.3
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
         scaleUniformMin: 3
-        scaleUniformMax: 7
+        scaleUniformMax: 3
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
     - name: Pissenlit01
       settings:
@@ -834,7 +834,7 @@ MonoBehaviour:
       selectedSlot: 0
       selected: 0
       colorTag: 0
-    - name: Violtete copy
+    - name: Violtete multibrush
       settings:
         brushRadius: 0.2
         brushSpacing: 0.616
@@ -849,13 +849,13 @@ MonoBehaviour:
         orientationMode: 0
         alongBrushStroke: 0
         rotation: {x: 0, y: 0, z: 0}
-        randomizeOrientationX: 21.5
-        randomizeOrientationY: 95.8
-        randomizeOrientationZ: 20.4
+        randomizeOrientationX: 0
+        randomizeOrientationY: 0
+        randomizeOrientationZ: 0
         scaleTransformMode: 0
-        scaleMode: 1
-        scaleUniformMin: 0.8
-        scaleUniformMax: 1.5
+        scaleMode: 0
+        scaleUniformMin: 1.5
+        scaleUniformMax: 2
         scalePerAxisMin: {x: 2, y: 2, z: 2}
         scalePerAxisMax: {x: 3, y: 4, z: 3}
         pinFixedRotation: 0
@@ -937,8 +937,8 @@ MonoBehaviour:
           pivotMode: 0
           pivotOffset: {x: 1, y: 1, z: 1}
         multibrushPaintSelectedSlot: 0
-        multibrushMode: 0
-        multibrushPattern: 0 1 2 3 5 6 7 8 9
+        multibrushMode: 1
+        multibrushPattern: 0 2 1 3
         multibrushPatternContinue: 0
         slopeEnabled: 0
         slopeAngleMin: 0
@@ -972,7 +972,7 @@ MonoBehaviour:
       colorTag: 0
     - name: Dentsdelions
       settings:
-        brushRadius: 1.21
+        brushRadius: 0.83
         brushSpacing: 0.232
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
@@ -1238,8 +1238,8 @@ MonoBehaviour:
       colorTag: 0
     - name: TouffeHerbe
       settings:
-        brushRadius: 0.89
-        brushSpacing: 0.01
+        brushRadius: 0.15
+        brushSpacing: 0.082
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
         brushOverlapCheckObjects: 1
