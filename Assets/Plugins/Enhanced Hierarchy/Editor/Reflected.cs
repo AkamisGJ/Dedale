@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -118,9 +118,9 @@ namespace EnhancedHierarchy {
                 if (HierarchyWindowInstance)
                     SceneHierarchyOrWindow.SetInstanceProperty("selectionSyncNeeded", true);
             } catch (Exception e) {
-                Debug.LogWarningFormat("Enabling \"{0}\" because it caused an exception", Preferences.AllowSelectingLocked.Label.text);
+                Debug.LogWarningFormat("Enabling \"{0}\" because it caused an exception", Preferences.AllowSelectingLockedObjects.Label.text);
                 Debug.LogException(e);
-                Preferences.AllowSelectingLocked.Value = true;
+                Preferences.AllowSelectingLockedObjects.Value = true;
             }
         }
 

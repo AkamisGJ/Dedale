@@ -17,6 +17,7 @@ namespace Sisus.HierarchyFolders
 		private const string EditorPrefsKey = "HierarchyFolderPreferences";
 
 		private static HierarchyFolderPreferences instance;
+		private static HierarchyFolderPreferences asset;
 
 		public Action<HierarchyFolderPreferences> onPreferencesChanged;
 
@@ -29,13 +30,16 @@ namespace Sisus.HierarchyFolders
 		public string nameSuffix = " ---";
 		public bool forceNamesUpperCase = false;
 
-		[Header("Stripping")]
+		[Header("Build Stripping")]
 		[Tooltip("If true then all hierarchy folders will be removed from all scenes during build post processing.\n\nAny child GameObjects will be moved upwards the parent chain.")]
 		public bool removeFromBuild = true;
 		public bool warnWhenNotRemovedFromBuild = true;
 
+		[Header("Play Mode Stripping")]
 		[Tooltip("If true then hierarchy folders will be removed from loaded scenes when their Awake method is called.\n\nAny members of the HierarchyGroup will be moved upwards the parent chain.")]
 		public StrippingType playModeBehaviour = StrippingType.None;
+		[Tooltip("Entire Scene Immediate : All Hierarchy Folders are stripped at the very beginning the scene loading process.\n\nIndividuallyDuringAwake: Hierarchy Folders are stripped in the order that Awake is called for them.\n\nAll Hierarchy Folders are stripped for a scene once it has fully finished loading and all scene scene objects have been initialized. WARNING: This means that Awake and OnEnable methods will get called for scene objects before stripping takes place!\n\nIf you encounter ArgumentException: The scene is not loaded then switch to using a stripping method other than Entire Scene Immediate.")]
+		public PlayModeStrippingMethod playModeStrippingMethod = PlayModeStrippingMethod.EntireSceneImmediate;
 
 		[Header("Drawer")]
 		[TextArea(2, 8)]
@@ -73,31 +77,44 @@ namespace Sisus.HierarchyFolders
 		{
 			get
 			{
-				#if UNITY_EDITOR
 				return EditorApplication.isPlayingOrWillChangePlaymode && Get().playModeBehaviour == StrippingType.FlattenHierarchy;
-				#else
-				return false;
-				#endif
 			}
 		}
 
+		[NotNull]
 		public static HierarchyFolderPreferences Get()
 		{
 			if(instance == null)
 			{
-				var assetPath = GetProjectSettingsAssetPath(false);
-				var asset = AssetDatabase.LoadAssetAtPath<HierarchyFolderPreferences>(assetPath);
+				var asset = GetAsset();
 				if(asset != null)
 				{
+					#if DEV_MODE
+					UnityEngine.Debug.Log("HierarchyFolderPreferences.Get - Instantiating asset...");
+					#endif
 					instance = Instantiate(asset);
 				}
 				else
 				{
+					#if DEV_MODE
+					UnityEngine.Debug.Log("HierarchyFolderPreferences.Get - Loading from EditorPrefs...");
+					#endif
 					instance = CreateInstance<HierarchyFolderPreferences>();
 					instance.LoadStateFromEditorPrefs();
 				}
 			}
 			return instance;
+		}
+
+		[CanBeNull]
+		private static HierarchyFolderPreferences GetAsset()
+		{
+			if(asset == null)
+			{
+				var assetPath = GetProjectSettingsAssetPath(false);
+				asset = AssetDatabase.LoadAssetAtPath<HierarchyFolderPreferences>(assetPath);
+			}
+			return asset;
 		}
 
 		[NotNull]
@@ -176,6 +193,44 @@ namespace Sisus.HierarchyFolders
 			}
 		}
 
+		public bool HasUnappliedChanges()
+		{
+			var asset = GetAsset();
+			if(asset == null)
+			{
+				if(EditorPrefs.HasKey(EditorPrefsKey))
+				{
+					string defaultState = EditorPrefs.GetString(EditorPrefsKey);
+					return !string.Equals(defaultState, EditorJsonUtility.ToJson(this), StringComparison.Ordinal);
+				}
+				return !HasDefaultState();
+			}
+
+			string assetState = EditorJsonUtility.ToJson(asset);
+			string nameWas = name;
+			name = asset.name;
+			string currentState = EditorJsonUtility.ToJson(this);
+			name = nameWas;
+			return !string.Equals(assetState, currentState, StringComparison.Ordinal);
+		}
+
+		public bool HasDefaultState()
+		{
+			var newInstance = CreateInstance<HierarchyFolderPreferences>();
+			
+			string nameWas = name;
+			name = newInstance.name;
+
+			string defaultState = EditorJsonUtility.ToJson(newInstance);
+			
+			DestroyImmediate(newInstance, false);
+
+			string currentState = EditorJsonUtility.ToJson(this);
+			name = nameWas;
+
+			return string.Equals(defaultState, currentState, StringComparison.Ordinal);
+		}
+
 		public void SaveState()
 		{
 			if(IsDefaultState())
@@ -209,8 +264,11 @@ namespace Sisus.HierarchyFolders
 				EditorPrefs.SetString(EditorPrefsKey, serializedState);
 
 				var assetPath = GetProjectSettingsAssetPath(true);
+
+				asset = null;
 				AssetDatabase.CreateAsset(Instantiate(this), assetPath);
 				AssetDatabase.SaveAssets();
+				AssetDatabase.Refresh();
 			}
 
 			if(onPreferencesChanged != null)
@@ -221,12 +279,28 @@ namespace Sisus.HierarchyFolders
 
 		public void DiscardChanges()
 		{
-			instance = null;
-			Get();
+			var asset = GetAsset();
+			if(asset != null)
+			{
+				string assetState = EditorJsonUtility.ToJson(asset);
+				EditorJsonUtility.FromJsonOverwrite(assetState, this);
+			}
+			else
+			{
+				var newInstance = CreateInstance<HierarchyFolderPreferences>();
+				string defaultState = EditorJsonUtility.ToJson(newInstance);
+				DestroyImmediate(newInstance, false);
+				EditorJsonUtility.FromJsonOverwrite(defaultState, this);
+				LoadStateFromEditorPrefs();
+			}
 		}
 
 		public void LoadStateFromEditorPrefs()
 		{
+			#if DEV_MODE
+			UnityEngine.Debug.Log("LoadStateFromEditorPrefs");
+			#endif
+
 			if(EditorPrefs.HasKey(EditorPrefsKey))
 			{
 				string serializedState = EditorPrefs.GetString(EditorPrefsKey);
@@ -265,9 +339,12 @@ namespace Sisus.HierarchyFolders
 
 		public static void ClearSavedState()
 		{
+			#if DEV_MODE
+			UnityEngine.Debug.Log("ClearSavedState");
+			#endif
+
 			var assetPath = GetProjectSettingsAssetPath(false);
 			AssetDatabase.DeleteAsset(assetPath);
-
 			EditorPrefs.DeleteKey(EditorPrefsKey);
 		}
 

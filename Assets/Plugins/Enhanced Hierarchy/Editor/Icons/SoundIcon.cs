@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
@@ -62,7 +62,7 @@ namespace EnhancedHierarchy.Icons {
             if (!EnhancedHierarchy.IsRepaintEvent || !EnhancedHierarchy.IsGameObject || !audioSource || Width <= 1f)
                 return;
 
-            using (ProfilerSample.Get()) {
+            using(ProfilerSample.Get()) {
                 if (!icon)
                     icon = EditorGUIUtility.ObjectContent(null, typeof(AudioSource)).image;
 

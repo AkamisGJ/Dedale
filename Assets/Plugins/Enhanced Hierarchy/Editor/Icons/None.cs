@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace EnhancedHierarchy.Icons {
     public sealed class None : IconBase {
