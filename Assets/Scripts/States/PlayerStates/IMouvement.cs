@@ -599,20 +599,40 @@ public class IMouvement : IPlayerState
     private void SelectFootStepAndPlay()
     {
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 10.0f);
-        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Example/Character/Player Footsteps");
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");   
         _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
         foreach  (RaycastHit raycastHit in hits)
         {
-            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Terre"))
+            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Carrelage"))
+            {
+                _footsteps.setParameterByName("Surface", 0);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Bout de verre"))
             {
                 _footsteps.setParameterByName("Surface", 1);
                 _footsteps.start();
                 _footsteps.release();
                 break;
-            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Beton"))
+            }else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Rocher"))
             {
                 _footsteps.setParameterByName("Surface", 2);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Lino"))
+            {
+                _footsteps.setParameterByName("Surface", 4);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Herbe"))
+            {
+                _footsteps.setParameterByName("Surface", 5);
                 _footsteps.start();
                 _footsteps.release();
                 break;
