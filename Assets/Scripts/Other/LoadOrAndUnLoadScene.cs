@@ -43,6 +43,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextSceneName));
         _asyncOperationLoad.completed -= OnCompleted;
+        print("Scene" + _nextSceneName + " loaded");
     }
 
     public void UnLoadScene()
@@ -52,30 +53,4 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
         }
     }
-    
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         LoadorUnloadScene();
-    //     }
-    // }
-
-    // public void LoadorUnloadScene()
-    // {
-    //     if(_alreadyUse == false)
-    //     {
-    //         if (_previousSceneName != string.Empty)
-    //         {
-    //             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
-    //         }
-    //         if (_nextSceneName != string.Empty)
-    //         {
-    //             _asyncOperationLoad.allowSceneActivation = true;
-    //         }
-    //         _alreadyUse = true;
-    //     }
-    // }
-
 }
