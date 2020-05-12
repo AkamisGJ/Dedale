@@ -276,6 +276,10 @@ public class IMouvement : IPlayerState
                     }
                 }
             }
+            else
+            {
+                Debug.Log(raycastHit.collider.gameObject + "  block the interaction.   Position :  "  + raycastHit.collider.gameObject.transform.position);
+            }
         }
         else
         {

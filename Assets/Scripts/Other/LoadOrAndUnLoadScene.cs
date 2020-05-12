@@ -8,6 +8,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     [SerializeField] private string _previousSceneName = null;
     [SerializeField] private bool _autoLoadingScene = false;
     [SerializeField] private LoadSceneParameters _sceneParameters;
+    [SerializeField] private int _priority = 0;
     private AsyncOperation _asyncOperationLoad = null;
     private bool _alreadyUse = false;
 
@@ -23,6 +24,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextSceneName, _sceneParameters);
             _asyncOperationLoad.allowSceneActivation = _autoLoadingScene;
+            _asyncOperationLoad.priority = _priority;
             _asyncOperationLoad.completed += OnCompleted;
         }
         yield return null;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ImageInteract : MonoBehaviour
 {
     [SerializeField] private GameObject _uiPosition = null;
+    [SerializeField] private Transform _canvasParent = null;
     private Canvas _canvas = null;
     private RawImage _currentImage = null;
     private RawImage _imageInteraction = null;
@@ -79,6 +80,7 @@ public class ImageInteract : MonoBehaviour
             return;
         }
         _currentImage = _imageInteraction;
+        _currentImage.transform.localPosition = Vector3.zero;
         Color color = _inputImage.color;
         color.a = 0;
         _inputImage.color = color;
@@ -91,8 +93,9 @@ public class ImageInteract : MonoBehaviour
 
     void SpawnCanvas()
     {
-        _canvas = Instantiate(_playerData.CanvasHelper, null, true);
+        _canvas = Instantiate(_playerData.CanvasHelper, _canvasParent, true);
         _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
+        _canvas.transform.position = _uiPosition.transform.position;
     }
 
     void Update()
@@ -101,11 +104,10 @@ public class ImageInteract : MonoBehaviour
         {
             LockedDoor();
         }
-        _canvas.transform.position = _uiPosition.transform.position;
         _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
         RaycastHit raycastHit;
         Physics.Raycast(_playerCamera.transform.position, transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, transform.position),_playerData.CantSeeInteractionHelperBehindThis);
-        if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) < (180 + _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
+        if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
         {
             Color color = _currentImage.color;
             color.a = 1;
@@ -117,7 +119,7 @@ public class ImageInteract : MonoBehaviour
             color.a = 0;
             _currentImage.color = color;
         }
-        if(IsFocus == true)
+        if(_isFocus == true)
         {
             ShowImageInput();
         }
