@@ -14,6 +14,10 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
 
     public void PreloadScene()
     {
+        if(_autoLoadingScene == true)
+        {
+            GameLoopManager.Instance.IsPaused = true;
+        }
         StartCoroutine(PreLoadSceneCoroutine());
     }
 
@@ -44,6 +48,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     private void OnCompleted(AsyncOperation asyncOperation)
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextSceneName));
+        GameLoopManager.Instance.IsPaused = false;
         _asyncOperationLoad.completed -= OnCompleted;
     }
 
