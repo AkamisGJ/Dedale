@@ -138,13 +138,16 @@ public class GameLoopManager : Singleton<GameLoopManager>
             _managerLoop -= value;
         }
     }
-    
+
     #endregion
-    
+
+    private bool _isPaused = false;
+
+    public bool IsPaused { get => _isPaused; set => _isPaused = value; }
 
     #region Loop
 
-    
+
     void Start()
     {
         if(_startPlayer != null){
@@ -157,51 +160,62 @@ public class GameLoopManager : Singleton<GameLoopManager>
 
     void Update()
     {
-        if (_lastStart != null)
+        if (_isPaused == false)
         {
-            _lastStart();
-        }
-        if (_gameLoopInputManager != null)
-        {
-            _gameLoopInputManager();
-        }
+            if (_lastStart != null)
+            {
+                _lastStart();
+            }
+            if (_gameLoopInputManager != null)
+            {
+                _gameLoopInputManager();
+            }
 
-        if(_loopQTE != null)
-        {
-            _loopQTE();
-        }
+            if (_loopQTE != null)
+            {
+                _loopQTE();
+            }
 
-        if (_gameLoopPlayer != null)
-        {
-            _gameLoopPlayer();
-        }
+            if (_gameLoopPlayer != null)
+            {
+                _gameLoopPlayer();
+            }
 
-        if(_managerLoop != null){
-            _managerLoop();
+            if (_managerLoop != null)
+            {
+                _managerLoop();
+            }
         }
-
     }
 
     private void FixedUpdate()
     {
-        if(_fixedGameLoop != null){
-            _fixedGameLoop();
+        if (_isPaused == false)
+        {
+            if (_fixedGameLoop != null)
+            {
+                _fixedGameLoop();
+            }
         }
     }
 
     private void LateUpdate() {
-        if(_lateGameLoop != null){
-            _lateGameLoop();
-        }
-
-        if (_lateLoopDialogue != null)
+        if (_isPaused == false)
         {
-            _lateLoopDialogue();
-        }
+            if (_lateGameLoop != null)
+            {
+                _lateGameLoop();
+            }
 
-        if (_gameLoopPortal != null)
-        {
-            _gameLoopPortal();
+            if (_lateLoopDialogue != null)
+            {
+                _lateLoopDialogue();
+            }
+
+            if (_gameLoopPortal != null)
+            {
+                _gameLoopPortal();
+            }
         }
     }
 
