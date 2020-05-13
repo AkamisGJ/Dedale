@@ -131,6 +131,13 @@ public class IMouvement : IPlayerState
 
     public void Exit()
     {
+        _playerController.AnimatorCamera.SetBool("NoAnim", true);
+        Debug.Log("noanim");
+        if (_lastStateAnimation != null)
+        {
+            _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+        }
+        _lastStateAnimation = "NoAnim";
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;

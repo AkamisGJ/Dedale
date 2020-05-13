@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class ImageInteract : MonoBehaviour
 {
     [SerializeField] private GameObject _uiPosition = null;
-    [SerializeField] private Transform _canvasParent = null;
     private Canvas _canvas = null;
     private RawImage _currentImage = null;
     private RawImage _imageInteraction = null;
@@ -93,7 +92,8 @@ public class ImageInteract : MonoBehaviour
 
     void SpawnCanvas()
     {
-        _canvas = Instantiate(_playerData.CanvasHelper, _canvasParent, true);
+        _canvas = Instantiate(_playerData.CanvasHelper, _uiPosition.transform, true);
+        _canvas.scaleFactor = 1;
         _inputImage = Instantiate(_playerData.InputHelper, _canvas.transform, true);
         _canvas.transform.position = _uiPosition.transform.position;
     }
