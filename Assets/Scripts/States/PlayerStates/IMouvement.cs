@@ -109,6 +109,7 @@ public class IMouvement : IPlayerState
     public void Update()
     {
         //RaycastInteractionObject();
+        AnimatorCameraController();
         SphereCastInteractionObject();
         if (_crouching == true)
         {
@@ -118,7 +119,6 @@ public class IMouvement : IPlayerState
         {
             Crouching(-1);
         }
-        AnimatorCameraController();
         /*if (_zooming == true)
         {
             _playerController.Zooming(1);
@@ -132,7 +132,6 @@ public class IMouvement : IPlayerState
     public void Exit()
     {
         _playerController.AnimatorCamera.SetBool("NoAnim", true);
-        Debug.Log("noanim");
         if (_lastStateAnimation != null)
         {
             _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
@@ -662,7 +661,7 @@ public class IMouvement : IPlayerState
 
     private void AnimatorCameraController()
     {
-        if(_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk"))
+        if (_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk"))
         {
             _playerController.AnimatorCamera.SetBool("Walk", true);
             if(_lastStateAnimation != null)
