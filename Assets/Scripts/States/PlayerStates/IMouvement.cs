@@ -47,6 +47,7 @@ public class IMouvement : IPlayerState
     private float _currentMouseY = 0;
     private float _currentTimeFootStepPlayer = 0;
     private FMOD.Studio.EventInstance _footsteps;
+    private string _lastStateAnimation = null;
     #endregion Fields
 
     #region Properties
@@ -117,6 +118,7 @@ public class IMouvement : IPlayerState
         {
             Crouching(-1);
         }
+        AnimatorCameraController();
         /*if (_zooming == true)
         {
             _playerController.Zooming(1);
@@ -374,7 +376,7 @@ public class IMouvement : IPlayerState
             if (_direction != Vector3.zero)
             {
                 Acceleration();
-                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false)
+                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false && _accelerationLerp == 1)
                 {
                     AccelerationSprint();
                 }
@@ -648,6 +650,36 @@ public class IMouvement : IPlayerState
                 _footsteps.release();
                 break;
             }
+        }
+    }
+
+    private void AnimatorCameraController()
+    {
+        if(_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk"))
+        {
+            _playerController.AnimatorCamera.SetBool("Walk", true);
+            if(_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Walk";
+        }else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run"))
+        {
+            _playerController.AnimatorCamera.SetTrigger("Run");
+            if (_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Run";
+        }
+        else if(_accelerationLerp == 0 && !_playerController.AnimatorCamera.GetBool("Idle"))
+        {
+            _playerController.AnimatorCamera.SetTrigger("Idle");
+            if (_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Idle";
         }
     }
 

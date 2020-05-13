@@ -174,6 +174,9 @@ public class PlayerData : ScriptableObject
     [Tooltip("The speed of player in narrow way")]
     [SerializeField] private float _speedNarrowWay = 2;
 
+    [BoxGroup("Canvas", centerLabel: true)]
+    [Tooltip("The canvas when loading the next scene")]
+    [SerializeField] private Canvas _LoadingCanvas = null;
 
     #endregion Fields
 
@@ -228,5 +231,6 @@ public class PlayerData : ScriptableObject
     public float LadderMinAngleY { get => _ladderMinAngleY; }
     public float LadderAngleY { get => _ladderAngleY; }
     public float SpeedCameraDoor { get => _speedCameraDoor; }
+    public Canvas LoadingCanvas { get => _LoadingCanvas; }
     #endregion Properties
 }

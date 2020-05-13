@@ -11,12 +11,16 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     [SerializeField] private int _priority = 0;
     private AsyncOperation _asyncOperationLoad = null;
     private bool _alreadyUse = false;
+    private PlayerData _playerData = null;
+    private Canvas _loadingCanvas = null;
 
     public void PreloadScene()
     {
         if(_autoLoadingScene == true)
         {
             GameLoopManager.Instance.IsPaused = true;
+            _playerData = PlayerManager.Instance.PlayerController.PlayerData;
+            _loadingCanvas = Instantiate(_playerData.LoadingCanvas, null, true);
         }
         StartCoroutine(PreLoadSceneCoroutine());
     }
@@ -49,6 +53,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextSceneName));
         GameLoopManager.Instance.IsPaused = false;
+        Destroy(_loadingCanvas.gameObject);
         _asyncOperationLoad.completed -= OnCompleted;
     }
 
@@ -59,7 +64,6 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
         }
     }
-    
 
     // private void OnTriggerEnter(Collider other)
     // {
@@ -84,5 +88,4 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     //         _alreadyUse = true;
     //     }
     // }
-
 }

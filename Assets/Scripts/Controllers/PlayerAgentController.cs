@@ -14,6 +14,7 @@ public class PlayerAgentController : MonoBehaviour
     [SerializeField] private Transform _cameraHolder = null;
     [Tooltip("Object Holder will be the parent of the observable object when player observe them")]
     [SerializeField] private Transform _objectHolder = null;
+    [SerializeField] private Animator _animatorCamera = null;
     #endregion SerializedFields
     #region PrivateFields
     private Vector3 _direction = Vector3.zero;
@@ -51,6 +52,7 @@ public class PlayerAgentController : MonoBehaviour
     public PlayerData PlayerData { get => _playerData; }
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
+    public Animator AnimatorCamera { get => _animatorCamera; set => _animatorCamera = value; }
     #endregion Properties
 
     private void Awake()
