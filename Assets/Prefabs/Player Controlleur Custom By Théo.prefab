@@ -171,6 +171,7 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 042168eb9105acf48a9eb6b1ffea2f8d, type: 2}
   _cameraHolder: {fileID: 3357959778010603219}
   _objectHolder: {fileID: 2807965667608906081}
+  _animatorCamera: {fileID: 2993866517244245693}
 --- !u!114 &114944398317296242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3357959778010603219}
+  - component: {fileID: 2993866517244245693}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -305,8 +307,9 @@ Transform:
   m_Father: {fileID: 1607918575787650602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &500074880269641448
-PrefabInstance:
+--- !u!95 &2993866517244245693
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
