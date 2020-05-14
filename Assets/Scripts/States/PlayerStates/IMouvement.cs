@@ -86,7 +86,7 @@ public class IMouvement : IPlayerState
         _currentTimeFootStepPlayer = 0;
     }
 
-    public void Enter(Collider collider)
+    public void Enter(Collider collider, string animation)
     {
         _playerController.CanMove = true;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
@@ -661,7 +661,7 @@ public class IMouvement : IPlayerState
 
     private void AnimatorCameraController()
     {
-        if (_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk"))
+        if (_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk") && _playerController.CanMove == true)
         {
             _playerController.AnimatorCamera.SetBool("Walk", true);
             if(_lastStateAnimation != null)
@@ -669,7 +669,7 @@ public class IMouvement : IPlayerState
                 _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
             }
             _lastStateAnimation = "Walk";
-        }else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run"))
+        }else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run") && _playerController.CanMove == true)
         {
             _playerController.AnimatorCamera.SetTrigger("Run");
             if (_lastStateAnimation != null)
