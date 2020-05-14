@@ -32,7 +32,7 @@ public class IObserve : IPlayerState
         _lightPlayer.enabled = false;
     }
 
-    public void Enter(Collider interactObjectCollider)
+    public void Enter(Collider interactObjectCollider, string animation)
     {
         _lightPlayer.enabled = true;
         _objectCollider = interactObjectCollider;
@@ -71,6 +71,10 @@ public class IObserve : IPlayerState
         _grabObject.transform.LookAt(_mainCamera.transform);
         _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
         InputManager.Instance.MousePosition += LookObject;
+        _playerAgentController.AnimatorCamera.SetBool("Idle", true);
+        _playerAgentController.AnimatorCamera.SetBool("Walk", false);
+        _playerAgentController.AnimatorCamera.SetBool("Run", false);
+        _playerAgentController.AnimatorCamera.SetBool("NoAnim", false);
     }
 
     public void Update()

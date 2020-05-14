@@ -14,6 +14,7 @@ public class IQTELadder : IPlayerState
     private float _currentMouseY = 0;
     private float _currentMouseX = 0;
     private PlayerAgentController _playerController = null;
+    private float _startYPlayer = 0;
 
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool IsAtTheEnd { get => _isAtTheEnd; set { _isAtTheEnd = value; SetOrientation(); } }
@@ -38,13 +39,14 @@ public class IQTELadder : IPlayerState
         _playerController.CanMove = false;
     }
 
-    public void Enter(Collider collider)
+    public void Enter(Collider collider, string animation)
     {
         SetOrientation();
         InputManager.Instance.Direction += SetDirection;
         PlayerManager.Instance.PlayerController.TimeZoom = 0;
         InputManager.Instance.MousePosition += LookAtMouse;
         _playerController.CanMove = true;
+        _startYPlayer = _characterController.transform.position.y;
     }
 
     private void SetOrientation()
@@ -61,7 +63,17 @@ public class IQTELadder : IPlayerState
 
     private void SetDirection(float horizontalMouvement, float verticalMouvement)
     {
-        _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
+        _directionHorizontal = Vector3.zero;
+        if(horizontalMouvement < 0 && _playerController.transform.position.y > _startYPlayer)
+        {
+            _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
+            Debug.Log("canMoveDown");
+        }
+        else if (horizontalMouvement > 0)
+        {
+            _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
+            Debug.Log("canMoveUp");
+        }
         Move();
     }
 

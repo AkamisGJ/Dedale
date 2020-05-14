@@ -18,7 +18,7 @@ public class IInteraction : IPlayerState
         _playerController = PlayerManager.Instance.PlayerController;
     }
 
-    public void Enter(Collider colliderInteraction)
+    public void Enter(Collider colliderInteraction, string animation)
     {
         _interactGameObject = colliderInteraction.gameObject;
         _interactObject = _interactGameObject.GetComponent<IInteract>();
