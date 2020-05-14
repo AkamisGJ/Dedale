@@ -7,6 +7,7 @@ public class PlayerManager : Singleton<PlayerManager>
     private Camera _cameraPlayerGameobject = null;
     private Camera _cameraUIGameObject = null;
     private bool _haveKey = false;
+    private PlayerAgentController.MyState _startState = PlayerAgentController.MyState.MOVEMENT;
 
     [SerializeField] private PlayerAgentController _playerController = null;
     [SerializeField] private Camera _cameraPlayer = null;
@@ -31,6 +32,7 @@ public class PlayerManager : Singleton<PlayerManager>
     public Camera CameraUI { get => _cameraUIGameObject; }
     public bool HaveKey { get => _haveKey; set => _haveKey = value; }
     public bool IsInNarrowWay { get => _isInNarrowWay; set => _isInNarrowWay = value; }
+    public PlayerAgentController.MyState StartState { get => _startState; set => _startState = value; }
     #endregion Properties
 
     protected override void Awake()

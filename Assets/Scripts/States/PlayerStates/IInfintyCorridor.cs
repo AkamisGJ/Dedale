@@ -13,7 +13,7 @@ public class IInfintyCorridor : IPlayerState
     private float _rotationY = 0;
     private float _acceleration = 0;
 
-    public void Enter(Collider collider = null)
+    public void Enter(Collider collider = null, string animation = null)
     {
         _playerController.CanMove = true;
         _acceleration = 0;

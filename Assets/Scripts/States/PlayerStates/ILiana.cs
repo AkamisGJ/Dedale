@@ -15,7 +15,7 @@ public class ILiana : IPlayerState
         _camera = camera;
     }
 
-    public void Enter(Collider collider)
+    public void Enter(Collider collider, string animation)
     {
         InputManager.Instance.Direction += SetOrientation;
         PlayerManager.Instance.PlayerController.TimeZoom = 0;
