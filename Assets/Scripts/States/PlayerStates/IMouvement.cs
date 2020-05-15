@@ -47,6 +47,7 @@ public class IMouvement : IPlayerState
     private float _currentMouseY = 0;
     private float _currentTimeFootStepPlayer = 0;
     private FMOD.Studio.EventInstance _footsteps;
+    private string _lastStateAnimation = null;
     #endregion Fields
 
     #region Properties
@@ -85,7 +86,7 @@ public class IMouvement : IPlayerState
         _currentTimeFootStepPlayer = 0;
     }
 
-    public void Enter(Collider collider)
+    public void Enter(Collider collider, string animation)
     {
         _playerController.CanMove = true;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
@@ -108,6 +109,7 @@ public class IMouvement : IPlayerState
     public void Update()
     {
         //RaycastInteractionObject();
+        AnimatorCameraController();
         SphereCastInteractionObject();
         if (_crouching == true)
         {
@@ -129,6 +131,12 @@ public class IMouvement : IPlayerState
 
     public void Exit()
     {
+        _playerController.AnimatorCamera.SetBool("NoAnim", true);
+        if (_lastStateAnimation != null)
+        {
+            _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+        }
+        _lastStateAnimation = "NoAnim";
         InputManager.Instance.MousePosition -= LookAtMouse;
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
@@ -276,6 +284,10 @@ public class IMouvement : IPlayerState
                     }
                 }
             }
+            else
+            {
+                Debug.Log(raycastHit.collider.gameObject + "  block the interaction.   Parent :  "  + raycastHit.collider.gameObject.transform.parent);
+            }
         }
         else
         {
@@ -370,7 +382,7 @@ public class IMouvement : IPlayerState
             if (_direction != Vector3.zero)
             {
                 Acceleration();
-                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false)
+                if(_speedSprint != 0 && horizontalMouvement > 0 && _isCrouch == false && _accelerationLerp == 1)
                 {
                     AccelerationSprint();
                 }
@@ -599,20 +611,40 @@ public class IMouvement : IPlayerState
     private void SelectFootStepAndPlay()
     {
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 10.0f);
-        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/Example/Character/Player Footsteps");
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");   
         _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
         foreach  (RaycastHit raycastHit in hits)
         {
-            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Terre"))
+            if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Carrelage"))
+            {
+                _footsteps.setParameterByName("Surface", 0);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Bout de verre"))
             {
                 _footsteps.setParameterByName("Surface", 1);
                 _footsteps.start();
                 _footsteps.release();
                 break;
-            }else if(raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Beton"))
+            }else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Rocher"))
             {
                 _footsteps.setParameterByName("Surface", 2);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Lino"))
+            {
+                _footsteps.setParameterByName("Surface", 4);
+                _footsteps.start();
+                _footsteps.release();
+                break;
+            }
+            else if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Herbe"))
+            {
+                _footsteps.setParameterByName("Surface", 5);
                 _footsteps.start();
                 _footsteps.release();
                 break;
@@ -624,6 +656,36 @@ public class IMouvement : IPlayerState
                 _footsteps.release();
                 break;
             }
+        }
+    }
+
+    private void AnimatorCameraController()
+    {
+        if (_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk") && _playerController.CanMove == true)
+        {
+            _playerController.AnimatorCamera.SetBool("Walk", true);
+            if(_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Walk";
+        }else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run") && _playerController.CanMove == true)
+        {
+            _playerController.AnimatorCamera.SetTrigger("Run");
+            if (_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Run";
+        }
+        else if(_accelerationLerp == 0 && !_playerController.AnimatorCamera.GetBool("Idle"))
+        {
+            _playerController.AnimatorCamera.SetTrigger("Idle");
+            if (_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "Idle";
         }
     }
 

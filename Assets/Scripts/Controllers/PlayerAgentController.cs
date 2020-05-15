@@ -14,6 +14,7 @@ public class PlayerAgentController : MonoBehaviour
     [SerializeField] private Transform _cameraHolder = null;
     [Tooltip("Object Holder will be the parent of the observable object when player observe them")]
     [SerializeField] private Transform _objectHolder = null;
+    [SerializeField] private Animator _animatorCamera = null;
     #endregion SerializedFields
     #region PrivateFields
     private Vector3 _direction = Vector3.zero;
@@ -36,6 +37,7 @@ public class PlayerAgentController : MonoBehaviour
         LIANA,
         FALL,
         INFINITYCORRIDOR,
+        CINEMATIC,
     }
     private MyState _currentState = MyState.MOVEMENT;
     private Dictionary<MyState, IPlayerState> _states = null;
@@ -51,10 +53,15 @@ public class PlayerAgentController : MonoBehaviour
     public PlayerData PlayerData { get => _playerData; }
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
+    public Animator AnimatorCamera { get => _animatorCamera; set => _animatorCamera = value; }
     #endregion Properties
 
     private void Awake()
     {
+        if(_animatorCamera == null)
+        {
+            _animatorCamera = _cameraHolder.GetComponent<Animator>();
+        }
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
         DontDestroyOnLoad(gameObject);
     }
@@ -70,7 +77,8 @@ public class PlayerAgentController : MonoBehaviour
         _states.Add(MyState.LIANA, new ILiana());
         _states.Add(MyState.FALL, new IFall());
         _states.Add(MyState.INFINITYCORRIDOR, new IInfintyCorridor());
-        _currentState = MyState.MOVEMENT;
+        _states.Add(MyState.CINEMATIC, new ICinematics());
+        _currentState = PlayerManager.Instance.StartState;
         _states[MyState.INTERACTION].Init(_playerData, _mainCamera);
         _states[MyState.MOVEMENT].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.OBSERVE].Init(_playerData, _mainCamera);
@@ -79,6 +87,7 @@ public class PlayerAgentController : MonoBehaviour
         _states[MyState.LIANA].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.FALL].Init(_playerData, _mainCamera, _characterController);
         _states[MyState.INFINITYCORRIDOR].Init(_playerData, _mainCamera, _characterController);
+        _states[MyState.CINEMATIC].Init(_playerData, _mainCamera, _characterController);
         _states[_currentState].Enter();
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
@@ -100,10 +109,10 @@ public class PlayerAgentController : MonoBehaviour
         }
     }
 
-    public void ChangeState(MyState nextState, Collider collider = null)
+    public void ChangeState(MyState nextState, Collider collider = null, string animation = null)
     {
         _states[_currentState].Exit();
-        _states[nextState].Enter(collider);
+        _states[nextState].Enter(collider, animation);
         _currentState = nextState;
     }
 
