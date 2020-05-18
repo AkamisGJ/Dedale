@@ -8,11 +8,20 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     [SerializeField] private string _previousSceneName = null;
     [SerializeField] private bool _autoLoadingScene = false;
     [SerializeField] private LoadSceneParameters _sceneParameters;
+    [SerializeField] private int _priority = 0;
     private AsyncOperation _asyncOperationLoad = null;
     private bool _alreadyUse = false;
+    private PlayerData _playerData = null;
+    private Canvas _loadingCanvas = null;
 
     public void PreloadScene()
     {
+        if(_autoLoadingScene == true)
+        {
+            GameLoopManager.Instance.IsPaused = true;
+            _playerData = PlayerManager.Instance.PlayerController.PlayerData;
+            _loadingCanvas = Instantiate(_playerData.LoadingCanvas, null, true);
+        }
         StartCoroutine(PreLoadSceneCoroutine());
     }
 
@@ -23,6 +32,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextSceneName, _sceneParameters);
             _asyncOperationLoad.allowSceneActivation = _autoLoadingScene;
+            _asyncOperationLoad.priority = _priority;
             _asyncOperationLoad.completed += OnCompleted;
         }
         yield return null;
@@ -42,8 +52,9 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     private void OnCompleted(AsyncOperation asyncOperation)
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextSceneName));
+        GameLoopManager.Instance.IsPaused = false;
+        Destroy(_loadingCanvas.gameObject);
         _asyncOperationLoad.completed -= OnCompleted;
-        print("Scene" + _nextSceneName + " loaded");
     }
 
     public void UnLoadScene()
@@ -53,4 +64,28 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
         }
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         LoadorUnloadScene();
+    //     }
+    // }
+
+    // public void LoadorUnloadScene()
+    // {
+    //     if(_alreadyUse == false)
+    //     {
+    //         if (_previousSceneName != string.Empty)
+    //         {
+    //             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
+    //         }
+    //         if (_nextSceneName != string.Empty)
+    //         {
+    //             _asyncOperationLoad.allowSceneActivation = true;
+    //         }
+    //         _alreadyUse = true;
+    //     }
+    // }
 }

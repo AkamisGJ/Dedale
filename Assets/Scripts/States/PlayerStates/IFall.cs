@@ -15,7 +15,7 @@ public class IFall : IPlayerState
         _camera = camera;
     }
 
-    public void Enter(Collider collider)
+    public void Enter(Collider collider, string animation)
     {
     }
 
