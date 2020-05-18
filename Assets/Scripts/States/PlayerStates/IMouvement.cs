@@ -93,9 +93,10 @@ public class IMouvement : IPlayerState
         _currentTimeFootStepPlayer = 0;
     }
 
-    public void Enter(Collider collider, string animation)
+    public void Enter(Collider collider,string animation)
     {
         _playerController.CanMove = true;
+        _lastStateAnimation = animation;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
@@ -118,7 +119,6 @@ public class IMouvement : IPlayerState
     public void Update()
     {
         //RaycastInteractionObject();
-        Debug.Log(_playerController.IsSlow + "   " + _isSlow);
         if (_playerController.IsSlow == true && _isSlow == false)
         {
             SwitchSlowWalk();

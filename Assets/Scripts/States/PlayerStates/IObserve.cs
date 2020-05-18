@@ -19,6 +19,10 @@ public class IObserve : IPlayerState
     private LayerMask _layerMask;
     private Vector3 OffsetSpherCast = Vector3.zero;
     private Light _lightPlayer = null;
+    private float _lerpObject = 0;
+    private bool _comeToPlayer = false;
+    private Quaternion _quaternionExitObserve = Quaternion.identity;
+    private Quaternion _quaternionEnterObserve = Quaternion.identity;
 
     public void Init(PlayerData playerData,Camera _camera, CharacterController characterController)
     {
@@ -41,6 +45,7 @@ public class IObserve : IPlayerState
         _originPositionGrabObject = _grabObject.transform.position;
         _originRotationGrabObject = _grabObject.transform.rotation;
         _objectHolder = _playerAgentController.ObjectHolder;
+        _objectHolder.transform.position = _grabObject.transform.position;
         _grabObjectCollider.isTrigger = true;
         _grabObject.transform.SetParent(_objectHolder);
         _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
@@ -65,16 +70,47 @@ public class IObserve : IPlayerState
             _distanceGrabObjectWithCameraWhenLooked = 1.0f;
             _grabObjectRotationWhenLooked = Quaternion.identity;
         }
-
-        _grabObject.transform.localPosition = Vector3.zero;
-        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
-        _grabObject.transform.LookAt(_mainCamera.transform);
-        _grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
-        InputManager.Instance.MousePosition += LookObject;
+        _lerpObject = 0;
+        //_grabObject.transform.localPosition = Vector3.zero;
+        _comeToPlayer = true;
+        //_objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
+        //_grabObject.transform.LookAt(_mainCamera.transform);
+        //_grabObject.transform.Rotate(_grabObjectRotationWhenLooked.eulerAngles);
+        _quaternionEnterObserve.eulerAngles = _objectHolder.rotation.eulerAngles + _grabObjectRotationWhenLooked.eulerAngles + new Vector3 (-_mainCamera.transform.rotation.eulerAngles.x, 180, 0);
+        //_grabObject.transform.rotation = _originRotationGrabObject;
+        //InputManager.Instance.MousePosition += LookObject;
+        GameLoopManager.Instance.LoopQTE += LerpingGrabObject;
         _playerAgentController.AnimatorCamera.SetBool("Idle", true);
         _playerAgentController.AnimatorCamera.SetBool("Walk", false);
         _playerAgentController.AnimatorCamera.SetBool("Run", false);
         _playerAgentController.AnimatorCamera.SetBool("NoAnim", false);
+    }
+
+    private void LerpingGrabObject()
+    {
+        float inversion = 0;
+        inversion = _comeToPlayer == true ? 1 : -1;
+        _lerpObject = Mathf.Clamp(_lerpObject + (Time.deltaTime * inversion * _playerData.SpeedLerp), 0, 1);
+        _objectHolder.transform.position = Vector3.Lerp(_originPositionGrabObject, _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked, _lerpObject);
+        if(_comeToPlayer == false)
+        {
+            _grabObject.transform.rotation = Quaternion.Lerp(_originRotationGrabObject, _quaternionExitObserve, _lerpObject);
+        }
+        else
+        {
+            _grabObject.transform.rotation = Quaternion.Lerp(_originRotationGrabObject, _quaternionEnterObserve, _lerpObject);
+        }
+        if(_lerpObject == 1)
+        {
+            InputManager.Instance.MousePosition += LookObject;
+            GameLoopManager.Instance.LoopQTE -= LerpingGrabObject;
+            GameLoopManager.Instance.LateGameLoop += OnLateUpdate;
+        }
+        else if (_lerpObject == 0)
+        {
+            GameLoopManager.Instance.LoopQTE -= LerpingGrabObject;
+            _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null, "Idle");
+        }
     }
 
     public void Update()
@@ -86,8 +122,23 @@ public class IObserve : IPlayerState
                 PlayerManager.Instance.HaveKey = true;
                 PlayerManager.Instance.DestroyThis(_currentObjectInterract.gameObject);
             }
-            _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+            _comeToPlayer = false;
+            if (_currentObjectInterract != null)
+            {
+                _quaternionExitObserve = _currentObjectInterract.transform.rotation;
+                GameLoopManager.Instance.LoopQTE += LerpingGrabObject;
+                GameLoopManager.Instance.LateGameLoop -= OnLateUpdate;
+            }
+            else
+            {
+                _playerAgentController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null,"Idle");
+            }
         }
+    }
+
+    private void OnLateUpdate()
+    {
+        _objectHolder.transform.position = _mainCamera.transform.position + _mainCamera.transform.forward * _distanceGrabObjectWithCameraWhenLooked;
     }
 
     public void Exit()
@@ -104,10 +155,14 @@ public class IObserve : IPlayerState
             Rigidbody objectRb = _grabObject.GetComponent<Rigidbody>();
             objectRb.isKinematic = false;
         }
-        _grabObject.transform.position = _originPositionGrabObject;
-        _grabObject.transform.rotation = _originRotationGrabObject;
+        //_grabObject.transform.position = _originPositionGrabObject;
+        //_grabObject.transform.rotation = _originRotationGrabObject;
         _grabObject = null;
         InputManager.Instance.MousePosition -= LookObject;
+        _playerAgentController.AnimatorCamera.SetBool("Idle", true);
+        _playerAgentController.AnimatorCamera.SetBool("Walk", false);
+        _playerAgentController.AnimatorCamera.SetBool("Run", false);
+        _playerAgentController.AnimatorCamera.SetBool("NoAnim", false);
     }
 
     private void LookObject(float mousePositionX, float mousePositionY)
@@ -116,5 +171,6 @@ public class IObserve : IPlayerState
         float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
         _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
         _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
+        
     }
 }
