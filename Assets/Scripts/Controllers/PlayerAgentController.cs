@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
+using UnityEngine.Analytics;
 
 public class PlayerAgentController : MonoBehaviour
 {
@@ -26,6 +26,8 @@ public class PlayerAgentController : MonoBehaviour
     private float _timeZoom = 0;
     private float _zoomLerp = 0;
     private bool _isSlow = false;
+    private bool _alreadyZoomed = false;
+    private int _countZoom = 0;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -93,6 +95,7 @@ public class PlayerAgentController : MonoBehaviour
         _states[_currentState].Enter();
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
+        _countZoom = 0;
     }
 
     void OnUpdate()
@@ -142,6 +145,19 @@ public class PlayerAgentController : MonoBehaviour
         }
     }
 
+    private void ZoomAnalytics()
+    {
+        if(_alreadyZoomed == false && _isZoom == true)
+        {
+            _alreadyZoomed = true;
+            _countZoom += 1;
+        }
+        if(_isZoom == false)
+        {
+            _alreadyZoomed = false;
+        }
+    }
+
     public void Zooming(float inversion)
     {
         _timeZoom += Time.deltaTime * inversion;
@@ -162,7 +178,11 @@ public class PlayerAgentController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(InputManager.Instance != null)
+        AnalyticsEvent.Custom("Zoom count", new Dictionary<string, object>
+        {
+            { "Zooms", _countZoom },
+        });
+        if (InputManager.Instance != null)
         {
             InputManager.Instance.Zoom -= Zoom;
         }
