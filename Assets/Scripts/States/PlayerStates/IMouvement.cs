@@ -48,6 +48,13 @@ public class IMouvement : IPlayerState
     private float _currentTimeFootStepPlayer = 0;
     private FMOD.Studio.EventInstance _footsteps;
     private string _lastStateAnimation = null;
+    private bool _isSlow = false;
+    private float _currentForwardSpeed = 0;
+    private float _currentBackSpeed = 0;
+    private float _currentSideSpeed = 0;
+    private float _currentCrouchSpeed = 0;
+    private float _currentSensitivityMouseX = 0;
+    private float _currentSensitivityMouseY = 0;
     #endregion Fields
 
     #region Properties
@@ -86,9 +93,10 @@ public class IMouvement : IPlayerState
         _currentTimeFootStepPlayer = 0;
     }
 
-    public void Enter(Collider collider, string animation)
+    public void Enter(Collider collider,string animation)
     {
         _playerController.CanMove = true;
+        _lastStateAnimation = animation;
         if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
@@ -100,6 +108,8 @@ public class IMouvement : IPlayerState
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         _baseYcamera = _mainCamera.transform.localPosition.y;
         _timeZoom = 0;
+        _isSlow = !_playerController.IsSlow;
+        SwitchSlowWalk();
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
@@ -109,6 +119,14 @@ public class IMouvement : IPlayerState
     public void Update()
     {
         //RaycastInteractionObject();
+        if (_playerController.IsSlow == true && _isSlow == false)
+        {
+            SwitchSlowWalk();
+        }
+        else if(_playerController.IsSlow == false && _isSlow == true)
+        {
+            SwitchSlowWalk();
+        }
         AnimatorCameraController();
         SphereCastInteractionObject();
         if (_crouching == true)
@@ -141,6 +159,35 @@ public class IMouvement : IPlayerState
         InputManager.Instance.Direction -= SetDirection;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
+    }
+
+    public void SwitchSlowWalk()
+    {
+        if(_isSlow == false)
+        {
+            // slow
+            _isSlow = true;
+            _currentForwardSpeed = _playerData.SpeedForwardSlowMode;
+            _currentSideSpeed = _playerData.SpeedSideSlowMode;
+            _currentBackSpeed = _playerData.SpeedBackSlowMode;
+            if(_playerData.CanCrouchInSlowMode == true)
+            {
+                _currentCrouchSpeed = _playerData.CrouchSpeedSlowMode;
+            }
+            _currentSensitivityMouseX = _playerData.SensitivityMouseXSlowMode;
+            _currentSensitivityMouseY = _playerData.SensitivityMouseYSlowMode;
+        }
+        else
+        {
+            //unslow
+            _isSlow = false;
+            _currentForwardSpeed = _playerData.SpeedForward;
+            _currentSideSpeed = _playerData.SpeedSide;
+            _currentBackSpeed = _playerData.SpeedBack;
+            _currentCrouchSpeed = _playerData.CrouchMoveSpeed;
+            _currentSensitivityMouseX = _playerData.SensitivityMouseX;
+            _currentSensitivityMouseY = _playerData.SensitivityMouseY;
+        }
     }
 
     private void RaycastInteractionObject()
@@ -334,22 +381,22 @@ public class IMouvement : IPlayerState
             {
                 if (_isCrouch == true)
                 {
-                    _direction += _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                    _direction += _playerController.transform.forward * (_currentCrouchSpeed - 1);
                 }
                 else
                 {
-                    _direction += _playerController.transform.forward * (_playerData.SpeedForward - 1);
+                    _direction += _playerController.transform.forward * (_currentForwardSpeed - 1);
                 }
             }
             if (horizontalMouvement < 0)
             {
                 if (_isCrouch == true)
                 {
-                    _direction -= _playerController.transform.forward * (_playerData.CrouchMoveSpeed - 1);
+                    _direction -= _playerController.transform.forward * (_currentCrouchSpeed - 1);
                 }
                 else
                 {
-                    _direction -= _playerController.transform.forward * (_playerData.SpeedBack - 1);
+                    _direction -= _playerController.transform.forward * (_currentBackSpeed - 1);
                 }
             }
 
@@ -357,22 +404,22 @@ public class IMouvement : IPlayerState
             {
                 if (_isCrouch == true)
                 {
-                    _direction += _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                    _direction += _playerController.transform.right * (_currentCrouchSpeed - 1);
                 }
                 else
                 {
-                    _direction += _playerController.transform.right * (_playerData.SpeedSide - 1);
+                    _direction += _playerController.transform.right * (_currentSideSpeed - 1);
                 }
             }
             else if (verticalMouvement < 0)
             {
                 if (_isCrouch == true)
                 {
-                    _direction -= _playerController.transform.right * (_playerData.CrouchMoveSpeed - 1);
+                    _direction -= _playerController.transform.right * (_currentCrouchSpeed - 1);
                 }
                 else
                 {
-                    _direction -= _playerController.transform.right * (_playerData.SpeedSide - 1);
+                    _direction -= _playerController.transform.right * (_currentSideSpeed - 1);
                 }
             }
             if (_speedSprint > 1 && horizontalMouvement > 0 && _isCrouch == false)
@@ -446,8 +493,8 @@ public class IMouvement : IPlayerState
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
-            _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
-            _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY;
+            _rotationX += _currentMouseY + mousePositionY * _currentSensitivityMouseX;
+            _rotationY += _currentMouseX + mousePositionX * _currentSensitivityMouseY;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
@@ -470,7 +517,7 @@ public class IMouvement : IPlayerState
 
     private void Crouch(bool crouchBool)
     {
-        if (crouchBool == true)
+        if ((_isSlow == false || _playerData.CanCrouchInSlowMode == true) && crouchBool == true)
         {
             if (_isCrouch == false && _crouching == false)
             {
@@ -552,7 +599,7 @@ public class IMouvement : IPlayerState
     */
     private void Sprinting(bool isSprinting)
     {
-        if (isSprinting == true)
+        if (isSprinting == true && _isSlow == false)
         {
             if (_sprintCurrentTime > 0 || _playerData.SprintTimeMax == 0 && _isCrouch == false)
             {
@@ -661,7 +708,7 @@ public class IMouvement : IPlayerState
 
     private void AnimatorCameraController()
     {
-        if (_accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk") && _playerController.CanMove == true)
+        if (_isSlow == false && _accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Walk") && _playerController.CanMove == true)
         {
             _playerController.AnimatorCamera.SetBool("Walk", true);
             if(_lastStateAnimation != null)
@@ -669,7 +716,16 @@ public class IMouvement : IPlayerState
                 _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
             }
             _lastStateAnimation = "Walk";
-        }else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run") && _playerController.CanMove == true)
+        }else if (_isSlow == true && _accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("SlowWalk") && _playerController.CanMove == true)
+        {
+            _playerController.AnimatorCamera.SetBool("SlowWalk", true);
+            if (_lastStateAnimation != null)
+            {
+                _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+            }
+            _lastStateAnimation = "SlowWalk";
+        }
+        else if(_accelerationLerp == 1 && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run") && _playerController.CanMove == true)
         {
             _playerController.AnimatorCamera.SetTrigger("Run");
             if (_lastStateAnimation != null)
