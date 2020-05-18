@@ -263,7 +263,8 @@ public class IMouvement : IPlayerState
                 _raycastHit = raycastHitVerify;
             }
             RaycastHit raycastHit;
-            Physics.Raycast(_mainCamera.transform.position, _raycastHit.transform.position - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, _raycastHit.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
+            Vector3 Uiposition = _raycastHit.transform.GetComponent<ImageInteract>().UiPosition.transform.position;
+            Physics.Raycast(_mainCamera.transform.position, Uiposition - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, Uiposition), _playerData.CantSeeInteractionHelperBehindThis);
             if (raycastHit.collider == null)
             {
                 if (enableHightLightObject != _raycastHit.collider.gameObject)
@@ -358,11 +359,11 @@ public class IMouvement : IPlayerState
             _currentGravity = Mathf.Clamp(_currentGravity, _gravity, _maxGravity);
         }
         _direction.y -= _currentGravity * _useGravity;
-        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
-        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.fixedDeltaTime;
-        float desiredMoveY = _direction.y * Time.fixedDeltaTime;
+        float desiredMoveX = _direction.x * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
+        float desiredMoveZ = _direction.z * _playerData.GlobalSpeed * _currentAcceleration * Time.deltaTime;
+        float desiredMoveY = _direction.y * Time.deltaTime;
         Vector3 desiredMove = new Vector3(desiredMoveX, desiredMoveY, desiredMoveZ);
-        Vector3 realMove = desiredMove + (_moveModifier * Time.fixedDeltaTime);
+        Vector3 realMove = desiredMove + (_moveModifier * Time.deltaTime);
         _characterController.Move(realMove);
         if (_characterController.isGrounded)
         {

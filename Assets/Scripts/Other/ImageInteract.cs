@@ -16,6 +16,7 @@ public class ImageInteract : MonoBehaviour
     private bool _canShowLock = false;
     private Camera _playerCamera = null;
     public bool IsFocus { get => _isFocus; set => _isFocus = value; }
+    public GameObject UiPosition { get => _uiPosition; }
 
     private void Awake()
     {
@@ -106,7 +107,7 @@ public class ImageInteract : MonoBehaviour
         }
         _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
         RaycastHit raycastHit;
-        Physics.Raycast(_playerCamera.transform.position, transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, transform.position),_playerData.CantSeeInteractionHelperBehindThis);
+        Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position),_playerData.CantSeeInteractionHelperBehindThis);
         if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
         {
             Color color = _currentImage.color;
