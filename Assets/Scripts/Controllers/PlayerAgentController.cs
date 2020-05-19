@@ -25,6 +25,7 @@ public class PlayerAgentController : MonoBehaviour
     private bool _unZooming = false;
     private float _timeZoom = 0;
     private float _zoomLerp = 0;
+    private bool _isSlow = false;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -54,6 +55,7 @@ public class PlayerAgentController : MonoBehaviour
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
     public Animator AnimatorCamera { get => _animatorCamera; set => _animatorCamera = value; }
+    public bool IsSlow { get => _isSlow; set => _isSlow = value; }
     #endregion Properties
 
     private void Awake()
@@ -111,6 +113,7 @@ public class PlayerAgentController : MonoBehaviour
 
     public void ChangeState(MyState nextState, Collider collider = null, string animation = null)
     {
+        Debug.Log(animation);
         _states[_currentState].Exit();
         _states[nextState].Enter(collider, animation);
         _currentState = nextState;

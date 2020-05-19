@@ -54,6 +54,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _gameLoopModifyVolume = null;
+    public event Action GameLoopModifyVolume
+    {
+        add
+        {
+            _gameLoopModifyVolume -= value;
+            _gameLoopModifyVolume += value;
+        }
+        remove
+        {
+            _gameLoopModifyVolume -= value;
+        }
+    }
+
     private Action _lateLoopDialogue = null;
     public event Action LateLoopDialogue
     {
@@ -165,6 +179,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
             if (_lastStart != null)
             {
                 _lastStart();
+            }
+            if(_gameLoopModifyVolume != null)
+            {
+                _gameLoopModifyVolume();
             }
             if (_gameLoopInputManager != null)
             {

@@ -7,6 +7,7 @@ public class InstantiatePlayer : MonoBehaviour
     [SerializeField] private Camera _cameraPlayer = null;
     [SerializeField] private Camera _cameraUI = null;
     [SerializeField] private PlayerAgentController.MyState _startStatePlayer = PlayerAgentController.MyState.MOVEMENT;
+    [SerializeField] private bool _playerIsSlowAtStart = false;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class InstantiatePlayer : MonoBehaviour
             PlayerManager.Instance.CameraPlayerInstantiate = _cameraPlayer;
             PlayerManager.Instance.CameraUIInstantiate = _cameraUI;
             PlayerManager.Instance.InstantiatePlayer(transform);
+            PlayerManager.Instance.PlayerController.IsSlow = _playerIsSlowAtStart;
             PlayerManager.Instance.StartState = _startStatePlayer;
         }
         Destroy(gameObject);

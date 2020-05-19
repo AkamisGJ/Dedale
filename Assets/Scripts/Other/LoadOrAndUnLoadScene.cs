@@ -38,16 +38,16 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         yield return null;
     }
 
-    public void FinalLoadScene()
-    {
-        if (_nextSceneName != string.Empty)
-        {
-            _asyncOperationLoad.allowSceneActivation = true;
-        }else
-        {
-            Debug.Log("Can't load the next scene");
-        }
-    }
+    // public void FinalLoadScene()
+    // {
+    //     if (_nextSceneName != string.Empty)
+    //     {
+    //         _asyncOperationLoad.allowSceneActivation = true;
+    //     }else
+    //     {
+    //         Debug.Log("Can't load the next scene");
+    //     }
+    // }
 
     private void OnCompleted(AsyncOperation asyncOperation)
     {
@@ -64,28 +64,4 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
         }
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         LoadorUnloadScene();
-    //     }
-    // }
-
-    // public void LoadorUnloadScene()
-    // {
-    //     if(_alreadyUse == false)
-    //     {
-    //         if (_previousSceneName != string.Empty)
-    //         {
-    //             AsyncOperation scene = SceneManager.UnloadSceneAsync(_previousSceneName);
-    //         }
-    //         if (_nextSceneName != string.Empty)
-    //         {
-    //             _asyncOperationLoad.allowSceneActivation = true;
-    //         }
-    //         _alreadyUse = true;
-    //     }
-    // }
 }
