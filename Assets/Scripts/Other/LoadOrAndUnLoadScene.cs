@@ -21,7 +21,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
 
     private void OnUpdate()
     {
-        if(_loadingCanvas.enabled == true)
+        if(_loadingCanvas == null || _loadingCanvas.enabled == true)
         {
             LoadScene();
             GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
@@ -32,8 +32,11 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
     {
         _sceneFinishToLoad = 0;
         GameLoopManager.Instance.IsPaused = true;
-        _playerData = PlayerManager.Instance.PlayerController.PlayerData;
-        _loadingCanvas = Instantiate(_playerData.LoadingCanvas, null, true);
+        if(PlayerManager.Instance.PlayerController != null)
+        {
+            _playerData = PlayerManager.Instance.PlayerController.PlayerData;
+            _loadingCanvas = Instantiate(_playerData.LoadingCanvas, null, true);
+        }
         GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
     }
 
@@ -122,8 +125,11 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
 
     private void Unpause()
     {
-        GameLoopManager.Instance.IsPaused = false;
-        Destroy(_loadingCanvas.gameObject);
+        if(_playerData != null)
+        {
+            GameLoopManager.Instance.IsPaused = false;
+            Destroy(_loadingCanvas.gameObject);
+        }
         _sceneFinishToLoad = 0;
     }
 
