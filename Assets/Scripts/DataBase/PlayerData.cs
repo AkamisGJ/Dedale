@@ -207,6 +207,9 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Canvas", centerLabel: true)]
     [Tooltip("The canvas when loading the next scene")]
     [SerializeField] private Canvas _loadingCanvas = null;
+    [BoxGroup("Canvas")]
+    [Tooltip("The canvas of pause menu")]
+    [SerializeField] private Canvas _pauseCanvas = null;
 
     #endregion Fields
 
@@ -270,5 +273,6 @@ public class PlayerData : ScriptableObject
     public float SensitivityMouseXSlowMode { get => _sensitivityMouseXSlowMode; }
     public float SensitivityMouseYSlowMode { get => _sensitivityMouseYSlowMode; }
     public float SpeedLerp { get => _speedLerp; }
+    public Canvas PauseCanvas { get => _pauseCanvas; }
     #endregion Properties
 }
