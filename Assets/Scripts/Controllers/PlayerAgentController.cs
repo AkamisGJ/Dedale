@@ -28,6 +28,8 @@ public class PlayerAgentController : MonoBehaviour
     private bool _isSlow = false;
     private bool _alreadyZoomed = false;
     private int _countZoom = 0;
+    private Canvas _canvasPauseMenu = null;
+    private MenuPause _menuPause = null;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -67,6 +69,7 @@ public class PlayerAgentController : MonoBehaviour
             _animatorCamera = _cameraHolder.GetComponent<Animator>();
         }
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
+        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdateNoPause;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -111,6 +114,36 @@ public class PlayerAgentController : MonoBehaviour
             {
                 Zooming(-1);
             }
+        }
+    }
+
+    void OnUpdateNoPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameLoopManager.Instance.IsPaused = !GameLoopManager.Instance.IsPaused;
+            PauseMenu(GameLoopManager.Instance.IsPaused);
+        }
+    }
+
+    private void PauseMenu(bool isPaused)
+    {
+        if(isPaused == true)
+        {
+            if(_canvasPauseMenu == null)
+            {
+                _canvasPauseMenu = Instantiate<Canvas>(_playerData.PauseCanvas);
+                _menuPause = _canvasPauseMenu.GetComponent<MenuPause>();
+            }
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            _menuPause.OnStart();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            _menuPause.OnPressEscape();
         }
     }
 
@@ -185,6 +218,11 @@ public class PlayerAgentController : MonoBehaviour
         if (InputManager.Instance != null)
         {
             InputManager.Instance.Zoom -= Zoom;
+        }
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdateNoPause;
+            GameLoopManager.Instance.GameLoopPlayer -= OnUpdate;
         }
     }
 }
