@@ -74,7 +74,10 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         if (_nextScenesNames[i] != string.Empty)
         {
             _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextScenesNames[i], _sceneParameters);
-            _asyncOperationLoad.completed += OnCompleted;
+            if(_sceneParameters.loadSceneMode == LoadSceneMode.Additive)
+            {
+                _asyncOperationLoad.completed += OnCompleted;
+            }
         }
         yield return null;
     }
