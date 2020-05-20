@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9157802555413110699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Footsteps.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Footsteps.bank
+  SubDir: 
+  lastModified: 637255819609282369
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-9149957982039334381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
+  Default: 0
+  Exists: 0
 --- !u!114 &-9135103753088525456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,9 +86,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Lit de Zoe 12.05.20 (avec FX)
   guid: 55451d4b903871408f04619ad8177896
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -76,16 +111,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Lit en cercle 2
   guid: b078cce92dd3c64fae35c66a69074516
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 5990
+--- !u!114 &-8979290505629951385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wooden Collision/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 8
+  Default: 0
+  Exists: 1
 --- !u!114 &-8970040803828529659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,8 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Hopital/Champs \xE9l\xE9ctrique"
   guid: c650581129e9724481f812b0b1b3ddc2
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -123,8 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Chambre de Zo\xE9/Boite a musique"
   guid: ea4f3bbd4c8c4849831e100a58c9d247
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -132,6 +182,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 25824
+--- !u!114 &-8893091624505842743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Barrel Roll/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 8
+  Default: 0
+  Exists: 1
 --- !u!114 &-8869775615554339850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +216,23 @@ MonoBehaviour:
   Max: 10000
   Default: 0
   Exists: 1
+--- !u!114 &-8628945343641919181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 1
 --- !u!114 &-8581627889349233473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +248,23 @@ MonoBehaviour:
   Name: Area
   Min: 0
   Max: 80
+  Default: 0
+  Exists: 0
+--- !u!114 &-8555268331547001508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 2
   Default: 0
   Exists: 0
 --- !u!114 &-8412723926195644001
@@ -183,6 +284,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-8382816516428464066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 1
 --- !u!114 &-8375305799567222256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +318,46 @@ MonoBehaviour:
   Max: 6
   Default: 0
   Exists: 1
+--- !u!114 &-8362607294926079537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Cardiogramme
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Cardiogramme
+  guid: 6203ea47378b1a4ea94329f3c8d8660f
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 74000
+--- !u!114 &-8268024547205889006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/City/Traffic
+  m_EditorClassIdentifier: 
+  Name: Traffic
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8125154753217615509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,16 +373,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Chambre a l'envers
   guid: 37177971cb4636479dd5263c863c62f0
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 8823
+--- !u!114 &-8120625645874978664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Toutes surfaces/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 0
 --- !u!114 &-8087205340150645801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,8 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Weapons/Pistol
   guid: cf5dc803ebc4944083c77839b5d058e8
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -280,9 +454,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Lit de Zoe 12.05.20 (sans FX)
   guid: eb9ad023e1746f479906b1329bad9a02
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -290,6 +464,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 56000
+--- !u!114 &-7805988392098984551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-7696842125767899945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Squat/Clef qui ouvre la porte
   guid: 06bf663b0c4b7c4ba18cdd24d0dcc889
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -345,8 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Door Close
   guid: 448f10435c287748a7854ae97ed0fb3d
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -368,8 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Chambre de Zo\xE9/Bruit de la pelluche"
   guid: 806a429b9b9cfd42947ebca1ef255a58
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -377,6 +565,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1344
+--- !u!114 &-7493565793471246150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 02/Area
+  m_EditorClassIdentifier: 
+  Name: Area
+  Min: 0
+  Max: 80
+  Default: 0
+  Exists: 0
 --- !u!114 &-7486908407235423044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,8 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Ramasser un item
   guid: 49c5bf7ab593a04a93f13c7f80a8b206
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -400,6 +604,64 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1999
+--- !u!114 &-7448084933818127154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 02/Area
+  m_EditorClassIdentifier: 
+  Name: Area
+  Min: 0
+  Max: 80
+  Default: 0
+  Exists: 1
+--- !u!114 &-7417705976830899737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Chambre de Zo\xE9/Bruit de la pelluche"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Chambre de Zo\xE9/Bruit de la pelluche"
+  guid: 806a429b9b9cfd42947ebca1ef255a58
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1344
+--- !u!114 &-7397816584472637242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VO.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/VO.bank
+  SubDir: 
+  lastModified: 637250732738125987
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-7370430202381987586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,6 +679,24 @@ MonoBehaviour:
   Max: 10000
   Default: 0
   Exists: 1
+--- !u!114 &-7230292721357024300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Vehicles.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Vehicles.bank
+  SubDir: 
+  lastModified: 637250732737647271
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-7230276776369620226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +715,74 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-7227244318555598488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-7194890270655344608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Freq
+  m_EditorClassIdentifier: 
+  Name: Freq
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
+--- !u!114 &-7181905981313052592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-7136262994443968280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Spatializer
+  m_EditorClassIdentifier: 
+  Name: Spatializer
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-7122571732379609296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,9 +798,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Dialogue Grand Mere
   guid: bd771d667a30d044946f72a657fb9d70
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -494,6 +842,23 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &-6960205314648023423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Health/Health
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 0
 --- !u!114 &-6928014271238134977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,8 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Weapons/Machine Gun
   guid: faaab7e9f02d9341b32ea74e5753cfa0
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -534,6 +898,99 @@ MonoBehaviour:
   Min: 0
   Max: 10000
   Default: 0
+  Exists: 0
+--- !u!114 &-6895581078814290236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_JP.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_JP.bank
+  SubDir: 
+  lastModified: 637255819607347550
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-6810535167709413970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &-6803439790090974134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Country/Hour
+  m_EditorClassIdentifier: 
+  Name: Hour
+  Min: 0
+  Max: 4
+  Default: 0
+  Exists: 0
+--- !u!114 &-6788742582989719567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Door Close
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Door Close
+  guid: 448f10435c287748a7854ae97ed0fb3d
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 653
+--- !u!114 &-6693640326404161134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637255819634187658
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &-6504833944474384607
 MonoBehaviour:
@@ -566,8 +1023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Chinc Verre
   guid: c524996888a0794da277e93090f829f8
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -575,6 +1031,30 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 354
+--- !u!114 &-6318430610745011510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Radio Dialogue
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Radio Dialogue
+  guid: 871fc4431f70254ca9a1c619ca106412
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 64908637544670726}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 999
 --- !u!114 &-6260752278039845353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,16 +1070,75 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Reveil 3
   guid: 846126b763bd994bbb2ac29e9c81a42c
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 2623
+--- !u!114 &-6166827606624459209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637255819610170013
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-6146280602808950241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Grotte/Roche lumineuse
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Grotte/Roche lumineuse
+  guid: ab28582225df20458bbe2c95b67a8397
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 7.4
+  Length: 189311
+--- !u!114 &-6132088656597454330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637255819619298646
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-6122029478947002239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +1156,23 @@ MonoBehaviour:
   Max: 100
   Default: 100
   Exists: 1
+--- !u!114 &-6097231558375852745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 0
 --- !u!114 &-6041011819347303606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,8 +1187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Cardiogramme
   guid: 6203ea47378b1a4ea94329f3c8d8660f
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -658,6 +1213,30 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-6015598347668896265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Ambience/Country
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Ambience/Country
+  guid: 4ec79a24a46e484681da206c4e22b801
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3485654617912830762}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-5923152104183645163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,8 +1252,8 @@ MonoBehaviour:
   Path: event:/Sound Design/Grand Mere/Son de nature
   guid: c7a7aa555fb7494ca16d7b473ad4972b
   Banks:
-  - {fileID: 5853994075083640750}
-  - {fileID: -5857341263667380877}
+  - {fileID: 7450858903060843074}
+  - {fileID: 7402367354890446420}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -731,16 +1310,34 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Reveil 4
   guid: c57b448c2464c74ba7428c7b0c76b829
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 6241
+--- !u!114 &-5872388409081330989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Vehicles.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Vehicles.bank
+  SubDir: 
+  lastModified: 637250732737647271
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-5857341263667380877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +1355,7 @@ MonoBehaviour:
   lastModified: 637250732735921886
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-5848253884621431355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,8 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Interactables/Wooden Collision
   guid: d80362bed8c8c5418ce6bce0de95807b
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -800,6 +1396,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5666354647792902924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Hopital/Lumi\xE8re irr\xE9guliere"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Hopital/Lumi\xE8re irr\xE9guliere"
+  guid: 1952c30655972949b11fffdf2baf0fad
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 33500
 --- !u!114 &-5512048526257698675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,8 +1450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Hopital/Lumi\xE8re irr\xE9guliere"
   guid: 1952c30655972949b11fffdf2baf0fad
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -871,8 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Grotte/Roche lumineuse
   guid: ab28582225df20458bbe2c95b67a8397
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -897,6 +1514,24 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &-5267229035651799254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_JP.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_JP.bank
+  SubDir: 
+  lastModified: 637255819607347550
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-5097473582433809717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,6 +1549,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-5040043403780094055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Enemy Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Enemy Footsteps
+  guid: 3f29b5149ef6e548a7aece02710ca3d9
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 147
 --- !u!114 &-5024412120853361131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,8 +1586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Ambience/Forest
   guid: e51074476d4a2e46bd1e4d558ce488ec
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -972,7 +1629,7 @@ MonoBehaviour:
   Path: snapshot:/Slow-Motion
   guid: 098d8d6ee012cf48b620f9cc3bc478a3
   Banks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -994,8 +1651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Interactables/Barrel Roll
   guid: 40222cc4b6c4ed42a4731a47f19945ea
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -1038,6 +1694,46 @@ MonoBehaviour:
   Max: 8
   Default: 0
   Exists: 1
+--- !u!114 &-4621774714165538474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 0
+--- !u!114 &-4542257648437531787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/UI/Cancel
+  m_EditorClassIdentifier: 
+  Path: event:/Example/UI/Cancel
+  guid: e6483e2afc946343946833d2dd4d7b00
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1026
 --- !u!114 &-4501988888136420152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,8 +1748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Hopital/Verre bris\xE9"
   guid: 3bba77936c37464d907d78031f507e41
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -1061,6 +1756,57 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 20
   Length: 12000
+--- !u!114 &-4321395069336199238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 02/Area
+  m_EditorClassIdentifier: 
+  Name: Area
+  Min: 0
+  Max: 80
+  Default: 0
+  Exists: 0
+--- !u!114 &-4251051126949168121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Freq
+  m_EditorClassIdentifier: 
+  Name: Freq
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
+--- !u!114 &-4176162314547260438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Explosion/Size
+  m_EditorClassIdentifier: 
+  Name: Size
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &-4088084228824381438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,8 +1839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Health
   guid: d6fef322452bff4faa855351bc5fe9cd
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -1103,6 +1848,59 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-3959075402923028096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 0
+--- !u!114 &-3951070457741563138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_CN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_CN.bank
+  SubDir: 
+  lastModified: 637255819605432658
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3839017505304661769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_EN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_EN.bank
+  SubDir: 
+  lastModified: 637255819606390104
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-3831685353765218910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,6 +1917,23 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 0
+--- !u!114 &-3751070284233209510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
   Exists: 0
 --- !u!114 &-3738569582125887227
 MonoBehaviour:
@@ -1137,7 +1952,7 @@ MonoBehaviour:
   lastModified: 637250732737647271
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-3736199319261979096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,6 +1971,47 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3666421045200658826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Spatializer
+  m_EditorClassIdentifier: 
+  Name: Spatializer
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 0
+--- !u!114 &-3575860102550470445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Player Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Player Footsteps
+  guid: 01d405e9f5764147a885f7844b244671
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 2248927400253663272}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3551234373888533202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,8 +2026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Son machine a laver
   guid: af6082a10872e641b957dcede9817de3
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -1179,6 +2034,24 @@ MonoBehaviour:
   MinDistance: 0.6999999
   MaxDistance: 5
   Length: 425418
+--- !u!114 &-3526782944998569649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_CN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_CN.bank
+  SubDir: 
+  lastModified: 637255819605432658
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-3516745206409926538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,6 +2086,47 @@ MonoBehaviour:
   Max: 5
   Default: 0
   Exists: 1
+--- !u!114 &-3361672838265890948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637255819619298646
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3342668323848476932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Door Open
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Door Open
+  guid: 18528562f3a80f47ab7a8af8f7df77bb
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1274
 --- !u!114 &-3230920710554201591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,6 +2161,47 @@ MonoBehaviour:
   lastModified: 637250732729597014
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &-3142180278190277300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Weapons/Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Weapons/Explosion
+  guid: 3871681f6ce0f5409bac57f84bbcedd3
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 1494650511477841083}
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 0
+--- !u!114 &-3055799373998725406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Rain
+  m_EditorClassIdentifier: 
+  Name: Rain
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-2776953672205118266
 MonoBehaviour:
@@ -1297,16 +2252,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 8
   guid: 5fd6293e54578147ab7878d6bfbeb163
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 5246
+--- !u!114 &-2603152880375126376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 0
 --- !u!114 &-2566522818035363597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,9 +2294,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Surmoi 1
   guid: f08d6efea77a79479aa14a8ca345b290
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -1346,8 +2318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Ambience/Country
   guid: 4ec79a24a46e484681da206c4e22b801
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1388,15 +2359,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Reveil 1
   guid: 5204838661f0964f8c977f7190b2d941
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 2507
 --- !u!114 &-2250846641056993197
 MonoBehaviour:
@@ -1412,8 +2383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Dialogue
   guid: c5eca29a4beabe4e85c3054b11b21dcd
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1436,16 +2406,34 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 6
   guid: be4aa641fc785646a3bfc25107dbd844
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 6484
+--- !u!114 &-2232499072300854088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_EN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_EN.bank
+  SubDir: 
+  lastModified: 637255819606390104
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-2110138928942515703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +2468,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-2051421061280662727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Weapons/Pistol
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Weapons/Pistol
+  guid: cf5dc803ebc4944083c77839b5d058e8
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 345
 --- !u!114 &-2008099557362824019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1497,6 +2508,24 @@ MonoBehaviour:
   Max: 5
   Default: 0
   Exists: 0
+--- !u!114 &-1983470106555374793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Sound Design.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Sound Design.bank
+  SubDir: 
+  lastModified: 637255819635065600
+  LoadResult: 13
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-1968875517000074669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,15 +2541,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Reveil 1
   guid: d084011231a06544b911c5b9cf7c3a81
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 4800
 --- !u!114 &-1896764240504602667
 MonoBehaviour:
@@ -1605,9 +2634,9 @@ MonoBehaviour:
   Path: event:/Introduction Audio
   guid: 6781eb0ae0dd1248b76c326c819641fd
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1615,6 +2644,58 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 42722
+--- !u!114 &-1691824572721047940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Health/Health
+  m_EditorClassIdentifier: 
+  Name: Health
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
+--- !u!114 &-1660318034992738057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VO.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/VO.bank
+  SubDir: 
+  lastModified: 637250732738125987
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-1612622203501971648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 0
 --- !u!114 &-1578886161238825631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1650,7 +2731,7 @@ MonoBehaviour:
   lastModified: 637250732686172174
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1405266090749580982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,6 +2750,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-1404824537225080767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Son machine a laver
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Son machine a laver
+  guid: af6082a10872e641b957dcede9817de3
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0.6999999
+  MaxDistance: 5
+  Length: 425418
 --- !u!114 &-1403901771975092456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,7 +2790,24 @@ MonoBehaviour:
   lastModified: 637250732692201963
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
+--- !u!114 &-1374254430376516397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 0
 --- !u!114 &-1341352211318114750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1701,8 +2822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Hopital/Feuille frois\xE9"
   guid: f883696741d51b4480daae8488ee4269
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1710,6 +2830,58 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3214
+--- !u!114 &-1309249541892112881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 10000
+  Default: 0
+  Exists: 0
+--- !u!114 &-1255272293378309606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Toutes surfaces/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 0
+--- !u!114 &-1239819211794490069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_JP.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_JP.bank
+  SubDir: 
+  lastModified: 637255819607347550
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-1170628507853947557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,6 +2899,24 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &-1032917730144340224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Footsteps.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Footsteps.bank
+  SubDir: 
+  lastModified: 637255819609282369
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-1024077888219694534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,8 +2931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Ambience/City
   guid: 7e9198bb5bd6f041a0cac50756da3f0e
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -1752,6 +2941,65 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-990402570058138017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Weapons/Machine Gun
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Weapons/Machine Gun
+  guid: faaab7e9f02d9341b32ea74e5753cfa0
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -620931693189153602}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 78
+--- !u!114 &-807168238426695943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-782081208666304982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Vehicles.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Vehicles.bank
+  SubDir: 
+  lastModified: 637250732737647271
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-767266696632795790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,6 +3017,81 @@ MonoBehaviour:
   Max: 6
   Default: 0
   Exists: 1
+--- !u!114 &-729793527928794267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Hopital/Roue de v\xE9lo qui tourne"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Hopital/Roue de v\xE9lo qui tourne"
+  guid: da0ffb47e30f3e47a55e00171060ab35
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 66808
+--- !u!114 &-672085079448662535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 10000
+  Default: 0
+  Exists: 1
+--- !u!114 &-620931693189153602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Machine Gun/Auto-Stop
+  m_EditorClassIdentifier: 
+  Name: Auto-Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-606319808442560207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_CN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_CN.bank
+  SubDir: 
+  lastModified: 637255819605432658
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &-447330239711945851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,8 +3106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Eboullement
   guid: 1644a80825ab934887b3a2c580629c70
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1807,15 +3129,50 @@ MonoBehaviour:
   Path: event:/FootSteps/Toutes surfaces
   guid: d0e781dc4eb07640a15423313ba4fef1
   Banks:
-  - {fileID: 1092571070069640331}
+  - {fileID: -1032917730144340224}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -767266696632795790}
+  - {fileID: 6663128485869709482}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-368289835181489231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637255819621203544
+  LoadResult: 13
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-351266220616006503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Cover
+  m_EditorClassIdentifier: 
+  Name: Cover
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-320471007919762902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,6 +3189,40 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+  Exists: 1
+--- !u!114 &-281903378799102342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Machine Gun/Auto-Stop
+  m_EditorClassIdentifier: 
+  Name: Auto-Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-225287649309275858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &-205814419574729409
 MonoBehaviour:
@@ -1851,6 +3242,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-148676727677493292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_EN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_EN.bank
+  SubDir: 
+  lastModified: 637255819606390104
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-144648749833122697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1866,15 +3275,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 5
   guid: 7244e5089c7fc94fb24845b29180b06a
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 7320
 --- !u!114 &-77139229846637717
 MonoBehaviour:
@@ -1890,8 +3299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Petite flammes (lampe a huile)
   guid: a65ba5b356fc6549ac4910c892f2f609
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1899,6 +3307,30 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 11500
+--- !u!114 &-69194745458621245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Health
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Health
+  guid: d6fef322452bff4faa855351bc5fe9cd
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1691824572721047940}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,16 +3345,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7340519158821708924}
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
-  - {fileID: 1092571070069640331}
-  - {fileID: -1403901771975092456}
-  - {fileID: 5853994075083640750}
-  - {fileID: -3164687878388348432}
-  - {fileID: -5857341263667380877}
-  - {fileID: -3738569582125887227}
-  - {fileID: 386538842753866836}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
+  - {fileID: -1032917730144340224}
+  - {fileID: -6166827606624459209}
+  - {fileID: 7450858903060843074}
+  - {fileID: 3803007491344081731}
+  - {fileID: 7402367354890446420}
+  - {fileID: 560669283078233998}
+  - {fileID: 2300806279134866331}
   EditorEvents:
   - {fileID: 8889924912793074294}
   - {fileID: -8125154753217615509}
@@ -1978,52 +3410,52 @@ MonoBehaviour:
   - {fileID: 575831891199817432}
   - {fileID: 5639717960436330248}
   - {fileID: 658292340214325812}
-  - {fileID: 4543250221626772946}
-  - {fileID: 3690982884497275425}
-  - {fileID: 2798623227587190474}
-  - {fileID: 4990770023532040021}
-  - {fileID: -4744038689969641358}
-  - {fileID: -7571352480010232997}
-  - {fileID: -2549714686520865734}
-  - {fileID: -1024077888219694534}
-  - {fileID: 6282566181406940858}
-  - {fileID: 2616509763663369838}
-  - {fileID: 6566295957326879724}
-  - {fileID: -2250846641056993197}
-  - {fileID: -8087205340150645801}
-  - {fileID: -4007607348836423729}
-  - {fileID: 5852386486982814830}
-  - {fileID: -5687372660560596917}
-  - {fileID: -5024412120853361131}
-  - {fileID: 1116009741434981516}
-  - {fileID: -6928014271238134977}
-  - {fileID: -7696842125767899945}
-  - {fileID: -447330239711945851}
-  - {fileID: -5437202925663481711}
-  - {fileID: -4501988888136420152}
-  - {fileID: -7486908407235423044}
-  - {fileID: -6041011819347303606}
-  - {fileID: -7548515699734004032}
-  - {fileID: 7994755965486897316}
-  - {fileID: 3528438104313346129}
-  - {fileID: -77139229846637717}
-  - {fileID: -5399439669478612610}
-  - {fileID: -3551234373888533202}
-  - {fileID: -6343404025757207452}
-  - {fileID: -8970040803828529659}
-  - {fileID: 7636674036742120839}
-  - {fileID: -8909471288512267570}
-  - {fileID: -1341352211318114750}
   - {fileID: 4537492913096657154}
   - {fileID: 6903973629367816889}
   - {fileID: 9074480175426629559}
   - {fileID: 3607670733514784556}
+  - {fileID: -3575860102550470445}
+  - {fileID: -3342668323848476932}
+  - {fileID: -3142180278190277300}
+  - {fileID: -5040043403780094055}
+  - {fileID: 4671942371065545855}
+  - {fileID: -6788742582989719567}
+  - {fileID: -6015598347668896265}
+  - {fileID: 8947035070805818659}
+  - {fileID: -6318430610745011510}
+  - {fileID: 3401318797320105109}
+  - {fileID: 1131077333579833534}
+  - {fileID: 118000042862693566}
+  - {fileID: -2051421061280662727}
+  - {fileID: -69194745458621245}
+  - {fileID: 1204893642774929085}
+  - {fileID: 1668046607940298530}
+  - {fileID: 3305858611337930730}
+  - {fileID: -4542257648437531787}
+  - {fileID: -990402570058138017}
+  - {fileID: 3813218322712657171}
+  - {fileID: 6766075048079235079}
+  - {fileID: -5666354647792902924}
+  - {fileID: 1981464578239656863}
+  - {fileID: 8426972407543080802}
+  - {fileID: -8362607294926079537}
+  - {fileID: -7417705976830899737}
+  - {fileID: 4332854617362096573}
+  - {fileID: 1327178407259997575}
+  - {fileID: 1159747973476194724}
+  - {fileID: -6146280602808950241}
+  - {fileID: -1404824537225080767}
+  - {fileID: 8973392984847712463}
+  - {fileID: 5118434553132641885}
+  - {fileID: -729793527928794267}
+  - {fileID: 5674374042681469031}
+  - {fileID: 71260624891216749}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   StringsBanks:
   - {fileID: 7340519158821708924}
-  stringsBankWriteTime: 637250732692272056
+  stringsBankWriteTime: 637255819610489145
   cacheVersion: 3
 --- !u!114 &63751644880608631
 MonoBehaviour:
@@ -2040,7 +3472,7 @@ MonoBehaviour:
   Path: event:/Musique/Musique de la grand mere
   guid: 278c4bb696f3ef4ba6ff90caae89bf0a
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -2048,6 +3480,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 33500
+--- !u!114 &64908637544670726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Dialogue/VO Sidechain
+  m_EditorClassIdentifier: 
+  Name: VO Sidechain
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &65445746905392898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2063,16 +3512,62 @@ MonoBehaviour:
   Path: event:/Example/Music/Level 03
   guid: 5a1416ec12371c4b9944ce26875a548b
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 3633502275709897285}
-  - {fileID: -3438013432163111632}
+  - {fileID: -7805988392098984551}
+  - {fileID: -8382816516428464066}
   MinDistance: 0
   MaxDistance: 0
   Length: 150857
+--- !u!114 &71260624891216749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Hopital/Feuille frois\xE9"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Hopital/Feuille frois\xE9"
+  guid: f883696741d51b4480daae8488ee4269
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3214
+--- !u!114 &118000042862693566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Character/Dialogue
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Character/Dialogue
+  guid: c5eca29a4beabe4e85c3054b11b21dcd
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &119613156545304469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,6 +3583,40 @@ MonoBehaviour:
   Name: Spatializer
   Min: 0
   Max: 2
+  Default: 0
+  Exists: 0
+--- !u!114 &241611820490029267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &283701337137962063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
   Default: 0
   Exists: 0
 --- !u!114 &386538842753866836
@@ -2107,7 +3636,7 @@ MonoBehaviour:
   lastModified: 637250732738125987
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &390824476796385873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,16 +3652,69 @@ MonoBehaviour:
   Path: event:/Example/Music/Level 01
   guid: 7cbabb74e8768c489cf967f000df1ffd
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4679683713569778360}
-  - {fileID: 1795639480416696371}
+  - {fileID: -225287649309275858}
+  - {fileID: -6810535167709413970}
   MinDistance: 0
   MaxDistance: 0
   Length: 54339
+--- !u!114 &399717947966508515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VO.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/VO.bank
+  SubDir: 
+  lastModified: 637250732738125987
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &524867210632220181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/City/Walla
+  m_EditorClassIdentifier: 
+  Name: Walla
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &560669283078233998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Vehicles.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Vehicles.bank
+  SubDir: 
+  lastModified: 637255819642714911
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &575831891199817432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2148,7 +3730,7 @@ MonoBehaviour:
   Path: event:/Musique/Radio
   guid: e4ceae97b23c694ca7c931ffc7261f48
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2156,6 +3738,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &596158510588328738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637255819610170013
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
 --- !u!114 &605472720236628724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,9 +3788,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Zoe 2
   guid: 4c15f5b39c977747a83f086e0be3c00c
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2213,15 +3813,49 @@ MonoBehaviour:
   Path: event:/Example/Music/Level 02
   guid: fd46f9c795d69b49a820752799c4921d
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 7353708771483513256}
+  - {fileID: -7448084933818127154}
   MinDistance: 0
   MaxDistance: 0
   Length: 56888
+--- !u!114 &680809411882679052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Spatializer
+  m_EditorClassIdentifier: 
+  Name: Spatializer
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 0
+--- !u!114 &791983140139930310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 0
 --- !u!114 &823614462586041356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2239,6 +3873,23 @@ MonoBehaviour:
   Max: 8
   Default: 0
   Exists: 1
+--- !u!114 &837192610888651228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Freq
+  m_EditorClassIdentifier: 
+  Name: Freq
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &900493523805648406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2254,6 +3905,42 @@ MonoBehaviour:
   Path: Assets/Fmod Project/Examples/Build/Desktop/Master.bank
   SubDir: 
   lastModified: 637250732692201963
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &902218872147908452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_JP.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_JP.bank
+  SubDir: 
+  lastModified: 637255819607347550
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &906876000108211705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_EN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_EN.bank
+  SubDir: 
+  lastModified: 637255819606390104
   LoadResult: 0
   FileSizes: []
   Exists: 0
@@ -2290,16 +3977,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Reveil 2
   guid: 982e1ea3f6d32841ab05dac1c5172716
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 13704
+--- !u!114 &1028550747287886228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 10000
+  Default: 0
+  Exists: 0
 --- !u!114 &1089361557643034673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,7 +4019,7 @@ MonoBehaviour:
   Path: event:/Musique/Crescendo
   guid: 7d17fbf46290ac439698b64bf1b62339
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2338,15 +4042,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Grotte 1
   guid: bc996dbd4092cc498049c8c81c2ed85b
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 11353
 --- !u!114 &1092571070069640331
 MonoBehaviour:
@@ -2365,7 +4069,7 @@ MonoBehaviour:
   lastModified: 637250732688705392
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &1116009741434981516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2380,8 +4084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/UI/Cancel
   guid: e6483e2afc946343946833d2dd4d7b00
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2389,6 +4092,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1026
+--- !u!114 &1131077333579833534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/UI/Okay
+  m_EditorClassIdentifier: 
+  Path: event:/Example/UI/Okay
+  guid: 979e4792c69464459e33efbeec59b34a
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 917
 --- !u!114 &1151177706658088829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2406,6 +4132,29 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &1159747973476194724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Petite flammes (lampe a huile)
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Petite flammes (lampe a huile)
+  guid: a65ba5b356fc6549ac4910c892f2f609
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 11500
 --- !u!114 &1170348920239671449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,6 +4171,47 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 0
+--- !u!114 &1204893642774929085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Lumiere qui s'allume
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Lumiere qui s'allume
+  guid: d7522490ba1dda4ebbef256e801b3255
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000
+--- !u!114 &1208601106279722439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Footsteps.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Footsteps.bank
+  SubDir: 
+  lastModified: 637255819609282369
+  LoadResult: 0
+  FileSizes: []
   Exists: 0
 --- !u!114 &1222176772748182021
 MonoBehaviour:
@@ -2455,15 +4245,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 3
   guid: 42a9e68d20971848934acbc10d610d89
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 7462
 --- !u!114 &1309773771097163772
 MonoBehaviour:
@@ -2482,6 +4272,64 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &1327178407259997575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Grosse lampe qui s'allume
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Grosse lampe qui s'allume
+  guid: 9fdc880ac58ae14b85adfda999dbd72e
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 63924
+--- !u!114 &1346955714488213320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Sound Design.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Sound Design.bank
+  SubDir: 
+  lastModified: 637250732735921886
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &1494650511477841083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Explosion/Size
+  m_EditorClassIdentifier: 
+  Name: Size
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
 --- !u!114 &1508704868022304569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,7 +4345,7 @@ MonoBehaviour:
   Path: event:/Musique/White Light
   guid: b6830a26df7e0642965c69807576d4bc
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2522,6 +4370,30 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 0
+--- !u!114 &1668046607940298530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Interactables/Wooden Collision
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Interactables/Wooden Collision
+  guid: d80362bed8c8c5418ce6bce0de95807b
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -8979290505629951385}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1669444401782288060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2539,7 +4411,7 @@ MonoBehaviour:
   lastModified: 637250732682921092
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &1795639480416696371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2575,6 +4447,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &1841117592682010070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 02/Area
+  m_EditorClassIdentifier: 
+  Name: Area
+  Min: 0
+  Max: 80
+  Default: 0
+  Exists: 0
 --- !u!114 &1900444937788527340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2592,6 +4481,29 @@ MonoBehaviour:
   Max: 1
   Default: -1
   Exists: 1
+--- !u!114 &1981464578239656863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Hopital/Verre bris\xE9"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Hopital/Verre bris\xE9"
+  guid: 3bba77936c37464d907d78031f507e41
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 12000
 --- !u!114 &2007092181653991346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,13 +4519,13 @@ MonoBehaviour:
   Path: event:/Example/Music/Radio Station
   guid: 9faf6ab3142f454c8cf0fc622a0ea38a
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -4927662192110657305}
-  - {fileID: 7948816007310209117}
+  - {fileID: -7136262994443968280}
+  - {fileID: -4251051126949168121}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -2634,6 +4546,58 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &2231057070815122091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/City/Walla
+  m_EditorClassIdentifier: 
+  Name: Walla
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &2248927400253663272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
+--- !u!114 &2300806279134866331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VO.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/VO.bank
+  SubDir: 
+  lastModified: 637255819643472851
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &2408578385703424294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,9 +4613,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Dialogue Grand Mere V2
   guid: d7c6b71419b91541966b97a91c5e3f80
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -2659,6 +4623,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 48084
+--- !u!114 &2456151700866121418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
+  Default: 0
+  Exists: 1
 --- !u!114 &2478637163791915530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2674,8 +4655,8 @@ MonoBehaviour:
   Path: snapshot:/Health Low
   guid: 3441ea87f1ff9d4e8f8b294a2b518223
   Banks:
-  - {fileID: -1403901771975092456}
-  - {fileID: -3164687878388348432}
+  - {fileID: -6166827606624459209}
+  - {fileID: 3803007491344081731}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -2718,6 +4699,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &2612310984066019032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 0
 --- !u!114 &2616509763663369838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2732,8 +4730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Chuchotement des mort
   guid: 945a04c438e395458712e635cd7fde4a
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -2772,8 +4769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Weapons/Explosion
   guid: 3871681f6ce0f5409bac57f84bbcedd3
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2782,6 +4778,41 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 0
+--- !u!114 &2962834679090982174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637255819619298646
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &3029873260164335810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/City/Traffic
+  m_EditorClassIdentifier: 
+  Name: Traffic
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &3047030998730529006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2814,7 +4845,7 @@ MonoBehaviour:
   Path: snapshot:/Pause
   guid: 98a405e3182b1d46b35c6eaea45fafd6
   Banks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -2822,6 +4853,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &3111296174555240511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Wind
+  m_EditorClassIdentifier: 
+  Name: Wind
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &3142639771989238957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,7 +4885,7 @@ MonoBehaviour:
   Path: event:/Musique/Musique Grotte
   guid: 1f41286f08990b4eb4d08556e4f85150
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2860,16 +4908,60 @@ MonoBehaviour:
   Path: "event:/Dialogue/Voix Off - Voice Line/Voix Off - D\xE9barras 1"
   guid: 85f602f8dfd2614aa87cb6fac1603ea2
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 11415
+--- !u!114 &3195834096938673353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Dialogue_CN.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Dialogue_CN.bank
+  SubDir: 
+  lastModified: 637255819605432658
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3305858611337930730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Ambience/Forest
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Ambience/Forest
+  guid: e51074476d4a2e46bd1e4d558ce488ec
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3111296174555240511}
+  - {fileID: -351266220616006503}
+  - {fileID: -3055799373998725406}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &3370584809930729558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2885,16 +4977,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Lit en cercle 1
   guid: 816fa7dc55d55f46a8068977ae349db0
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 1996
+--- !u!114 &3391898378888339810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Barrel Roll/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 8
+  Default: 0
+  Exists: 0
 --- !u!114 &3392788344384157138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2913,6 +5022,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &3401318797320105109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Chuchotement des mort
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Chuchotement des mort
+  guid: 945a04c438e395458712e635cd7fde4a
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22329
 --- !u!114 &3482032001157854665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2928,9 +5060,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Dialogue Sylvain & Charlene
   guid: 69553897425c59478f19f8ddaa85257d
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2938,6 +5070,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 30313
+--- !u!114 &3485654617912830762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Country/Hour
+  m_EditorClassIdentifier: 
+  Name: Hour
+  Min: 0
+  Max: 4
+  Default: 0
+  Exists: 1
 --- !u!114 &3516787754643803465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2953,7 +5102,7 @@ MonoBehaviour:
   Path: event:/Dialogue/PereHopital
   guid: a8ffabc8099af64ead933dcdaaab334c
   Banks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -2975,8 +5124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Grosse lampe qui s'allume
   guid: 9fdc880ac58ae14b85adfda999dbd72e
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2984,6 +5132,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 63924
+--- !u!114 &3582632948088644642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 0
 --- !u!114 &3607670733514784556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2999,7 +5164,7 @@ MonoBehaviour:
   Path: event:/Example/VO/Welcome
   guid: 29bbead7d9ab5740b408eef937d66f2a
   Banks:
-  - {fileID: 386538842753866836}
+  - {fileID: 2300806279134866331}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3038,8 +5203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Door Open
   guid: 18528562f3a80f47ab7a8af8f7df77bb
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3064,7 +5228,7 @@ MonoBehaviour:
   lastModified: 637250732684406887
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &3741846505098253039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,16 +5261,57 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 2
   guid: b149e1932b94dc408840bdb9a5465349
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 2647
+--- !u!114 &3803007491344081731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637255819634187658
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3813218322712657171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Squat/Clef qui ouvre la porte
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Squat/Clef qui ouvre la porte
+  guid: 06bf663b0c4b7c4ba18cdd24d0dcc889
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 10125
 --- !u!114 &3990889911566068005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3122,8 +5327,8 @@ MonoBehaviour:
   Path: event:/Sound Design/Grand Mere/Vent
   guid: c925af0a01dc954f9447dc506d3d1711
   Banks:
-  - {fileID: 5853994075083640750}
-  - {fileID: -5857341263667380877}
+  - {fileID: 7450858903060843074}
+  - {fileID: 7402367354890446420}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -3146,7 +5351,7 @@ MonoBehaviour:
   Path: event:/Musique/Musique du Squat
   guid: 792b94fb82c3e44194c115ebf6248225
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -3154,6 +5359,47 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 283050
+--- !u!114 &4280679898980236560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637255819610170013
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &4332854617362096573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Grotte/Goutes d'eau
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Grotte/Goutes d'eau
+  guid: 87b512985416c54696db60b24b690d87
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18000
 --- !u!114 &4537492913096657154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3169,16 +5415,33 @@ MonoBehaviour:
   Path: event:/Example/Vehicles/Car Engine
   guid: b463830caf239c4faf4b0951bfd37d84
   Banks:
-  - {fileID: -3738569582125887227}
+  - {fileID: 560669283078233998}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -8869775615554339850}
-  - {fileID: -1806277483450611420}
+  - {fileID: -672085079448662535}
+  - {fileID: -8628945343641919181}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4538302314770240577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Toutes surfaces/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 0
 --- !u!114 &4543250221626772946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3193,8 +5456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Player Footsteps
   guid: 01d405e9f5764147a885f7844b244671
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3218,9 +5480,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Grand Mere 1
   guid: cc2e093a0b4ba147af21df3e4aa12914
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3228,6 +5490,30 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 13084
+--- !u!114 &4671942371065545855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Interactables/Barrel Roll
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Interactables/Barrel Roll
+  guid: 40222cc4b6c4ed42a4731a47f19945ea
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8893091624505842743}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4679683713569778360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3276,8 +5562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Enemy Footsteps
   guid: 3f29b5149ef6e548a7aece02710ca3d9
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3285,6 +5570,64 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 147
+--- !u!114 &5007698790968862662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Footsteps.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Footsteps.bank
+  SubDir: 
+  lastModified: 637255819609282369
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &5064422607346727172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  Min: 0
+  Max: 5
+  Default: 0
+  Exists: 0
+--- !u!114 &5118434553132641885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Hopital/Champs \xE9l\xE9ctrique"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Hopital/Champs \xE9l\xE9ctrique"
+  guid: c650581129e9724481f812b0b1b3ddc2
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5561
 --- !u!114 &5207120165020352754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3337,6 +5680,23 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 1
+--- !u!114 &5567055453580030767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Dialogue/VO Sidechain
+  m_EditorClassIdentifier: 
+  Name: VO Sidechain
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &5639717960436330248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3352,7 +5712,7 @@ MonoBehaviour:
   Path: event:/Musique/Musique machine a laver
   guid: f9259764e88f37459bf54d9599db8d3c
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3360,6 +5720,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &5674374042681469031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Sound Design/Chambre de Zo\xE9/Boite a musique"
+  m_EditorClassIdentifier: 
+  Path: "event:/Sound Design/Chambre de Zo\xE9/Boite a musique"
+  guid: ea4f3bbd4c8c4849831e100a58c9d247
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 25824
 --- !u!114 &5679513158432284602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,8 +5774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Hopital/Lumiere qui s'allume
   guid: d7522490ba1dda4ebbef256e801b3255
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -3417,7 +5799,7 @@ MonoBehaviour:
   lastModified: 637250732716920242
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &5929141304254234633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3486,7 +5868,7 @@ MonoBehaviour:
   Path: snapshot:/Reverb/Cave Reverb
   guid: c0ee95b678fe5547b8069690c06dfc0b
   Banks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -3508,8 +5890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/Character/Radio Dialogue
   guid: 871fc4431f70254ca9a1c619ca106412
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -3550,7 +5931,7 @@ MonoBehaviour:
   Path: event:/Musique/Musique Hopital
   guid: a6dee00cd46b9f42bd0f71228d78af09
   Banks:
-  - {fileID: 5853994075083640750}
+  - {fileID: 7450858903060843074}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -3573,15 +5954,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Voix Off - Voice Line/Voix Off - Hopital 1
   guid: 8b81c510342d0d40a7e91523dc30fd9b
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 5110
 --- !u!114 &6566295957326879724
 MonoBehaviour:
@@ -3597,8 +5978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Example/UI/Okay
   guid: 979e4792c69464459e33efbeec59b34a
-  Banks:
-  - {fileID: -3164687878388348432}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3606,6 +5986,81 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 917
+--- !u!114 &6641499138580139192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Cover
+  m_EditorClassIdentifier: 
+  Name: Cover
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &6663128485869709482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Toutes surfaces/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
+--- !u!114 &6705964286586761636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637255819610170013
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &6766075048079235079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Eboullement
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Eboullement
+  guid: 1644a80825ab934887b3a2c580629c70
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2500
 --- !u!114 &6792489859747908518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3621,16 +6076,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Zoe 1
   guid: 6c3107a94d842c4da17c4c755b1a3b06
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 3575
+--- !u!114 &6818486646342520856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
+  Exists: 0
 --- !u!114 &6903973629367816889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3646,16 +6118,34 @@ MonoBehaviour:
   Path: event:/Example/Vehicles/Ride-on Mower
   guid: f1e8a57ac28ec642b4651241a603a055
   Banks:
-  - {fileID: -3738569582125887227}
+  - {fileID: 560669283078233998}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 1900444937788527340}
-  - {fileID: 9108594751092600815}
+  - {fileID: 9214719308178782860}
+  - {fileID: 2456151700866121418}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7035663018480969966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/SFX.bank
+  SubDir: 
+  lastModified: 637255819621203544
+  LoadResult: 13
+  FileSizes: []
+  Exists: 0
 --- !u!114 &7191418167553977695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3671,16 +6161,33 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 1
   guid: 61c223f9577c68409128fd0f5d8b2451
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 2919
+--- !u!114 &7192483295061251155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 01/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &7263548312572957688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3696,8 +6203,8 @@ MonoBehaviour:
   Path: event:/Sound Design/Grand Mere/Grillon
   guid: 7182e32b12f7d64f94c30573c8be8cd7
   Banks:
-  - {fileID: 5853994075083640750}
-  - {fileID: -5857341263667380877}
+  - {fileID: 7450858903060843074}
+  - {fileID: 7402367354890446420}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -3719,7 +6226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Fmod Project/Examples/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637250732692272056
+  lastModified: 637255819610489145
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -3744,6 +6251,42 @@ MonoBehaviour:
   Max: 80
   Default: 0
   Exists: 1
+--- !u!114 &7402367354890446420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Sound Design.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Sound Design.bank
+  SubDir: 
+  lastModified: 637255819640740155
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7450858903060843074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Music.bank
+  SubDir: 
+  lastModified: 637255819619298646
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7636674036742120839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3758,8 +6301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: "event:/Sound Design/Hopital/Roue de v\xE9lo qui tourne"
   guid: da0ffb47e30f3e47a55e00171060ab35
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -3767,6 +6309,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 66808
+--- !u!114 &7674957003274954410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Freq
+  m_EditorClassIdentifier: 
+  Name: Freq
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 0
 --- !u!114 &7723795642680614663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3782,16 +6341,50 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 4
   guid: e9130afe9f60a1479b3a68c06829a2a1
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 6951
+--- !u!114 &7725856542710023507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Wind
+  m_EditorClassIdentifier: 
+  Name: Wind
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &7859974394417529808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wooden Collision/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 8
+  Default: 0
+  Exists: 0
 --- !u!114 &7866984565534673267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3857,8 +6450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Sound Design/Grotte/Goutes d'eau
   guid: 87b512985416c54696db60b24b690d87
-  Banks:
-  - {fileID: -5857341263667380877}
+  Banks: []
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -3932,9 +6524,9 @@ MonoBehaviour:
   Path: event:/Dialogue/Dialogue Papa
   guid: b96fcbefad83dd4c840b4da23b986c6a
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -3975,15 +6567,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 9
   guid: 99a592ce2e9b1a46b520970a54533e0f
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 7248
 --- !u!114 &8143429450219667210
 MonoBehaviour:
@@ -4000,15 +6592,15 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Squat 7
   guid: 82d57c2088f5be40bbffc70714e4708e
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 6513
 --- !u!114 &8154066236914255665
 MonoBehaviour:
@@ -4027,6 +6619,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &8174553884214677014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Forest/Rain
+  m_EditorClassIdentifier: 
+  Name: Rain
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
 --- !u!114 &8296975439691944315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4079,6 +6688,29 @@ MonoBehaviour:
   Max: 4
   Default: 0
   Exists: 0
+--- !u!114 &8426972407543080802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Ramasser un item
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Ramasser un item
+  guid: 49c5bf7ab593a04a93f13c7f80a8b206
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1999
 --- !u!114 &8458219964066146884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4096,6 +6728,41 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &8491444832359921537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Sound Design.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod Project/Examples/Build/Desktop/Sound Design.bank
+  SubDir: 
+  lastModified: 637250732735921886
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &8552199675413401817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Radio Station/Spatializer
+  m_EditorClassIdentifier: 
+  Name: Spatializer
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 0
 --- !u!114 &8889924912793074294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4111,16 +6778,58 @@ MonoBehaviour:
   Path: event:/Dialogue/Eko - Voice Line/Eko - Grotte 1
   guid: 13f9151d3074cf4680503e3dc73a19cf
   Banks:
-  - {fileID: 1669444401782288060}
-  - {fileID: 3721196429482291224}
-  - {fileID: -1509192561921493270}
+  - {fileID: 3195834096938673353}
+  - {fileID: -148676727677493292}
+  - {fileID: -5267229035651799254}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 11174
+--- !u!114 &8894332812353077129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Car Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 10000
+  Default: 0
+  Exists: 0
+--- !u!114 &8947035070805818659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Example/Ambience/City
+  m_EditorClassIdentifier: 
+  Path: event:/Example/Ambience/City
+  guid: 7e9198bb5bd6f041a0cac50756da3f0e
+  Banks:
+  - {fileID: 3803007491344081731}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 2231057070815122091}
+  - {fileID: -8268024547205889006}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &8966028594847446039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4136,7 +6845,7 @@ MonoBehaviour:
   Path: snapshot:/Reverb/Sewer Reverb
   guid: 8ee207c13b87aa4c949268fe72210c48
   Banks:
-  - {fileID: -1403901771975092456}
+  - {fileID: -6166827606624459209}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -4144,6 +6853,63 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &8973392984847712463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sound Design/Hopital/Chinc Verre
+  m_EditorClassIdentifier: 
+  Path: event:/Sound Design/Hopital/Chinc Verre
+  guid: c524996888a0794da277e93090f829f8
+  Banks:
+  - {fileID: 7402367354890446420}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 354
+--- !u!114 &8983369288412200315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Level 03/Stinger
+  m_EditorClassIdentifier: 
+  Name: Stinger
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &9012948453487548137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 2000
+  Default: 0
+  Exists: 0
 --- !u!114 &9074480175426629559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4159,7 +6925,7 @@ MonoBehaviour:
   Path: event:/Example/VO/Main Menu
   guid: 1612b8a70bfb9c4b9e7db897825d9821
   Banks:
-  - {fileID: 386538842753866836}
+  - {fileID: 2300806279134866331}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4217,4 +6983,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 1
+--- !u!114 &9214719308178782860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ride-on Mower/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: -1
+  Max: 1
+  Default: -1
   Exists: 1
