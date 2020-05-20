@@ -2454,13 +2454,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0728e72c67afe3847966aa5c0c87ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextSceneName: 6_ChambreZoe
-  _previousSceneName: 3_L'hopital part 1
-  _autoLoadingScene: 0
+  _nextScenesNames: []
+  _previousScenesNames: []
   _sceneParameters:
     m_LoadSceneMode: 1
     m_LocalPhysicsMode: 0
-  _priority: 0
 --- !u!4 &328743253
 Transform:
   m_ObjectHideFlags: 0
@@ -4776,7 +4774,7 @@ PrefabInstance:
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
       propertyPath: m_onTriggerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
@@ -4803,10 +4801,20 @@ PrefabInstance:
       propertyPath: m_onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
+        type: 3}
+      propertyPath: m_onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnLoadScene
+      objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128718, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
       propertyPath: m_Name
       value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
+        type: 3}
+      propertyPath: _previousScenesNames.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
@@ -4817,6 +4825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _nextSceneName
       value: 6_ChambreZoe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
+        type: 3}
+      propertyPath: _previousScenesNames.Array.data[0]
+      value: "4_Chambre de la grand m\xE8re rework nature"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcaec26b286de274dbf32902a53ae835, type: 3}

@@ -3561,6 +3561,18 @@ MonoBehaviour:
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
     IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 1379917685}
+    Ordinal: 1
+    Priority: 0
+    IconType: 1090
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
 --- !u!4 &101095929
 Transform:
   m_ObjectHideFlags: 1
@@ -27509,18 +27521,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1379917686}
-        m_MethodName: UnLoadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1379917686}
-        m_MethodName: PreloadScene
+        m_MethodName: StartLoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27857,13 +27858,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0728e72c67afe3847966aa5c0c87ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nextSceneName: 9_Grotte_etroite
-  _previousSceneName: 7_Hopital part_3
-  _autoLoadingScene: 1
+  _nextScenesNames:
+  - 9_Grotte_etroite
+  _previousScenesNames:
+  - 7_Hopital part_3
   _sceneParameters:
     m_LoadSceneMode: 1
     m_LocalPhysicsMode: 0
-  _priority: 0
 --- !u!4 &1379917687
 Transform:
   m_ObjectHideFlags: 0
