@@ -55,7 +55,7 @@ public class TutoZoom : MonoBehaviour
                 _image.color = _color;
                 if (_fade == 1)
                 {
-                    Destroy(_tutoCrouch);
+                    Destroy(_tutoZoom);
                     Destroy(this.gameObject);
                 }
             }

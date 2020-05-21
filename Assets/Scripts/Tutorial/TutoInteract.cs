@@ -56,7 +56,7 @@ public class TutoInteract : MonoBehaviour
                 _image.color = _color;
                 if (_fade == 1)
                 {
-                    Destroy(_tutoObserve);
+                    Destroy(_tutoInteract);
                     Destroy(this.gameObject);
                 }
             }
