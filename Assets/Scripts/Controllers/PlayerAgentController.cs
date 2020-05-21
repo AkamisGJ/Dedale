@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
+using UnityEngine.Analytics;
 
 public class PlayerAgentController : MonoBehaviour
 {
@@ -25,6 +25,11 @@ public class PlayerAgentController : MonoBehaviour
     private bool _unZooming = false;
     private float _timeZoom = 0;
     private float _zoomLerp = 0;
+    private bool _isSlow = false;
+    private bool _alreadyZoomed = false;
+    private int _countZoom = 0;
+    private Canvas _canvasPauseMenu = null;
+    private MenuPause _menuPause = null;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -54,6 +59,7 @@ public class PlayerAgentController : MonoBehaviour
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
     public Animator AnimatorCamera { get => _animatorCamera; set => _animatorCamera = value; }
+    public bool IsSlow { get => _isSlow; set => _isSlow = value; }
     #endregion Properties
 
     private void Awake()
@@ -63,6 +69,7 @@ public class PlayerAgentController : MonoBehaviour
             _animatorCamera = _cameraHolder.GetComponent<Animator>();
         }
         GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
+        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdateNoPause;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -91,6 +98,7 @@ public class PlayerAgentController : MonoBehaviour
         _states[_currentState].Enter();
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
+        _countZoom = 0;
     }
 
     void OnUpdate()
@@ -109,8 +117,39 @@ public class PlayerAgentController : MonoBehaviour
         }
     }
 
+    void OnUpdateNoPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameLoopManager.Instance.IsPaused = !GameLoopManager.Instance.IsPaused;
+            PauseMenu(GameLoopManager.Instance.IsPaused);
+        }
+    }
+
+    private void PauseMenu(bool isPaused)
+    {
+        if(isPaused == true)
+        {
+            if(_canvasPauseMenu == null)
+            {
+                _canvasPauseMenu = Instantiate<Canvas>(_playerData.PauseCanvas);
+                _menuPause = _canvasPauseMenu.GetComponent<MenuPause>();
+            }
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            _menuPause.OnStart();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            _menuPause.OnPressEscape();
+        }
+    }
+
     public void ChangeState(MyState nextState, Collider collider = null, string animation = null)
     {
+        Debug.Log(animation);
         _states[_currentState].Exit();
         _states[nextState].Enter(collider, animation);
         _currentState = nextState;
@@ -139,6 +178,19 @@ public class PlayerAgentController : MonoBehaviour
         }
     }
 
+    private void ZoomAnalytics()
+    {
+        if(_alreadyZoomed == false && _isZoom == true)
+        {
+            _alreadyZoomed = true;
+            _countZoom += 1;
+        }
+        if(_isZoom == false)
+        {
+            _alreadyZoomed = false;
+        }
+    }
+
     public void Zooming(float inversion)
     {
         _timeZoom += Time.deltaTime * inversion;
@@ -159,9 +211,18 @@ public class PlayerAgentController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(InputManager.Instance != null)
+        AnalyticsEvent.Custom("Zoom count", new Dictionary<string, object>
+        {
+            { "Zooms", _countZoom },
+        });
+        if (InputManager.Instance != null)
         {
             InputManager.Instance.Zoom -= Zoom;
+        }
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdateNoPause;
+            GameLoopManager.Instance.GameLoopPlayer -= OnUpdate;
         }
     }
 }

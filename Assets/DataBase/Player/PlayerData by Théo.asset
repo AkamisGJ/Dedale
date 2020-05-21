@@ -15,11 +15,12 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 918272
-  _rayonInteraction: 1
-  _maxDistanceInteractionObject: 2
+  _rayonInteraction: 1.7
+  _maxDistanceInteractionObject: 1.7
   _angleHelper: 45
-  _distanceHelperInteraction: 5
-  _distanceHelperObservableObject: 10
+  _distanceHelperInteraction: 3
+  _distanceHelperObservableObject: 5
+  _speedLerp: 4
   _canvasHelper: {fileID: 622945719475349574, guid: 01454113832c5e54a95960acce308afd,
     type: 3}
   _inputHelper: {fileID: 5224312957269270060, guid: 5421f40781b14884aadce86d4639937a,
@@ -107,13 +108,18 @@ MonoBehaviour:
   _slopeLimit: 45
   _stepOffset: 0.3
   _speedForward: 3
-  _speedBack: 1
+  _speedBack: 2.5
   _speedSide: 2.5
-  _speedLadder: 0.5
-  _gloabalSpeed: 2
-  _crouchMoveSpeed: 1
+  _speedLadder: 1.5
+  _gloabalSpeed: 1
+  _crouchMoveSpeed: 1.5
   _timeStep: 0.05
-  _maxSprintSpeed: 3
+  _speedForwardSlowMode: 0.5
+  _speedBackSlowMode: 0.25
+  _speedSideSlowMode: 0.25
+  _canCrouchInSlowMode: 1
+  _crouchSpeedSlowMode: 0.1
+  _maxSprintSpeed: 10
   _mouseSensitivityObserve: 3
   _angleX: 70
   _stackMovement: 0.5
@@ -124,6 +130,8 @@ MonoBehaviour:
   _speedCameraDoor: 0.01
   _sensitivityMouseX: 3
   _sensitivityMouseY: 3
+  _sensitivityMouseXSlowMode: 0.25
+  _sensitivityMouseYSlowMode: 0.25
   _sprintTimeMax: 0
   _gravity: 2
   _maxFallGravity: 45
@@ -160,5 +168,7 @@ MonoBehaviour:
   _speedRotationCamera: 0.25
   _speedEnterExitNarrowWay: 0.25
   _speedNarrowWay: 1
-  _LoadingCanvas: {fileID: 1785785795628711090, guid: eab7487323dbd5846bf58f14e2983c6f,
+  _loadingCanvas: {fileID: 1785785795628711090, guid: eab7487323dbd5846bf58f14e2983c6f,
+    type: 3}
+  _pauseCanvas: {fileID: 2750112275330734348, guid: 32b71a43e49989d42a38c99b695e2b31,
     type: 3}

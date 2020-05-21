@@ -54,6 +54,34 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _gameLoopLoadingScene = null;
+    public event Action GameLoopLoadingScene
+    {
+        add
+        {
+            _gameLoopLoadingScene -= value;
+            _gameLoopLoadingScene += value;
+        }
+        remove
+        {
+            _gameLoopLoadingScene -= value;
+        }
+    }
+
+    private Action _gameLoopModifyVolume = null;
+    public event Action GameLoopModifyVolume
+    {
+        add
+        {
+            _gameLoopModifyVolume -= value;
+            _gameLoopModifyVolume += value;
+        }
+        remove
+        {
+            _gameLoopModifyVolume -= value;
+        }
+    }
+
     private Action _lateLoopDialogue = null;
     public event Action LateLoopDialogue
     {
@@ -166,6 +194,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
             {
                 _lastStart();
             }
+            if(_gameLoopModifyVolume != null)
+            {
+                _gameLoopModifyVolume();
+            }
             if (_gameLoopInputManager != null)
             {
                 _gameLoopInputManager();
@@ -185,6 +217,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
             {
                 _managerLoop();
             }
+        }
+        if(_gameLoopLoadingScene != null)
+        {
+            _gameLoopLoadingScene();
         }
     }
 

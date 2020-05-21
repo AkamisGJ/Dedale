@@ -25,6 +25,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("Define the distance when the player has the information of what observable object is interactive")]
     [SerializeField] private float _distanceHelperObservableObject;
 
+    [BoxGroup("Interaction Object", centerLabel: true)]
+    [Tooltip("The speed of the gameobject to come in front of camera or return to it's place")]
+    [SerializeField] private float _speedLerp = 1;
+
     [BoxGroup("Interaction Object Helper", centerLabel: true)]
     [Tooltip("The canvas for interaction helper")]
     [SerializeField] private Canvas _canvasHelper;
@@ -90,6 +94,26 @@ public class PlayerData : ScriptableObject
     [Tooltip("Time between to step")]
     [Range(0, 0.1f)]
     [SerializeField] private float _timeStep = 0.5f;
+    [BoxGroup("Move speed/Slow Mode", centerLabel: false)]
+    [Min(0)]
+    [Tooltip("Move speed of forward direction in slow mode")]
+    [SerializeField] private float _speedForwardSlowMode = 0.5f;
+    [BoxGroup("Move speed/Slow Mode")]
+    [Min(0)]
+    [Tooltip("Move speed of back direction in slow mode")]
+    [SerializeField] private float _speedBackSlowMode = 0.25f;
+    [BoxGroup("Move speed/Slow Mode")]
+    [Min(0)]
+    [Tooltip("Move speed of side direction in slow mode")]
+    [SerializeField] private float _speedSideSlowMode = 0.25f;
+    [BoxGroup("Move speed/Slow Mode")]
+    [Tooltip("enable/disable crouch in slow mode")]
+    [SerializeField] private bool _canCrouchInSlowMode = true;
+    [BoxGroup("Move speed/Slow Mode")]
+    [ShowIf("_canCrouchInSlowMode")]
+    [Tooltip("Move speed when crouching in slow mode")]
+    [SerializeField] private float _crouchSpeedSlowMode = 0.25f;
+
 
     [BoxGroup("Sprint", centerLabel: true)]
     [Tooltip("Multiply forward speed by this value")]
@@ -127,6 +151,12 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Mouse Sensitivity")]
     [Tooltip("Mousse sensitivity on Y axis when player move")]
     [SerializeField] private float _sensitivityMouseY = 1f;
+    [BoxGroup("Mouse Sensitivity/Slow Mode", centerLabel: true)]
+    [Tooltip("Mousse sensitivity on X axis when player move in slow mode")]
+    [SerializeField] private float _sensitivityMouseXSlowMode = 1f;
+    [BoxGroup("Mouse Sensitivity/Slow Mode")]
+    [Tooltip("Mousse sensitivity on Y axis when player move in slow mode")]
+    [SerializeField] private float _sensitivityMouseYSlowMode = 1f;
 
     [BoxGroup("Sprint")]
     [Tooltip("Sprint max time in seconds (0 = infinty)")]
@@ -176,7 +206,10 @@ public class PlayerData : ScriptableObject
 
     [BoxGroup("Canvas", centerLabel: true)]
     [Tooltip("The canvas when loading the next scene")]
-    [SerializeField] private Canvas _LoadingCanvas = null;
+    [SerializeField] private Canvas _loadingCanvas = null;
+    [BoxGroup("Canvas")]
+    [Tooltip("The canvas of pause menu")]
+    [SerializeField] private Canvas _pauseCanvas = null;
 
     #endregion Fields
 
@@ -231,6 +264,15 @@ public class PlayerData : ScriptableObject
     public float LadderMinAngleY { get => _ladderMinAngleY; }
     public float LadderAngleY { get => _ladderAngleY; }
     public float SpeedCameraDoor { get => _speedCameraDoor; }
-    public Canvas LoadingCanvas { get => _LoadingCanvas; }
+    public Canvas LoadingCanvas { get => _loadingCanvas; }
+    public float SpeedForwardSlowMode { get => _speedForwardSlowMode; }
+    public float SpeedBackSlowMode { get => _speedBackSlowMode; }
+    public float SpeedSideSlowMode { get => _speedSideSlowMode; }
+    public bool CanCrouchInSlowMode { get => _canCrouchInSlowMode; }
+    public float CrouchSpeedSlowMode { get => _crouchSpeedSlowMode; }
+    public float SensitivityMouseXSlowMode { get => _sensitivityMouseXSlowMode; }
+    public float SensitivityMouseYSlowMode { get => _sensitivityMouseYSlowMode; }
+    public float SpeedLerp { get => _speedLerp; }
+    public Canvas PauseCanvas { get => _pauseCanvas; }
     #endregion Properties
 }
