@@ -5,7 +5,7 @@
 			<value>Voix Off - Reveil 4</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c5a1b492-bce8-4b3d-b652-6de0c91b10f7}</destination>
@@ -113,7 +113,6 @@
 	<object class="MixerBusEffectChain" id="{da99fc39-d5e1-4b11-ae4c-8ff778d000f8}">
 		<relationship name="effects">
 			<destination>{091e126e-120d-4c9d-81d8-4648b9c781fc}</destination>
-			<destination>{b9eeb675-3179-4ca8-bd95-57b244a9bf95}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b7893026-2ed4-4cd1-95ee-e34add570872}" />
@@ -125,6 +124,5 @@
 	</object>
 	<object class="MixerBusPanner" id="{737e805d-d511-4623-960b-cd8509d3ae27}" />
 	<object class="MixerBusFader" id="{091e126e-120d-4c9d-81d8-4648b9c781fc}" />
-	<object class="SpatialiserEffect" id="{b9eeb675-3179-4ca8-bd95-57b244a9bf95}" />
 	<object class="MixerBusFader" id="{4f9e0954-912f-4ab7-99f6-ab9c5632c7f3}" />
 </objects>
