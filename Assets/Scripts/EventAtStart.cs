@@ -24,6 +24,9 @@ public class EventAtStart : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameLoopManager.Instance.GameLoopPortal -= OnStart;
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopPortal -= OnStart;
+        }
     }
 }

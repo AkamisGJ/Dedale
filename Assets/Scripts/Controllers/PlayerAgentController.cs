@@ -30,6 +30,7 @@ public class PlayerAgentController : MonoBehaviour
     private int _countZoom = 0;
     private Canvas _canvasPauseMenu = null;
     private MenuPause _menuPause = null;
+    [SerializeField] Animator _animator = null;
     #endregion PrivateFields
     #region StatesPlayer
     public enum MyState
@@ -130,6 +131,7 @@ public class PlayerAgentController : MonoBehaviour
     {
         if(isPaused == true)
         {
+            _animator.enabled = false;
             if(_canvasPauseMenu == null)
             {
                 _canvasPauseMenu = Instantiate<Canvas>(_playerData.PauseCanvas);
@@ -141,6 +143,7 @@ public class PlayerAgentController : MonoBehaviour
         }
         else
         {
+            _animator.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _menuPause.OnPressEscape();
@@ -149,7 +152,6 @@ public class PlayerAgentController : MonoBehaviour
 
     public void ChangeState(MyState nextState, Collider collider = null, string animation = null)
     {
-        Debug.Log(animation);
         _states[_currentState].Exit();
         _states[nextState].Enter(collider, animation);
         _currentState = nextState;
