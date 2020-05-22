@@ -44,7 +44,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
 
     private void LoadScene()
     {
-        if(_nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
+        if(_i < _nextScenesNames.Length && _nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
         {
             if(_loadingCanvas == null)
             {
@@ -52,7 +52,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             }
             StartCoroutine(LoadSceneCoroutine(_i));
         }
-        else 
+        else if(_i < _nextScenesNames.Length)
         {
             _sceneFinishToLoad += 1;
             if (_nextScenesNames.Length > _sceneFinishToLoad)
@@ -69,7 +69,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             _asyncOperationLoad.completed -= OnCompleted;
         }
-        if (_nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
+        if (_i < _nextScenesNames.Length && _nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
         {
             if (_loadingCanvas == null)
             {

@@ -66,7 +66,7 @@ public class cailloux_vollant : MonoBehaviour
     {
         if(GameLoopManager.Instance != null)
         {
-            GameLoopManager.Instance.GameLoopPortal += OnUpdate;
+            GameLoopManager.Instance.GameLoopPortal -= OnUpdate;
         }
     }
 }

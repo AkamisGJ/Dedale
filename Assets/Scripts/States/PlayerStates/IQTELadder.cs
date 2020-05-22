@@ -67,12 +67,10 @@ public class IQTELadder : IPlayerState
         if(horizontalMouvement < 0 && _playerController.transform.position.y > _startYPlayer)
         {
             _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
-            Debug.Log("canMoveDown");
         }
         else if (horizontalMouvement > 0)
         {
             _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
-            Debug.Log("canMoveUp");
         }
         Move();
     }

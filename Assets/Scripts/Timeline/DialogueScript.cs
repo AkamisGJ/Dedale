@@ -88,4 +88,12 @@ public class DialogueScript : MonoBehaviour
         GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
         _dialogueIndex = 0;
     }
+
+    private void OnDestroy()
+    {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
+        }
+    }
 }
