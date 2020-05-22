@@ -5,9 +5,9 @@ public class MainMenu : MonoBehaviour
 {
     #region Fields
     [SerializeField] private GameObject _mainMenu = null;
+    [SerializeField] private GameObject _selectLevel = null;
     [SerializeField] private GameObject _tutorielMenu = null;
     [SerializeField] private GameObject _settings = null;
-    [SerializeField] private string _selectedStage;
     #endregion Fields
 
     private void Start()
@@ -15,11 +15,13 @@ public class MainMenu : MonoBehaviour
         _mainMenu.SetActive(true);
         _tutorielMenu.SetActive(false);
         _settings.SetActive(false);
+        _selectLevel.SetActive(false);
     }
 
-    public void SelectStage()
+    public void OnClickSelectStage()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.GAME, _selectedStage);
+        _selectLevel.SetActive(true);
+        _mainMenu.SetActive(false);
     }
 
     public void OnClickStart()
@@ -43,11 +45,17 @@ public class MainMenu : MonoBehaviour
         _mainMenu.SetActive(true);
         _tutorielMenu.SetActive(false);
         _settings.SetActive(false);
+        _selectLevel.SetActive(false);
     }
 
     public void OnClickSettings()
     {
         _mainMenu.SetActive(false);
         _settings.SetActive(true);
+    }
+
+    public void OnClickLevel(string level)
+    {
+        GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN, level);
     }
 }

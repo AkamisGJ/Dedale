@@ -110,6 +110,12 @@ public class IMouvement : IPlayerState
         _timeZoom = 0;
         _isSlow = !_playerController.IsSlow;
         SwitchSlowWalk();
+        _playerController.AnimatorCamera.SetBool("Idle", true);
+        if (_lastStateAnimation != null)
+        {
+            _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
+        }
+        _lastStateAnimation = "Idle";
         InputManager.Instance.Crouch += Crouch;
         InputManager.Instance.Sprint += Sprinting;
         InputManager.Instance.MousePosition += LookAtMouse;
