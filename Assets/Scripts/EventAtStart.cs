@@ -5,7 +5,7 @@ public class EventAtStart : MonoBehaviour
 {
     [SerializeField] private UnityEvent _unityEvent = null;
     private float _currentTime = 0;
-    [SerializeField] private float _timer = 1;
+    [SerializeField] private float _timer = 0;
 
     void Start()
     {

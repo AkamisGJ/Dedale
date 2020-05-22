@@ -2227,6 +2227,7 @@ MonoBehaviour:
   m_onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  _debug: 0
 --- !u!65 &299175017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3031,6 +3032,7 @@ MonoBehaviour:
   m_onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  _debug: 0
 --- !u!65 &394919446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4774,7 +4776,7 @@ PrefabInstance:
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
       propertyPath: m_onTriggerEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
@@ -4794,7 +4796,7 @@ PrefabInstance:
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
       propertyPath: m_onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UnLoadScene
+      value: StartLoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128717, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
@@ -4818,6 +4820,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
         type: 3}
+      propertyPath: _nextScenesNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
+        type: 3}
       propertyPath: _previousSceneName
       value: "4_Chambre de la grand m\xE8re rework nature"
       objectReference: {fileID: 0}
@@ -4831,6 +4838,11 @@ PrefabInstance:
       propertyPath: _previousScenesNames.Array.data[0]
       value: "4_Chambre de la grand m\xE8re rework nature"
       objectReference: {fileID: 0}
+    - target: {fileID: 1457653928238128719, guid: fcaec26b286de274dbf32902a53ae835,
+        type: 3}
+      propertyPath: _nextScenesNames.Array.data[0]
+      value: 6_ChambreZoe
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcaec26b286de274dbf32902a53ae835, type: 3}
 --- !u!114 &639099960 stripped
@@ -4839,12 +4851,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 639099959}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 639099961}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0728e72c67afe3847966aa5c0c87ef7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &639099961 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1457653928238128718, guid: fcaec26b286de274dbf32902a53ae835,
+    type: 3}
+  m_PrefabInstance: {fileID: 639099959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &644513770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11363,6 +11381,7 @@ MonoBehaviour:
   m_onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  _debug: 0
 --- !u!65 &1055219309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11858,6 +11877,7 @@ MonoBehaviour:
   m_onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
+  _debug: 0
 --- !u!65 &1089586077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15973,6 +15993,18 @@ MonoBehaviour:
     Ordinal: 2
     Priority: 0
     IconType: 1380
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 639099961}
+    Ordinal: 3
+    Priority: 0
+    IconType: 1090
     IconTexture: {fileID: 0}
     IsIconRecursive: 0
     BackgroundType: 0
