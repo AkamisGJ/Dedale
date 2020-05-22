@@ -122,7 +122,9 @@ public class PlayerAgentController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log(GameLoopManager.Instance.IsPaused);
             GameLoopManager.Instance.IsPaused = !GameLoopManager.Instance.IsPaused;
+            Debug.Log(GameLoopManager.Instance.IsPaused);
             PauseMenu(GameLoopManager.Instance.IsPaused);
         }
     }
