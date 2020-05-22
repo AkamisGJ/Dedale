@@ -54,6 +54,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _gameLoopLoadingScene = null;
+    public event Action GameLoopLoadingScene
+    {
+        add
+        {
+            _gameLoopLoadingScene -= value;
+            _gameLoopLoadingScene += value;
+        }
+        remove
+        {
+            _gameLoopLoadingScene -= value;
+        }
+    }
+
     private Action _gameLoopModifyVolume = null;
     public event Action GameLoopModifyVolume
     {
@@ -203,6 +217,10 @@ public class GameLoopManager : Singleton<GameLoopManager>
             {
                 _managerLoop();
             }
+        }
+        if(_gameLoopLoadingScene != null)
+        {
+            _gameLoopLoadingScene();
         }
     }
 

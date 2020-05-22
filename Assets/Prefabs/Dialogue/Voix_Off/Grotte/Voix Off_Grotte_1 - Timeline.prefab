@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2724386241266308554}
   - component: {fileID: 2724386241266308555}
   - component: {fileID: 2724386241266308596}
-  - component: {fileID: 2724386241266308597}
+  - component: {fileID: 218526830}
   m_Layer: 0
   m_Name: Voix Off_Grotte_1 - Timeline
   m_TagString: Untagged
@@ -127,23 +127,27 @@ MonoBehaviour:
   _playableDirector: {fileID: 2724386241266308554}
   _dialogueData: {fileID: 11400000, guid: f9f1fca4710df424ba0f35392c712b5b, type: 2}
   _dialogueManager: {fileID: 0}
-  _eventEmitter: {fileID: 0}
---- !u!95 &2724386241266308597
-Animator:
-  serializedVersion: 3
+  _eventEmitter: {fileID: 218526830}
+--- !u!114 &218526830
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2724386241266308598}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Dialogue/Voix Off - Voice Line/Voix Off - Grotte 1
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0

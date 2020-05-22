@@ -103,6 +103,10 @@ public class DialogueManager : MonoBehaviour
 
     public void OnEndTimeline()
     {
+        if(_currentPlayableDirector != null)
+        {
+            _currentPlayableDirector.Stop();
+        }
         _currentPlayableDirector = null;
         DestroyCurrentDialogue();
         if (_nextPlayableDirector != null)
