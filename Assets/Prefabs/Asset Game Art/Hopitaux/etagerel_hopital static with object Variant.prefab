@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847249505278697504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.00000024201472, y: -0.0018902256, z: -0.000000044863555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4227597706040817538}
@@ -48,7 +48,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1017056930152874444
 Transform:
@@ -82,7 +82,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1017056930335070569
 Transform:
@@ -118,7 +118,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1017056930577501812
 Transform:
@@ -162,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1017056930845694550
 Transform:
@@ -217,7 +217,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1272317648391847466
 Transform:
@@ -247,7 +247,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2177511521077880444
 Transform:
@@ -278,7 +278,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2942108803979168421
 Transform:
@@ -289,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 2202015603964557494}
   m_LocalRotation: {x: 0.053595576, y: 0.031583194, z: 0.9980516, w: 0.0047961916}
   m_LocalPosition: {x: 4.843715, y: 4.0732574, z: -5.881537}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999994}
   m_Children:
   - {fileID: 3837962273286224485}
   m_Father: {fileID: 0}
@@ -326,16 +326,12 @@ GameObject:
   - component: {fileID: 7674467141274906605}
   - component: {fileID: 1852385786375979159}
   - component: {fileID: 2177511522704406703}
-  - component: {fileID: 2177511522704406702}
-  - component: {fileID: 2177511522704406697}
-  - component: {fileID: 2177511522704406696}
-  - component: {fileID: 2177511522704406699}
   m_Layer: 0
   m_Name: etagere_hopital_vitree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2246080571588657408
 Transform:
@@ -413,90 +409,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3772854, y: 238.34204, z: 57.783092}
   m_Center: {x: -0.00000029534772, y: -119.83073, z: -30.557913}
---- !u!54 &2177511522704406702
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254557772491435419}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 2
-  m_CollisionDetection: 0
---- !u!59 &2177511522704406697
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254557772491435419}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 175.8586, y: -2.4131784, z: 139.56833}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: 0
-    max: 180
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!114 &2177511522704406696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254557772491435419}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiPosition: {fileID: 1272317648391847467}
---- !u!114 &2177511522704406699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254557772491435419}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0dff9ad42cd8b34c953c756ad1e1200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
-  _hj: {fileID: 0}
-  _speed: 80
-  _inverseRotation: 0
-  _bounciness: 0.05
-  _needKey: 0
-  minLimit: 0
-  maxLimit: 180
 --- !u!1 &4718092373585449111
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +423,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4718092373585449110
 Transform:
@@ -550,7 +462,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4718092373913474932
 Transform:
@@ -595,7 +507,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4718092374132216424
 Transform:
@@ -627,16 +539,12 @@ GameObject:
   - component: {fileID: 6085982087312900898}
   - component: {fileID: 3387346173272283402}
   - component: {fileID: 2177511522704406704}
-  - component: {fileID: 2177511522704406707}
-  - component: {fileID: 2177511522704406706}
-  - component: {fileID: 2177511522704406701}
-  - component: {fileID: 2177511522704406700}
   m_Layer: 0
   m_Name: etagere_hopital_vitree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4051507865204279968
 Transform:
@@ -714,90 +622,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3772854, y: 238.34207, z: 55.859985}
   m_Center: {x: -0.00000086214897, y: -119.65391, z: 29.293055}
---- !u!54 &2177511522704406707
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7788901205885898039}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 2
-  m_CollisionDetection: 0
---- !u!59 &2177511522704406706
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7788901205885898039}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 1, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 177.1362, y: -2.4114091, z: 139.56833}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: 0
-    max: 180
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!114 &2177511522704406701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7788901205885898039}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiPosition: {fileID: 2177511521077880447}
---- !u!114 &2177511522704406700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7788901205885898039}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0dff9ad42cd8b34c953c756ad1e1200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
-  _hj: {fileID: 0}
-  _speed: 80
-  _inverseRotation: 0
-  _bounciness: 0.05
-  _needKey: 0
-  minLimit: 0
-  maxLimit: 180
 --- !u!1 &7944824808197169203
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +639,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4227597706040817538
 Transform:
@@ -973,6 +797,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5771787445089328465 stripped
@@ -992,6 +821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -1082,6 +916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -1243,6 +1082,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5168973216090586102 stripped
@@ -1262,6 +1106,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -1423,6 +1272,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5168973216025637469 stripped
@@ -1512,6 +1366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fiole_marron
+      objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
@@ -1603,6 +1462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5168973216380712371 stripped
@@ -1622,6 +1486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -1783,6 +1652,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840060505170036 stripped
@@ -1802,6 +1676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_ouverte
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9146187397143189393, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
         type: 3}
@@ -1966,7 +1845,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -2058,6 +1937,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061400518643 stripped
@@ -2148,6 +2032,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061335074590 stripped
@@ -2167,6 +2056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -2328,6 +2222,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061176728552 stripped
@@ -2418,6 +2317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061680155704 stripped
@@ -2437,6 +2341,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -2598,6 +2507,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061542694338 stripped
@@ -2688,6 +2602,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840061499392156 stripped
@@ -2707,6 +2626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -2858,6 +2782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840062464540986 stripped
@@ -2877,6 +2806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -3038,6 +2972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &4554840062285540634 stripped
@@ -3128,6 +3067,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5168973214506628543 stripped
@@ -3147,6 +3091,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_ouverte (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9146187397143189393, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
         type: 3}
@@ -3303,6 +3252,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_verte
       objectReference: {fileID: 0}
+    - target: {fileID: 8820350769884922447, guid: f1d9eebefb113144d9dc30679cd11f7a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1d9eebefb113144d9dc30679cd11f7a, type: 3}
 --- !u!4 &7228344996352636113 stripped
@@ -3322,6 +3276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_ouverte
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9146187397143189393, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
         type: 3}
@@ -3478,6 +3437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grande_boite_jaune
       objectReference: {fileID: 0}
+    - target: {fileID: 7332712559075050241, guid: 152795cfaf71bc549a88c8e40f499f41,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152795cfaf71bc549a88c8e40f499f41, type: 3}
 --- !u!4 &8933756318923599198 stripped
@@ -3497,6 +3461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_grise (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
@@ -3588,6 +3557,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_grise (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3672,6 +3646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_ouverte (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9146187397143189393, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
         type: 3}
@@ -3763,6 +3742,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_grise
       objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3847,6 +3831,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bouchon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160078054766734504, guid: f0468f3f8d7d0c8488d7515cb796f611,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160078054767161480, guid: f0468f3f8d7d0c8488d7515cb796f611,
         type: 3}
@@ -3937,6 +3926,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_ouverte (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146187397142694833, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9146187397143189393, guid: 9ea8509523559bb47aab56ebaa6f9cbc,
         type: 3}
@@ -4093,6 +4087,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &5200493017661458129 stripped
@@ -4112,6 +4111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_grise (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
@@ -4261,7 +4265,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -4282,6 +4286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_grise
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
@@ -4433,6 +4442,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965953090583291 stripped
@@ -4516,7 +4530,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -4603,6 +4617,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965953008920327 stripped
@@ -4622,6 +4641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_bleu (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944268674784753341, guid: 46dc78d2a260f9545b2884328c7ea03e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944268674784914077, guid: 46dc78d2a260f9545b2884328c7ea03e,
         type: 3}
@@ -4781,7 +4805,7 @@ PrefabInstance:
     - target: {fileID: 9039399361783279151, guid: 7b2f8b98630abeb44b627e1413806708,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2f8b98630abeb44b627e1413806708, type: 3}
@@ -4868,6 +4892,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &9205762363948762662 stripped
@@ -4943,6 +4972,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: grande_boite_jaune (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7332712559075050241, guid: 152795cfaf71bc549a88c8e40f499f41,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152795cfaf71bc549a88c8e40f499f41, type: 3}
 --- !u!4 &3790997269158671436 stripped
@@ -4962,6 +4996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_bleu (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944268674784753341, guid: 46dc78d2a260f9545b2884328c7ea03e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944268674784914077, guid: 46dc78d2a260f9545b2884328c7ea03e,
         type: 3}
@@ -5113,6 +5152,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965952722748979 stripped
@@ -5198,6 +5242,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 926280979877464493, guid: b12fe62801c80e249a03b6ff57de6bdc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b12fe62801c80e249a03b6ff57de6bdc, type: 3}
 --- !u!4 &6738963331762203212 stripped
@@ -5282,6 +5331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fiole_rouge (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
@@ -5373,6 +5427,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_jaune
       objectReference: {fileID: 0}
+    - target: {fileID: 4102297361075085469, guid: 1a2ec597cfc1a5942801fb3ce390e158,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2ec597cfc1a5942801fb3ce390e158, type: 3}
 --- !u!4 &7615900750399029066 stripped
@@ -5392,6 +5451,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_bleu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944268674784753341, guid: 46dc78d2a260f9545b2884328c7ea03e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944268674784914077, guid: 46dc78d2a260f9545b2884328c7ea03e,
         type: 3}
@@ -5543,6 +5607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965952880907200 stripped
@@ -5562,6 +5631,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_bleu (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944268674784753341, guid: 46dc78d2a260f9545b2884328c7ea03e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944268674784914077, guid: 46dc78d2a260f9545b2884328c7ea03e,
         type: 3}
@@ -5713,6 +5787,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &9205762365309477679 stripped
@@ -5803,6 +5882,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_jaune (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4102297361075085469, guid: 1a2ec597cfc1a5942801fb3ce390e158,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2ec597cfc1a5942801fb3ce390e158, type: 3}
 --- !u!4 &7615900751052870650 stripped
@@ -5886,7 +5970,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -5978,6 +6062,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_jaune (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4102297361075085469, guid: 1a2ec597cfc1a5942801fb3ce390e158,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2ec597cfc1a5942801fb3ce390e158, type: 3}
 --- !u!4 &7615900750866153890 stripped
@@ -6063,6 +6152,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_rouge
       objectReference: {fileID: 0}
+    - target: {fileID: 3359162839751503450, guid: 3aff0f0937e2fa349bf13ac77dd62b01,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3aff0f0937e2fa349bf13ac77dd62b01, type: 3}
 --- !u!4 &9205762365670879456 stripped
@@ -6082,6 +6176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_bleu (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944268674784753341, guid: 46dc78d2a260f9545b2884328c7ea03e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944268674784914077, guid: 46dc78d2a260f9545b2884328c7ea03e,
         type: 3}
@@ -6233,6 +6332,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965951831618065 stripped
@@ -6318,6 +6422,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: fiole_marron (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6202529715417687209, guid: 4e8a3511aa7db904992e8effe09c7120,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8a3511aa7db904992e8effe09c7120, type: 3}
 --- !u!4 &525965951723043660 stripped
@@ -6401,7 +6510,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -6493,6 +6602,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: boite_verte
       objectReference: {fileID: 0}
+    - target: {fileID: 8820350769884922447, guid: f1d9eebefb113144d9dc30679cd11f7a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1d9eebefb113144d9dc30679cd11f7a, type: 3}
 --- !u!4 &3278312290478630007 stripped
@@ -6582,6 +6696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: grande_boite_jaune
+      objectReference: {fileID: 0}
+    - target: {fileID: 7332712559075050241, guid: 152795cfaf71bc549a88c8e40f499f41,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152795cfaf71bc549a88c8e40f499f41, type: 3}
@@ -6681,7 +6800,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -6766,7 +6885,7 @@ PrefabInstance:
     - target: {fileID: 4425199854208050914, guid: c230c85cba8c6a044831a4b1f166e693,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c230c85cba8c6a044831a4b1f166e693, type: 3}
@@ -6866,7 +6985,7 @@ PrefabInstance:
     - target: {fileID: 9039399361783279151, guid: 7b2f8b98630abeb44b627e1413806708,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2f8b98630abeb44b627e1413806708, type: 3}
@@ -6966,7 +7085,7 @@ PrefabInstance:
     - target: {fileID: 9039399361783279151, guid: 7b2f8b98630abeb44b627e1413806708,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2f8b98630abeb44b627e1413806708, type: 3}
@@ -6987,6 +7106,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: boite_grise (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665792640183376505, guid: 014322bf27eeb614482e077b7d47633e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665792640183469657, guid: 014322bf27eeb614482e077b7d47633e,
         type: 3}
@@ -7141,7 +7265,7 @@ PrefabInstance:
     - target: {fileID: 9039399361783279151, guid: 7b2f8b98630abeb44b627e1413806708,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2f8b98630abeb44b627e1413806708, type: 3}
