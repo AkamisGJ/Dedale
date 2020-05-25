@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         _currentState = MyState.PRELOAD;
-        ChangeState(MyState.MAINMENU, "Main Menu");
+        ChangeState(MyState.MAINMENU, "0_MainMenu");
     }
 
     public void ChangeState(MyState nextState, string scene = null)
