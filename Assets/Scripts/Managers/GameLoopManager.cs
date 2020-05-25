@@ -178,7 +178,7 @@ public class GameLoopManager : Singleton<GameLoopManager>
 
     void Start()
     {
-        if(_startPlayer != null){
+        if (_startPlayer != null){
             _startPlayer();
         }
         if(_startInputManager != null){
