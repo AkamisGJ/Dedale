@@ -100,6 +100,7 @@ public class PlayerAgentController : MonoBehaviour
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
         _countZoom = 0;
+        GameLoopManager.Instance.IsPaused = false;
     }
 
     void OnUpdate()
