@@ -113,6 +113,10 @@
 	<object class="MixerBusEffectChain" id="{bd7f7ba9-109a-4bd0-b306-e4ac501f0d9e}">
 		<relationship name="effects">
 			<destination>{5f20d88a-2733-406d-a5d9-d1badaca8e8b}</destination>
+			<destination>{98da0de3-3632-477c-8ee7-4be106f9235d}</destination>
+			<destination>{016cc662-d428-4500-ac2b-92421724a7ba}</destination>
+			<destination>{f2071d7b-56c0-49fb-870d-521766ca4d6b}</destination>
+			<destination>{13eec602-f117-4387-bf7a-61e29f440d28}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1c112bca-7fe6-48c2-9c1c-d08afb0a270e}" />
@@ -124,5 +128,36 @@
 	</object>
 	<object class="MixerBusPanner" id="{7500f937-f478-4a9a-a3c6-3b7e6199ae7c}" />
 	<object class="MixerBusFader" id="{5f20d88a-2733-406d-a5d9-d1badaca8e8b}" />
+	<object class="PitchShifterEffect" id="{98da0de3-3632-477c-8ee7-4be106f9235d}">
+		<property name="pitch">
+			<value>1.05000007</value>
+		</property>
+		<property name="overlap">
+			<value>1.20000005</value>
+		</property>
+	</object>
+	<object class="ChorusEffect" id="{016cc662-d428-4500-ac2b-92421724a7ba}" />
+	<object class="DelayEffect" id="{f2071d7b-56c0-49fb-870d-521766ca4d6b}">
+		<property name="delay">
+			<value>240</value>
+		</property>
+		<property name="feedback">
+			<value>50.5</value>
+		</property>
+		<property name="level">
+			<value>-30</value>
+		</property>
+		<property name="dryLevel">
+			<value>-4</value>
+		</property>
+	</object>
+	<object class="ThreeEQEffect" id="{13eec602-f117-4387-bf7a-61e29f440d28}">
+		<property name="lowGain">
+			<value>5.5</value>
+		</property>
+		<property name="highGain">
+			<value>-19</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{ff8b0244-813e-41c5-b912-f4324db6f588}" />
 </objects>
