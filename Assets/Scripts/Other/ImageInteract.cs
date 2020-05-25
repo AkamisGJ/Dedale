@@ -89,6 +89,7 @@ public class ImageInteract : MonoBehaviour
         _currentImage.color = color;
         _isFocus = false;
         _playerCamera = PlayerManager.Instance.CameraPlayer;
+        GameLoopManager.Instance.GameLoopPortal += OnUpdate;
     }
 
     void SpawnCanvas()
@@ -99,34 +100,37 @@ public class ImageInteract : MonoBehaviour
         _canvas.transform.position = _uiPosition.transform.position;
     }
 
-    void Update()
+    void OnUpdate()
     {
-        if(_canShowLock == true && PlayerManager.Instance.HaveKey == true)
+        if (PlayerManager.Instance.CameraUI != null)
         {
-            LockedDoor();
-        }
-        _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
-        RaycastHit raycastHit;
-        Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position),_playerData.CantSeeInteractionHelperBehindThis);
-        if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
-        {
-            Color color = _currentImage.color;
-            color.a = 1;
-            _currentImage.color = color;
-        }
-        else
-        {
-            Color color = _currentImage.color;
-            color.a = 0;
-            _currentImage.color = color;
-        }
-        if(_isFocus == true)
-        {
-            ShowImageInput();
-        }
-        else
-        {
-            ShowImageInteraction();
+            if (_canShowLock == true && PlayerManager.Instance.HaveKey == true)
+            {
+                LockedDoor();
+            }
+            _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
+            RaycastHit raycastHit;
+            Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
+            if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
+            {
+                Color color = _currentImage.color;
+                color.a = 1;
+                _currentImage.color = color;
+            }
+            else
+            {
+                Color color = _currentImage.color;
+                color.a = 0;
+                _currentImage.color = color;
+            }
+            if (_isFocus == true)
+            {
+                ShowImageInput();
+            }
+            else
+            {
+                ShowImageInteraction();
+            }
         }
     }
 
@@ -161,6 +165,14 @@ public class ImageInteract : MonoBehaviour
             Color nextColor = _currentImage.color;
             color.a = 1;
             _currentImage.color = nextColor;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopPortal -= OnUpdate;
         }
     }
 }

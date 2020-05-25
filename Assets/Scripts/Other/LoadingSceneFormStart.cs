@@ -9,23 +9,23 @@ public class LoadingSceneFormStart : MonoBehaviour
 
     void Start()
     {
+        if(GameManager.Instance.NextScene != null)
+        {
+            _mainScene = GameManager.Instance.NextScene;
+        }
         StartCoroutine(LoadMySceneAsync());
-        GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
     }
 
-    private void OnUpdate()
+    private void OnUpdate(AsyncOperation asyncOperation)
     {
-        Debug.Log(_mainSceneAsync.isDone);
-        if(_mainSceneAsync.isDone)
-        {
-            GameManager.Instance.ChangeState(GameManager.MyState.GAME);
-            GameLoopManager.Instance.GameLoopPlayer -= OnUpdate;
-        }
+        GameManager.Instance.ChangeState(GameManager.MyState.GAME, _mainScene);
+        _mainSceneAsync.completed -= OnUpdate;
     }
 
     IEnumerator LoadMySceneAsync()
     {
         _mainSceneAsync = SceneManager.LoadSceneAsync(_mainScene, LoadSceneMode.Additive);
+        _mainSceneAsync.completed += OnUpdate;
         yield return null;
     }
 }

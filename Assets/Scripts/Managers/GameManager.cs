@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     }
     private MyState _currentState = MyState.PRELOAD;
     private Dictionary<MyState, IGameState> _states = null;
-    private string _nextSceneName = "Level1";
+    private string _nextSceneName = "1_Introduction Audio";
     #endregion Fields
 
     #region Properties
@@ -45,12 +45,12 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeState(MyState nextState, string scene = null)
     {
-        _states[_currentState].Exit();
-        _currentState = nextState;
-        if(_currentState == MyState.GAME)
+        if (scene != null)
         {
             _nextSceneName = scene;
         }
+        _states[_currentState].Exit();
+        _currentState = nextState;
         _states[nextState].Enter();
     }
 }

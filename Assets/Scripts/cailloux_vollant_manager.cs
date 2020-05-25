@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class cailloux_vollant_manager : MonoBehaviour
 {
+    /*
     //Manager
     [InfoBox("This script will make floating all the object on the scene")]
     cailloux_vollant[] floatingObjects = null;
@@ -14,9 +15,9 @@ public class cailloux_vollant_manager : MonoBehaviour
 
         foreach (cailloux_vollant item in floatingObjects)
         {
-            item.random_startTime = SetRandomTime();
-            item.initial_position = item.transform.position;
-            item.initialRotation = item.transform.rotation;
+            item._randomStartTime = SetRandomTime();
+            item._initialPosition = item.transform.position;
+            item._initialRotation = item.transform.rotation;
         }
     }
 
@@ -35,23 +36,24 @@ public class cailloux_vollant_manager : MonoBehaviour
     void ChangeRotation(){
         foreach (cailloux_vollant item in floatingObjects)
         {
-            if(item.transform.rotation == item.newRotation || item.lerpRotationValue > 1f){
-                item.newRotation = Random.rotation;
-                item.initialRotation = item.transform.rotation;
-                item.lerpRotationValue = 0f;
+            if(item.transform.rotation == item._newRotation || item._lerpRotationValue > 1f){
+                item._newRotation = Random.rotation;
+                item._initialRotation = item.transform.rotation;
+                item._lerpRotationValue = 0f;
             }
-            item.lerpRotationValue += Time.deltaTime * item.speedRotation;
-            item.transform.rotation = Quaternion.Lerp(item.initialRotation, item.newRotation, item.lerpRotationValue);
+            item._lerpRotationValue += Time.deltaTime * item._speedRotation;
+            item.transform.rotation = Quaternion.Lerp(item._initialRotation, item._newRotation, item._lerpRotationValue);
         }
     }
 
     void MovePosition(){
         foreach (cailloux_vollant item in floatingObjects)
         {
-            item.time = Mathf.Sin(Time.time + item.random_startTime);
-            Vector3 new_position = item.initial_position;
-            new_position.y += item.curve.Evaluate(item.time);
+            item._timePosition = Mathf.Sin(Time.time + item._randomStartTime);
+            Vector3 new_position = item._initialPosition;
+            new_position.y += item.curve.Evaluate(item._timePosition);
             item.transform.position = new_position;
         }
     }
+    */
 }

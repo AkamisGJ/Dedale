@@ -31,7 +31,7 @@ public class DialogueManager : MonoBehaviour
 
     public void OnStartTimeline(PlayableDirector playableDirector, DialogueData dialogueData)
     {
-        if (_currentPlayableDirector == null)
+        if (_currentPlayableDirector == null && playableDirector != null)
         {
             _dialogueTransition = 0;
             _currentPlayableDirector = playableDirector;
