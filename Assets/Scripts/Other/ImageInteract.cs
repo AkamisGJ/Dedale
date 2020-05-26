@@ -87,7 +87,10 @@ public class ImageInteract : MonoBehaviour
         }
         _currentImage = _imageInteraction;
         _currentImage.transform.localPosition = Vector3.zero;
-        _lockImage.transform.localPosition = Vector3.zero;
+        if(_lockImage != null)
+        {
+            _lockImage.transform.localPosition = Vector3.zero;
+        }
         Color color = _inputImage.color;
         color.a = 0;
         _inputImage.color = color;
