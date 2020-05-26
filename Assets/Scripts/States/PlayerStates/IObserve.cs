@@ -143,6 +143,7 @@ public class IObserve : IPlayerState
 
     public void Exit()
     {
+        InputManager.Instance.MousePosition -= LookObject;
         _lightPlayer.enabled = false;
         _objectCollider.isTrigger = false;
         _grabObject.transform.SetParent(null);
@@ -158,7 +159,6 @@ public class IObserve : IPlayerState
         //_grabObject.transform.position = _originPositionGrabObject;
         //_grabObject.transform.rotation = _originRotationGrabObject;
         _grabObject = null;
-        InputManager.Instance.MousePosition -= LookObject;
         _playerAgentController.AnimatorCamera.SetBool("Idle", true);
         _playerAgentController.AnimatorCamera.SetBool("Walk", false);
         _playerAgentController.AnimatorCamera.SetBool("Run", false);
@@ -167,10 +167,12 @@ public class IObserve : IPlayerState
 
     private void LookObject(float mousePositionX, float mousePositionY)
     {
-        float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
-        float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
-        _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
-        _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
-        
+        if(_grabObject != null)
+        {
+            float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
+            float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
+            _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
+            _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
+        }
     }
 }
