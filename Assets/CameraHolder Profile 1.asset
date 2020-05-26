@@ -22,7 +22,7 @@ MonoBehaviour:
     m_Value: 1
   focusDistance:
     m_OverrideState: 0
-    m_Value: 100
+    m_Value: 0.1
     min: 0.1
   nearFocusStart:
     m_OverrideState: 0
@@ -66,98 +66,6 @@ MonoBehaviour:
   m_Resolution:
     m_OverrideState: 0
     m_Value: 2
---- !u!114 &-2645940959701594103
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9008a067f4d626c4d8bc4bc48f04bb89, type: 3}
-  m_Name: AmbientOcclusion
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  quality:
-    m_OverrideState: 0
-    m_Value: 1
-  rayTracing:
-    m_OverrideState: 0
-    m_Value: 0
-  intensity:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 4
-  directLightingStrength:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 1
-  radius:
-    m_OverrideState: 0
-    m_Value: 2
-    min: 0.25
-    max: 5
-  temporalAccumulation:
-    m_OverrideState: 0
-    m_Value: 1
-  ghostingReduction:
-    m_OverrideState: 0
-    m_Value: 0.5
-    min: 0
-    max: 1
-  blurSharpness:
-    m_OverrideState: 0
-    m_Value: 0.1
-    min: 0
-    max: 1
-  layerMask:
-    m_OverrideState: 0
-    m_Value:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  rayLength:
-    m_OverrideState: 0
-    m_Value: 0.5
-    min: 0
-    max: 50
-  sampleCount:
-    m_OverrideState: 0
-    m_Value: 4
-    min: 1
-    max: 64
-  denoise:
-    m_OverrideState: 0
-    m_Value: 0
-  denoiserRadius:
-    m_OverrideState: 0
-    m_Value: 0.5
-    min: 0.001
-    max: 1
-  m_StepCount:
-    m_OverrideState: 0
-    m_Value: 6
-    min: 2
-    max: 32
-  m_FullResolution:
-    m_OverrideState: 0
-    m_Value: 0
-  m_MaximumRadiusInPixels:
-    m_OverrideState: 0
-    m_Value: 40
-    min: 16
-    max: 256
-  m_BilateralUpsample:
-    m_OverrideState: 0
-    m_Value: 1
-  m_DirectionCount:
-    m_OverrideState: 0
-    m_Value: 2
-    min: 1
-    max: 6
 --- !u!114 &-1234255340212703411
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -173,43 +81,43 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   quality:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   threshold:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0
     min: 0
     max: 1
   scatter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.5
     min: 0
     max: 1
   tint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
   dirtTexture:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {fileID: 0}
   dirtIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: 0
   anamorphic:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   m_Resolution:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   m_HighQualityFiltering:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
 --- !u!114 &-399334791771628803
 MonoBehaviour:
@@ -223,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1bfcd0f0fa7b8468f281d6bbbaf320, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: -0.047
     min: -1
     max: 1
   xMultiplier:
@@ -244,7 +152,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   scale:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.01
     min: 0.01
     max: 5
@@ -261,13 +169,13 @@ MonoBehaviour:
   m_Name: CameraHolder Profile 1
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -2645940959701594103}
   - {fileID: -4477687500906396269}
   - {fileID: 3639380814825558673}
   - {fileID: 5444641408733341205}
   - {fileID: -399334791771628803}
   - {fileID: -1234255340212703411}
   - {fileID: 8951785883112694414}
+  - {fileID: 0}
 --- !u!114 &478511905099479449
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -384,7 +292,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {fileID: 0}
   intensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
     min: 0
     max: 1
