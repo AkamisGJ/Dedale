@@ -25,6 +25,7 @@ public class DialogueScript : MonoBehaviour
         {
             _eventEmitter.Play();
         }
+        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
     }
 
     public void ClearText()
@@ -57,6 +58,26 @@ public class DialogueScript : MonoBehaviour
         }
     }
 
+    private void OnUpdate()
+    {
+        if(GameLoopManager.Instance.IsPaused == true && _playableDirector.state == PlayState.Playing)
+        {
+            _playableDirector.Pause();
+            if(_eventEmitter != null)
+            {
+                _eventEmitter.EventInstance.setPaused(true);
+            }
+        }
+        else if(GameLoopManager.Instance.IsPaused == false && _playableDirector.state == PlayState.Paused)
+        {
+            _playableDirector.Resume();
+            if (_eventEmitter != null)
+            {
+                _eventEmitter.EventInstance.setPaused(false);
+            }
+        }
+    }
+
     public void OnExit()
     {
         _dialogueManager.OnEndTimeline();
@@ -64,6 +85,15 @@ public class DialogueScript : MonoBehaviour
         {
             _eventEmitter.Stop();
         }
+        GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
         _dialogueIndex = 0;
+    }
+
+    private void OnDestroy()
+    {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
+        }
     }
 }

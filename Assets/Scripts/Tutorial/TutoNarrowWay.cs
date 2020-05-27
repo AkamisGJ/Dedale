@@ -6,7 +6,7 @@ public class TutoNarrowWay : MonoBehaviour
 {
     private float _fade = 0;
     private bool _fading = false;
-    [SerializeField] private GameObject _tutoMovement = null;
+    [SerializeField] private GameObject _tutoNarrowWay = null;
     [SerializeField] private TextMeshProUGUI _textFirstPart = null;
     [SerializeField] private TextMeshProUGUI _textSecondPart = null;
     private Color _color = Color.white;
@@ -103,7 +103,7 @@ public class TutoNarrowWay : MonoBehaviour
                 _imageSecondPart.color = _color;
                 if (_fade == 0 && _tutoGoBack == false)
                 {
-                    Destroy(_tutoMovement);
+                    Destroy(_tutoNarrowWay);
                     Destroy(this.gameObject);
                 }
                 else if(_fade == 0 && _tutoGoBack == true)
