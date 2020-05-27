@@ -43,5 +43,8 @@ public class GetTimelineBinding : MonoBehaviour
 
         var track = timelineAsset.GetOutputTrack(3);
         timeline.SetGenericBinding(track, cameraAnimator);
+
+        track = timelineAsset.GetOutputTrack(4);
+        timeline.SetGenericBinding(track, cameraAnimator);
     }
 }

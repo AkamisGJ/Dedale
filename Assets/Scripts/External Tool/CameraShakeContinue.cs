@@ -42,7 +42,7 @@ void Update()
         {
             camTransform.localPosition = Vector3.Lerp(camTransform.localPosition,originalPos + Random.insideUnitSphere * shakeAmount,Time.deltaTime * 3);
 
-            shakeDuration -= Time.deltaTime * decreaseFactor;
+            //shakeDuration -= Time.deltaTime * decreaseFactor;
         }
         else
         {
