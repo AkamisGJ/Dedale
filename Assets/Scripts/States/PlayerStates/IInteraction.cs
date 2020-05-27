@@ -29,7 +29,7 @@ public class IInteraction : IPlayerState
     {
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null, "NoAnim");
         }
     }
 

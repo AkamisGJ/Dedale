@@ -15,6 +15,7 @@ public class ImageInteract : MonoBehaviour
     private float _distance = 0;
     private bool _canShowLock = false;
     private Camera _playerCamera = null;
+    private Door _door = null;
     public bool IsFocus { get => _isFocus; set => _isFocus = value; }
     public GameObject UiPosition { get => _uiPosition; }
 
@@ -38,7 +39,7 @@ public class ImageInteract : MonoBehaviour
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
         {
             SpawnCanvas();
-            if(GetComponent<Door>() != null && GetComponent<Door>().NeedKey == true)
+            if(GetComponent<Door>() != null && GetComponent<Door>().IsLocked == true)
             {
                 _lockImage = Instantiate(_playerData.Lock, _canvas.transform, true);
                 _unlockImage = Instantiate(_playerData.InteractionHelper, _canvas.transform, true);
@@ -47,11 +48,16 @@ public class ImageInteract : MonoBehaviour
                 colorUnlock.a = 0;
                 _inputImage.color = colorUnlock;
                 _canShowLock = true;
+                _door = GetComponent<Door>();
             }
-            else
+            else if(GetComponent<Door>() != null)
             {
                 _imageInteraction = Instantiate(_playerData.InteractionHelper, _canvas.transform, true);
+                _lockImage = Instantiate(_playerData.Lock, _canvas.transform, true);
+                Color colorLock = _lockImage.color;
+                colorLock.a = 0;
                 _canShowLock = false;
+                _door = GetComponent<Door>();
             }
             _distance = _playerData.DistanceHelperInteraction;
         }
@@ -81,6 +87,10 @@ public class ImageInteract : MonoBehaviour
         }
         _currentImage = _imageInteraction;
         _currentImage.transform.localPosition = Vector3.zero;
+        if(_lockImage != null)
+        {
+            _lockImage.transform.localPosition = Vector3.zero;
+        }
         Color color = _inputImage.color;
         color.a = 0;
         _inputImage.color = color;
@@ -89,6 +99,7 @@ public class ImageInteract : MonoBehaviour
         _currentImage.color = color;
         _isFocus = false;
         _playerCamera = PlayerManager.Instance.CameraPlayer;
+        GameLoopManager.Instance.GameLoopPortal += OnUpdate;
     }
 
     void SpawnCanvas()
@@ -99,41 +110,48 @@ public class ImageInteract : MonoBehaviour
         _canvas.transform.position = _uiPosition.transform.position;
     }
 
-    void Update()
+    void OnUpdate()
     {
-        if(_canShowLock == true && PlayerManager.Instance.HaveKey == true)
+        if (PlayerManager.Instance.CameraUI != null)
         {
-            LockedDoor();
-        }
-        _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
-        RaycastHit raycastHit;
-        Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position),_playerData.CantSeeInteractionHelperBehindThis);
-        if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
-        {
-            Color color = _currentImage.color;
-            color.a = 1;
-            _currentImage.color = color;
-        }
-        else
-        {
-            Color color = _currentImage.color;
-            color.a = 0;
-            _currentImage.color = color;
-        }
-        if(_isFocus == true)
-        {
-            ShowImageInput();
-        }
-        else
-        {
-            ShowImageInteraction();
+            if(_door != null && _door.IsLocked == true)
+            {
+                _canShowLock = _door.IsLocked;
+            }
+            if (_canShowLock == true && _imageInteraction != _lockImage)
+            {
+                LockedDoor();
+            }
+            _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
+            RaycastHit raycastHit;
+            Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
+            if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
+            {
+                Color color = _currentImage.color;
+                color.a = 1;
+                _currentImage.color = color;
+            }
+            else
+            {
+                Color color = _currentImage.color;
+                color.a = 0;
+                _currentImage.color = color;
+            }
+            if (_isFocus == true)
+            {
+                ShowImageInput();
+            }
+            else
+            {
+                ShowImageInteraction();
+            }
         }
     }
 
     void LockedDoor()
     {
-        _canShowLock = false;
-        _imageInteraction = _unlockImage;
+        _imageInteraction = _lockImage;
+        _lockImage.transform.localPosition = Vector3.zero;
     }
 
     public void ShowImageInteraction()
@@ -161,6 +179,14 @@ public class ImageInteract : MonoBehaviour
             Color nextColor = _currentImage.color;
             color.a = 1;
             _currentImage.color = nextColor;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopPortal -= OnUpdate;
         }
     }
 }

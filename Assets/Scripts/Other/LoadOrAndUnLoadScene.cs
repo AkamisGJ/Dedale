@@ -21,32 +21,38 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
 
     private void OnUpdate()
     {
-        if(_loadingCanvas == null || _loadingCanvas.enabled == true)
-        {
-            LoadScene();
-            GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
-        }
+        //if(_loadingCanvas == null || _loadingCanvas.enabled == true)
+        LoadScene();
+        GameLoopManager.Instance.GameLoopLoadingScene -= OnUpdate;
     }
 
     public void StartLoadScene()
     {
         _sceneFinishToLoad = 0;
+        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
+    }
+
+    private void SpawnCanvas()
+    {
         GameLoopManager.Instance.IsPaused = true;
-        if(PlayerManager.Instance.PlayerController != null)
+        if (PlayerManager.Instance.PlayerController != null)
         {
             _playerData = PlayerManager.Instance.PlayerController.PlayerData;
             _loadingCanvas = Instantiate(_playerData.LoadingCanvas, null, true);
         }
-        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
     }
 
     private void LoadScene()
     {
-        if(_nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
+        if(_i < _nextScenesNames.Length && _nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
         {
+            if(_loadingCanvas == null)
+            {
+                SpawnCanvas();
+            }
             StartCoroutine(LoadSceneCoroutine(_i));
         }
-        else 
+        else if(_i < _nextScenesNames.Length)
         {
             _sceneFinishToLoad += 1;
             if (_nextScenesNames.Length > _sceneFinishToLoad)
@@ -63,14 +69,19 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         {
             _asyncOperationLoad.completed -= OnCompleted;
         }
-        if (_nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
+        if (_i < _nextScenesNames.Length && _nextScenesNames[_i] != null && SceneManager.GetSceneByName(_nextScenesNames[_i]).isLoaded == false)
         {
+            if (_loadingCanvas == null)
+            {
+                SpawnCanvas();
+            }
             StartCoroutine(LoadSceneCoroutine(_i));
         }
     }
 
     IEnumerator LoadSceneCoroutine(int i)
     {
+        yield return new WaitForSeconds(0.3f);
         if (_nextScenesNames[i] != string.Empty)
         {
             _asyncOperationLoad = SceneManager.LoadSceneAsync(_nextScenesNames[i], _sceneParameters);

@@ -24,10 +24,10 @@ public class DialogueComportment : MonoBehaviour
         _color.a = _fade;
         _image.color = _color;
         _textMeshPro.alpha = _fade;
-
+        GameLoopManager.Instance.GameLoopPlayer += OnUpdate;
     }
 
-    void Update()
+    void OnUpdate()
     {
         if(_fading == false)
         {
@@ -64,6 +64,10 @@ public class DialogueComportment : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopPlayer -= OnUpdate;
+        }
         _dialogueManager.Dialogues.Remove(this.gameObject);
     }
 }

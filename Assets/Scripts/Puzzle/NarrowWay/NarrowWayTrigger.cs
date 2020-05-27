@@ -48,10 +48,6 @@ public class NarrowWayTrigger : MonoBehaviour
             _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
             _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _enterTransform.rotation, _lerpStartPositionPlayer);
             _playerController.MainCamera.fieldOfView = Mathf.Lerp(_startFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
-            if(_onEnter != null)
-            {
-                _onEnter.Invoke();
-            }
             if (_lerpStartPositionPlayer > 1)
             {
                 PlayerManager.Instance.IsInNarrowWay = true;
@@ -59,6 +55,10 @@ public class NarrowWayTrigger : MonoBehaviour
                 _playerController.ChangeState(PlayerAgentController.MyState.NARROWWAY);
                 GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
                 _lerpStartPositionPlayer = 0;
+                if (_onEnter != null)
+                {
+                    _onEnter.Invoke();
+                }
             }
         }
     }
@@ -77,10 +77,6 @@ public class NarrowWayTrigger : MonoBehaviour
         _playerController.transform.position = Vector3.Lerp(_startPlayerPosition, _exitTransform.position, _lerpExitNarrowWay);
         _playerController.transform.rotation = Quaternion.Lerp(_startPlayerQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
-        if(_onExit != null)
-        {
-            _onExit.Invoke();
-        }
         if (_lerpExitNarrowWay >= 1)
         {
             _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
@@ -90,6 +86,10 @@ public class NarrowWayTrigger : MonoBehaviour
             _collider.isTrigger = false;
             _isStarted = false;
             _pairedColliderNarowWay.isTrigger = false;
+            if (_onExit != null)
+            {
+                _onExit.Invoke();
+            }
         }
     }
 

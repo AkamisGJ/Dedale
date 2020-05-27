@@ -171,7 +171,8 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 042168eb9105acf48a9eb6b1ffea2f8d, type: 2}
   _cameraHolder: {fileID: 3357959778010603219}
   _objectHolder: {fileID: 2807965667608906081}
-  _animatorCamera: {fileID: 2993866517244245693}
+  _animatorCamera: {fileID: 2630322305557368833}
+  _animator: {fileID: 2630322305557368833}
 --- !u!114 &114944398317296242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +286,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3357959778010603219}
-  - component: {fileID: 2993866517244245693}
+  - component: {fileID: 2630322305557368833}
+  - component: {fileID: 7865480301302488880}
+  - component: {fileID: 3659638700045707810}
+  - component: {fileID: 7984205561034140949}
+  - component: {fileID: 3790104531367509583}
+  - component: {fileID: 4636993569859431776}
+  - component: {fileID: 5716476019538386466}
+  - component: {fileID: 7436907211467593523}
+  - component: {fileID: 1587833637700875324}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -307,7 +316,7 @@ Transform:
   m_Father: {fileID: 1607918575787650602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2993866517244245693
+--- !u!95 &2630322305557368833
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -317,7 +326,7 @@ Animator:
   m_GameObject: {fileID: 9050726462071773923}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 23dfec41ccaf71543a4ba93789a36f9d, type: 2}
+  m_Controller: {fileID: 9100000, guid: c9d965ae44a477749a07db53f8170f36, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -326,3 +335,141 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7865480301302488880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 50
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 65a75476103755e4bbe956fc4dba363c, type: 2}
+--- !u!114 &3659638700045707810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728047960a2d8f0439635004685b238e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _colorValue: {r: 0, g: 0, b: 0, a: 1}
+  _centerValue: {x: 0, y: 0}
+  _intensityValue: 0
+  _smoothnessValue: 0.01
+  _roundnessValue: 0
+  _rounded: 0
+--- !u!114 &7984205561034140949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8ffd4580a2b2c4c81c86cd058c3194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _intensity: 0
+  _directLightingStrenght: 0
+  _radius: 0.25
+  _ambientOcclusionQuality: 0
+  _ghostingReduction: 0
+--- !u!114 &3790104531367509583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9405ae1d3bb8bee4bbfa5621642d4099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _fixedExposureValue: 0
+  _compensationValue: 0
+  _limitMinValue: 0
+  _limitMaxValue: 0
+  _speedDarkToLightValue: 0
+  _speedLightToDarkValue: 0
+--- !u!114 &4636993569859431776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bddd3b3c6a302c4486582c8a2dfb413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _bloomIntensityValue: 0
+  _bloomQuality: 0
+  _bloomThresholdValue: 0
+  _bloomScatterValue: 0
+  _bloomTintValue: {r: 1, g: 1, b: 1, a: 1}
+  _lensDirtIntensity: 0
+--- !u!114 &5716476019538386466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fc9046ba788d54993d1f01ea925c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _intensityValue: 0
+--- !u!114 &7436907211467593523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45f31ed66be69847add34fe07b16898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _intensityValue: 0
+  _xMultiplierValue: 0
+  _yMultiplierValue: 0
+  _centerValue: {x: 0, y: 0}
+  _scaleValue: 0.01
+--- !u!114 &1587833637700875324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050726462071773923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bb0b88b3590ab46a63665d6f3f59ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volume: {fileID: 7865480301302488880}
+  _focusDistanceValue: 0.1
