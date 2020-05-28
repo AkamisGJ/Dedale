@@ -500,8 +500,8 @@ public class IMouvement : IPlayerState
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
-            _rotationX += _currentMouseY + mousePositionY * _currentSensitivityMouseX;
-            _rotationY += _currentMouseX + mousePositionX * _currentSensitivityMouseY;
+            _rotationX += _currentMouseY + mousePositionY * _currentSensitivityMouseX * PlayerManager.Instance.MouseSensitivityMultiplier;
+            _rotationY += _currentMouseX + mousePositionX * _currentSensitivityMouseY * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);

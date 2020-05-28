@@ -14,18 +14,24 @@ public class MenuPause : MonoBehaviour
     {
         _pauseMenu.SetActive(true);
         _settings.SetActive(false);
-        _sliderMusique.value = SoundManager.Instance.InitAudioMixer("Sound Design");
-        _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Dialogue et voix");
+        //_sliderMusique.value = SoundManager.Instance.InitAudioMixer("Sound Design");
+        //_sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Dialogue et voix");
+        _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
     }
 
     public void OnChangeVolumeDialogue()
     {
-        SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
+        //SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
     }
 
     public void OnChangeVolumeMusique()
     {
-        SoundManager.Instance.MixerSoundDesign(_sliderMusique.value);
+        //SoundManager.Instance.MixerSoundDesign(_sliderMusique.value);
+    }
+
+    public void OnChangeMouseSensitivity()
+    {
+        PlayerManager.Instance.MouseSensitivityMultiplier = _sliderMouseSensitivity.value;
     }
 
     public void OnClickContinue()

@@ -116,8 +116,8 @@ public class IInfintyCorridor : IPlayerState
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
-            _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
-            _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY;
+            _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX * PlayerManager.Instance.MouseSensitivityMultiplier;
+            _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor + ReductionVisionY, -_playerData.AngleYInfintyCorridor + 360 - ReductionVisionY);
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleXInfintyCorridor + ReductionVisionX, _playerData.AngleXInfintyCorridor - ReductionVisionX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
