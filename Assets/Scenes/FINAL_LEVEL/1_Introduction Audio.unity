@@ -345,7 +345,7 @@ MonoBehaviour:
   _playableDirector: {fileID: 911935892}
   _dialogueData: {fileID: 11400000, guid: 7e08580a0e56de743985b4c3e8a3b244, type: 2}
   _dialogueManager: {fileID: 1291878891}
-  _eventEmitter: {fileID: 0}
+  _eventEmitter: {fileID: 2104121388}
 --- !u!114 &911935891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +570,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _timer: 2
 --- !u!4 &1212192861
 Transform:
   m_ObjectHideFlags: 0
@@ -597,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextScenesNames:
-  - 2_Le reveil
+  - 2_Le reveil david version
   _previousScenesNames: []
   _sceneParameters:
     m_LoadSceneMode: 0
@@ -885,8 +886,8 @@ MonoBehaviour:
   _onSkipIntro:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1291878891}
-        m_MethodName: OnEndTimeline
+      - m_Target: {fileID: 911935890}
+        m_MethodName: OnExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

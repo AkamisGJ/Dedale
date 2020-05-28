@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3455790572421002415}
   - component: {fileID: 3455790572421002414}
   - component: {fileID: 3455790572421002413}
-  - component: {fileID: 3455790572421002412}
+  - component: {fileID: 1281429002}
   m_Layer: 0
   m_Name: Voix_Sylvain et charlene - Timeline -
   m_TagString: Untagged
@@ -43,7 +43,7 @@ PlayableDirector:
   m_GameObject: {fileID: 3455790572421002411}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 71c2e7815040f824c94767c75b7b952c, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 5d7e4bdaa6ee29f429d6dc0ccce5d39e, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -56,6 +56,18 @@ PlayableDirector:
   - key: {fileID: -4883741997480441152, guid: 71c2e7815040f824c94767c75b7b952c, type: 2}
     value: {fileID: 3455790572421002414}
   - key: {fileID: -9193925489802491531, guid: 71c2e7815040f824c94767c75b7b952c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2093578478504325360, guid: 71c2e7815040f824c94767c75b7b952c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5214181066171800080, guid: 71c2e7815040f824c94767c75b7b952c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4883741997480441152, guid: 5d7e4bdaa6ee29f429d6dc0ccce5d39e, type: 2}
+    value: {fileID: 3455790572421002414}
+  - key: {fileID: -9193925489802491531, guid: 5d7e4bdaa6ee29f429d6dc0ccce5d39e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2093578478504325360, guid: 5d7e4bdaa6ee29f429d6dc0ccce5d39e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5214181066171800080, guid: 5d7e4bdaa6ee29f429d6dc0ccce5d39e, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
@@ -132,22 +144,21 @@ MonoBehaviour:
   _dialogueData: {fileID: 11400000, guid: 11559828556026d4b89af7790e15f7a2, type: 2}
   _dialogueManager: {fileID: 0}
   _eventEmitter: {fileID: 0}
---- !u!95 &3455790572421002412
-Animator:
-  serializedVersion: 3
+--- !u!114 &1281429002
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3455790572421002411}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b6f187b1da40443b1dd0cf096cc9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cameraAnimator: {fileID: 0}
+  autobindingTracks: 1

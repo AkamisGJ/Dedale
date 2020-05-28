@@ -8,11 +8,11 @@ public class SkipIntro : MonoBehaviour
     [SerializeField] Slider _sliderObject = null;
     private float _progressBar = 0;
     [SerializeField] float _speed = 2;
-    private bool _eIsPressed = false;
+    private bool _IsPressed = false;
 
     void Start()
     {
-        _eIsPressed = false;
+        _IsPressed = false;
         _progressBar = 0;
         GameLoopManager.Instance.LoopQTE += OnUpdate;
     }
@@ -21,13 +21,13 @@ public class SkipIntro : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) == true)
         {
-            _eIsPressed = true;
+            _IsPressed = true;
         }
         if (Input.GetKeyUp(KeyCode.E) == true)
         {
-            _eIsPressed = false;
+            _IsPressed = false;
         }
-        if(_eIsPressed == true)
+        if(_IsPressed == true)
         {
             ProgressBar(1);
         }

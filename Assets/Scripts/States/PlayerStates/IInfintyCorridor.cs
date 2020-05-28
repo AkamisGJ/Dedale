@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class IInfintyCorridor : IPlayerState
 {
@@ -12,6 +10,7 @@ public class IInfintyCorridor : IPlayerState
     private float _rotationX = 0;
     private float _rotationY = 0;
     private float _acceleration = 0;
+    private float _accelerationLerp = 0;
 
     public void Enter(Collider collider = null, string animation = null)
     {
@@ -46,12 +45,20 @@ public class IInfintyCorridor : IPlayerState
         _playerController = PlayerManager.Instance.PlayerController;
         _playerData = playerData;
         _mainCamera = camera;
+        _accelerationLerp = 0;
     }
 
     public void Update()
     {
-        _playerController.transform.position -= Vector3.forward * _playerData.SpeedForward * Time.fixedDeltaTime * _acceleration;
-        _acceleration += Time.deltaTime;
+        Acceleration();
+        _playerController.transform.position -= Vector3.forward * _playerData.MaxSpeedInfintyCorridor * Time.deltaTime * _acceleration;
+    }
+
+    private void Acceleration()
+    {
+        _accelerationLerp += Time.deltaTime / _playerData.AccelerationTimeToReachMaxSpeed;
+        _accelerationLerp = Mathf.Clamp(_accelerationLerp, 0, 1);
+        _acceleration = _playerData.AccelerationInfintyCorridor.Evaluate(_accelerationLerp);
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
@@ -101,7 +108,7 @@ public class IInfintyCorridor : IPlayerState
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
             _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY;
-            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleY, -_playerData.AngleY + 360);
+            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor, -_playerData.AngleYInfintyCorridor + 360);
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
