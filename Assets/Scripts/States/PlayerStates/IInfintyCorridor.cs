@@ -11,12 +11,19 @@ public class IInfintyCorridor : IPlayerState
     private float _rotationY = 0;
     private float _acceleration = 0;
     private float _accelerationLerp = 0;
+    private float _reductionVisionY = 0;
+    private float _reductionVisionX = 0;
+
+    public float ReductionVisionX { get => _reductionVisionX; set => _reductionVisionX = value; }
+    public float ReductionVisionY { get => _reductionVisionY; set => _reductionVisionY = value; }
 
     public void Enter(Collider collider = null, string animation = null)
     {
+        _reductionVisionY = 0;
+        _reductionVisionX = 0;
         _playerController.CanMove = true;
         _acceleration = 0;
-        if (_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
+        if (_mainCamera.transform.localEulerAngles.x < _playerData.AngleXInfintyCorridor)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
         }
@@ -24,7 +31,7 @@ public class IInfintyCorridor : IPlayerState
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x + 360;
         }
-        if (_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
+        if (_mainCamera.transform.localEulerAngles.x < _playerData.AngleXInfintyCorridor)
         {
             _rotationY = -_mainCamera.transform.localEulerAngles.y;
         }
@@ -50,6 +57,7 @@ public class IInfintyCorridor : IPlayerState
 
     public void Update()
     {
+        
         Acceleration();
         _playerController.transform.position -= Vector3.forward * _playerData.MaxSpeedInfintyCorridor * Time.deltaTime * _acceleration;
     }
@@ -63,6 +71,8 @@ public class IInfintyCorridor : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
+        _reductionVisionX = Mathf.Clamp(_reductionVisionX, 0, _playerData.AngleXInfintyCorridor);
+        _reductionVisionY = Mathf.Clamp(_reductionVisionY, 0, _playerData.AngleYInfintyCorridor);
         if (_playerController.CanMove == true && _playerController != null)
         {
             if (mousePositionX > 0)
@@ -108,8 +118,8 @@ public class IInfintyCorridor : IPlayerState
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX;
             _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY;
-            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor, -_playerData.AngleYInfintyCorridor + 360);
-            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
+            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor + ReductionVisionY, -_playerData.AngleYInfintyCorridor + 360 - ReductionVisionY);
+            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleXInfintyCorridor + ReductionVisionX, _playerData.AngleXInfintyCorridor - ReductionVisionX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
         }

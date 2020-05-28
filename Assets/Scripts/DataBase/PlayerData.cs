@@ -212,6 +212,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
     [SerializeField] private float _angleYInfintyCorridor = 40f;
     [BoxGroup("InfinityCorridor")]
+    [BoxGroup("InfinityCorridor")]
+    [Tooltip("Define the max angle on X of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
+    [SerializeField] private float _angleXInfintyCorridor = 40f;
+    [BoxGroup("InfinityCorridor")]
     [Tooltip("Define the max speed of the player when in infinity corridor")]
     [SerializeField] private float _maxSpeedInfintyCorridor = 40f;
     [BoxGroup("InfinityCorridor")]
@@ -287,5 +291,6 @@ public class PlayerData : ScriptableObject
     public AnimationCurve AccelerationInfintyCorridor { get => _accelerationInfintyCorridor; }
     public float AccelerationTimeToReachMaxSpeed { get => _accelerationTimeToReachMaxSpeed; }
     public float AngleYInfintyCorridor { get => _angleYInfintyCorridor; }
+    public float AngleXInfintyCorridor { get => _angleXInfintyCorridor; }
     #endregion Properties
 }
