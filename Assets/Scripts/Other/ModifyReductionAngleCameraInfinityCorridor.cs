@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class ModifyReductionAngleCameraInfinityCorridor : MonoBehaviour
 {
-    private float _reductionVisionY = 0;
-    private float _reductionVisionX = 0;
+    [SerializeField] private float _reductionVisionY = 0;
+    [SerializeField] private float _reductionVisionX = 0;
     private IInfintyCorridor _infintyCorridor = null;
-
-    public float ReductionVisionX { get => _reductionVisionX; set => _reductionVisionX = value; }
-    public float ReductionVisionY { get => _reductionVisionY; set => _reductionVisionY = value; }
 
     void Start()
     {
