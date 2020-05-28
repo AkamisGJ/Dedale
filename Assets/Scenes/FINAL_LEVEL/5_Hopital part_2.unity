@@ -3634,6 +3634,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &523423586
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 855428087}
+    m_Modifications:
+    - target: {fileID: 5658247178208108101, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_Name
+      value: Musique Hopital
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 113.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90.265
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071058
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9516b493bbd7fd24a9d3b25d41f93cfc, type: 3}
+--- !u!4 &523423587 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5658247178208108106, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 523423586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &523423588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5658247178208108104, guid: 9516b493bbd7fd24a9d3b25d41f93cfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 523423586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &538688691
 Mesh:
   m_ObjectHideFlags: 0
@@ -6972,6 +7059,8 @@ Transform:
   - {fileID: 1415801269}
   - {fileID: 5223651599625031661}
   - {fileID: 1908995634}
+  - {fileID: 523423587}
+  - {fileID: 8638122749712386942}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31339,3 +31428,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2482f5701ed6a41b8d62616e3d09d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8638122749712386929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8638122749712386942}
+  - component: {fileID: 8638122749712386943}
+  - component: {fileID: 8638122749712386930}
+  m_Layer: 0
+  m_Name: Trigger Stop Musique Hopital
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &8638122749712386930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638122749712386929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7bb10eff197f848893f70cfcec996d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagMask:
+    m_tags:
+    - Player
+  m_onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 523423588}
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  _debug: 0
+--- !u!4 &8638122749712386942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638122749712386929}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000028461216}
+  m_LocalPosition: {x: 99.941, y: -1.875, z: 121.763}
+  m_LocalScale: {x: 1, y: 1, z: 4.7353}
+  m_Children: []
+  m_Father: {fileID: 855428087}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+--- !u!65 &8638122749712386943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638122749712386929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
