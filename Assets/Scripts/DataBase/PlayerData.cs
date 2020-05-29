@@ -133,9 +133,6 @@ public class PlayerData : ScriptableObject
     [Tooltip("Define speed of camera slow when player stop move it")]
     [SerializeField] private float _speedToStopCamera = 2;
     [BoxGroup("Player's Camera")]
-    [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
-    [SerializeField] private float _angleY = 40f;
-    [BoxGroup("Player's Camera")]
     [Tooltip("Define the min angle on Y of the player's camera when on ladder")]
     [SerializeField] private float _ladderMinAngleY = 40f;
     [BoxGroup("Player's Camera")]
@@ -211,6 +208,23 @@ public class PlayerData : ScriptableObject
     [Tooltip("The canvas of pause menu")]
     [SerializeField] private Canvas _pauseCanvas = null;
 
+    [BoxGroup("InfinityCorridor", centerLabel: true)]
+    [Tooltip("Define the max angle on Y of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
+    [SerializeField] private float _angleYInfintyCorridor = 40f;
+    [BoxGroup("InfinityCorridor")]
+    [BoxGroup("InfinityCorridor")]
+    [Tooltip("Define the max angle on X of the player's camera when in infinity corridor, auto inverse this value to define the min angle")]
+    [SerializeField] private float _angleXInfintyCorridor = 40f;
+    [BoxGroup("InfinityCorridor")]
+    [Tooltip("Define the max speed of the player when in infinity corridor")]
+    [SerializeField] private float _maxSpeedInfintyCorridor = 40f;
+    [BoxGroup("InfinityCorridor")]
+    [Tooltip("Define the acceleration of the player when in infinity corridor")]
+    [SerializeField] private AnimationCurve _accelerationInfintyCorridor = null;
+    [BoxGroup("InfinityCorridor")]
+    [Tooltip("Define the speed of the acceleration of the player when in infinity corridor")]
+    [SerializeField] private float _accelerationTimeToReachMaxSpeed = 2;
+
     #endregion Fields
 
     #region Properties
@@ -259,7 +273,6 @@ public class PlayerData : ScriptableObject
     public float StackMovement { get => _stackMovement; }
     public float TimeStep { get => _timeStep; }
     public float CrouchMoveSpeed { get => _crouchMoveSpeed; }
-    public float AngleY { get => _angleY; }
     public LayerMask CantSeeInteractionHelperBehindThis { get => _cantSeeInteractionHelperBehindThis; }
     public float LadderMinAngleY { get => _ladderMinAngleY; }
     public float LadderAngleY { get => _ladderAngleY; }
@@ -274,5 +287,10 @@ public class PlayerData : ScriptableObject
     public float SensitivityMouseYSlowMode { get => _sensitivityMouseYSlowMode; }
     public float SpeedLerp { get => _speedLerp; }
     public Canvas PauseCanvas { get => _pauseCanvas; }
+    public float MaxSpeedInfintyCorridor { get => _maxSpeedInfintyCorridor; }
+    public AnimationCurve AccelerationInfintyCorridor { get => _accelerationInfintyCorridor; }
+    public float AccelerationTimeToReachMaxSpeed { get => _accelerationTimeToReachMaxSpeed; }
+    public float AngleYInfintyCorridor { get => _angleYInfintyCorridor; }
+    public float AngleXInfintyCorridor { get => _angleXInfintyCorridor; }
     #endregion Properties
 }

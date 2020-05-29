@@ -100,6 +100,7 @@ public class PlayerAgentController : MonoBehaviour
         _timeZoom = 0;
         InputManager.Instance.Zoom += Zoom;
         _countZoom = 0;
+        GameLoopManager.Instance.IsPaused = false;
     }
 
     void OnUpdate()
@@ -122,9 +123,7 @@ public class PlayerAgentController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log(GameLoopManager.Instance.IsPaused);
             GameLoopManager.Instance.IsPaused = !GameLoopManager.Instance.IsPaused;
-            Debug.Log(GameLoopManager.Instance.IsPaused);
             PauseMenu(GameLoopManager.Instance.IsPaused);
         }
     }

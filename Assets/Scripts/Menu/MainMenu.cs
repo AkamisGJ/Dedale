@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnClickStart()
     {
-        GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN);
+        GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN, "1_Introduction Audio");
     }
 
     public void OnClickQuit()

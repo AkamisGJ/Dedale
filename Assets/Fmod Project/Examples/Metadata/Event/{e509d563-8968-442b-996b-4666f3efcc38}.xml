@@ -54,6 +54,9 @@ Recordings by David at Track Time Audio.</value>
 			<destination>{001a4c4c-ff56-427b-818c-e2fe66aa6bb4}</destination>
 			<destination>{8b9f00f3-0328-4a96-8fa7-84477875d85a}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{8e8bb331-4aed-43bb-8571-b914e14eb83e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{14ab3b67-195e-4a28-adc2-270e94e65471}">
 		<relationship name="masterBus">
@@ -110,8 +113,14 @@ Recordings by David at Track Time Audio.</value>
 	<object class="MixerBusPanner" id="{244e0281-26ea-4d2d-809f-49c6f6683515}" />
 	<object class="SingleSound" id="{8b88767b-b3bb-496d-84a1-a6f900cc1402}">
 		<property name="length">
-			<value>1.6250113378684807</value>
+			<value>0.83999999999999997</value>
 		</property>
+		<property name="timelockedOffset">
+			<value>0.20000000000000001</value>
+		</property>
+		<relationship name="fadeOutCurve">
+			<destination>{4657ece0-e8bc-4b43-af32-0d37635d0f61}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{9ed7586b-95f7-40fe-b6be-3bb252a4c746}</destination>
 		</relationship>
@@ -135,10 +144,19 @@ Recordings by David at Track Time Audio.</value>
 			<destination>{8443a51b-f796-4ca3-976d-4892c0dc0abe}</destination>
 			<destination>{e6064e43-d49a-45ff-8d2d-b4aff5f81cd5}</destination>
 			<destination>{946ce9ba-5d14-4c03-bc70-f21563e836ef}</destination>
+			<destination>{3f5639b3-47b5-4e58-bddc-fbb46a08dac0}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b3d202bd-833e-46dd-8af7-34a9c0d7aa49}" />
 	<object class="MixerBusFader" id="{0e9842c0-17ee-44d4-9c4c-b2a1ad5e5c06}" />
+	<object class="FadeCurve" id="{4657ece0-e8bc-4b43-af32-0d37635d0f61}">
+		<relationship name="startPoint">
+			<destination>{904fb7e4-9f83-4015-b7e1-3fbef41946d7}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{182528e6-439f-456c-80e8-29e779b72438}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{d4d31d6e-63c8-472a-98f2-69e8b6243a5a}">
 		<relationship name="effects">
 			<destination>{1c12d1d0-794a-481b-9c2c-67da399c92f9}</destination>
@@ -161,6 +179,45 @@ Recordings by David at Track Time Audio.</value>
 		<relationship name="preset">
 			<destination>{028d38fd-417b-0bad-290b-a30ea50da357}</destination>
 		</relationship>
+	</object>
+	<object class="SFXReverbEffect" id="{3f5639b3-47b5-4e58-bddc-fbb46a08dac0}">
+		<property name="earlyDelay">
+			<value>7</value>
+		</property>
+		<property name="lateDelay">
+			<value>11</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>59</value>
+		</property>
+		<property name="highCut">
+			<value>7800</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>87</value>
+		</property>
+		<property name="wetLevel">
+			<value>-5.5</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{904fb7e4-9f83-4015-b7e1-3fbef41946d7}">
+		<property name="position">
+			<value>0.26000000000000001</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.0944646895</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{182528e6-439f-456c-80e8-29e779b72438}">
+		<property name="position">
+			<value>0.83999999999999997</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
 	</object>
 	<object class="MixerBusFader" id="{1c12d1d0-794a-481b-9c2c-67da399c92f9}" />
 </objects>

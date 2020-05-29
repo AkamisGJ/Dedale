@@ -10,9 +10,9 @@ public class Door : MonoBehaviour, IInteract
     [SerializeField] private bool _inverseRotation = false;
     private JointLimits _limits;
     [SerializeField] private float _bounciness = 0.05f;
-    [SerializeField] private bool _needKey = false;
-    [SerializeField] private float minLimit = -90f;
-    [SerializeField] private float maxLimit = 90f;
+    [SerializeField] private bool _isLocked = false;
+    [SerializeField] private float _minLimit = -90f;
+    [SerializeField] private float _maxLimit = 90f;
     private Transform _startTransformDoor = null;
     private int _inversion = 1;
     private float _rotationX = 0;
@@ -23,7 +23,9 @@ public class Door : MonoBehaviour, IInteract
     private PlayerData _playerData = null;
     private Camera _mainCamera = null;
     private float _inversionSense = 1;
-    public bool NeedKey { get => _needKey; }
+    private float _startLockAngleDoor = 0;
+    private float _lerpCloseDoor = 0;
+    public bool IsLocked { get => _isLocked; set => LockDoor(value); }
 
     void Start()
     {
@@ -46,19 +48,56 @@ public class Door : MonoBehaviour, IInteract
         _startTransformDoor = transform;
     }
 
+    private void LockDoor (bool isLocked)
+    {
+        _isLocked = isLocked;
+        if(_isLocked == true)
+        {
+            _startLockAngleDoor = _hj.angle;
+            _lerpCloseDoor = 0;
+            JointMotor motor = _hj.motor;
+            _hj.useMotor = true;
+            motor.freeSpin = false;
+            _limits.bounciness = 0f;
+            _limits.min = _minLimit;
+            _limits.max = _maxLimit;
+            _hj.limits = _limits;
+            _hj.motor = motor;
+            motor.force = _speed;
+            GameLoopManager.Instance.GameLoopModifyVolume += LockDoorAnim;
+        }
+    }
+
+    private void LockDoorAnim()
+    {
+        JointMotor motor = _hj.motor;
+        if(_hj.angle > 0)
+        {
+            _inversion = -1;
+        }else if(_hj.angle < 0)
+        {
+            _inversion = 1;
+        }
+        _speed = Mathf.Abs(_hj.angle);
+        motor.targetVelocity = _speed * _inversion * _inversionSense;
+        _hj.motor = motor;
+        if (Mathf.Abs(_hj.angle) <= 0.1f)
+        {
+            GameLoopManager.Instance.GameLoopModifyVolume -= LockDoorAnim;
+        }
+    }
+
     public void Enter()
     {
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
         IMouvement mouvement = _playerController.States[PlayerAgentController.MyState.MOVEMENT] as IMouvement;
         _rotationX = mouvement.RotationX;
-        UnClick();
-        OnClick();
         JointMotor motor = _hj.motor;
         _hj.useMotor = true;
         motor.freeSpin = false;
         _limits.bounciness = 0f;
-        _limits.min = minLimit;
-        _limits.max = maxLimit;
+        _limits.min = _minLimit;
+        _limits.max = _maxLimit;
         _hj.limits = _limits;
         Transform playerTransform = PlayerManager.Instance.PlayerController.transform;
         Vector3 vectorDoorPlayer = playerTransform.position - _startTransformDoor.position;
@@ -84,7 +123,6 @@ public class Door : MonoBehaviour, IInteract
 
     public void Exit()
     {
-        UnClick();
         IMouvement mouvement = _playerController.States[PlayerAgentController.MyState.MOVEMENT] as IMouvement;
         mouvement.RotationX = _rotationX;
         JointMotor motor = _hj.motor;
@@ -97,7 +135,7 @@ public class Door : MonoBehaviour, IInteract
 
     public void Interact(float mousePositionX, float mousePositionY)
     {
-        if (_needKey == false || (_needKey == true && PlayerManager.Instance.HaveKey == true))
+        if (_isLocked == false)
         {
             JointMotor motor = _hj.motor;
             if (mousePositionY < 0)
@@ -111,16 +149,6 @@ public class Door : MonoBehaviour, IInteract
             motor.targetVelocity = mousePositionY * _speed * _inversion * _inversionSense;
             _hj.motor = motor;
         }
-    }
-
-    void OnClick()
-    {
-        //transform.GetComponent<MeshRenderer>().material.color = Color.cyan;
-    }
-
-    void UnClick()
-    {
-        //transform.GetComponent<MeshRenderer>().material.color = Color.magenta;
     }
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
@@ -167,11 +195,19 @@ public class Door : MonoBehaviour, IInteract
                 _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
-            _rotationX += (_currentMouseY + mousePositionY * _playerData.SensitivityMouseX) * _playerData.SpeedCameraDoor;
-            _rotationY += (_currentMouseX + mousePositionX * _playerData.SensitivityMouseY) * _playerData.SpeedCameraDoor;
+            _rotationX += (_currentMouseY + mousePositionY * _playerData.SensitivityMouseX) * _playerData.SpeedCameraDoor * PlayerManager.Instance.MouseSensitivityMultiplier;
+            _rotationY += (_currentMouseX + mousePositionX * _playerData.SensitivityMouseY) * _playerData.SpeedCameraDoor * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if(GameLoopManager.Instance != null)
+        {
+            GameLoopManager.Instance.GameLoopModifyVolume -= LockDoorAnim;
         }
     }
 }

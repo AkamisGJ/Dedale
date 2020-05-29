@@ -15,6 +15,7 @@ public class ImageInteract : MonoBehaviour
     private float _distance = 0;
     private bool _canShowLock = false;
     private Camera _playerCamera = null;
+    private Door _door = null;
     public bool IsFocus { get => _isFocus; set => _isFocus = value; }
     public GameObject UiPosition { get => _uiPosition; }
 
@@ -38,7 +39,7 @@ public class ImageInteract : MonoBehaviour
         else if (_uiPosition.gameObject.layer == LayerMask.NameToLayer("InteractObject"))
         {
             SpawnCanvas();
-            if(GetComponent<Door>() != null && GetComponent<Door>().NeedKey == true)
+            if(GetComponent<Door>() != null && GetComponent<Door>().IsLocked == true)
             {
                 _lockImage = Instantiate(_playerData.Lock, _canvas.transform, true);
                 _unlockImage = Instantiate(_playerData.InteractionHelper, _canvas.transform, true);
@@ -47,11 +48,16 @@ public class ImageInteract : MonoBehaviour
                 colorUnlock.a = 0;
                 _inputImage.color = colorUnlock;
                 _canShowLock = true;
+                _door = GetComponent<Door>();
             }
-            else
+            else if(GetComponent<Door>() != null)
             {
                 _imageInteraction = Instantiate(_playerData.InteractionHelper, _canvas.transform, true);
+                _lockImage = Instantiate(_playerData.Lock, _canvas.transform, true);
+                Color colorLock = _lockImage.color;
+                colorLock.a = 0;
                 _canShowLock = false;
+                _door = GetComponent<Door>();
             }
             _distance = _playerData.DistanceHelperInteraction;
         }
@@ -81,6 +87,10 @@ public class ImageInteract : MonoBehaviour
         }
         _currentImage = _imageInteraction;
         _currentImage.transform.localPosition = Vector3.zero;
+        if(_lockImage != null)
+        {
+            _lockImage.transform.localPosition = Vector3.zero;
+        }
         Color color = _inputImage.color;
         color.a = 0;
         _inputImage.color = color;
@@ -104,7 +114,11 @@ public class ImageInteract : MonoBehaviour
     {
         if (PlayerManager.Instance.CameraUI != null)
         {
-            if (_canShowLock == true && PlayerManager.Instance.HaveKey == true)
+            if(_door != null && _door.IsLocked == true)
+            {
+                _canShowLock = _door.IsLocked;
+            }
+            if (_canShowLock == true && _imageInteraction != _lockImage)
             {
                 LockedDoor();
             }
@@ -136,8 +150,8 @@ public class ImageInteract : MonoBehaviour
 
     void LockedDoor()
     {
-        _canShowLock = false;
-        _imageInteraction = _unlockImage;
+        _imageInteraction = _lockImage;
+        _lockImage.transform.localPosition = Vector3.zero;
     }
 
     public void ShowImageInteraction()
