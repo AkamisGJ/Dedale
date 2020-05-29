@@ -56,7 +56,7 @@
 			<destination>{0d0397c5-fb69-4687-b7c6-cbfee942f581}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{bc3d8127-734c-4564-9a57-e92bf2d2afe5}</destination>
+			<destination>{c9745d1a-898d-427b-a627-e7b905d51aba}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{eab26971-b4a4-46d0-89ac-f9c3b22303b2}" />
@@ -127,6 +127,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{794e7de1-91f5-4668-bff6-0a8258a6dd21}">
+		<property name="volume">
+			<value>-80</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -142,7 +145,7 @@
 	</object>
 	<object class="SingleSound" id="{ba47d7ec-847f-444a-9b02-bbd6c7351b40}">
 		<property name="length">
-			<value>5</value>
+			<value>4.666666666666667</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{e2c62f94-0a26-4e65-b464-fab586e918a9}</destination>
@@ -194,14 +197,17 @@
 		<property name="length">
 			<value>4.666666666666667</value>
 		</property>
+		<relationship name="fadeInCurve">
+			<destination>{d0ea5002-b645-40bd-bd3a-09e7293b79c5}</destination>
+		</relationship>
+		<relationship name="fadeOutCurve">
+			<destination>{76fa2b50-cb00-4d91-8464-c863660713f0}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{20982e3d-91a7-4af6-84d3-7e11a4f82c01}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8baa6ba4-63a0-4eaa-95f9-d8e94418d1ed}">
-		<property name="volume">
-			<value>-80</value>
-		</property>
 		<property name="name">
 			<value>Audio 4</value>
 		</property>
@@ -240,6 +246,22 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{af5711dd-1b6b-4e12-abee-0eb0e78583d2}" />
+	<object class="FadeCurve" id="{d0ea5002-b645-40bd-bd3a-09e7293b79c5}">
+		<relationship name="startPoint">
+			<destination>{beab03fe-d81b-4477-95c3-51e0983f886e}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{b2d2b219-77a8-4d89-9c6b-9b1956df5a94}</destination>
+		</relationship>
+	</object>
+	<object class="FadeCurve" id="{76fa2b50-cb00-4d91-8464-c863660713f0}">
+		<relationship name="startPoint">
+			<destination>{3d03fc59-662a-450c-8aa8-e96039900905}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{69890865-657c-40cf-98f7-dc6515e7d318}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{11231803-457e-46cf-a0c1-2de5700b87b8}">
 		<relationship name="effects">
 			<destination>{93c3c360-5327-49df-a7f6-9701211704eb}</destination>
@@ -250,5 +272,43 @@
 	<object class="MixerBusFader" id="{8c759423-e6cf-463b-913e-2d2da4ba8b93}" />
 	<object class="MixerBusFader" id="{440e1c56-fbd6-444d-9a8f-b2fed1ea9b46}" />
 	<object class="MixerBusFader" id="{69702ce0-63f2-4f6e-87a9-d4056ef8df10}" />
+	<object class="AutomationPoint" id="{beab03fe-d81b-4477-95c3-51e0983f886e}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.2547189</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{b2d2b219-77a8-4d89-9c6b-9b1956df5a94}">
+		<property name="position">
+			<value>0.35000000000000003</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{3d03fc59-662a-450c-8aa8-e96039900905}">
+		<property name="position">
+			<value>4.1500000000000004</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>0.25471893</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{69890865-657c-40cf-98f7-dc6515e7d318}">
+		<property name="position">
+			<value>4.666666666666667</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{93c3c360-5327-49df-a7f6-9701211704eb}" />
 </objects>
