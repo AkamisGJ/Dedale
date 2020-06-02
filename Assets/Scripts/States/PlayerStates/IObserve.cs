@@ -169,8 +169,8 @@ public class IObserve : IPlayerState
     {
         if(_grabObject != null)
         {
-            float XaxisRotation = mousePositionX * _mouseSensitivityInteract;
-            float YaxisRotation = mousePositionY * _mouseSensitivityInteract;
+            float XaxisRotation = mousePositionX * _mouseSensitivityInteract * PlayerManager.Instance.MouseSensitivityMultiplier;
+            float YaxisRotation = mousePositionY * _mouseSensitivityInteract * PlayerManager.Instance.MouseSensitivityMultiplier;
             _grabObject.transform.Rotate(_mainCamera.transform.up, -XaxisRotation, 0);
             _grabObject.transform.Rotate(_mainCamera.transform.right, YaxisRotation, 0);
         }

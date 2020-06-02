@@ -11,7 +11,7 @@ public class ICinematics : IPlayerState
 
     public void Exit()
     {
-        
+        _playerAgentController.AnimatorCamera.SetBool("WakeUp", false);
     }
 
     public void Init(PlayerData playerData, Camera camera, CharacterController playerController = null)

@@ -25,6 +25,7 @@ public class Door : MonoBehaviour, IInteract
     private float _inversionSense = 1;
     private float _startLockAngleDoor = 0;
     private float _lerpCloseDoor = 0;
+    [SerializeField] private float _speedCloseDoor = 10;
     public bool IsLocked { get => _isLocked; set => LockDoor(value); }
 
     void Start()
@@ -79,7 +80,7 @@ public class Door : MonoBehaviour, IInteract
             _inversion = 1;
         }
         _speed = Mathf.Abs(_hj.angle);
-        motor.targetVelocity = _speed * _inversion * _inversionSense;
+        motor.targetVelocity = _speed * _inversion * _inversionSense * _speedCloseDoor;
         _hj.motor = motor;
         if (Mathf.Abs(_hj.angle) <= 0.1f)
         {
@@ -195,8 +196,8 @@ public class Door : MonoBehaviour, IInteract
                 _currentMouseY += Time.deltaTime * _playerData.SpeedToStopCamera;
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
-            _rotationX += (_currentMouseY + mousePositionY * _playerData.SensitivityMouseX) * _playerData.SpeedCameraDoor;
-            _rotationY += (_currentMouseX + mousePositionX * _playerData.SensitivityMouseY) * _playerData.SpeedCameraDoor;
+            _rotationX += (_currentMouseY + mousePositionY * _playerData.SensitivityMouseX) * _playerData.SpeedCameraDoor * PlayerManager.Instance.MouseSensitivityMultiplier;
+            _rotationY += (_currentMouseX + mousePositionX * _playerData.SensitivityMouseY) * _playerData.SpeedCameraDoor * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);

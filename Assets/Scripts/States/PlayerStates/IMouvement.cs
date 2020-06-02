@@ -500,8 +500,8 @@ public class IMouvement : IPlayerState
                 _currentMouseY = Mathf.Clamp(_currentMouseY, -_playerData.StackMovement, 0);
             }
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
-            _rotationX += _currentMouseY + mousePositionY * _currentSensitivityMouseX;
-            _rotationY += _currentMouseX + mousePositionX * _currentSensitivityMouseY;
+            _rotationX += _currentMouseY + mousePositionY * _currentSensitivityMouseX * PlayerManager.Instance.MouseSensitivityMultiplier;
+            _rotationY += _currentMouseX + mousePositionX * _currentSensitivityMouseY * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleX, _playerData.AngleX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
@@ -528,6 +528,10 @@ public class IMouvement : IPlayerState
         {
             if (_isCrouch == false && _crouching == false)
             {
+                if(_mainCamera == null)
+                {
+                    _mainCamera = PlayerManager.Instance.CameraPlayer;
+                }
                 _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
@@ -652,11 +656,12 @@ public class IMouvement : IPlayerState
     private void FootStepSpeed(Vector3 realMove)
     {
         float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
-        if(speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep / speedPlayer))
+        //Debug.Log(_playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2));
+        if(speedPlayer > 0 && _currentTimeFootStepPlayer > _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer,2))
         {
             SelectFootStepAndPlay();
             _currentTimeFootStepPlayer = 0;
-        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (_playerData.TimeStep / speedPlayer))
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2))
         {
             _currentTimeFootStepPlayer += Time.deltaTime;
         }
@@ -763,6 +768,13 @@ public class IMouvement : IPlayerState
 
     private void OnDestroy()
     {
+        _crouchLerp = 0;
+        _sprintCurrentTime = 0;
+        _currentAcceleration = 0;
+        _accelerationLerp = 0;
+        _isCrouch = false;
+        _crouching = false;
+        _unCrouching = false;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;

@@ -113,7 +113,7 @@ MonoBehaviour:
   _speedLadder: 1.5
   _gloabalSpeed: 1
   _crouchMoveSpeed: 1.5
-  _timeStep: 0.05
+  _timeStep: 0.341
   _speedForwardSlowMode: 2.5
   _speedBackSlowMode: 2
   _speedSideSlowMode: 2
@@ -124,7 +124,6 @@ MonoBehaviour:
   _angleX: 70
   _stackMovement: 0.5
   _speedToStopCamera: 2
-  _angleY: 90
   _ladderMinAngleY: 40
   _ladderAngleY: 80
   _speedCameraDoor: 0.01
@@ -172,3 +171,58 @@ MonoBehaviour:
     type: 3}
   _pauseCanvas: {fileID: 2750112275330734348, guid: 32b71a43e49989d42a38c99b695e2b31,
     type: 3}
+  _angleYInfintyCorridor: 140
+  _angleXInfintyCorridor: 40
+  _maxSpeedInfintyCorridor: 40
+  _accelerationInfintyCorridor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0884434
+      outSlope: 0.0884434
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2029596
+    - serializedVersion: 3
+      time: 0.3968338
+      value: 0.25736666
+      inSlope: 0.86932075
+      outSlope: 0.86932075
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.11712579
+      outWeight: 0.1597542
+    - serializedVersion: 3
+      time: 0.60190433
+      value: 0.34100562
+      inSlope: 0.6275391
+      outSlope: 0.6275391
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7004222
+      value: 0.5044998
+      inSlope: 4.4090614
+      outSlope: 4.4090614
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30391788
+      outWeight: 0.0698019
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.6539953
+      outSlope: 1.6539953
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _accelerationTimeToReachMaxSpeed: 50

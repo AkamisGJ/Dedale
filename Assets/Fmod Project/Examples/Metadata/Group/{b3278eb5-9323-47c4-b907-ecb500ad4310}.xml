@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="MixerGroup" id="{b3278eb5-9323-47c4-b907-ecb500ad4310}">
+		<property name="name">
+			<value>Voix Off</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{a8d8196c-5cf3-4a7c-be29-acd8e7da3a7f}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{e83b7451-51f3-47c2-a185-c757782c3481}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{bc3d8127-734c-4564-9a57-e92bf2d2afe5}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{a8d8196c-5cf3-4a7c-be29-acd8e7da3a7f}">
+		<relationship name="effects">
+			<destination>{744244f0-cccb-40ba-8bae-60c8ccc4610b}</destination>
+			<destination>{e22cd828-8f9c-4c7c-b423-606a939cddf1}</destination>
+			<destination>{a60695b7-9f0f-4986-887a-81a7ba088073}</destination>
+			<destination>{a6352eb3-5580-4152-8fd8-c30820b628f5}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{e83b7451-51f3-47c2-a185-c757782c3481}" />
+	<object class="PitchShifterEffect" id="{744244f0-cccb-40ba-8bae-60c8ccc4610b}">
+		<property name="pitch">
+			<value>0.980000079</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{e22cd828-8f9c-4c7c-b423-606a939cddf1}" />
+	<object class="DelayEffect" id="{a60695b7-9f0f-4986-887a-81a7ba088073}">
+		<property name="delay">
+			<value>440</value>
+		</property>
+		<property name="level">
+			<value>-30</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{a6352eb3-5580-4152-8fd8-c30820b628f5}">
+		<property name="decayTime">
+			<value>2900</value>
+		</property>
+		<property name="earlyDelay">
+			<value>15</value>
+		</property>
+		<property name="lateDelay">
+			<value>22</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>100</value>
+		</property>
+		<property name="highCut">
+			<value>20000</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>59</value>
+		</property>
+		<property name="wetLevel">
+			<value>-11.3000002</value>
+		</property>
+	</object>
+</objects>

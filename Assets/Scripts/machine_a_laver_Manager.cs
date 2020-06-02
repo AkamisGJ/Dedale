@@ -8,6 +8,8 @@ public class machine_a_laver_Manager : MonoBehaviour
     hublot[] hublots = null;
     tambour[] tambours = null;
 
+    public bool activate_hublot = false;
+
 
     void Start()
     {
@@ -49,7 +51,7 @@ public class machine_a_laver_Manager : MonoBehaviour
         {
             if (item._activate)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (activate_hublot)
                 {
                     item.GetComponent<Rigidbody>().AddTorque(item.transform.up * item.forceAmount * Time.deltaTime, item._forceMode);
                 }
