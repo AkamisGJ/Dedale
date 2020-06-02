@@ -93,9 +93,13 @@ public class TutoMovement : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            InputManager.Instance.Direction += VerifyTouch;
-            GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
+            ActivateTuto();
         }
+    }
+
+    public void ActivateTuto(){
+        InputManager.Instance.Direction += VerifyTouch;
+        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
     }
 
     private void OnDestroy()
