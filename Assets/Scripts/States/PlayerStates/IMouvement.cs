@@ -528,6 +528,10 @@ public class IMouvement : IPlayerState
         {
             if (_isCrouch == false && _crouching == false)
             {
+                if(_mainCamera == null)
+                {
+                    _mainCamera = PlayerManager.Instance.CameraPlayer;
+                }
                 _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
@@ -764,6 +768,13 @@ public class IMouvement : IPlayerState
 
     private void OnDestroy()
     {
+        _crouchLerp = 0;
+        _sprintCurrentTime = 0;
+        _currentAcceleration = 0;
+        _accelerationLerp = 0;
+        _isCrouch = false;
+        _crouching = false;
+        _unCrouching = false;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;

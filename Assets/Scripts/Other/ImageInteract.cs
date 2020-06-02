@@ -112,7 +112,7 @@ public class ImageInteract : MonoBehaviour
 
     void OnUpdate()
     {
-        if (PlayerManager.Instance.CameraUI != null)
+        if (PlayerManager.Instance.CameraUI != null && _playerCamera != null)
         {
             if(_door != null && _door.IsLocked == true)
             {
