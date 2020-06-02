@@ -92,18 +92,7 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         }
         yield return null;
     }
-    /*
-    public void FinalLoadScene()
-    {
-        if (_nextSceneName != string.Empty)
-        {
-            _asyncOperationLoad.allowSceneActivation = true;
-        }else
-        {
-            Debug.Log("Can't load the next scene");
-        }
-    }
-    */
+ 
     private void OnCompleted(AsyncOperation asyncOperation)
     {
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(_nextScenesNames[_i]));
@@ -145,5 +134,9 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
             Destroy(_loadingCanvas.gameObject);
         }
         _sceneFinishToLoad = 0;
+    }
+
+    public void DestroyPlayer(){
+        Destroy(PlayerManager.Instance.PlayerController.gameObject);
     }
 }

@@ -60,6 +60,9 @@
 		<property name="isPersistent">
 			<value>true</value>
 		</property>
+		<property name="maxVoices">
+			<value>1</value>
+		</property>
 	</object>
 	<object class="MarkerTrack" id="{a6a2e2f2-1750-453f-b919-f9bcbde21810}" />
 	<object class="GroupTrack" id="{3a54a412-fa6b-47b9-bbd0-f24ad847896a}">
@@ -97,19 +100,22 @@
 	<object class="MixerBusPanner" id="{a1445504-940c-4293-9d54-536321cebe43}" />
 	<object class="SingleSound" id="{e0b30f9c-ff11-4528-98b9-fbdb514a7dbe}">
 		<property name="length">
-			<value>181.93548752834468</value>
+			<value>196</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{d5d9b4b5-3640-4ed5-bae8-0d6a2ccbb1d3}</destination>
+			<destination>{b2d298d9-2fcb-4245-bf96-57034e5e895e}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{bfa2c928-ea59-41e9-a80d-983fa497f067}">
 		<property name="volume">
-			<value>-18.5</value>
+			<value>-7.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{96d03cb2-60ca-4c82-8eb6-21d44a5e2f3e}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{e5a9f565-4fa9-441c-8cb7-6089e42b140d}</destination>
 		</relationship>
@@ -125,7 +131,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>181.92000000000002</value>
+			<value>196</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{9f8056b1-15bd-44d1-af13-092b5dc9a09d}</destination>
@@ -141,6 +147,26 @@
 	</object>
 	<object class="MixerBusPanner" id="{cc73797b-0318-4e95-b4aa-5071021ad575}" />
 	<object class="MixerBusFader" id="{4d670eb6-0d1a-4fa9-adc0-ccf931d236d4}" />
+	<object class="ADSRModulator" id="{96d03cb2-60ca-4c82-8eb6-21d44a5e2f3e}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>4000</value>
+		</property>
+		<property name="holdTime">
+			<value>0</value>
+		</property>
+		<property name="releaseTime">
+			<value>3000</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{e5a9f565-4fa9-441c-8cb7-6089e42b140d}">
 		<relationship name="effects">
 			<destination>{1dbbf4cc-5e67-4287-b4c2-97f15b8d850a}</destination>

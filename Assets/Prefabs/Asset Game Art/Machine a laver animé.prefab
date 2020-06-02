@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2278295591715670752}
   - component: {fileID: 4805143007244725482}
   m_Layer: 0
-  m_Name: Machine a laver
+  m_Name: "Machine a laver anim\xE9"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activate: 1
-  maxAmplitude: 0.2
+  maxAmplitude: 0.1
   speed: 0.15
   amplitude: 0
   startingPos: {x: 0, y: 0, z: 0}
@@ -104,9 +104,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0.6999999
-  OverrideMaxDistance: 5
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.5
+  OverrideMaxDistance: 2
 --- !u!1 &6220572719668699445
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.26762962, y: 0.76085633, z: 0.45659494}
+  m_ConnectedAnchor: {x: 0.26762557, y: 0.76085615, z: 0.45658776}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1123d63d79dd34aa9549d175062458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activate: 1
+  _activate: 0
   forceAmount: 300
   _forceMode: 1
   _randomAmount: 0
@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 8509629403072148824}
   - component: {fileID: 598999133255904636}
   - component: {fileID: 4849924274561957310}
+  - component: {fileID: 2676937507236231462}
   m_Layer: 0
   m_Name: Corps
   m_TagString: Untagged
@@ -471,3 +472,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2676937507236231462
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7602133167053321958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00427, y: 1.3748709, z: 1.020417}
+  m_Center: {x: 0, y: 0.68243545, z: -0.0051475465}
