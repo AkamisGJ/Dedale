@@ -117,19 +117,19 @@ public class InputManager : Singleton<InputManager>
     {
         base.Awake();
         GameLoopManager.Instance.StartInputManager += OnStart;
-        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
     }
 
-    protected void OnStart()
+    public void OnStart()
     {
         _sprint = false;
         _crouch = false;
         _zoom = false;
+        GameLoopManager.Instance.GameLoopInputManager += OnUpdate;
     }
 
     protected void OnUpdate()
     {
-        if(PlayerManager.Instance.PlayerIsDead == false)
+        if(PlayerManager.Instance.PlayerIsDead == false && GameManager.Instance.CurrentState == GameManager.MyState.GAME)
         {
             if (_directionAction != null)
             {

@@ -3,11 +3,14 @@ using UnityEngine.Playables;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using FMODUnity;
 
 public class DialogueManager : MonoBehaviour
 {
     private PlayableDirector _currentPlayableDirector = null;
     private PlayableDirector _nextPlayableDirector = null;
+    private StudioEventEmitter _currentStudioEventEmitter = null;
+    private StudioEventEmitter _nextStudioEventEmitter = null;
     private DialogueData _nextDialogueData = null;
     [SerializeField] private GameObject _canvasDialogue = null;
     [SerializeField] private GameObject _prefabsDialogue = null;
@@ -29,18 +32,24 @@ public class DialogueManager : MonoBehaviour
         _dialogueTransition = 0;
     }
 
-    public void OnStartTimeline(PlayableDirector playableDirector, DialogueData dialogueData)
+    public void OnStartTimeline(PlayableDirector playableDirector, DialogueData dialogueData, StudioEventEmitter studioEventEmitter = null)
     {
         if (_currentPlayableDirector == null && playableDirector != null)
         {
             _dialogueTransition = 0;
             _currentPlayableDirector = playableDirector;
+            if(studioEventEmitter != null)
+            {
+                _currentStudioEventEmitter = studioEventEmitter;
+                _currentStudioEventEmitter.Play();
+            }
             _currentPlayableDirector.Play();
         }
         else if(_currentPlayableDirector != playableDirector)
         {
             _nextPlayableDirector = playableDirector;
-            _nextDialogueData = dialogueData;
+            _nextStudioEventEmitter = studioEventEmitter;
+            OnEndTimeline();
         }
     }
 
@@ -50,7 +59,7 @@ public class DialogueManager : MonoBehaviour
         {
             _dialogueToMove = new List<GameObject>(_dialogues).ToArray();
             GameLoopManager.Instance.LastStart += TransitionDIalogue;
-        } 
+        }
         GameObject currentDialogue = Instantiate(_prefabsDialogue, _canvasDialogue.transform.position, Quaternion.identity, _canvasDialogue.transform);
         currentDialogue.transform.localPosition = new Vector3(0, _positionYDialogue, 0);
         TextMeshProUGUI textMeshProUGUI = currentDialogue.GetComponentInChildren<TextMeshProUGUI>();
@@ -107,12 +116,22 @@ public class DialogueManager : MonoBehaviour
         {
             _currentPlayableDirector.Stop();
         }
+        if(_currentStudioEventEmitter != null)
+        {
+            _currentStudioEventEmitter.Stop();
+        }
         _currentPlayableDirector = null;
         DestroyCurrentDialogue();
         if (_nextPlayableDirector != null)
         {
-            OnStartTimeline(_nextPlayableDirector, _nextDialogueData);
+            OnStartTimeline(_nextPlayableDirector, _nextDialogueData, _nextStudioEventEmitter);
             _nextPlayableDirector = null;
+            _nextStudioEventEmitter = null;
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnEndTimeline();
     }
 }

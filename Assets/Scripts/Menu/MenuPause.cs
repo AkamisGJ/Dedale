@@ -66,5 +66,7 @@ public class MenuPause : MonoBehaviour
     {
         _pauseMenu.SetActive(false);
         _settings.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
