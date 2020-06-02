@@ -87,6 +87,10 @@ public class DialogueManager : MonoBehaviour
         _dialogueTransition = Mathf.Clamp(_dialogueTransition, 0, 50);
         foreach (var dialogue in _dialogueToMove)
         {
+            if(dialogue == null)
+            {
+                return;
+            }
             dialogue.transform.localPosition = new Vector3(0, _dialogueTransition, 0);
         }
         if (_dialogueTransition == 50)

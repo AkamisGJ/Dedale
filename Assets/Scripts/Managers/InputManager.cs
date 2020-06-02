@@ -129,7 +129,7 @@ public class InputManager : Singleton<InputManager>
 
     protected void OnUpdate()
     {
-        if(PlayerManager.Instance.PlayerIsDead == false && GameManager.Instance.CurrentState == GameManager.MyState.GAME)
+        if(PlayerManager.Instance.PlayerIsDead == false && GameManager.Instance.CurrentState == GameManager.MyState.GAME && PlayerManager.Instance.PlayerController != null)
         {
             if (_directionAction != null)
             {
