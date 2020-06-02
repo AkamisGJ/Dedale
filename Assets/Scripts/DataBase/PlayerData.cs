@@ -92,7 +92,7 @@ public class PlayerData : ScriptableObject
     [SerializeField] private float _crouchMoveSpeed = 1;
     [BoxGroup("Move speed")]
     [Tooltip("Time between to step")]
-    [Range(0, 0.1f)]
+    [Range(0, 1f)]
     [SerializeField] private float _timeStep = 0.5f;
     [BoxGroup("Move speed/Slow Mode", centerLabel: false)]
     [Min(0)]

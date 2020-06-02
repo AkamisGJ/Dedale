@@ -1,4 +1,5 @@
 ﻿using System;
+using FMODUnity;
 
 public class GameLoopManager : Singleton<GameLoopManager>
 {
@@ -221,6 +222,11 @@ public class GameLoopManager : Singleton<GameLoopManager>
         if(_gameLoopLoadingScene != null)
         {
             _gameLoopLoadingScene();
+            FMOD.Studio.Bus bus;
+            float value;
+            bus = FMODUnity.RuntimeManager.GetBus("Bus:/Sound Design");
+            bus.getVolume(out value);
+            //UnityEngine.Debug.Log(value);
         }
     }
 

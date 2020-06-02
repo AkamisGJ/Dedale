@@ -20,7 +20,7 @@ public class DialogueScript : MonoBehaviour
 
     public void OnStart()
     {
-        _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData);
+        _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData, _eventEmitter);
         if(_eventEmitter != null && _eventEmitter.IsPlaying() == false)
         {
             _eventEmitter.Play();

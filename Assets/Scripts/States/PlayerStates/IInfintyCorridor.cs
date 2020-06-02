@@ -14,8 +14,8 @@ public class IInfintyCorridor : IPlayerState
     private float _reductionVisionY = 0;
     private float _reductionVisionX = 0;
 
-    public float ReductionVisionX { get => _reductionVisionX; set => _reductionVisionX = value; }
-    public float ReductionVisionY { get => _reductionVisionY; set => _reductionVisionY = value; }
+    public float ReductionVisionX { get => _reductionVisionX; set { _reductionVisionX = value; } }
+    public float ReductionVisionY { get => _reductionVisionY; set { _reductionVisionY = value; } }
 
     public void Enter(Collider collider = null, string animation = null)
     {
@@ -57,7 +57,6 @@ public class IInfintyCorridor : IPlayerState
 
     public void Update()
     {
-        
         Acceleration();
         _playerController.transform.position -= Vector3.forward * _playerData.MaxSpeedInfintyCorridor * Time.deltaTime * _acceleration;
     }
@@ -71,8 +70,8 @@ public class IInfintyCorridor : IPlayerState
 
     private void LookAtMouse(float mousePositionX, float mousePositionY)
     {
-        _reductionVisionX = Mathf.Clamp(_reductionVisionX, 0, _playerData.AngleXInfintyCorridor);
-        _reductionVisionY = Mathf.Clamp(_reductionVisionY, 0, _playerData.AngleYInfintyCorridor);
+        _reductionVisionX = Mathf.Max(0, _reductionVisionX);
+        _reductionVisionY = Mathf.Max(0, _reductionVisionY);
         if (_playerController.CanMove == true && _playerController != null)
         {
             if (mousePositionX > 0)
@@ -118,8 +117,9 @@ public class IInfintyCorridor : IPlayerState
             _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
             _rotationX += _currentMouseY + mousePositionY * _playerData.SensitivityMouseX * PlayerManager.Instance.MouseSensitivityMultiplier;
             _rotationY += _currentMouseX + mousePositionX * _playerData.SensitivityMouseY * PlayerManager.Instance.MouseSensitivityMultiplier;
-            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor + ReductionVisionY, -_playerData.AngleYInfintyCorridor + 360 - ReductionVisionY);
-            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleXInfintyCorridor + ReductionVisionX, _playerData.AngleXInfintyCorridor - ReductionVisionX);
+            Debug.Log(_reductionVisionX + "  " + _reductionVisionY);
+            _rotationY = Mathf.Clamp(_rotationY, _playerData.AngleYInfintyCorridor + _reductionVisionY, -_playerData.AngleYInfintyCorridor + 360 - _reductionVisionY);
+            _rotationX = Mathf.Clamp(_rotationX, -_playerData.AngleXInfintyCorridor + _reductionVisionX, _playerData.AngleXInfintyCorridor - _reductionVisionX);
             _playerController.gameObject.transform.localEulerAngles = new Vector3(0, _rotationY, 0);
             _mainCamera.transform.localEulerAngles = new Vector3(-_rotationX, 0, 0);
         }

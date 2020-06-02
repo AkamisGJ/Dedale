@@ -9,24 +9,31 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private Slider _sliderMusique = null;
     [SerializeField] private Slider _sliderDialogue = null;
     [SerializeField] private Slider _sliderMouseSensitivity = null;
+    private Animator _animator = null;
+
+    private void Start()
+    {
+        _sliderMusique.value = SoundManager.Instance.InitAudioMixer("Bus:/Sound Design");
+        _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Bus:/Dialogue et voix");
+        _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
+        _animator = PlayerManager.Instance.PlayerController.Animator;
+
+    }
 
     public void OnStart()
     {
         _pauseMenu.SetActive(true);
         _settings.SetActive(false);
-        //_sliderMusique.value = SoundManager.Instance.InitAudioMixer("Sound Design");
-        //_sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Dialogue et voix");
-        _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
     }
 
     public void OnChangeVolumeDialogue()
     {
-        //SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
+        SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
     }
 
     public void OnChangeVolumeMusique()
     {
-        //SoundManager.Instance.MixerSoundDesign(_sliderMusique.value);
+        SoundManager.Instance.MixerSoundDesign(_sliderMusique.value);
     }
 
     public void OnChangeMouseSensitivity()
@@ -36,6 +43,7 @@ public class MenuPause : MonoBehaviour
 
     public void OnClickContinue()
     {
+        _animator.enabled = true;
         _pauseMenu.SetActive(false);
         GameLoopManager.Instance.IsPaused = false;
     }
@@ -62,5 +70,7 @@ public class MenuPause : MonoBehaviour
     {
         _pauseMenu.SetActive(false);
         _settings.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
