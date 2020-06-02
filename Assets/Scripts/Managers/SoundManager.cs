@@ -46,10 +46,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             FMOD.Studio.Bus _busDialogue;
             _busDialogue = FMODUnity.RuntimeManager.GetBus("Bus:/Dialogue et voix");
-            _busDialogue.setVolume(volume * _volumeBusDialogue);
-            float value;
-            _busDialogue.getVolume(out value);
-            UnityEngine.Debug.Log(value);
+            _busDialogue.setVolume(volume * _volumeBusSoundDesign);
         }
     }
 }

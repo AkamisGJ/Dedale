@@ -136,7 +136,10 @@ public class LoadOrAndUnLoadScene : MonoBehaviour
         _sceneFinishToLoad = 0;
     }
 
-    public void DestroyPlayer(){
+    public void DestroyPlayer()
+    {
         Destroy(PlayerManager.Instance.PlayerController.gameObject);
+        PlayerManager.Instance.PlayerController = null;
+        Destroy(PlayerManager.Instance.CameraUI.gameObject);
     }
 }
