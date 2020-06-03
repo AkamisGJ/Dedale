@@ -5,7 +5,7 @@
 			<value>Bruit de saute et damage</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{98069e56-a733-47ad-943c-8e19e242cc9c}</destination>
@@ -101,6 +101,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{3c95aa1d-eb23-4bd5-9ce8-5bcf4e69e070}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -117,7 +120,6 @@
 	<object class="MixerBusEffectChain" id="{77847a31-60c1-4a4b-b1b7-4c28f37a9560}">
 		<relationship name="effects">
 			<destination>{e5d09978-5e3c-4990-b8d5-59e396dd4c02}</destination>
-			<destination>{98689764-ff47-4c97-9465-0ebf41aac672}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{391f3c74-775a-458e-811f-85761062d9a9}" />
@@ -129,10 +131,5 @@
 	</object>
 	<object class="MixerBusPanner" id="{2c6ef6e8-3232-48b9-a8c9-60d302805ca9}" />
 	<object class="MixerBusFader" id="{e5d09978-5e3c-4990-b8d5-59e396dd4c02}" />
-	<object class="SpatialiserEffect" id="{98689764-ff47-4c97-9465-0ebf41aac672}">
-		<property name="maximumDistance">
-			<value>7.4000001</value>
-		</property>
-	</object>
 	<object class="MixerBusFader" id="{c23ca4c1-327c-4e45-b76f-2b25bfb8515c}" />
 </objects>
