@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class DialogueComportment : MonoBehaviour
 {
     private DialogueManager _dialogueManager = null;
     [SerializeField] private TextMeshProUGUI _textMeshPro = null;
     [SerializeField] private RawImage _image = null;
-    [SerializeField] private float _transpaencyMin = 0.8f; 
+    [SerializeField] private float _transpaencyMin = 0.8f;
+    private PlayableDirector _playableDirector = null;
     private bool _fading = false;
     private bool _canFade = false;
     private float _fade = 0;
@@ -17,6 +19,7 @@ public class DialogueComportment : MonoBehaviour
     void Start()
     {
         _dialogueManager = GetComponentInParent<DialogueManager>();
+        _playableDirector = _dialogueManager.CurrentPlayableDirector;
         _fading = false;
         _canFade = false;
         _fade = 0;
