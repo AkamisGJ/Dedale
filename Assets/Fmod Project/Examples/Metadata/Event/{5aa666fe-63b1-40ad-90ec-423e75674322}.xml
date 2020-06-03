@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{1ed75040-a148-46e9-9cd6-682991e807b0}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{8e8bb331-4aed-43bb-8571-b914e14eb83e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{7b2dda3d-8e9b-4cff-9616-4e732fa25f12}">
 		<relationship name="masterBus">
@@ -50,7 +53,7 @@
 			<destination>{7f0309bb-1b10-4940-af92-4d7493e5bfc2}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{af9d027a-3a1f-49a8-a9ef-4cbe20673632}</destination>
+			<destination>{24546846-508c-42f1-8582-c24ccb3fcccf}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3dfefcb9-1dd1-40c9-8925-564515529d22}" />
@@ -129,7 +132,6 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{19d880cd-5ac4-4261-b5c3-132290b4fe35}">
 		<relationship name="effects">
-			<destination>{1e005cb4-de41-4424-968f-610a1e7a765e}</destination>
 			<destination>{a202982d-ca5d-4e10-adbf-7c7bee35b6d6}</destination>
 			<destination>{0a16a35a-e11f-44c0-875d-be4fe74030d3}</destination>
 			<destination>{80f2ddff-1ea8-46e3-a132-42088812299e}</destination>
@@ -147,7 +149,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1a9ba3fd-5a2c-4802-a747-52f9f908f186}" />
-	<object class="PitchShifterEffect" id="{1e005cb4-de41-4424-968f-610a1e7a765e}" />
 	<object class="MixerBusFader" id="{a202982d-ca5d-4e10-adbf-7c7bee35b6d6}" />
 	<object class="SpatialiserEffect" id="{0a16a35a-e11f-44c0-875d-be4fe74030d3}" />
 	<object class="SFXReverbEffect" id="{80f2ddff-1ea8-46e3-a132-42088812299e}" />
