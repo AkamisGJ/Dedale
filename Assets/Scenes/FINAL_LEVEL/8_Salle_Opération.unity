@@ -3708,6 +3708,30 @@ MonoBehaviour:
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
     IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 701936947}
+    Ordinal: 1
+    Priority: 0
+    IconType: 1380
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 0
+    Name: 
+    GameObject: {fileID: 829741038}
+    Ordinal: 2
+    Priority: 0
+    IconType: 1380
+    IconTexture: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
 --- !u!4 &101095929
 Transform:
   m_ObjectHideFlags: 1
@@ -11508,7 +11532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &413291928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17451,6 +17475,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 673824431}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &673824433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 163238742, guid: d764491551d60ba4e801d286ae919b5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 673824431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &701936947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701936949}
+  - component: {fileID: 701936948}
+  m_Layer: 0
+  m_Name: Son Cardiogramme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &701936948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701936947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Sound Design/Hopital/Cardiogramme
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &701936949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701936947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 673824433}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &710236692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18649,6 +18733,16 @@ PrefabInstance:
       propertyPath: PlayEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1170445154483628233, guid: c86ea06de717cef4cb87f2365a127c37,
+        type: 3}
+      propertyPath: OverrideAttenuation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170445154483628233, guid: c86ea06de717cef4cb87f2365a127c37,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2663876866434216854, guid: c86ea06de717cef4cb87f2365a127c37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18744,6 +18838,12 @@ PrefabInstance:
 --- !u!4 &829741037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266591623749904427, guid: c86ea06de717cef4cb87f2365a127c37,
+    type: 3}
+  m_PrefabInstance: {fileID: 829741036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &829741038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3195925262099071437, guid: c86ea06de717cef4cb87f2365a127c37,
     type: 3}
   m_PrefabInstance: {fileID: 829741036}
   m_PrefabAsset: {fileID: 0}
@@ -23782,7 +23882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1353287342
 Transform:
   m_ObjectHideFlags: 0
@@ -47462,6 +47562,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1426570329}
     m_Modifications:
+    - target: {fileID: 4998621463390171222, guid: 7bb3c0eddb067054393426284569a54b,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998621463390171222, guid: 7bb3c0eddb067054393426284569a54b,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5424220949649251729, guid: 7bb3c0eddb067054393426284569a54b,
         type: 3}
       propertyPath: m_Name
