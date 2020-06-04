@@ -528,6 +528,10 @@ public class IMouvement : IPlayerState
         {
             if (_isCrouch == false && _crouching == false)
             {
+                if(_mainCamera == null)
+                {
+                    _mainCamera = PlayerManager.Instance.CameraPlayer;
+                }
                 _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
@@ -652,7 +656,7 @@ public class IMouvement : IPlayerState
     private void FootStepSpeed(Vector3 realMove)
     {
         float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
-        Debug.Log(_playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2));
+        //Debug.Log(_playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2));
         if(speedPlayer > 0 && _currentTimeFootStepPlayer > _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer,2))
         {
             SelectFootStepAndPlay();
@@ -764,6 +768,13 @@ public class IMouvement : IPlayerState
 
     private void OnDestroy()
     {
+        _crouchLerp = 0;
+        _sprintCurrentTime = 0;
+        _currentAcceleration = 0;
+        _accelerationLerp = 0;
+        _isCrouch = false;
+        _crouching = false;
+        _unCrouching = false;
         InputManager.Instance.Crouch -= Crouch;
         InputManager.Instance.Sprint -= Sprinting;
         InputManager.Instance.MousePosition -= LookAtMouse;
