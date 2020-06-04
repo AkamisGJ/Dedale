@@ -657,11 +657,22 @@ public class IMouvement : IPlayerState
     {
         float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
         //Debug.Log(_playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2));
-        if(speedPlayer > 0 && _currentTimeFootStepPlayer > _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer,2))
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
+        float stepMultiplier = 1;
+        foreach (RaycastHit raycastHit in hits)
+        {
+            if (raycastHit.transform.CompareTag("Stair"))
+            {
+                stepMultiplier = _playerData.MultiplierStepOnStair;
+                break;
+            }
+        }
+        if (speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep * stepMultiplier) / Mathf.Log(1.25f + speedPlayer,2))
         {
             SelectFootStepAndPlay();
             _currentTimeFootStepPlayer = 0;
-        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2))
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (_playerData.TimeStep * stepMultiplier) / Mathf.Log(1.25f + speedPlayer, 2))
         {
             _currentTimeFootStepPlayer += Time.deltaTime;
         }
@@ -671,7 +682,7 @@ public class IMouvement : IPlayerState
     {
         RaycastHit[] hits;
         hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
-        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");   
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");
         _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
         foreach  (RaycastHit raycastHit in hits)
         {

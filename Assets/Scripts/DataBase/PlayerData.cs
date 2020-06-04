@@ -94,6 +94,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("Time between to step")]
     [Range(0, 1f)]
     [SerializeField] private float _timeStep = 0.5f;
+    [BoxGroup("Move speed")]
+    [Tooltip("Time multiplier for step on stair")]
+    [Range(0, 1f)]
+    [SerializeField] private float _multiplierStepOnStair = 0.5f;
     [BoxGroup("Move speed/Slow Mode", centerLabel: false)]
     [Min(0)]
     [Tooltip("Move speed of forward direction in slow mode")]
@@ -292,5 +296,6 @@ public class PlayerData : ScriptableObject
     public float AccelerationTimeToReachMaxSpeed { get => _accelerationTimeToReachMaxSpeed; }
     public float AngleYInfintyCorridor { get => _angleYInfintyCorridor; }
     public float AngleXInfintyCorridor { get => _angleXInfintyCorridor; }
+    public float MultiplierStepOnStair { get => _multiplierStepOnStair; }
     #endregion Properties
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -8,6 +9,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _selectLevel = null;
     [SerializeField] private GameObject _tutorielMenu = null;
     [SerializeField] private GameObject _settings = null;
+    [SerializeField] private Slider _sliderSoundDesign = null;
+    [SerializeField] private Slider _sliderMusic = null;
+    [SerializeField] private Slider _sliderDialogue = null;
+    [SerializeField] private Slider _sliderMouseSensitivity = null;
     #endregion Fields
 
     private void Start()
@@ -16,6 +21,10 @@ public class MainMenu : MonoBehaviour
         _tutorielMenu.SetActive(false);
         _settings.SetActive(false);
         _selectLevel.SetActive(false);
+        _sliderSoundDesign.value = SoundManager.Instance.InitAudioMixer("Bus:/Sound Design");
+        _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Bus:/Dialogue et voix");
+        _sliderMusic.value = SoundManager.Instance.InitAudioMixer("Bus:/Music");
+        _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
     }
 
     public void OnClickSelectStage()
@@ -32,6 +41,26 @@ public class MainMenu : MonoBehaviour
     public void OnClickQuit()
     {
         Application.Quit();
+    }
+
+    public void OnChangeVolumeDialogue()
+    {
+        SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
+    }
+
+    public void OnChangeVolumeSoundDesign()
+    {
+        SoundManager.Instance.MixerSoundDesign(_sliderSoundDesign.value);
+    }
+
+    public void OnChangeVolumeMusic()
+    {
+        SoundManager.Instance.MixerSoundDesign(_sliderMusic.value);
+    }
+
+    public void OnChangeMouseSensitivity()
+    {
+        PlayerManager.Instance.MouseSensitivityMultiplier = _sliderMouseSensitivity.value;
     }
 
     public void OnClickTutorial()

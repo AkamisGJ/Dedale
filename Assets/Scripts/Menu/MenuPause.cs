@@ -6,18 +6,19 @@ public class MenuPause : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenu = null;
     [SerializeField] private GameObject _settings = null;
-    [SerializeField] private Slider _sliderMusique = null;
+    [SerializeField] private Slider _sliderSoundDesign = null;
     [SerializeField] private Slider _sliderDialogue = null;
+    [SerializeField] private Slider _sliderMusic = null;
     [SerializeField] private Slider _sliderMouseSensitivity = null;
     private Animator _animator = null;
 
     private void Start()
     {
-        _sliderMusique.value = SoundManager.Instance.InitAudioMixer("Bus:/Sound Design");
+        _sliderSoundDesign.value = SoundManager.Instance.InitAudioMixer("Bus:/Sound Design");
         _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Bus:/Dialogue et voix");
+        _sliderMusic.value = SoundManager.Instance.InitAudioMixer("Bus:/Music");
         _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
         _animator = PlayerManager.Instance.PlayerController.Animator;
-
     }
 
     public void OnStart()
@@ -31,9 +32,14 @@ public class MenuPause : MonoBehaviour
         SoundManager.Instance.MixerDialogue(_sliderDialogue.value);
     }
 
-    public void OnChangeVolumeMusique()
+    public void OnChangeVolumeSoundDesign()
     {
-        SoundManager.Instance.MixerSoundDesign(_sliderMusique.value);
+        SoundManager.Instance.MixerSoundDesign(_sliderSoundDesign.value);
+    }
+
+    public void OnChangeVolumeMusic()
+    {
+        SoundManager.Instance.MixerSoundDesign(_sliderMusic.value);
     }
 
     public void OnChangeMouseSensitivity()
