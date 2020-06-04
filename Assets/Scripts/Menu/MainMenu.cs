@@ -55,7 +55,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnChangeVolumeMusic()
     {
-        SoundManager.Instance.MixerSoundDesign(_sliderMusic.value);
+        SoundManager.Instance.MixerMusic(_sliderMusic.value);
     }
 
     public void OnChangeMouseSensitivity()

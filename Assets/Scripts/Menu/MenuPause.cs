@@ -39,7 +39,7 @@ public class MenuPause : MonoBehaviour
 
     public void OnChangeVolumeMusic()
     {
-        SoundManager.Instance.MixerSoundDesign(_sliderMusic.value);
+        SoundManager.Instance.MixerMusic(_sliderMusic.value);
     }
 
     public void OnChangeMouseSensitivity()
