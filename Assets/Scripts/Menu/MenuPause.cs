@@ -20,13 +20,6 @@ public class MenuPause : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        _sliderMusique.value = SoundManager.Instance.InitAudioMixer("Bus:/Sound Design");
-        _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Bus:/Dialogue et voix");
-        _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
-    }
-
     public void OnStart()
     {
         _pauseMenu.SetActive(true);
