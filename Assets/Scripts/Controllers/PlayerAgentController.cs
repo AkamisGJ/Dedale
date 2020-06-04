@@ -61,6 +61,7 @@ public class PlayerAgentController : MonoBehaviour
     public float TimeZoom { get => _timeZoom; set => _timeZoom = value; }
     public Animator AnimatorCamera { get => _animatorCamera; set => _animatorCamera = value; }
     public bool IsSlow { get => _isSlow; set => _isSlow = value; }
+    public Animator Animator { get => _animator; set => _animator = value; }
     #endregion Properties
 
     private void Awake()

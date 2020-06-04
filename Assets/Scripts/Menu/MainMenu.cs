@@ -58,4 +58,8 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.Instance.ChangeState(GameManager.MyState.LOADINGSCREEN, level);
     }
+
+    public void LoadLevel(string level){
+        SceneManager.LoadScene(level, LoadSceneMode.Single);
+    }
 }
