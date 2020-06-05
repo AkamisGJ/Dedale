@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using FMODUnity;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "DataBase/PlayerData")]
 public class PlayerData : ScriptableObject
@@ -186,6 +187,14 @@ public class PlayerData : ScriptableObject
     [BoxGroup("Crouch")]
     [Tooltip("The difference between crouch height and normal height")]
     [SerializeField] private float _differenceHeightCrouch = 1;
+    [BoxGroup("Crouch")]
+    [Tooltip("Song when crouching")]
+    [EventRef]
+    [SerializeField] private string _crouch = "";
+    [BoxGroup("Crouch")]
+    [Tooltip("Song when uncrouching")]
+    [EventRef]
+    [SerializeField] private string _uncrouch = "";
 
     [BoxGroup("Color Hightlight")]
     [Tooltip("Define the color of the interactible object when the player look at it")]
@@ -297,5 +306,7 @@ public class PlayerData : ScriptableObject
     public float AngleYInfintyCorridor { get => _angleYInfintyCorridor; }
     public float AngleXInfintyCorridor { get => _angleXInfintyCorridor; }
     public float MultiplierStepOnStair { get => _multiplierStepOnStair; }
+    public string Uncrouch { get => _uncrouch; }
+    public string Crouch { get => _crouch;  }
     #endregion Properties
 }

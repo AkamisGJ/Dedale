@@ -535,6 +535,11 @@ public class IMouvement : IPlayerState
                 _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
+                if(_playerData.Crouch != string.Empty)
+                {
+                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Crouch);
+                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                }
             }
         }
         if (crouchBool == false && (_crouching == true || _isCrouch == true) && !Physics.Raycast(PlayerManager.Instance.PlayerController.transform.position, PlayerManager.Instance.PlayerController.transform.up, (_playerData.MaxHeight - _playerData.DifferenceHeightCrouch) /2 + _playerData.DifferenceHeightCrouch))
@@ -543,6 +548,11 @@ public class IMouvement : IPlayerState
             {
                 _crouching = false;
                 _unCrouching = true;
+                if(_playerData.Uncrouch != string.Empty)
+                {
+                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Uncrouch);
+                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                }
             }
         }
     }
