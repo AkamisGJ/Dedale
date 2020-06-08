@@ -10,7 +10,7 @@ public class InteractObject : MonoBehaviour
     [SerializeField] private UnityEvent _OnThrowObject = null;
     [SerializeField] private bool _isKey = false;
     [Min(0)]
-    [SerializeField] private float _intensity = 1;
+    [SerializeField] private float _intensity = 0.1f;
     public UnityEvent OnThrowObject { get { return _OnThrowObject; } }
     public UnityEvent OnTakeObject { get { return _OnTakeObject; } }
     public bool IsKey { get => _isKey; }
