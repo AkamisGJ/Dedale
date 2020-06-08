@@ -5,7 +5,7 @@
 			<value>Musique machine a laver</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c2692448-301e-417a-8ade-796c6589bfa4}</destination>
@@ -59,11 +59,18 @@
 	<object class="EventAutomatableProperties" id="{ef155ce5-dfc0-4e75-aeb8-5ee5b2d6d8e0}" />
 	<object class="MarkerTrack" id="{d91d2814-a523-43c3-b438-7ef6ca637ff6}" />
 	<object class="GroupTrack" id="{51d560b0-68df-4758-8c5b-6e86ddeca94d}">
+		<relationship name="modules">
+			<destination>{7896255d-347d-4868-9f39-139db3c23420}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{f32de068-cafa-4821-ab14-70224ee075c4}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{5cdafd32-a28c-4050-bbec-31f22383df29}" />
+	<object class="Timeline" id="{5cdafd32-a28c-4050-bbec-31f22383df29}">
+		<relationship name="modules">
+			<destination>{7896255d-347d-4868-9f39-139db3c23420}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{13234a6b-dcc7-4fd1-a1c8-ce8bfda558a4}">
 		<relationship name="effectChain">
 			<destination>{ebff0ab2-41db-4261-8cd5-3d847bebe4ca}</destination>
@@ -81,6 +88,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{d498b4d8-64ef-4122-a666-0573c3b3d020}" />
+	<object class="SingleSound" id="{7896255d-347d-4868-9f39-139db3c23420}">
+		<property name="length">
+			<value>55.142857142857146</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>2</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{6c4a9bde-02a6-4625-bc2b-eb6b7d32ccc4}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{f32de068-cafa-4821-ab14-70224ee075c4}">
 		<property name="name">
 			<value>Audio 1</value>
