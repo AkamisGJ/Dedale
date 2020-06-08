@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598790021937263828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: livre1984
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23,9 +23,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4598790021936965876}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 102.808655, y: -0.85222477, z: 116.9463}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.0078463, y: 0.0078463, z: 0.0078463}
   m_Children:
   - {fileID: 4598790021937263830}
   m_Father: {fileID: 0}
@@ -42,7 +42,10 @@ GameObject:
   - component: {fileID: 4598790021937263830}
   - component: {fileID: 4598790021935936758}
   - component: {fileID: 4598790021934970422}
-  m_Layer: 0
+  - component: {fileID: 8987151400113634952}
+  - component: {fileID: 8987151400113634950}
+  - component: {fileID: 8987151400113634951}
+  m_Layer: 8
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +113,51 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8987151400113634952
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598790021936965878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 18.047283, y: 25.293118, z: 2.9416163}
+  m_Center: {x: -0.00048828125, y: 0, z: 0}
+--- !u!114 &8987151400113634950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598790021936965878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920bd3b0e80fa3f43b951f31c8a33ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPosition: {fileID: 0}
+--- !u!114 &8987151400113634951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598790021936965878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeb87944b642aa40910d2dac9b7ff5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationWhenLooked: {x: 0, y: 0, z: 0}
+  _distanceWithCameraWehnLooked: 0.3
+  _OnTakeObject:
+    m_PersistentCalls:
+      m_Calls: []
+  _OnThrowObject:
+    m_PersistentCalls:
+      m_Calls: []
+  _isKey: 0
+  _intensity: 0.1
