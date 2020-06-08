@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190365522931177101}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2876427, y: 90.3403, z: -94.48201}
+  m_LocalPosition: {x: -0.56336, y: 90.34, z: -96.985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5748205194400459530}
@@ -272,8 +272,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.0206075, y: 190, z: 90.00012}
-  m_Center: {x: -6.034849, y: 104.7, z: -51.409954}
+  m_Size: {x: 4.0206075, y: 190, z: 97.932465}
+  m_Center: {x: -6.0348516, y: 104.7, z: -55.376133}
 --- !u!54 &1561468206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.5}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -42.111595, y: 0.99725, z: 3.344696}
+  m_ConnectedAnchor: {x: 1.6252594, y: 0, z: 11.717736}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -355,9 +355,10 @@ MonoBehaviour:
   _speed: 100
   _inverseRotation: 0
   _bounciness: 0.05
-  _needKey: 1
-  minLimit: -90
-  maxLimit: 0
+  _isLocked: 0
+  _minLimit: -90
+  _maxLimit: 90
+  _speedCloseDoor: 10
 --- !u!1 &7573756784492532531
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7573756784492532531}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.46980977, y: 90.34029, z: -101.577995}
+  m_LocalPosition: {x: -3.92, y: 90.34029, z: -102.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5748205194400459530}
