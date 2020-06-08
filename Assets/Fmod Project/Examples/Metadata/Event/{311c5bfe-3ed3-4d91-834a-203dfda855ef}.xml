@@ -104,9 +104,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{4b2c9e81-b69c-4b09-939c-195e2b8f8325}">
-		<property name="volume">
-			<value>-18.5</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -138,6 +135,8 @@
 		<relationship name="effects">
 			<destination>{2527dacc-6780-4790-82d4-39da2f44f7e0}</destination>
 			<destination>{529dc96c-d0d8-4449-b555-1b68a8c0b0a5}</destination>
+			<destination>{e4fb3189-9917-4c14-8ce9-a3044adcefa4}</destination>
+			<destination>{a8f0a8d6-b02f-40df-9c5b-5e402e2f87ca}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{83c29439-1977-41e0-9d13-82593af572ad}" />
@@ -149,9 +148,29 @@
 	</object>
 	<object class="MixerBusPanner" id="{286f887c-87ed-4fb7-9041-eb0fe0c735d3}" />
 	<object class="MixerBusFader" id="{2527dacc-6780-4790-82d4-39da2f44f7e0}" />
-	<object class="SpatialiserEffect" id="{529dc96c-d0d8-4449-b555-1b68a8c0b0a5}">
-		<property name="maximumDistance">
-			<value>7.4000001</value>
+	<object class="SpatialiserEffect" id="{529dc96c-d0d8-4449-b555-1b68a8c0b0a5}" />
+	<object class="DistortionEffect" id="{e4fb3189-9917-4c14-8ce9-a3044adcefa4}" />
+	<object class="SFXReverbEffect" id="{a8f0a8d6-b02f-40df-9c5b-5e402e2f87ca}">
+		<property name="decayTime">
+			<value>2900</value>
+		</property>
+		<property name="earlyDelay">
+			<value>15</value>
+		</property>
+		<property name="lateDelay">
+			<value>22</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>100</value>
+		</property>
+		<property name="highCut">
+			<value>20000</value>
+		</property>
+		<property name="earlyLateMix">
+			<value>59</value>
+		</property>
+		<property name="wetLevel">
+			<value>-11.3000002</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{69586027-849d-4a91-ad84-e1042a74473e}" />
