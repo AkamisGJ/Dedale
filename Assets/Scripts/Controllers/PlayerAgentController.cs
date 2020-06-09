@@ -51,7 +51,7 @@ public class PlayerAgentController : MonoBehaviour
     #endregion Fields
 
     #region Properties
-    public Camera MainCamera { get => _mainCamera; set => _mainCamera = value; }
+    public Camera MainCamera { get { return _mainCamera; } set { _mainCamera = value; } }
     public Transform CameraHolder { get { return _cameraHolder; } }
     public Transform ObjectHolder { get => _objectHolder; }
     public MyState CurrentState { get => _currentState; }

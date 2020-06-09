@@ -8,6 +8,7 @@ public class SoundManager : Singleton<SoundManager>
     private FMOD.Studio.Bus _bus;
     private float _volumeBusSoundDesign = 0;
     private float _volumeBusDialogue = 0;
+    private float _volumeBusMusic = 0;
 
     void Awake()
     {
@@ -26,6 +27,9 @@ public class SoundManager : Singleton<SoundManager>
         else if(audioGroup == "Bus:/Dialogue et voix")
         {
             _volumeBusDialogue = value;
+        }else if (audioGroup == "Bus:/Music")
+        {
+            _volumeBusMusic = value;
         }
         return value;
     }
@@ -47,6 +51,16 @@ public class SoundManager : Singleton<SoundManager>
             FMOD.Studio.Bus _busDialogue;
             _busDialogue = FMODUnity.RuntimeManager.GetBus("Bus:/Dialogue et voix");
             _busDialogue.setVolume(volume * _volumeBusSoundDesign);
+        }
+    }
+
+    public void MixerMusic(float volume)
+    {
+        if (volume >= 0)
+        {
+            FMOD.Studio.Bus _busMusic;
+            _busMusic = FMODUnity.RuntimeManager.GetBus("Bus:/Music");
+            _busMusic.setVolume(volume * _volumeBusMusic);
         }
     }
 }
