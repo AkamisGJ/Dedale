@@ -5,7 +5,7 @@
 			<value>Accroupir Up</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{b591d6e5-4c7c-4998-a79b-4013f783743f}</destination>
@@ -101,6 +101,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{4f0bd8a7-bfaf-4eb6-bf2d-c5612fe7fbbc}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -117,7 +120,7 @@
 	<object class="MixerBusEffectChain" id="{2e6f6c76-0978-44f2-84d3-6a5eb83156b9}">
 		<relationship name="effects">
 			<destination>{25ff48ba-6dd0-4d6e-bc56-29112de302b4}</destination>
-			<destination>{811174f1-f3b1-48eb-a940-120aa774bf4c}</destination>
+			<destination>{4f72206b-9075-4693-b5df-75dba3ddb3fc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c9310fad-1711-4e08-a6f7-b59b75010ecc}" />
@@ -129,9 +132,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{52334575-7677-43c2-8c52-a7b2b9004df4}" />
 	<object class="MixerBusFader" id="{25ff48ba-6dd0-4d6e-bc56-29112de302b4}" />
-	<object class="SpatialiserEffect" id="{811174f1-f3b1-48eb-a940-120aa774bf4c}">
-		<property name="maximumDistance">
-			<value>7.4000001</value>
+	<object class="GainEffect" id="{4f72206b-9075-4693-b5df-75dba3ddb3fc}">
+		<property name="gain">
+			<value>10</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{9c64963e-b075-4f61-a96c-e99967e6a2f3}" />
