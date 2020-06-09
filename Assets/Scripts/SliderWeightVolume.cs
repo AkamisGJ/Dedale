@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class SliderWeightVolume : MonoBehaviour
 {
     [SerializeField] private float _timeToBlend = 1f;
+    [SerializeField] private float _newWeight = 1f;
     private float _increasseAmout = 0f;
     private bool blending = false;
     private Volume _volume;
@@ -27,7 +28,7 @@ public class SliderWeightVolume : MonoBehaviour
         {
             _volume.weight += _increasseAmout;
 
-            if(_volume.weight > 1)
+            if(_volume.weight >= _newWeight)
             {
                 blending = false;
             }

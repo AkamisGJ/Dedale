@@ -276,6 +276,7 @@ MonoBehaviour:
   _isLocked: 0
   _minLimit: -90
   _maxLimit: 90
+  _speedCloseDoor: 10
 --- !u!59 &1605175953
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -301,7 +302,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: -90
-    max: 90
+    max: 0
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
