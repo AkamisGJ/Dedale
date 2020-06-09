@@ -16,10 +16,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 918272
   _rayonInteraction: 1.7
-  _maxDistanceInteractionObject: 1.7
+  _maxDistanceInteractionObject: 3
   _angleHelper: 45
-  _distanceHelperInteraction: 3
-  _distanceHelperObservableObject: 5
+  _distanceHelperInteraction: 4
+  _distanceHelperObservableObject: 6
   _speedLerp: 4
   _canvasHelper: {fileID: 622945719475349574, guid: 01454113832c5e54a95960acce308afd,
     type: 3}
@@ -38,7 +38,7 @@ MonoBehaviour:
   _lock: {fileID: 5224312957269270060, guid: 97fac92a0ba442c4891fc4e9d59434a8, type: 3}
   _cantSeeInteractionHelperBehindThis:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4608
   _accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -114,6 +114,7 @@ MonoBehaviour:
   _gloabalSpeed: 1
   _crouchMoveSpeed: 1.5
   _timeStep: 0.341
+  _multiplierStepOnStair: 0.5
   _speedForwardSlowMode: 2.5
   _speedBackSlowMode: 2
   _speedSideSlowMode: 2
@@ -162,6 +163,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   _maxHeight: 2
   _differenceHeightCrouch: 1
+  _crouch: 
+  _uncrouch: 
   _colorHightlightObject: {r: 0.8490566, g: 0.7799147, b: 0.12415449, a: 1}
   _maxAngleNarrowWay: 60
   _speedRotationCamera: 0.7

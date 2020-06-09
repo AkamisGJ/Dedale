@@ -125,7 +125,7 @@ public class ImageInteract : MonoBehaviour
             _canvas.transform.LookAt(PlayerManager.Instance.CameraUI.transform.position);
             RaycastHit raycastHit;
             Physics.Raycast(_playerCamera.transform.position, UiPosition.transform.position - _playerCamera.transform.position, out raycastHit, Vector3.Distance(_playerCamera.transform.position, UiPosition.transform.position), _playerData.CantSeeInteractionHelperBehindThis);
-            if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && raycastHit.collider == null)
+            if (Vector3.Angle(_currentImage.transform.forward, PlayerManager.Instance.CameraUI.transform.forward) > (180 - _playerData.AngleHelper) && PlayerManager.Instance.PlayerController.CurrentState == PlayerAgentController.MyState.MOVEMENT && Vector3.Distance(_currentImage.transform.position, PlayerManager.Instance.CameraUI.transform.position) < _distance && (raycastHit.collider == null || (_door != null && raycastHit.collider.gameObject == _door.gameObject)))
             {
                 Color color = _currentImage.color;
                 color.a = 1;
