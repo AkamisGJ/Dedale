@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{0ce0dea6-6bd4-429f-bd0f-71228d78af09}">
 		<property name="name">
-			<value>Musique Hopital</value>
+			<value>Musique Hopital Normal</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -67,7 +67,7 @@
 	<object class="MarkerTrack" id="{a6a2e2f2-1750-453f-b919-f9bcbde21810}" />
 	<object class="GroupTrack" id="{3a54a412-fa6b-47b9-bbd0-f24ad847896a}">
 		<relationship name="modules">
-			<destination>{e0b30f9c-ff11-4528-98b9-fbdb514a7dbe}</destination>
+			<destination>{23e36aa0-ee1c-4bbf-acc0-672e43cd0309}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{bfa2c928-ea59-41e9-a80d-983fa497f067}</destination>
@@ -75,7 +75,7 @@
 	</object>
 	<object class="Timeline" id="{9f8056b1-15bd-44d1-af13-092b5dc9a09d}">
 		<relationship name="modules">
-			<destination>{e0b30f9c-ff11-4528-98b9-fbdb514a7dbe}</destination>
+			<destination>{23e36aa0-ee1c-4bbf-acc0-672e43cd0309}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{4e2c015e-aed7-4583-96c9-83620aab0cbd}</destination>
@@ -98,18 +98,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{a1445504-940c-4293-9d54-536321cebe43}" />
-	<object class="SingleSound" id="{e0b30f9c-ff11-4528-98b9-fbdb514a7dbe}">
+	<object class="SingleSound" id="{23e36aa0-ee1c-4bbf-acc0-672e43cd0309}">
 		<property name="length">
-			<value>196</value>
+			<value>189.15791383219954</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{b2d298d9-2fcb-4245-bf96-57034e5e895e}</destination>
+			<destination>{fee3b987-0ffe-4910-a2e9-19bd2b224ffc}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{bfa2c928-ea59-41e9-a80d-983fa497f067}">
-		<property name="volume">
-			<value>-7.5</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -131,7 +128,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>196</value>
+			<value>189.15791383219954</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{9f8056b1-15bd-44d1-af13-092b5dc9a09d}</destination>
@@ -155,7 +152,7 @@
 			<value>-80</value>
 		</property>
 		<property name="attackTime">
-			<value>4000</value>
+			<value>1200</value>
 		</property>
 		<property name="holdTime">
 			<value>0</value>

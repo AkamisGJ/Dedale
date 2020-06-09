@@ -535,6 +535,11 @@ public class IMouvement : IPlayerState
                 _baseYcamera = _mainCamera.transform.position.y;
                 _crouching = true;
                 _unCrouching = false;
+                if(_playerData.Crouch != string.Empty)
+                {
+                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Crouch);
+                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                }
             }
         }
         if (crouchBool == false && (_crouching == true || _isCrouch == true) && !Physics.Raycast(PlayerManager.Instance.PlayerController.transform.position, PlayerManager.Instance.PlayerController.transform.up, (_playerData.MaxHeight - _playerData.DifferenceHeightCrouch) /2 + _playerData.DifferenceHeightCrouch))
@@ -543,6 +548,11 @@ public class IMouvement : IPlayerState
             {
                 _crouching = false;
                 _unCrouching = true;
+                if(_playerData.Uncrouch != string.Empty)
+                {
+                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Uncrouch);
+                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                }
             }
         }
     }
@@ -657,11 +667,22 @@ public class IMouvement : IPlayerState
     {
         float speedPlayer = new Vector3(realMove.x, 0, realMove.z).magnitude;
         //Debug.Log(_playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2));
-        if(speedPlayer > 0 && _currentTimeFootStepPlayer > _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer,2))
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
+        float stepMultiplier = 1;
+        foreach (RaycastHit raycastHit in hits)
+        {
+            if (raycastHit.transform.CompareTag("Stair"))
+            {
+                stepMultiplier = _playerData.MultiplierStepOnStair;
+                break;
+            }
+        }
+        if (speedPlayer > 0 && _currentTimeFootStepPlayer > (_playerData.TimeStep * stepMultiplier) / Mathf.Log(1.25f + speedPlayer,2))
         {
             SelectFootStepAndPlay();
             _currentTimeFootStepPlayer = 0;
-        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < _playerData.TimeStep / Mathf.Log(1.25f + speedPlayer, 2))
+        }else if(speedPlayer > 0 && _currentTimeFootStepPlayer < (_playerData.TimeStep * stepMultiplier) / Mathf.Log(1.25f + speedPlayer, 2))
         {
             _currentTimeFootStepPlayer += Time.deltaTime;
         }
@@ -671,7 +692,7 @@ public class IMouvement : IPlayerState
     {
         RaycastHit[] hits;
         hits = Physics.RaycastAll(PlayerManager.Instance.PlayerController.transform.position, Vector3.down, 3);
-        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");   
+        _footsteps = FMODUnity.RuntimeManager.CreateInstance("event:/FootSteps/Toutes surfaces");
         _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
         foreach  (RaycastHit raycastHit in hits)
         {

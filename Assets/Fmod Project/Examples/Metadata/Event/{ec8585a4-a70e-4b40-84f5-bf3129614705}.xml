@@ -5,7 +5,7 @@
 			<value>Bruit de saute et damage</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{98069e56-a733-47ad-943c-8e19e242cc9c}</destination>
@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{c7443f5a-ef8f-4ffa-aaa5-6ac07706307d}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{8e8bb331-4aed-43bb-8571-b914e14eb83e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{8f3c5fa4-f730-48f1-b295-3eb98f91939a}">
 		<relationship name="masterBus">
@@ -50,7 +53,7 @@
 			<destination>{d78211bf-9cbb-4a6a-a729-cae6401936f8}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{af9d027a-3a1f-49a8-a9ef-4cbe20673632}</destination>
+			<destination>{24546846-508c-42f1-8582-c24ccb3fcccf}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{bbb2d151-8cd8-4819-aad6-116244958c49}">
@@ -98,6 +101,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{3c95aa1d-eb23-4bd5-9ce8-5bcf4e69e070}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -114,7 +120,6 @@
 	<object class="MixerBusEffectChain" id="{77847a31-60c1-4a4b-b1b7-4c28f37a9560}">
 		<relationship name="effects">
 			<destination>{e5d09978-5e3c-4990-b8d5-59e396dd4c02}</destination>
-			<destination>{98689764-ff47-4c97-9465-0ebf41aac672}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{391f3c74-775a-458e-811f-85761062d9a9}" />
@@ -126,10 +131,5 @@
 	</object>
 	<object class="MixerBusPanner" id="{2c6ef6e8-3232-48b9-a8c9-60d302805ca9}" />
 	<object class="MixerBusFader" id="{e5d09978-5e3c-4990-b8d5-59e396dd4c02}" />
-	<object class="SpatialiserEffect" id="{98689764-ff47-4c97-9465-0ebf41aac672}">
-		<property name="maximumDistance">
-			<value>7.4000001</value>
-		</property>
-	</object>
 	<object class="MixerBusFader" id="{c23ca4c1-327c-4e45-b76f-2b25bfb8515c}" />
 </objects>

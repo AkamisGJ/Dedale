@@ -2,10 +2,10 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{59a050c4-6f0d-47e7-b8b0-657ce79a38d7}">
 		<property name="name">
-			<value>Accroupir</value>
+			<value>Accroupir Up</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{b591d6e5-4c7c-4998-a79b-4013f783743f}</destination>
@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{90384092-04bd-4529-a1a4-ab0c60aebb38}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{8e8bb331-4aed-43bb-8571-b914e14eb83e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{de224622-9faf-4ce7-848c-32448c5354e0}">
 		<relationship name="masterBus">
@@ -50,7 +53,7 @@
 			<destination>{b3a1940a-4c60-40f8-abc5-feb07ad3a506}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{af9d027a-3a1f-49a8-a9ef-4cbe20673632}</destination>
+			<destination>{24546846-508c-42f1-8582-c24ccb3fcccf}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a86bcc83-f6e5-41c8-bee1-eddcbe0e36ab}">
@@ -62,7 +65,6 @@
 	<object class="GroupTrack" id="{88274304-4ee5-47ec-b3e5-bdcdef53535b}">
 		<relationship name="modules">
 			<destination>{8ff6d519-6123-4740-a089-3a93c58753c9}</destination>
-			<destination>{48ca36de-505d-4f50-9e17-abcfdcaee50a}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{4f0bd8a7-bfaf-4eb6-bf2d-c5612fe7fbbc}</destination>
@@ -71,7 +73,6 @@
 	<object class="Timeline" id="{90384092-04bd-4529-a1a4-ab0c60aebb38}">
 		<relationship name="modules">
 			<destination>{8ff6d519-6123-4740-a089-3a93c58753c9}</destination>
-			<destination>{48ca36de-505d-4f50-9e17-abcfdcaee50a}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{c54311fe-b72e-4392-8ba5-3891c8bcba36}">
@@ -99,18 +100,10 @@
 			<destination>{24cd2af2-481c-42ca-a7be-042cccdcaf33}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{48ca36de-505d-4f50-9e17-abcfdcaee50a}">
-		<property name="start">
-			<value>6</value>
-		</property>
-		<property name="length">
-			<value>2</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{b657098f-5a26-4ea2-aabc-96c5c64a699b}</destination>
-		</relationship>
-	</object>
 	<object class="EventMixerGroup" id="{4f0bd8a7-bfaf-4eb6-bf2d-c5612fe7fbbc}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -127,7 +120,7 @@
 	<object class="MixerBusEffectChain" id="{2e6f6c76-0978-44f2-84d3-6a5eb83156b9}">
 		<relationship name="effects">
 			<destination>{25ff48ba-6dd0-4d6e-bc56-29112de302b4}</destination>
-			<destination>{811174f1-f3b1-48eb-a940-120aa774bf4c}</destination>
+			<destination>{4f72206b-9075-4693-b5df-75dba3ddb3fc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{c9310fad-1711-4e08-a6f7-b59b75010ecc}" />
@@ -139,9 +132,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{52334575-7677-43c2-8c52-a7b2b9004df4}" />
 	<object class="MixerBusFader" id="{25ff48ba-6dd0-4d6e-bc56-29112de302b4}" />
-	<object class="SpatialiserEffect" id="{811174f1-f3b1-48eb-a940-120aa774bf4c}">
-		<property name="maximumDistance">
-			<value>7.4000001</value>
+	<object class="GainEffect" id="{4f72206b-9075-4693-b5df-75dba3ddb3fc}">
+		<property name="gain">
+			<value>10</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{9c64963e-b075-4f61-a96c-e99967e6a2f3}" />

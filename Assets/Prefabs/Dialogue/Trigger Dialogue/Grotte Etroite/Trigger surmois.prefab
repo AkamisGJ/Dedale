@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8387738864574854886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8387738864574854810}
+  - component: {fileID: 8387738864574854809}
+  - component: {fileID: 8387738864574854808}
+  - component: {fileID: 8387738864574854887}
+  m_Layer: 0
+  m_Name: Trigger surmois
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8387738864574854810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387738864574854886}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70710677, w: 0.7071068}
+  m_LocalPosition: {x: 343, y: 0.625, z: 226.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 3963110045613908151}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.00001}
+--- !u!33 &8387738864574854809
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387738864574854886}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &8387738864574854808
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387738864574854886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8387738864574854887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8387738864574854886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7bb10eff197f848893f70cfcec996d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagMask:
+    m_tags:
+    - Player
+  m_onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3963110045613908148}
+        m_MethodName: OnStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  _debug: 0
+--- !u!1001 &8387738863993654147
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8387738864574854810}
+    m_Modifications:
+    - target: {fileID: 4798857636437945137, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_Name
+      value: Voix Off_Sur-moi_1 - Timeline
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.8125002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.493393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798857636437945143, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+        type: 3}
+      propertyPath: _dialogueManager
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5cb53af6556c4c0479ca1397c3a975b0, type: 3}
+--- !u!4 &3963110045613908151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4798857636437945140, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8387738863993654147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3963110045613908148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4798857636437945143, guid: 5cb53af6556c4c0479ca1397c3a975b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8387738863993654147}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2482f5701ed6a41b8d62616e3d09d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

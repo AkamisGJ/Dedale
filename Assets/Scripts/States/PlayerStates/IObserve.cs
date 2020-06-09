@@ -49,6 +49,7 @@ public class IObserve : IPlayerState
         _grabObjectCollider.isTrigger = true;
         _grabObject.transform.SetParent(_objectHolder);
         _currentObjectInterract = _grabObject.GetComponent<InteractObject>();
+        _lightPlayer.intensity = _currentObjectInterract.Intensity;
         if (_currentObjectInterract.OnTakeObject != null)
         {
             _currentObjectInterract.OnTakeObject.Invoke();
