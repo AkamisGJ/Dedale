@@ -274,8 +274,9 @@ MonoBehaviour:
   _inverseRotation: 0
   _bounciness: 0.05
   _isLocked: 0
-  _minLimit: -90
+  _minLimit: 0
   _maxLimit: 90
+  _speedCloseDoor: 10
 --- !u!59 &1605175953
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -287,7 +288,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 151.21788, y: -1.4008801, z: 115.79879}
+  m_ConnectedAnchor: {x: 95.44104, y: -1.41418, z: 148.51682}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -301,7 +302,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: -90
-    max: 90
+    max: 0
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0

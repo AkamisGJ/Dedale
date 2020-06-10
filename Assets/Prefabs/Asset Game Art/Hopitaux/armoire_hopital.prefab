@@ -172,8 +172,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0068226, y: 101.667244, z: 52.64444}
-  m_Center: {x: 2.434064, y: -49.07951, z: 25.122898}
+  m_Size: {x: 6.0068226, y: 101.66724, z: 49.91732}
+  m_Center: {x: 2.4340637, y: -49.079502, z: 23.759338}
 --- !u!59 &2129217227
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 100.51741, y: 0.5691365, z: 55.175934}
+  m_ConnectedAnchor: {x: -6.570972, y: 1.0131365, z: 10.918246}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -226,9 +226,10 @@ MonoBehaviour:
   _speed: 80
   _inverseRotation: 0
   _bounciness: 0.05
-  _needKey: 0
-  minLimit: 0
-  maxLimit: 180
+  _isLocked: 0
+  _minLimit: 0
+  _maxLimit: 120
+  _speedCloseDoor: 10
 --- !u!114 &2129217226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,8 +339,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0068226, y: 101.667244, z: 52.535645}
-  m_Center: {x: 2.6805182, y: -49.1801, z: -25.34554}
+  m_Size: {x: 6.0068226, y: 101.66724, z: 49.537033}
+  m_Center: {x: 2.6805184, y: -49.180103, z: -23.846233}
 --- !u!54 &5351744341883211534
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1.6535225, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 100.51988, y: 0.5866777, z: 54.14607}
+  m_ConnectedAnchor: {x: -7.6008387, y: 1.0306777, z: 10.915763}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -421,9 +422,10 @@ MonoBehaviour:
   _speed: 80
   _inverseRotation: 0
   _bounciness: 0.05
-  _needKey: 0
-  minLimit: 0
-  maxLimit: 180
+  _isLocked: 0
+  _minLimit: -120
+  _maxLimit: 0
+  _speedCloseDoor: 10
 --- !u!1 &4367512539964350484
 GameObject:
   m_ObjectHideFlags: 0

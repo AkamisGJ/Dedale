@@ -47,6 +47,7 @@ public class IMouvement : IPlayerState
     private float _currentMouseY = 0;
     private float _currentTimeFootStepPlayer = 0;
     private FMOD.Studio.EventInstance _footsteps;
+    private FMOD.Studio.EventInstance _soundCrouch;
     private string _lastStateAnimation = null;
     private bool _isSlow = false;
     private float _currentForwardSpeed = 0;
@@ -260,10 +261,16 @@ public class IMouvement : IPlayerState
 
     private void SphereCastInteractionObject()
     {
-        OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * _playerData.RayonInteraction;
+        OffsetSpherCast = _mainCamera.transform.position - _mainCamera.transform.forward * (_playerData.RayonInteraction + 1f);
+        Vector3 offSetSphereCastVerify = _mainCamera.transform.position - _mainCamera.transform.forward * (_playerData.RayonInteraction / 5 + 1f);
         if (_mainCamera != null && Physics.SphereCast(OffsetSpherCast, _playerData.RayonInteraction, _mainCamera.transform.forward, out _raycastHit, _playerData.MaxDistanceInteractionObject, _layerMask))
         {
             RaycastHit raycastHitVerify;
+            if(Physics.SphereCast(offSetSphereCastVerify, _playerData.RayonInteraction / 5, _mainCamera.transform.forward, out raycastHitVerify, _playerData.MaxDistanceInteractionObject, _layerMask))
+            {
+                _raycastHit = raycastHitVerify;
+                Debug.Log(raycastHitVerify.collider.name);
+            }
             if(Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.forward, out raycastHitVerify, _playerData.MaxDistanceInteractionObject, _layerMask))
             {
                 _raycastHit = raycastHitVerify;
@@ -271,7 +278,7 @@ public class IMouvement : IPlayerState
             RaycastHit raycastHit;
             Vector3 Uiposition = _raycastHit.transform.GetComponent<ImageInteract>().UiPosition.transform.position;
             Physics.Raycast(_mainCamera.transform.position, Uiposition - _mainCamera.transform.position, out raycastHit, Vector3.Distance(_mainCamera.transform.position, Uiposition), _playerData.CantSeeInteractionHelperBehindThis);
-            if (raycastHit.collider == null)
+            if (raycastHit.collider == null || raycastHit.collider.gameObject == _raycastHit.collider.gameObject)
             {
                 if (enableHightLightObject != _raycastHit.collider.gameObject)
                 {
@@ -537,8 +544,10 @@ public class IMouvement : IPlayerState
                 _unCrouching = false;
                 if(_playerData.Crouch != string.Empty)
                 {
-                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Crouch);
-                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                    _soundCrouch = FMODUnity.RuntimeManager.CreateInstance(_playerData.Crouch);
+                    _soundCrouch.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                    _soundCrouch.start();
+                    _soundCrouch.release();
                 }
             }
         }
@@ -550,8 +559,10 @@ public class IMouvement : IPlayerState
                 _unCrouching = true;
                 if(_playerData.Uncrouch != string.Empty)
                 {
-                    _footsteps = FMODUnity.RuntimeManager.CreateInstance(_playerData.Uncrouch);
-                    _footsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                    _soundCrouch = FMODUnity.RuntimeManager.CreateInstance(_playerData.Uncrouch);
+                    _soundCrouch.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(PlayerManager.Instance.PlayerController.gameObject));
+                    _soundCrouch.start();
+                    _soundCrouch.release();
                 }
             }
         }

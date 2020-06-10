@@ -51,6 +51,8 @@ public class MenuPause : MonoBehaviour
     {
         _animator.enabled = true;
         _pauseMenu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         GameLoopManager.Instance.IsPaused = false;
     }
 

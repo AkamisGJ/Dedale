@@ -84,6 +84,7 @@ public class Door : MonoBehaviour, IInteract
         _hj.motor = motor;
         if (Mathf.Abs(_hj.angle) <= 0.1f)
         {
+            _hj.useMotor = false;
             GameLoopManager.Instance.GameLoopModifyVolume -= LockDoorAnim;
         }
     }
