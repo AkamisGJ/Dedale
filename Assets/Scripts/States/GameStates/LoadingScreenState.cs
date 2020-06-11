@@ -24,7 +24,7 @@ public class LoadingScreenState : IGameState
         busMusic = FMODUnity.RuntimeManager.GetBus("Bus:/Music");
         busMusic.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD.Studio.Bus busVoice;
-        busVoice = FMODUnity.RuntimeManager.GetBus("Dialogue et voix");
+        busVoice = FMODUnity.RuntimeManager.GetBus("Bus:/Dialogue et voix");
         busVoice.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
