@@ -29,7 +29,7 @@ public class GameState : MonoBehaviour, IGameState
         busMusic = FMODUnity.RuntimeManager.GetBus("Bus:/Music");
         busMusic.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         FMOD.Studio.Bus busVoice;
-        busVoice = FMODUnity.RuntimeManager.GetBus("Dialogue et voix");
+        busVoice = FMODUnity.RuntimeManager.GetBus("Bus:/Dialogue et voix");
         busVoice.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         GameLoopManager.Instance.IsPaused = false;
         for (int i = 0; i < SceneManager.sceneCount; i++)

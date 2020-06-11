@@ -89,6 +89,18 @@ public class Door : MonoBehaviour, IInteract
         }
     }
 
+    public void SetInverseRotation(bool state){
+        _inverseRotation = state;
+        if (_inverseRotation == true)
+        {
+            _inversionSense = -1;
+        }
+        else
+        {
+            _inversionSense = 1;
+        }
+    }
+
     public void Enter()
     {
         _rotationY = _playerController.gameObject.transform.localEulerAngles.y;
