@@ -15,6 +15,7 @@ public class IQTELadder : IPlayerState
     private float _currentMouseX = 0;
     private PlayerAgentController _playerController = null;
     private float _startYPlayer = 0;
+    private string _moveAnim = "";
 
     public bool CanMove { get => _canMove; set => _canMove = value; }
     public bool IsAtTheEnd { get => _isAtTheEnd; set { _isAtTheEnd = value; SetOrientation(); } }
@@ -47,6 +48,11 @@ public class IQTELadder : IPlayerState
         InputManager.Instance.MousePosition += LookAtMouse;
         _playerController.CanMove = true;
         _startYPlayer = _characterController.transform.position.y;
+        _playerController.AnimatorCamera.SetBool("Idle", true);
+        _playerController.AnimatorCamera.SetBool("NoAnim", false);
+        _playerController.AnimatorCamera.SetBool("Run", false);
+        _playerController.AnimatorCamera.SetBool("Crouch", false);
+        _playerController.AnimatorCamera.SetBool("Walk", false);
     }
 
     private void SetOrientation()
@@ -54,10 +60,12 @@ public class IQTELadder : IPlayerState
         if (_isAtTheEnd == false)
         {
             _orientation = _characterController.transform.up;
+            _moveAnim = "Ladder";
         }
         else
         {
             _orientation = _characterController.transform.forward;
+            _moveAnim = "Walk";
         }
     }
 
@@ -71,6 +79,17 @@ public class IQTELadder : IPlayerState
         else if (horizontalMouvement > 0)
         {
             _directionHorizontal = horizontalMouvement * _orientation * _playerData.SpeedLadder;
+        }
+        if(_directionHorizontal != Vector3.zero)
+        {
+            _playerController.AnimatorCamera.SetBool("Idle", false);
+            _playerController.AnimatorCamera.SetBool(_moveAnim, true);
+        }
+        else
+        {
+            _playerController.AnimatorCamera.SetBool("Walk", false);
+            _playerController.AnimatorCamera.SetBool("Ladder", false);
+            _playerController.AnimatorCamera.SetBool("Idle", true);
         }
         Move();
     }

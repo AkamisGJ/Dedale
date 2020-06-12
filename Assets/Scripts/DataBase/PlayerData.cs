@@ -52,6 +52,9 @@ public class PlayerData : ScriptableObject
     [Tooltip("The image for ladder helper")]
     [SerializeField] private RawImage _ladderHelper;
     [BoxGroup("Interaction Object Helper")]
+    [Tooltip("The image for interacting door helper")]
+    [SerializeField] private RawImage _interactingDoor;
+    [BoxGroup("Interaction Object Helper")]
     [Tooltip("The image for locked door")]
     [SerializeField] private RawImage _lock;
     [BoxGroup("Interaction Object Helper")]
@@ -308,5 +311,6 @@ public class PlayerData : ScriptableObject
     public float MultiplierStepOnStair { get => _multiplierStepOnStair; }
     public string Uncrouch { get => _uncrouch; }
     public string Crouch { get => _crouch;  }
+    public RawImage InteractingDoor { get => _interactingDoor; }
     #endregion Properties
 }

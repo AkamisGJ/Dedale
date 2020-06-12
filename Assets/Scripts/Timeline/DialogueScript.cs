@@ -8,24 +8,31 @@ public class DialogueScript : MonoBehaviour
     [SerializeField] private DialogueData _dialogueData = null;
     [SerializeField] private DialogueManager _dialogueManager = null;
     [SerializeField] private StudioEventEmitter _eventEmitter = null;
+    [SerializeField] private bool _playAllTime = false;
     private int _dialogueIndex = 0;
     private bool _is3D = false;
+    private bool _wasPlayed = false;
 
     public DialogueData DialogueData { get => _dialogueData; }
 
     void Awake()
     {
         _dialogueIndex = 0;
+        _wasPlayed = false;
     }
 
     public void OnStart()
     {
-        _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData, _eventEmitter);
-        if(_eventEmitter != null && _eventEmitter.IsPlaying() == false)
+        if (_wasPlayed == false || _playAllTime == true)
         {
-            _eventEmitter.Play();
+            _wasPlayed = true;
+            _dialogueManager.OnStartTimeline(_playableDirector, _dialogueData, _eventEmitter);
+            if (_eventEmitter != null && _eventEmitter.IsPlaying() == false)
+            {
+                _eventEmitter.Play();
+            }
+            GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
         }
-        GameLoopManager.Instance.GameLoopLoadingScene += OnUpdate;
     }
 
     public void ClearText()
