@@ -111,6 +111,7 @@ public class IMouvement : IPlayerState
         _timeZoom = 0;
         _isSlow = !_playerController.IsSlow;
         SwitchSlowWalk();
+        _playerController.AnimatorCamera.SetBool("NoAnim", false);
         _playerController.AnimatorCamera.SetBool("Idle", true);
         if (_lastStateAnimation != null)
         {
@@ -771,7 +772,7 @@ public class IMouvement : IPlayerState
         }
         else if(_accelerationLerp == 1 && _isCrouch == false && _accelerationSprintLerp > 0 && !_playerController.AnimatorCamera.GetBool("Run") && _playerController.CanMove == true)
         {
-            _playerController.AnimatorCamera.SetTrigger("Run");
+            _playerController.AnimatorCamera.SetBool("Run", true);
             if (_lastStateAnimation != null)
             {
                 _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);
@@ -780,7 +781,7 @@ public class IMouvement : IPlayerState
         }
         else if (_isCrouch == true && _accelerationLerp > 0 && _accelerationSprintLerp == 0 && !_playerController.AnimatorCamera.GetBool("Crouch") && _playerController.CanMove == true)
         {
-            _playerController.AnimatorCamera.SetTrigger("Crouch");
+            _playerController.AnimatorCamera.SetBool("Crouch", true);
             if (_lastStateAnimation != null)
             {
                 _playerController.AnimatorCamera.SetBool(_lastStateAnimation, false);

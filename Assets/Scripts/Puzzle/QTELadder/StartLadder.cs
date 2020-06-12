@@ -17,13 +17,14 @@ public class StartLadder : MonoBehaviour
         _playerController = PlayerManager.Instance.PlayerController;
         _lerpStartPositionPlayer = 0;
         _isStarted = false;
+        GameLoopManager.Instance.LadderLoop += OnUpdate;
     }
 
-    private void Update()
+    private void OnUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && _canLeave == true)
         {
-            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null,"Idle");
         }
     }
 
@@ -35,6 +36,10 @@ public class StartLadder : MonoBehaviour
             _startPlayerQuaternion = _playerController.transform.rotation;
             _startCameraQuaternion = _playerController.MainCamera.transform.rotation;
             _startFieldOfView = _playerController.MainCamera.fieldOfView;
+            _playerController.AnimatorCamera.SetBool("Walk", true);
+            _playerController.AnimatorCamera.SetBool("Run", false);
+            _playerController.AnimatorCamera.SetBool("NoAnim", false);
+            _playerController.AnimatorCamera.SetBool("Idle", false);
             _isStarted = true;
         }
         _lerpStartPositionPlayer += Time.deltaTime;
@@ -44,7 +49,7 @@ public class StartLadder : MonoBehaviour
         _playerController.MainCamera.fieldOfView = Mathf.Lerp(_startFieldOfView, _playerController.PlayerData.FieldOfView, _lerpStartPositionPlayer);
         if(_lerpStartPositionPlayer > 1)
         {
-            _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER);
+            _playerController.ChangeState(PlayerAgentController.MyState.QTELADDER, null, "Idle");
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
             _lerpStartPositionPlayer = 0;
             _isStarted = false;
@@ -64,6 +69,7 @@ public class StartLadder : MonoBehaviour
         if(GameLoopManager.Instance != null)
         {
             GameLoopManager.Instance.LoopQTE -= StartPositionPlayer;
+            GameLoopManager.Instance.LadderLoop -= OnUpdate;
         }
     }
 
