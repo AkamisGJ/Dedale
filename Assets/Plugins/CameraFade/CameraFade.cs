@@ -282,5 +282,17 @@ namespace CameraFading
 			Alpha = 1;
 			Callback();
 		}
+
+		public void FadeOut(float _time){
+			CameraFadeOut(_time, false, false);
+		}
+
+		public void FadeIn(float _time){
+			CameraFadeIn(_time, false, false);
+		}
+
+		public void SetColor(Color _newColor){
+			color = _newColor;
+		}
 	}
 }

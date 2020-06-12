@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4450813145896964422}
   - component: {fileID: 4450813145896964417}
   - component: {fileID: 4450813145896964416}
-  - component: {fileID: 4450813145896964419}
+  - component: {fileID: 407808048}
   m_Layer: 0
   m_Name: Eko_squat_bombe_peinture
   m_TagString: Untagged
@@ -127,23 +127,27 @@ MonoBehaviour:
   _playableDirector: {fileID: 4450813145896964417}
   _dialogueData: {fileID: 11400000, guid: 0d7de9ec789e9944ebce7534af2d8d37, type: 2}
   _dialogueManager: {fileID: 0}
-  _eventEmitter: {fileID: 0}
---- !u!95 &4450813145896964419
-Animator:
-  serializedVersion: 3
+  _eventEmitter: {fileID: 407808048}
+--- !u!114 &407808048
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450813145896964418}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Dialogue/Eko - Voice Line/Squat/Eko - Squat 6
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0

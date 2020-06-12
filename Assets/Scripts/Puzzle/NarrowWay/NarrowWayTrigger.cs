@@ -79,7 +79,7 @@ public class NarrowWayTrigger : MonoBehaviour
         _playerController.MainCamera.transform.rotation = Quaternion.Lerp(_startCameraQuaternion, _exitTransform.rotation, _lerpExitNarrowWay);
         if (_lerpExitNarrowWay >= 1)
         {
-            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null, "NoAnim");
             PlayerManager.Instance.IsInNarrowWay = false;
             _lerpExitNarrowWay = 0;
             GameLoopManager.Instance.GameLoopPlayer -= OnExitNarrowWayTrigger;

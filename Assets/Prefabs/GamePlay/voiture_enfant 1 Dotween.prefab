@@ -1,0 +1,508 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4611123547430863632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4611123547430863630}
+  - component: {fileID: 4611123547430863633}
+  m_Layer: 24
+  m_Name: Son de voiture 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4611123547430863630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611123547430863632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3520914292246382388}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4611123547430863633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611123547430863632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Sound Design/Hopital/Voiture enfant 1
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 20
+--- !u!1 &6176627086074919298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3520914292246382388}
+  - component: {fileID: 2564492543785143957}
+  - component: {fileID: 1235661903297297407}
+  - component: {fileID: 4611123548574868597}
+  - component: {fileID: 4611123548574868594}
+  m_Layer: 24
+  m_Name: voiture_enfant 1 Dotween
+  m_TagString: Voiture
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3520914292246382388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176627086074919298}
+  m_LocalRotation: {x: -0, y: -0.7073032, z: -0, w: 0.7069104}
+  m_LocalPosition: {x: 119.37002, y: -1.8699994, z: 101.87999}
+  m_LocalScale: {x: 0.0100000035, y: 0.01, z: 0.0100000035}
+  m_Children:
+  - {fileID: 4611123547430863630}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -0.032, z: 0}
+--- !u!33 &2564492543785143957
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176627086074919298}
+  m_Mesh: {fileID: -6509269033559306479, guid: 48d8798bcc3e9884eb16022f4e741d56, type: 3}
+--- !u!23 &1235661903297297407
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176627086074919298}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 568883fff8c4b604cae0c31f9b24d0d7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &4611123548574868597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176627086074919298}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 41.128582, y: 52.46151, z: 100.05955}
+  m_Center: {x: 0, y: 26.077923, z: 0}
+--- !u!114 &4611123548574868594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176627086074919298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -333801856, guid: aa0b1eebb5db27a419fa4564bbe5c9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 1
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 1
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4611123547430863633}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6176627086074919298}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  delay: 0
+  duration: 5
+  easeType: 37
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loops: 0
+  id: 
+  loopType: 0
+  orientType: 1
+  lookAtTransform: {fileID: 0}
+  lookAtPosition: {x: 0, y: 0, z: 0}
+  lookAhead: 0.05
+  autoPlay: 0
+  autoKill: 0
+  relative: 0
+  isLocal: 0
+  isClosedPath: 0
+  pathResolution: 10
+  pathMode: 1
+  lockRotation: 0
+  assignForwardAndUp: 0
+  forwardDirection: {x: 0, y: 0, z: 1}
+  upDirection: {x: 0, y: 1, z: 0}
+  tweenRigidbody: 0
+  wps:
+  - {x: 116.86379, y: -1.8, z: 101.06516}
+  - {x: 114.670616, y: -1.8, z: 103.153625}
+  - {x: 112.083244, y: -1.8, z: 100.78592}
+  - {x: 109.76074, y: -1.8, z: 103.640945}
+  - {x: 107.67536, y: -1.8, z: 101.190384}
+  - {x: 102.82536, y: -1.8, z: 102.722336}
+  - {x: 98.567566, y: -1.8, z: 100.98288}
+  - {x: 96.74189, y: -1.8, z: 104.88537}
+  fullWps: []
+  path:
+    wpLengths:
+    - 0
+    - 2.6814759
+    - 3.10978
+    - 3.599487
+    - 3.7691512
+    - 3.359543
+    - 5.130685
+    - 4.6871915
+    - 4.407305
+    type: 1
+    subdivisionsXSegment: 10
+    subdivisions: 90
+    wps:
+    - {x: 119.37002, y: -1.8699994, z: 101.87999}
+    - {x: 116.86379, y: -1.8, z: 101.06516}
+    - {x: 114.670616, y: -1.8, z: 103.153625}
+    - {x: 112.083244, y: -1.8, z: 100.78592}
+    - {x: 109.76074, y: -1.8, z: 103.640945}
+    - {x: 107.67536, y: -1.8, z: 101.190384}
+    - {x: 102.82536, y: -1.8, z: 102.722336}
+    - {x: 98.567566, y: -1.8, z: 100.98288}
+    - {x: 96.74189, y: -1.8, z: 104.88537}
+    controlPoints:
+    - a: {x: 116.86379, y: -1.8, z: 101.06516}
+      b: {x: 0, y: 0, z: 0}
+    - a: {x: 94.916214, y: -1.8, z: 108.78786}
+      b: {x: 0, y: 0, z: 0}
+    length: 30.753466
+    isFinalized: 1
+    timesTable:
+    - 0.011111111
+    - 0.022222223
+    - 0.033333335
+    - 0.044444446
+    - 0.055555556
+    - 0.06666667
+    - 0.07777778
+    - 0.08888889
+    - 0.1
+    - 0.11111111
+    - 0.12222222
+    - 0.13333334
+    - 0.14444445
+    - 0.15555556
+    - 0.16666667
+    - 0.17777778
+    - 0.18888889
+    - 0.2
+    - 0.21111111
+    - 0.22222222
+    - 0.23333333
+    - 0.24444444
+    - 0.25555557
+    - 0.26666668
+    - 0.2777778
+    - 0.2888889
+    - 0.3
+    - 0.31111112
+    - 0.32222223
+    - 0.33333334
+    - 0.34444445
+    - 0.35555556
+    - 0.36666667
+    - 0.37777779
+    - 0.3888889
+    - 0.4
+    - 0.41111112
+    - 0.42222223
+    - 0.43333334
+    - 0.44444445
+    - 0.45555556
+    - 0.46666667
+    - 0.47777778
+    - 0.4888889
+    - 0.5
+    - 0.51111114
+    - 0.5222222
+    - 0.53333336
+    - 0.54444444
+    - 0.5555556
+    - 0.56666666
+    - 0.5777778
+    - 0.5888889
+    - 0.6
+    - 0.6111111
+    - 0.62222224
+    - 0.6333333
+    - 0.64444447
+    - 0.65555555
+    - 0.6666667
+    - 0.67777777
+    - 0.6888889
+    - 0.7
+    - 0.7111111
+    - 0.72222227
+    - 0.73333335
+    - 0.7444445
+    - 0.75555557
+    - 0.7666667
+    - 0.7777778
+    - 0.78888893
+    - 0.8
+    - 0.81111115
+    - 0.82222223
+    - 0.8333334
+    - 0.84444445
+    - 0.8555556
+    - 0.8666667
+    - 0.8777778
+    - 0.8888889
+    - 0.90000004
+    - 0.9111111
+    - 0.92222226
+    - 0.93333334
+    - 0.9444445
+    - 0.95555556
+    - 0.9666667
+    - 0.9777778
+    - 0.9888889
+    - 1
+    lengthsTable:
+    - 0.04514476
+    - 0.17092517
+    - 0.36289108
+    - 0.6067032
+    - 0.88813686
+    - 1.1932163
+    - 1.5082517
+    - 1.8201363
+    - 2.1167274
+    - 2.3877823
+    - 2.6269855
+    - 2.8487012
+    - 3.0958633
+    - 3.3742933
+    - 3.6788905
+    - 4.0002494
+    - 4.327102
+    - 4.647666
+    - 4.950674
+    - 5.2267265
+    - 5.470846
+    - 5.6879044
+    - 5.900831
+    - 6.1482105
+    - 6.4463634
+    - 6.790405
+    - 7.167427
+    - 7.561476
+    - 7.9555607
+    - 8.332746
+    - 8.677339
+    - 8.976995
+    - 9.227969
+    - 9.448156
+    - 9.690024
+    - 9.986257
+    - 10.336791
+    - 10.729154
+    - 11.146285
+    - 11.56938
+    - 11.979168
+    - 12.356817
+    - 12.685374
+    - 12.953137
+    - 13.164363
+    - 13.352095
+    - 13.563413
+    - 13.821269
+    - 14.123438
+    - 14.458419
+    - 14.811751
+    - 15.168662
+    - 15.515876
+    - 15.843902
+    - 16.151012
+    - 16.449404
+    - 16.769978
+    - 17.137394
+    - 17.553806
+    - 18.012802
+    - 18.504019
+    - 19.01536
+    - 19.534071
+    - 20.047571
+    - 20.544159
+    - 21.014097
+    - 21.451218
+    - 21.861052
+    - 22.284473
+    - 22.73198
+    - 23.199905
+    - 23.679281
+    - 24.158297
+    - 24.623875
+    - 25.062943
+    - 25.463898
+    - 25.81914
+    - 26.130188
+    - 26.41674
+    - 26.707403
+    - 27.022202
+    - 27.370768
+    - 27.75338
+    - 28.165102
+    - 28.598232
+    - 29.043621
+    - 29.491505
+    - 29.931957
+    - 30.355457
+    - 30.753466
+  inspectorMode: 0
+  pathType: 1
+  handlesType: 1
+  livePreview: 1
+  handlesDrawMode: 0
+  perspectiveHandleSize: 0.5
+  showIndexes: 1
+  showWpLength: 0
+  pathColor: {r: 1, g: 1, b: 1, a: 0.5}
+  lastSrcPosition: {x: 119.37002, y: -1.8699994, z: 101.87999}
+  lastSrcRotation: {x: -0, y: -0.7073032, z: -0, w: 0.7069104}
+  wpsDropdown: 1
+  dropToFloorOffset: 0
