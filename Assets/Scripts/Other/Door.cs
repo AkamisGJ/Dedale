@@ -25,6 +25,7 @@ public class Door : MonoBehaviour, IInteract
     private float _inversionSense = 1;
     private float _startLockAngleDoor = 0;
     private float _lerpCloseDoor = 0;
+    [SerializeField] private ImageInteract _imageInteract = null;
     [SerializeField] private float _speedCloseDoor = 10;
     public bool IsLocked { get => _isLocked; set => LockDoor(value); }
 
@@ -40,6 +41,11 @@ public class Door : MonoBehaviour, IInteract
         {
             _hj = GetComponent<HingeJoint>();
             Debug.LogWarning(" Insert hingeJoint on door script to optimise  :   " + gameObject);
+        }
+        if(_imageInteract == null)
+        {
+            _imageInteract = GetComponent<ImageInteract>();
+            Debug.LogWarning(" Insert ImageInteract on door script to optimise  :   " + gameObject);
         }
         _limits.bounciness = _bounciness;
         _hj.limits = _limits;
@@ -132,6 +138,7 @@ public class Door : MonoBehaviour, IInteract
         {
             _inversion = 1;
         }
+        _imageInteract.ShowImageWhenInteract();
         InputManager.Instance.MousePosition += LookAtMouse;
     }
 
@@ -144,6 +151,7 @@ public class Door : MonoBehaviour, IInteract
         _hj.useMotor = false;
         _limits.bounciness = _bounciness;
         _hj.limits = _limits;
+        _imageInteract.UnShowImageWhenInteract();
         InputManager.Instance.MousePosition -= LookAtMouse;
     }
 

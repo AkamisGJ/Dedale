@@ -35,7 +35,8 @@ public class EndLadder : MonoBehaviour
         {
             _iQTELadder.IsAtTheEnd = false;
             _isAtTheEnd = false;
-            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT);
+            _playerController.AnimatorCamera.SetBool("Ladder", false);
+            _playerController.ChangeState(PlayerAgentController.MyState.MOVEMENT, null, "Walk");
         }
     }
 }
