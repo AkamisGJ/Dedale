@@ -55,6 +55,20 @@ public class GameLoopManager : Singleton<GameLoopManager>
         }
     }
 
+    private Action _ladderLoop = null;
+    public event Action LadderLoop
+    {
+        add
+        {
+            _ladderLoop -= value;
+            _ladderLoop += value;
+        }
+        remove
+        {
+            _ladderLoop -= value;
+        }
+    }
+
     private Action _gameLoopLoadingScene = null;
     public event Action GameLoopLoadingScene
     {
@@ -212,6 +226,11 @@ public class GameLoopManager : Singleton<GameLoopManager>
             if (_gameLoopPlayer != null)
             {
                 _gameLoopPlayer();
+            }
+
+            if(_ladderLoop != null)
+            {
+                _ladderLoop();
             }
 
             if (_managerLoop != null)

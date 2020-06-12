@@ -10,6 +10,7 @@ public class ImageInteract : MonoBehaviour
     private RawImage _unlockImage = null;
     private RawImage _inputImage = null;
     private RawImage _lockImage = null;
+    private RawImage _interactingDoorImage = null;
     private bool _isFocus = false;
     private PlayerData _playerData = null;
     private float _distance = 0;
@@ -49,6 +50,10 @@ public class ImageInteract : MonoBehaviour
                 _inputImage.color = colorUnlock;
                 _canShowLock = true;
                 _door = GetComponent<Door>();
+                _interactingDoorImage = Instantiate(_playerData.InteractingDoor, _canvas.transform, true);
+                Color colorInteractingDoor = _interactingDoorImage.color;
+                colorInteractingDoor.a = 0;
+                _interactingDoorImage.color = colorInteractingDoor;
             }
             else if(GetComponent<Door>() != null)
             {
@@ -58,6 +63,10 @@ public class ImageInteract : MonoBehaviour
                 colorLock.a = 0;
                 _canShowLock = false;
                 _door = GetComponent<Door>();
+                _interactingDoorImage = Instantiate(_playerData.InteractingDoor, _canvas.transform, true);
+                Color colorInteractingDoor = _interactingDoorImage.color;
+                colorInteractingDoor.a = 0;
+                _interactingDoorImage.color = colorInteractingDoor;
             }
             _distance = _playerData.DistanceHelperInteraction;
         }
@@ -90,6 +99,14 @@ public class ImageInteract : MonoBehaviour
         if(_lockImage != null)
         {
             _lockImage.transform.localPosition = Vector3.zero;
+        }
+        if(_interactingDoorImage != null)
+        {
+            _interactingDoorImage.transform.localPosition = Vector3.zero;
+        }
+        if(_imageInteraction != null)
+        {
+            _imageInteraction.transform.localPosition = Vector3.zero;
         }
         Color color = _inputImage.color;
         color.a = 0;
@@ -180,6 +197,20 @@ public class ImageInteract : MonoBehaviour
             color.a = 1;
             _currentImage.color = nextColor;
         }
+    }
+
+    public void ShowImageWhenInteract()
+    {
+        Color colorInteractingDoor = _interactingDoorImage.color;
+        colorInteractingDoor.a = 1;
+        _interactingDoorImage.color = colorInteractingDoor;
+    }
+
+    public void UnShowImageWhenInteract()
+    {
+        Color colorInteractingDoor = _interactingDoorImage.color;
+        colorInteractingDoor.a = 0;
+        _interactingDoorImage.color = colorInteractingDoor;
     }
 
     private void OnDestroy()
