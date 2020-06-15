@@ -96,9 +96,10 @@ public class IMouvement : IPlayerState
 
     public void Enter(Collider collider,string animation)
     {
+        Debug.Log(_mainCamera.transform.localEulerAngles.x);
         _playerController.CanMove = true;
         _lastStateAnimation = animation;
-        if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
+        if(_mainCamera.transform.localEulerAngles.x < 180)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
         }

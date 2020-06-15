@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IObserve : IPlayerState
 {
@@ -159,6 +160,7 @@ public class IObserve : IPlayerState
         }
         //_grabObject.transform.position = _originPositionGrabObject;
         //_grabObject.transform.rotation = _originRotationGrabObject;
+        SceneManager.MoveGameObjectToScene(_grabObject, SceneManager.GetActiveScene());
         _grabObject = null;
         _playerAgentController.AnimatorCamera.SetBool("Idle", true);
         _playerAgentController.AnimatorCamera.SetBool("Walk", false);
