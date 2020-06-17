@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FMODUnity;
+using UnityEngine;
 
 public class Door : MonoBehaviour, IInteract
 {
@@ -27,6 +28,7 @@ public class Door : MonoBehaviour, IInteract
     private float _lerpCloseDoor = 0;
     [SerializeField] private ImageInteract _imageInteract = null;
     [SerializeField] private float _speedCloseDoor = 10;
+    [EventRef] [SerializeField] private string _soundLockDoor;
     public bool IsLocked { get => _isLocked; set => LockDoor(value); }
 
     void Start()
@@ -71,6 +73,17 @@ public class Door : MonoBehaviour, IInteract
             _hj.limits = _limits;
             _hj.motor = motor;
             motor.force = _speed;
+            if (_soundLockDoor != string.Empty)
+            {
+                FMOD.Studio.EventInstance _eventLockDoor = FMODUnity.RuntimeManager.CreateInstance(_soundLockDoor);
+                _eventLockDoor.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.gameObject));
+                _eventLockDoor.start();
+                _eventLockDoor.release();
+            }
+            else
+            {
+                Debug.LogWarning("No sound lock");
+            }
             GameLoopManager.Instance.GameLoopModifyVolume += LockDoorAnim;
         }
     }

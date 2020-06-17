@@ -98,7 +98,7 @@ public class IMouvement : IPlayerState
     {
         _playerController.CanMove = true;
         _lastStateAnimation = animation;
-        if(_mainCamera.transform.localEulerAngles.x < _playerData.AngleX)
+        if(_mainCamera.transform.localEulerAngles.x < 180)
         {
             _rotationX = -_mainCamera.transform.localEulerAngles.x;
         }

@@ -158,11 +158,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0dff9ad42cd8b34c953c756ad1e1200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rb: {fileID: 0}
+  _hj: {fileID: 0}
   _speed: 100
+  _inverseRotation: 0
   _bounciness: 0.05
-  _needKey: 0
-  minLimit: -90
-  maxLimit: 0
+  _isLocked: 0
+  _minLimit: -90
+  _maxLimit: 90
+  _imageInteract: {fileID: 0}
+  _speedCloseDoor: 10
+  _soundLockDoor: event:/Sound Design/Hopital/Porte metal hopital Close
 --- !u!65 &7589948823667463745
 BoxCollider:
   m_ObjectHideFlags: 0

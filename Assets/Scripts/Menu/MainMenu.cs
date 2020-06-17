@@ -13,6 +13,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Slider _sliderMusic = null;
     [SerializeField] private Slider _sliderDialogue = null;
     [SerializeField] private Slider _sliderMouseSensitivity = null;
+    [Range(0,1)]
+    [SerializeField] private float _startVolumeDialogue = 0;
+    [Range(0, 1)]
+    [SerializeField] private float _startVolumeSoundDesign = 0;
+    [Range(0, 1)]
+    [SerializeField] private float _startVolumeMusique = 0;
+    [Range(0, 5)]
+    [SerializeField] private float _startMouseSensitivity = 0;
     #endregion Fields
 
     private void Start()
@@ -25,6 +33,13 @@ public class MainMenu : MonoBehaviour
         _sliderDialogue.value = SoundManager.Instance.InitAudioMixer("Bus:/Dialogue et voix");
         _sliderMusic.value = SoundManager.Instance.InitAudioMixer("Bus:/Music");
         _sliderMouseSensitivity.value = PlayerManager.Instance.MouseSensitivityMultiplier;
+        if (SoundManager.Instance.WasInit == false)
+        {
+            _sliderSoundDesign.value = _startVolumeSoundDesign;
+            _sliderDialogue.value = _startVolumeDialogue;
+            _sliderMusic.value = _startVolumeMusique;
+            SoundManager.Instance.WasInit = true;
+        }
     }
 
     public void OnClickSelectStage()

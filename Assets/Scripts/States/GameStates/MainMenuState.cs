@@ -6,7 +6,7 @@ public class MainMenuState : IGameState
     public void Enter()
     {
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("0_MainMenu");
     }
 
