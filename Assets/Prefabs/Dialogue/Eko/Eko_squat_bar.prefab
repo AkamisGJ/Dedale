@@ -49,6 +49,7 @@ MonoBehaviour:
   _dialogueData: {fileID: 11400000, guid: 4b6f4c451e0bfb343886ea3d551ff9fb, type: 2}
   _dialogueManager: {fileID: 0}
   _eventEmitter: {fileID: 0}
+  _playAllTime: 0
 --- !u!320 &8403503243432439899
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -66,7 +67,9 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 5249728091649050092, guid: ed5fb35d11667df4490d45382923f55d, type: 2}
     value: {fileID: 8403503243432439900}
-  - key: {fileID: -6461542128384210988, guid: ed5fb35d11667df4490d45382923f55d, type: 2}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -2746045225818656301, guid: ed5fb35d11667df4490d45382923f55d, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
