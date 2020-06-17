@@ -9,10 +9,14 @@ public class SoundManager : Singleton<SoundManager>
     private float _volumeBusSoundDesign = 0;
     private float _volumeBusDialogue = 0;
     private float _volumeBusMusic = 0;
+    private bool _wasInit = false;
+
+    public bool WasInit { get => _wasInit; set => _wasInit = value; }
 
     void Awake()
     {
         base.Awake();
+        _wasInit = false;
     }
 
     public float InitAudioMixer(string audioGroup)
@@ -40,7 +44,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             FMOD.Studio.Bus _busSoundDesign;
             _busSoundDesign = FMODUnity.RuntimeManager.GetBus("Bus:/Sound Design");
-            _busSoundDesign.setVolume(volume * _volumeBusSoundDesign);
+            _busSoundDesign.setVolume(volume);
         }
     }
 
@@ -50,7 +54,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             FMOD.Studio.Bus _busDialogue;
             _busDialogue = FMODUnity.RuntimeManager.GetBus("Bus:/Dialogue et voix");
-            _busDialogue.setVolume(volume * _volumeBusSoundDesign);
+            _busDialogue.setVolume(volume);
         }
     }
 
@@ -60,7 +64,7 @@ public class SoundManager : Singleton<SoundManager>
         {
             FMOD.Studio.Bus _busMusic;
             _busMusic = FMODUnity.RuntimeManager.GetBus("Bus:/Music");
-            _busMusic.setVolume(volume * _volumeBusMusic);
+            _busMusic.setVolume(volume);
         }
     }
 }
