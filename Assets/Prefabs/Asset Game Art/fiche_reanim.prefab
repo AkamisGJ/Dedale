@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1833807050571363760}
   - component: {fileID: 1833807050571363767}
   - component: {fileID: 7615215996066550042}
+  - component: {fileID: 1974361496}
   m_Layer: 8
   m_Name: fiche_reanim
   m_TagString: Untagged
@@ -111,11 +112,34 @@ MonoBehaviour:
   _distanceWithCameraWehnLooked: 0.25
   _OnTakeObject:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1974361496}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _OnThrowObject:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1974361496}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _isKey: 0
+  _intensity: 0.1
 --- !u!114 &7615215996066550042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +153,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiPosition: {fileID: 0}
+--- !u!114 &1974361496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7661485934707666107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: "event:/Sound Design/Hopital/Feuille frois\xE9"
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
