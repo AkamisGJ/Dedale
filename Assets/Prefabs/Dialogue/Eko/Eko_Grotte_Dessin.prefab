@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5182260834600870489}
   - component: {fileID: 5182260834600870494}
   - component: {fileID: 5182260834600870495}
-  - component: {fileID: 5182260834600870492}
+  - component: {fileID: 2031857412}
   m_Layer: 0
   m_Name: Eko_Grotte_Dessin
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
   _playableDirector: {fileID: 5182260834600870494}
   _dialogueData: {fileID: 11400000, guid: 094e586b93e1dd64f94717d9079b565a, type: 2}
   _dialogueManager: {fileID: 0}
-  _eventEmitter: {fileID: 0}
+  _eventEmitter: {fileID: 2031857412}
   _playAllTime: 0
 --- !u!320 &5182260834600870494
 PlayableDirector:
@@ -129,22 +129,26 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &5182260834600870492
-Animator:
-  serializedVersion: 3
+--- !u!114 &2031857412
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5182260834600870493}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Dialogue/Eko - Voice Line/Eko - Dessin
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
