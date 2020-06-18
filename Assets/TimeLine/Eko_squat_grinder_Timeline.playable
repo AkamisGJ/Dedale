@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7231907286277074986
+--- !u!114 &-7226874551661283223
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133253f56854570409c222a87786b263, type: 3}
-  m_Name: FMOD Event Track
+  m_Script: {fileID: 11500000, guid: 8b22792c3b570444eb18cb78c2af3a74, type: 3}
+  m_Name: Audio Track
   m_EditorClassIdentifier: 
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -24,14 +24,14 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -6620111909830762593}
-    m_Duration: 16.483333333333334
+    m_Asset: {fileID: 5256711761172978466}
+    m_Duration: 16.19764172335601
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -7231907286277074986}
+    m_ParentTrack: {fileID: -7226874551661283223}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -89,9 +89,13 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: Eko - Squat 3
+    m_DisplayName: Eko Grinder
   m_Markers:
     m_Objects: []
+  m_TrackProperties:
+    volume: 1
+    stereoPan: 0
+    spatialBlend: 0
 --- !u!114 &-6925622664023643860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,22 +127,6 @@ MonoBehaviour:
     - {fileID: -2331697936292162933}
     - {fileID: 7051784942889072408}
     - {fileID: 6560314266519691350}
---- !u!114 &-6620111909830762593
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 987a467495df9d942b56b1b51381d095, type: 3}
-  m_Name: FMODEventPlayable
-  m_EditorClassIdentifier: 
-  eventLength: 15.2
-  eventName: event:/Dialogue/Eko - Voice Line/Squat/Eko - Squat 3
-  stopType: 0
-  parameters: []
 --- !u!114 &-5549543658779651765
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 5.566666666666666
+  m_Time: 6.87753489613533
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
@@ -167,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 3.7833333333333323
+  m_Time: 4.6774371564388275
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
@@ -183,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 1.4333333333333333
+  m_Time: 2.592204436659813
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
@@ -199,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 6.997564502060413
+  m_Time: 8.283333333333333
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
@@ -218,7 +206,7 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: -6925622664023643860}
-  - {fileID: -7231907286277074986}
+  - {fileID: -7226874551661283223}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -259,10 +247,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 13.700000000000003
+  m_Time: 16.19764172335601
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 39e4c8659b693c141a61ab10891d8e18, type: 2}
+--- !u!114 &5256711761172978466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 34fb43a1880f6514985883bf8c73140a, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &6560314266519691350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 12.016666666666667
+  m_Time: 14.3
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
@@ -291,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 10
+  m_Time: 11.416666666666666
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 8fe199ee566b7e94690922bd9631486c, type: 2}
