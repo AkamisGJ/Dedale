@@ -5,7 +5,7 @@
 			<value>Son salle d'opération</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{90bfdd7b-508d-43e3-9fa3-3645bfa11b3b}</destination>
@@ -259,6 +259,7 @@
 	<object class="MixerBusEffectChain" id="{a476e78e-e321-4615-aec5-467ee639e830}">
 		<relationship name="effects">
 			<destination>{113059c9-ccf4-4a58-97ed-9325e9439119}</destination>
+			<destination>{9e38258e-1fae-4550-907f-eb369d7ea9c0}</destination>
 			<destination>{cd0d56b3-dea7-40d2-903d-6f4bd227accf}</destination>
 		</relationship>
 	</object>
@@ -283,6 +284,7 @@
 	</object>
 	<object class="MixerBusPanner" id="{5a0d4e8c-b4ea-4d8f-b71b-eec25feb9e4c}" />
 	<object class="MixerBusFader" id="{113059c9-ccf4-4a58-97ed-9325e9439119}" />
+	<object class="SpatialiserEffect" id="{9e38258e-1fae-4550-907f-eb369d7ea9c0}" />
 	<object class="SFXReverbEffect" id="{cd0d56b3-dea7-40d2-903d-6f4bd227accf}">
 		<property name="decayTime">
 			<value>2900</value>
