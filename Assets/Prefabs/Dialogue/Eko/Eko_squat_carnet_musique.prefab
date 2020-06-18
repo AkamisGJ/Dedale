@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7914737296614222019}
   - component: {fileID: 7914737296614222020}
   - component: {fileID: 7914737296614222021}
-  - component: {fileID: 7914737296614222022}
+  - component: {fileID: 1873420368}
   m_Layer: 0
   m_Name: Eko_squat_carnet_musique
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
   _playableDirector: {fileID: 7914737296614222020}
   _dialogueData: {fileID: 11400000, guid: fe921f00174afba488f470efbf8df34c, type: 2}
   _dialogueManager: {fileID: 0}
-  _eventEmitter: {fileID: 0}
+  _eventEmitter: {fileID: 1873420368}
   _playAllTime: 0
 --- !u!320 &7914737296614222020
 PlayableDirector:
@@ -131,22 +131,26 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &7914737296614222022
-Animator:
-  serializedVersion: 3
+--- !u!114 &1873420368
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7914737296614222023}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Dialogue/Eko - Voice Line/Squat/Eko - Squat 7
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
